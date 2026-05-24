@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Holdings — Command Center</title>
+    <style>
+        :root{--bg:#0f1419;--card:#1a2332;--border:#2d3748;--accent:#00d4ff;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--text:#f1f5f9;--text2:#94a3b8;--purple:#8b5cf6}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+        .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:10px}
+        .header h1{font-size:1.5rem;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .header .time{color:var(--text2);font-size:0.85rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:30px}
+        .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+        .card h2{font-size:1rem;margin-bottom:15px;display:flex;align-items:center;gap:8px}
+        .card h2 .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+        .dot-green{background:var(--green)}
+        .dot-yellow{background:var(--yellow)}
+        .dot-red{background:var(--red)}
+        .metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem}
+        .metric:last-child{border-bottom:none}
+        .metric .label{color:var(--text2)}
+        .metric .value{font-weight:600}
+        .status-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:600}
+        .badge-green{background:rgba(16,185,129,0.15);color:var(--green)}
+        .badge-yellow{background:rgba(245,158,11,0.15);color:var(--yellow)}
+        .badge-red{background:rgba(239,68,68,0.15);color:var(--red)}
+        .priority-list{list-style:none}
+        .priority-list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:0.85rem;display:flex;align-items:flex-start;gap:10px}
+        .priority-list li:last-child{border-bottom:none}
+        .priority-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold;flex-shrink:0}
+        .p-critical{background:var(--red);color:white}
+        .p-high{background:var(--yellow);color:black}
+        .p-medium{background:var(--accent);color:black}
+        .deadline-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.85rem}
+        .deadline-item:last-child{border-bottom:none}
+        .deadline-date{color:var(--yellow);font-weight:600;font-size:0.8rem}
+        .revenue-bar{height:6px;background:var(--border);border-radius:3px;margin-top:5px;overflow:hidden}
+        .revenue-fill{height:100%;border-radius:3px;transition:width 0.5s}
+        .section-title{font-size:1.2rem;font-weight:700;margin:30px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+        .contacts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+        .contact-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px}
+        .contact-card .name{font-weight:600;margin-bottom:5px}
+        .contact-card .role{color:var(--text2);font-size:0.8rem;margin-bottom:8px}
+        .contact-card .detail{font-size:0.8rem;color:var(--text2);padding:2px 0}
+        .full-width{grid-column:1/-1}
+        table{width:100%;border-collapse:collapse;font-size:0.85rem}
+        th{text-align:left;padding:10px 8px;border-bottom:2px solid var(--border);color:var(--text2);font-weight:500}
+        td{padding:10px 8px;border-bottom:1px solid var(--border)}
+        @media(max-width:768px){.grid{grid-template-columns:1fr}body{padding:10px}}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Francisco Holdings — Command Center</h1>
+        <div class="time" id="clock"></div>
+    </div>
+
+    <!-- Top Row: System Status -->
+    <div class="grid">
+        <div class="card">
+            <h2><span class="dot dot-green"></span> Empire Status</h2>
+            <div class="metric"><span class="label">Live Sites</span><span class="value">10</span></div>
+            <div class="metric"><span class="label">Sites Healthy</span><span class="value"><span class="status-badge badge-green">10/10</span></span></div>
+            <div class="metric"><span class="label">Custom Domains</span><span class="value">1 (omniaguard.com)</span></div>
+            <div class="metric"><span class="label">Telegram Bot</span><span class="value"><span class="status-badge badge-green">LIVE</span></span></div>
+            <div class="metric"><span class="label">Stripe</span><span class="value"><span class="status-badge badge-red">NOT SET UP</span></span></div>
+            <div class="metric"><span class="label">Monthly Overhead</span><span class="value">$0/mo</span></div>
+        </div>
+
+        <div class="card">
+            <h2><span class="dot dot-yellow"></span> Revenue Pipeline</h2>
+            <div class="metric"><span class="label">Monthly Revenue</span><span class="value">$0</span></div>
+            <div class="metric"><span class="label">Pipeline (LOIs)</span><span class="value">$3,897 CAD/mo</span></div>
+            <div class="metric"><span class="label">Funding Pipeline</span><span class="value">$217,000</span></div>
+            <div class="metric"><span class="label">LOIs Sent</span><span class="value">3</span></div>
+            <div class="metric"><span class="label">LOIs Signed</span><span class="value">0</span></div>
+            <div class="metric"><span class="label">First Revenue ETA</span><span class="value">30-60 days</span></div>
+        </div>
+
+        <div class="card">
+            <h2><span class="dot dot-red"></span> Critical Blockers</h2>
+            <ul class="priority-list">
+                <li><span class="priority-num p-critical">1</span>Stripe not set up — cannot accept payments</li>
+                <li><span class="priority-num p-critical">2</span>3 LOIs unsigned — $3,897/mo waiting</li>
+                <li><span class="priority-num p-high">3</span>ccldr.net domain not transferred to Porkbun</li>
+                <li><span class="priority-num p-high">4</span>No business bank account open</li>
+                <li><span class="priority-num p-medium">5</span>Cloudflare Worker not deployed (bot offline when sandbox sleeps)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Properties Table -->
+    <h3 class="section-title">Digital Properties</h3>
+    <div class="card full-width" style="overflow-x:auto">
+        <table>
+            <thead>
+                <tr><th>Property</th><th>URL</th><th>Status</th><th>Revenue</th><th>Priority</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>OmniaGuard</strong></td><td>omniaguard.com</td><td><span class="status-badge badge-green">LIVE</span></td><td>$0 (needs Stripe)</td><td>HIGH</td></tr>
+                <tr><td><strong>CCLDR.net</strong></td><td>franciscoderek7.github.io/Ccldr-net</td><td><span class="status-badge badge-green">LIVE</span></td><td>$0 (needs Stripe)</td><td>HIGH</td></tr>
+                <tr><td><strong>CleanSwarm Portal</strong></td><td>franciscoderek7.github.io/cleanswarm-portal</td><td><span class="status-badge badge-green">LIVE</span></td><td>$0 (needs LOI)</td><td>HIGH</td></tr>
+                <tr><td><strong>MindShift Sales</strong></td><td>franciscoderek7.github.io/mindshift-sales</td><td><span class="status-badge badge-green">LIVE</span></td><td>$0 (needs Stripe)</td><td>MEDIUM</td></tr>
+                <tr><td><strong>MindShift Main</strong></td><td>franciscoderek7.github.io/mindshift-makayla</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+                <tr><td><strong>CyberGuard Pro</strong></td><td>franciscoderek7.github.io/cyberguard-pro</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+                <tr><td><strong>CloudSecure</strong></td><td>franciscoderek7.github.io/cloudsecure</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+                <tr><td><strong>DataVault</strong></td><td>franciscoderek7.github.io/datavault</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+                <tr><td><strong>HealthTech Pro</strong></td><td>franciscoderek7.github.io/healthtech-pro</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+                <tr><td><strong>CleanSwarm SaaS</strong></td><td>cleanswarm-frcbcgyn.manus.space</td><td><span class="status-badge badge-green">LIVE</span></td><td>—</td><td>LOW</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Deadlines -->
+    <h3 class="section-title">Upcoming Deadlines</h3>
+    <div class="grid">
+        <div class="card">
+            <h2>Legal Deadlines</h2>
+            <div class="deadline-item"><span>Durham Police LECA (6-month limit)</span><span class="deadline-date">~Nov 2026</span></div>
+            <div class="deadline-item"><span>Health Canada Response</span><span class="deadline-date">Pending</span></div>
+            <div class="deadline-item"><span>Gemma Affidavit Draft</span><span class="deadline-date">ASAP</span></div>
+            <div class="deadline-item"><span>Bill Denby Next Filing</span><span class="deadline-date">TBD</span></div>
+        </div>
+        <div class="card">
+            <h2>Business Deadlines</h2>
+            <div class="deadline-item"><span>LOI Follow-up: Ali</span><span class="deadline-date">May 27</span></div>
+            <div class="deadline-item"><span>LOI Follow-up: Andrew</span><span class="deadline-date">May 27</span></div>
+            <div class="deadline-item"><span>LOI Demo: Matt (It Matters)</span><span class="deadline-date">May 30</span></div>
+            <div class="deadline-item"><span>Starter Company PLUS</span><span class="deadline-date">Check deadline</span></div>
+            <div class="deadline-item"><span>IRAP Application</span><span class="deadline-date">Q3 2026</span></div>
+        </div>
+        <div class="card">
+            <h2>Quick Wins (This Week)</h2>
+            <ul class="priority-list">
+                <li><span class="priority-num p-critical">1</span>Create Stripe account + 3 payment links (15 min)</li>
+                <li><span class="priority-num p-high">2</span>Send LOI follow-up emails (30 min)</li>
+                <li><span class="priority-num p-high">3</span>Test @OmniaGuard_bot on Telegram (1 min)</li>
+                <li><span class="priority-num p-medium">4</span>Open business bank account (1 hour)</li>
+                <li><span class="priority-num p-medium">5</span>Deploy Cloudflare Worker (10 min)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contacts -->
+    <h3 class="section-title">Key Contacts</h3>
+    <div class="contacts-grid">
+        <div class="contact-card">
+            <div class="name">Ken Surgent</div>
+            <div class="role">Operations — CleanSwarm / CCLDR</div>
+            <div class="detail">Status: Active contractor</div>
+            <div class="detail">Task: CCLDR.net management via Kimi K2.5</div>
+        </div>
+        <div class="contact-card">
+            <div class="name">Makayla Francisco</div>
+            <div class="role">Director — MindShift Wellness</div>
+            <div class="detail">Status: Trent University (3rd year Psych)</div>
+            <div class="detail">Task: Course content review</div>
+        </div>
+        <div class="contact-card">
+            <div class="name">Ali</div>
+            <div class="role">Prospect — CleanSwarm (Growth Tier)</div>
+            <div class="detail">Status: LOI sent May 20</div>
+            <div class="detail">Next: Follow up May 27</div>
+        </div>
+        <div class="contact-card">
+            <div class="name">Andrew</div>
+            <div class="role">Prospect — CleanSwarm (Starter Tier)</div>
+            <div class="detail">Status: LOI sent May 20</div>
+            <div class="detail">Next: Follow up May 27</div>
+        </div>
+        <div class="contact-card">
+            <div class="name">Matt — It Matters HVAC</div>
+            <div class="role">Prospect — CleanSwarm (Scale Tier)</div>
+            <div class="detail">Status: LOI sent May 22</div>
+            <div class="detail">Next: In-person demo May 30</div>
+        </div>
+        <div class="contact-card">
+            <div class="name">ODSP Caseworker</div>
+            <div class="role">Employment Supports</div>
+            <div class="detail">Status: Awaiting response</div>
+            <div class="detail">Task: Operational funding approval</div>
+        </div>
+    </div>
+
+    <!-- Document Vault -->
+    <h3 class="section-title">Document Vault</h3>
+    <div class="card full-width" style="overflow-x:auto">
+        <table>
+            <thead>
+                <tr><th>Document</th><th>Type</th><th>Entity</th><th>Status</th><th>Location</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Weedlaw Quintinity (24 lessons)</td><td>Course Content</td><td>CCLDR</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>GitHub</td></tr>
+                <tr><td>BENO-X Framework (5 modules)</td><td>Course Content</td><td>CCLDR</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>GitHub</td></tr>
+                <tr><td>12-Appearance Sovereignty</td><td>Course Content</td><td>CCLDR</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>GitHub</td></tr>
+                <tr><td>6 Motion Templates</td><td>Legal Templates</td><td>CCLDR</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>GitHub</td></tr>
+                <tr><td>9 Ontario Court Templates</td><td>Legal Templates</td><td>CCLDR</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>OmniaGuard SDK Docs</td><td>Technical</td><td>OmniaGuard</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>CleanSwarm Proposals (3)</td><td>Sales</td><td>CleanSwarm</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>SR&ED Documentation</td><td>Tax/Funding</td><td>Holdings</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Corporate Structure</td><td>Corporate</td><td>Holdings</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Automation Engine Spec</td><td>Technical</td><td>CleanSwarm</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Social Media Kit</td><td>Marketing</td><td>All</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Email Funnels (20 emails)</td><td>Marketing</td><td>All</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Merch Design Specs</td><td>Product</td><td>All</td><td><span class="status-badge badge-green">COMPLETE</span></td><td>Local</td></tr>
+                <tr><td>Health Canada Demand</td><td>Legal</td><td>CCLDR</td><td><span class="status-badge badge-yellow">DRAFT</span></td><td>GitHub</td></tr>
+                <tr><td>Gemma Affidavit</td><td>Legal</td><td>Personal</td><td><span class="status-badge badge-red">NEEDS FACTS</span></td><td>—</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function updateClock(){
+            const now=new Date();
+            document.getElementById('clock').textContent=now.toLocaleString('en-CA',{dateStyle:'full',timeStyle:'short'});
+        }
+        updateClock();
+        setInterval(updateClock,60000);
+    </script>
+</body>
+</html>
