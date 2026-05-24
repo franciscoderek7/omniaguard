@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://franciscoderek7.github.io/omniaguard/sitemap.xml
