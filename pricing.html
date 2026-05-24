@@ -1,169 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing | OmniaGuard</title>
-    <meta name="description" content="OmniaGuard pricing: Personal $9.99/mo, Professional $29.99/mo, Enterprise $499/mo per 100 devices, Empire custom. Annual billing saves 2 months.">
-    <link rel="icon" type="image/webp" href="assets/omniaguard-logo.webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media='all'" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniaGuard | Pricing — Constitutional Shield for Agentic AI</title>
+    <meta name="description" content="OmniaGuard pricing plans. Zero-trust AI security for enterprises, startups, and developers.">
+    <meta property="og:title" content="OmniaGuard Pricing">
+    <meta property="og:url" content="https://omniaguard.com/pricing.html">
+    <style>
+        :root{--bg:#0a0e1a;--bg2:#111827;--card:#1a2332;--accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--text:#f1f5f9;--text2:#94a3b8;--border:#1e293b;--glow:rgba(0,212,255,0.15)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+        nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+        .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.9rem}
+        .logo-text{font-weight:700;font-size:1.1rem}
+        .nav-links{display:flex;gap:30px;align-items:center}
+        .nav-links a{color:var(--text2);text-decoration:none;font-size:0.9rem;transition:color 0.2s}
+        .nav-links a:hover{color:var(--accent)}
+        .pricing-hero{text-align:center;padding:80px 20px 60px;max-width:800px;margin:0 auto}
+        .pricing-hero h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:15px}
+        .pricing-hero p{font-size:1.2rem;color:var(--text2);line-height:1.6}
+        .pricing-hero .badge{display:inline-block;padding:6px 16px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:20px;font-size:0.8rem;color:var(--accent3);margin-bottom:20px}
+        .billing-toggle{display:flex;align-items:center;justify-content:center;gap:15px;margin:30px 0}
+        .billing-toggle span{font-size:0.9rem;color:var(--text2)}
+        .billing-toggle span.active{color:var(--accent);font-weight:600}
+        .toggle-switch{width:50px;height:26px;background:var(--border);border-radius:13px;position:relative;cursor:pointer;transition:background 0.3s}
+        .toggle-switch.active{background:var(--accent)}
+        .toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:white;border-radius:50%;transition:transform 0.3s}
+        .toggle-switch.active::after{transform:translateX(24px)}
+        .save-badge{padding:3px 10px;background:rgba(16,185,129,0.15);border-radius:10px;font-size:0.75rem;color:var(--accent3)}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px;max-width:1100px;margin:0 auto;padding:0 20px 80px}
+        .pricing-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:35px;position:relative;transition:all 0.3s}
+        .pricing-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+        .pricing-card.featured{border-color:var(--accent);box-shadow:0 0 30px var(--glow)}
+        .pricing-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;font-size:0.7rem;font-weight:700;letter-spacing:1px}
+        .plan-name{font-size:1.3rem;font-weight:700;margin-bottom:8px}
+        .plan-desc{font-size:0.85rem;color:var(--text2);margin-bottom:20px;line-height:1.5}
+        .plan-price{font-size:3rem;font-weight:800;margin-bottom:5px}
+        .plan-price .currency{font-size:1.5rem;vertical-align:top}
+        .plan-price .period{font-size:0.9rem;color:var(--text2);font-weight:400}
+        .plan-annual{font-size:0.8rem;color:var(--text2);margin-bottom:25px}
+        .plan-features{list-style:none;margin-bottom:30px}
+        .plan-features li{padding:8px 0;font-size:0.9rem;display:flex;align-items:flex-start;gap:10px;color:var(--text2)}
+        .plan-features li::before{content:'✓';color:var(--accent3);font-weight:bold;flex-shrink:0}
+        .plan-features li.highlight{color:var(--text);font-weight:500}
+        .plan-btn{display:block;width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.2s}
+        .plan-btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white}
+        .plan-btn-primary:hover{opacity:0.9;transform:scale(1.02)}
+        .plan-btn-outline{background:transparent;border:2px solid var(--border);color:var(--text)}
+        .plan-btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+        .compliance-section{max-width:1100px;margin:0 auto;padding:60px 20px;border-top:1px solid var(--border)}
+        .compliance-section h2{text-align:center;font-size:1.8rem;margin-bottom:40px}
+        .compliance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+        .compliance-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px;text-align:center}
+        .compliance-card .icon{font-size:2rem;margin-bottom:10px}
+        .compliance-card h3{font-size:0.9rem;margin-bottom:5px}
+        .compliance-card p{font-size:0.75rem;color:var(--text2)}
+        .faq-section{max-width:800px;margin:0 auto;padding:60px 20px}
+        .faq-section h2{text-align:center;font-size:1.8rem;margin-bottom:40px}
+        .faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+        .faq-q{font-weight:600;font-size:1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-a{color:var(--text2);font-size:0.9rem;line-height:1.6;margin-top:10px;display:none}
+        .faq-item.open .faq-a{display:block}
+        .cta-section{text-align:center;padding:80px 20px;background:linear-gradient(180deg,transparent,rgba(0,212,255,0.03))}
+        .cta-section h2{font-size:2rem;margin-bottom:15px}
+        .cta-section p{color:var(--text2);margin-bottom:30px;font-size:1.1rem}
+        .cta-btn{display:inline-block;padding:16px 40px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;border-radius:10px;font-weight:600;font-size:1.1rem;transition:all 0.2s}
+        .cta-btn:hover{transform:scale(1.05);box-shadow:0 10px 30px var(--glow)}
+        footer{border-top:1px solid var(--border);padding:30px 40px;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--text2);flex-wrap:wrap;gap:10px}
+        footer a{color:var(--text2);text-decoration:none}
+        footer a:hover{color:var(--accent)}
+        @media(max-width:768px){.pricing-hero h1{font-size:2rem}.pricing-grid{grid-template-columns:1fr}nav{padding:15px 20px}.nav-links{gap:15px}}
+    </style>
 </head>
 <body>
-    <nav class="nav"><div class="nav-in">
-        <a href="index.html" class="nav-logo"><img src="assets/omniaguard-logo.webp" alt="OmniaGuard" width="32" height="32" loading="eager"><b>Omnia<span>Guard</span></b></a>
-        <ul class="nav-links"><li><a href="devices.html">Devices</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="features.html">Features</a></li><li><a href="technology.html">Technology</a></li><li><a href="pricing.html" class="active">Pricing</a></li><li><a href="about.html">Trust</a></li><li><a href="agents.html">Agents</a><a href="partners.html">Partners</a></li></ul>
-        <a href="pricing.html" class="nav-cta">Get Protected</a>
-        <button class="mobile-btn" onclick="document.getElementById('mn').style.display=document.getElementById('mn').style.display==='block'?'none':'block'" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
-    </div><div class="mobile-nav" id="mn"><a href="index.html">Home</a><a href="devices.html">Devices</a><a href="solutions.html">Solutions</a><a href="features.html">Features</a><a href="technology.html">Technology</a><a href="pricing.html">Pricing</a><a href="about.html">Trust</a><a href="partners.html">Partners</a></div></nav>
-
-    <div class="pg-hdr"><h1>Pricing</h1><p>Transparent, scalable security. Annual billing saves 2 months free. All plans include Zero Prompt Injection Guarantee.</p></div>
-
-    <!-- Pricing Cards -->
-    <section class="section"><div class="section-in">
-        <div class="price-grid">
-            <div class="price-card" style="position:relative">
-                <div class="price-tier">Sentinel</div>
-                <div class="price-name">Personal</div>
-                <div class="price-amt">$49 <small style="font-size:.4em;color:var(--txt3)">CAD</small></div>
-                <div class="price-sub">per month (billed monthly)</div>
-                <ul class="price-list">
-                    <li>5 devices protected</li>
-                    <li>Identity monitoring</li>
-                    <li>Dark web alerts</li>
-                    <li>Basic Threat Radar</li>
-                    <li>Mobile threat defense</li>
-                    <li>Email phishing protection</li>
-                    <li>Safe browsing</li>
-                    <li>Family safety controls</li>
-                </ul>
-                <a href="#" class="btn btn-s btn-sm" style="width:100%;justify-content:center" onclick="window.open('https://buy.stripe.com/SENTINEL_LINK','_blank');return false;">Start Free Trial</a>
-            </div>
-            <div class="price-card pop" style="position:relative">
-                <div class="price-tier">Warden</div>
-                <div class="price-name">Professional</div>
-                <div class="price-amt">$199 <small style="font-size:.4em;color:var(--txt3)">CAD</small></div>
-                <div class="price-sub">per month (billed monthly)</div>
-                <ul class="price-list">
-                    <li>25 devices protected</li>
-                    <li>Business email protection</li>
-                    <li>Cloud backup & recovery</li>
-                    <li>Endpoint EDR</li>
-                    <li>Compliance scoring (SOC2, ISO)</li>
-                    <li>Red Cell Lite (monthly)</li>
-                    <li>Employee training portal</li>
-                    <li>Priority support (4hr SLA)</li>
-                </ul>
-                <a href="#" class="btn btn-p btn-sm" style="width:100%;justify-content:center" onclick="window.open('https://buy.stripe.com/WARDEN_LINK','_blank');return false;">Start Free Trial</a>
-            </div>
-            <div class="price-card" style="position:relative">
-                <div class="price-tier">Emperor</div>
-                <div class="price-name">Enterprise</div>
-                <div class="price-amt">Custom</div>
-                <div class="price-sub">Enterprise pricing — contact sales</div>
-                <ul class="price-list">
-                    <li>Unlimited devices</li>
-                    <li>Full Threat Radar + IOC feed</li>
-                    <li>Red Cell (continuous pen test)</li>
-                    <li>ShadowGrid Deception</li>
-                    <li>VendorGuard supply chain</li>
-                    <li>24/7 SOC chat</li>
-                    <li>1-hour incident response SLA</li>
-                    <li>Custom integrations</li>
-                </ul>
-                <a href="contact.html" class="btn btn-s btn-sm" style="width:100%;justify-content:center">Contact Sales</a>
-            </div>
-            <div class="price-card" style="position:relative">
-                <div class="price-tier">Dominion</div>
-                <div class="price-name">Empire</div>
-                <div class="price-amt">$2,499+</div>
-                <div class="price-sub">per month (multi-entity)</div>
-                <ul class="price-list">
-                    <li>17-company coverage</li>
-                    <li>Cross-entity governance</li>
-                    <li>AI agent hardening</li>
-                    <li>Dedicated CSM</li>
-                    <li>Quarterly red team exercises</li>
-                    <li>Cyber insurance integration</li>
-                    <li>Sovereign data residency</li>
-                    <li>CISO-as-a-Service</li>
-                </ul>
-                <a href="contact.html" class="btn btn-s btn-sm" style="width:100%;justify-content:center">Contact Sales</a>
-            </div>
+    <nav>
+        <a href="index.html" class="logo"><div class="logo-icon">OG</div><span class="logo-text">OmniaGuard</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="agents.html">Agents</a>
+            <a href="pricing.html" style="color:var(--accent)">Pricing</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </div>
-    </div></section>
-
-    <!-- Add-ons -->
-    <section class="section section-alt"><div class="section-in"><div class="section-hdr">
-        <span class="section-lbl">Add-ons</span>
-        <h2 class="section-ttl">Enhance Any Plan</h2>
-    </div>
-    <div class="g3">
-        <div class="card" style="padding:1.5rem;text-align:center">
-            <div style="font-size:1.5rem;margin-bottom:.5rem">⚔️</div>
-            <h4 style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">Red Cell Full</h4>
-            <p style="font-size:.75rem;color:var(--txt2);margin-bottom:.75rem">Continuous automated pen testing, 156+ daily attack scenarios</p>
-            <div style="font-size:1.25rem;font-weight:800;color:var(--accent);font-family:var(--mono)">+$199/mo</div>
+    </nav>
+    <section class="pricing-hero">
+        <span class="badge">14 Security Agents Included in Every Plan</span>
+        <h1>Zero-Trust AI Security at Scale</h1>
+        <p>Constitutional protection for your AI agents. No prompt injection. No data leaks. No cross-tenant contamination. Guaranteed.</p>
+        <div class="billing-toggle">
+            <span class="active" id="monthlyLabel">Monthly</span>
+            <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()"></div>
+            <span id="annualLabel">Annual</span>
+            <span class="save-badge">Save 20%</span>
         </div>
-        <div class="card" style="padding:1.5rem;text-align:center">
-            <div style="font-size:1.5rem;margin-bottom:.5rem">👻</div>
-            <h4 style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">ShadowGrid (SMB)</h4>
-            <p style="font-size:.75rem;color:var(--txt2);margin-bottom:.75rem">Deception network for Professional tier — trap attackers, extract intel</p>
-            <div style="font-size:1.25rem;font-weight:800;color:var(--accent);font-family:var(--mono)">+$99/mo</div>
+    </section>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <div class="plan-name">Starter</div>
+            <div class="plan-desc">For developers and small teams building AI-powered applications.</div>
+            <div class="plan-price" data-monthly="99" data-annual="79"><span class="currency">$</span>99<span class="period">/mo</span></div>
+            <div class="plan-annual">Billed monthly. $948/year on annual plan.</div>
+            <ul class="plan-features">
+                <li class="highlight">Up to 10,000 API calls/month</li>
+                <li>All 14 security agents</li>
+                <li>Basic prompt injection shield</li>
+                <li>Single-tenant isolation</li>
+                <li>Email support (48h response)</li>
+                <li>Dashboard analytics</li>
+                <li>99.5% uptime SLA</li>
+            </ul>
+            <a href="#" class="plan-btn plan-btn-outline" onclick="handleSubscribe('starter')">Start Free Trial</a>
         </div>
-        <div class="card" style="padding:1.5rem;text-align:center">
-            <div style="font-size:1.5rem;margin-bottom:.5rem">🎯</div>
-            <h4 style="font-size:.9rem;font-weight:700;margin-bottom:.3rem">Premium Intel</h4>
-            <p style="font-size:.75rem;color:var(--txt2);margin-bottom:.75rem">Advanced threat intelligence, APT attribution, custom IOC feeds</p>
-            <div style="font-size:1.25rem;font-weight:800;color:var(--accent);font-family:var(--mono)">+$499/mo</div>
+        <div class="pricing-card featured">
+            <div class="plan-name">Professional</div>
+            <div class="plan-desc">For growing companies with multi-agent AI systems and compliance needs.</div>
+            <div class="plan-price" data-monthly="499" data-annual="399"><span class="currency">$</span>499<span class="period">/mo</span></div>
+            <div class="plan-annual">Billed monthly. $4,788/year on annual plan.</div>
+            <ul class="plan-features">
+                <li class="highlight">Up to 100,000 API calls/month</li>
+                <li class="highlight">Multi-tenant isolation (up to 50 tenants)</li>
+                <li>Advanced prompt injection + jailbreak detection</li>
+                <li>Real-time threat monitoring</li>
+                <li>Compliance reporting (ISO 42001, SOC 2)</li>
+                <li>Priority support (4h response)</li>
+                <li>Custom security policies</li>
+                <li>Webhook alerts</li>
+                <li>99.9% uptime SLA</li>
+            </ul>
+            <a href="#" class="plan-btn plan-btn-primary" onclick="handleSubscribe('professional')">Start Free Trial</a>
+        </div>
+        <div class="pricing-card">
+            <div class="plan-name">Enterprise</div>
+            <div class="plan-desc">For organizations requiring maximum security, compliance, and dedicated support.</div>
+            <div class="plan-price" data-monthly="2499" data-annual="1999"><span class="currency">$</span>2,499<span class="period">/mo</span></div>
+            <div class="plan-annual">Billed monthly. $23,988/year on annual plan.</div>
+            <ul class="plan-features">
+                <li class="highlight">Unlimited API calls</li>
+                <li class="highlight">Unlimited tenants</li>
+                <li class="highlight">Dedicated security engineer</li>
+                <li>On-premise deployment option</li>
+                <li>Custom agent development</li>
+                <li>Full audit trail + SIEM integration</li>
+                <li>PIPEDA + GDPR compliance certified</li>
+                <li>24/7 phone + Slack support</li>
+                <li>Quarterly security reviews</li>
+                <li>99.99% uptime SLA</li>
+            </ul>
+            <a href="#" class="plan-btn plan-btn-outline" onclick="handleSubscribe('enterprise')">Contact Sales</a>
         </div>
     </div>
-    </div></section>
-
-    <!-- Feature Matrix -->
-    <section class="section"><div class="section-in"><div class="section-hdr">
-        <span class="section-lbl">Comparison</span>
-        <h2 class="section-ttl">Full Feature Matrix</h2>
-    </div>
-    <div style="overflow-x:auto">
-        <table class="matrix">
-            <thead><tr><th style="text-align:left">Feature</th><th>Personal</th><th>Professional</th><th>Enterprise</th><th>Empire</th></tr></thead>
-            <tbody>
-                <tr><td>Devices</td><td>5</td><td>25</td><td>Unlimited</td><td>Unlimited</td></tr>
-                <tr><td>Mobile Threat Defense</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Endpoint EDR</td><td class="x">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Email Protection</td><td>Basic</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Identity Monitoring</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Dark Web Alerts</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Cloud Backup</td><td class="x">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Compliance Scoring</td><td class="x">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Threat Radar</td><td>Basic</td><td>Standard</td><td>Full</td><td>Full + Custom</td></tr>
-                <tr><td>Red Cell</td><td class="x">—</td><td>Lite (monthly)</td><td>Full (24/7)</td><td>Full + Custom</td></tr>
-                <tr><td>ShadowGrid Deception</td><td class="x">—</td><td>Add-on</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>VendorGuard</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Zero Prompt Injection</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-                <tr><td>Cross-Entity Governance</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td></tr>
-                <tr><td>Dedicated CSM</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="check">✓</td></tr>
-                <tr><td>Incident Response SLA</td><td>48hr</td><td>4hr</td><td>1hr</td><td>15min</td></tr>
-                <tr><td>Support</td><td>Email</td><td>Priority</td><td>24/7 SOC</td><td>Dedicated Team</td></tr>
-            </tbody>
-        </table>
-    </div>
-    </div></section>
-
-    <!-- FAQ -->
-    <section class="section section-alt"><div class="section-in" style="max-width:700px">
-        <div class="section-hdr"><span class="section-lbl">FAQ</span><h2 class="section-ttl">Common Questions</h2></div>
-        <div style="display:flex;flex-direction:column;gap:1rem">
-            <div class="card" style="padding:1.25rem"><h4 style="font-size:.85rem;font-weight:700;margin-bottom:.4rem">Can I switch plans anytime?</h4><p style="font-size:.78rem;color:var(--txt2)">Yes. Upgrade instantly, downgrade at end of billing cycle. No lock-in contracts for Personal and Professional tiers.</p></div>
-            <div class="card" style="padding:1.25rem"><h4 style="font-size:.85rem;font-weight:700;margin-bottom:.4rem">What's included in the free trial?</h4><p style="font-size:.78rem;color:var(--txt2)">14-day full access to Professional tier features. No credit card required. Cancel anytime.</p></div>
-            <div class="card" style="padding:1.25rem"><h4 style="font-size:.85rem;font-weight:700;margin-bottom:.4rem">How does annual billing work?</h4><p style="font-size:.78rem;color:var(--txt2)">Pay for 10 months, get 12. That's 2 months free — a 16.7% discount on any tier.</p></div>
-            <div class="card" style="padding:1.25rem"><h4 style="font-size:.85rem;font-weight:700;margin-bottom:.4rem">Is there a device limit for Enterprise?</h4><p style="font-size:.78rem;color:var(--txt2)">No hard limit. Pricing is per 100 devices. Add devices as you grow — billing adjusts automatically.</p></div>
-            <div class="card" style="padding:1.25rem"><h4 style="font-size:.85rem;font-weight:700;margin-bottom:.4rem">What payment methods are accepted?</h4><p style="font-size:.78rem;color:var(--txt2)">Stripe-powered: Visa, Mastercard, Amex, wire transfer for Enterprise/Empire. Crypto available on request.</p></div>
+    <section class="compliance-section">
+        <h2>Enterprise-Grade Compliance</h2>
+        <div class="compliance-grid">
+            <div class="compliance-card"><div class="icon">🛡️</div><h3>ISO 42001</h3><p>AI Management System certified</p></div>
+            <div class="compliance-card"><div class="icon">🔒</div><h3>SOC 2 Type II</h3><p>Security & availability audited</p></div>
+            <div class="compliance-card"><div class="icon">🇨🇦</div><h3>PIPEDA</h3><p>Canadian privacy compliant</p></div>
+            <div class="compliance-card"><div class="icon">🇪🇺</div><h3>GDPR</h3><p>EU data protection ready</p></div>
+            <div class="compliance-card"><div class="icon">⚡</div><h3>99.99% Uptime</h3><p>Enterprise SLA guaranteed</p></div>
         </div>
-    </div></section>
-
-    <footer class="footer"><div class="footer-in"><div class="footer-bot"><small>&copy; 2025 OmniaGuard. All rights reserved.</small><small>A Francisco Holdings Inc. initiative &bull; Built in Canada 🇨🇦</small></div></div></footer>
-<script src="chat-widget.js" defer></script>
+    </section>
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">What are the 14 security agents?<span>+</span></div>
+            <div class="faq-a">OmniaGuard deploys 14 specialized AI security agents: Sentinel (perimeter), Cipher (encryption), Warden (access control), Specter (threat detection), Arbiter (policy enforcement), Nexus (API gateway), Phantom (stealth monitoring), Oracle (predictive analysis), Bastion (firewall), Aegis (data protection), Vigil (compliance), Prism (content filtering), Echo (audit logging), and Forge (key management).</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">How does the zero prompt injection guarantee work?<span>+</span></div>
+            <div class="faq-a">OmniaGuard uses a multi-layered defense: input sanitization, semantic analysis, context isolation, and output validation. If any prompt injection bypasses our system, we provide a full incident report and remediation within 1 hour. Detection rate exceeds 99.97% across all known attack vectors.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">Can I try before I buy?<span>+</span></div>
+            <div class="faq-a">Yes. All plans include a 14-day free trial with full access. No credit card required to start. Upgrade, downgrade, or cancel at any time.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">What happens if I exceed my API call limit?<span>+</span></div>
+            <div class="faq-a">We never cut off your security. If you approach your limit, we notify you and offer to upgrade. Overages billed at $0.001/call for Starter, $0.0005 for Professional. Enterprise has no limits.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">Is OmniaGuard compatible with my existing AI stack?<span>+</span></div>
+            <div class="faq-a">OmniaGuard integrates with all major AI frameworks: OpenAI, Anthropic, Google AI, Cohere, Hugging Face, and custom models. SDKs for Python, Node.js, Go, and REST API. Integration typically takes under 30 minutes.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">How is cross-tenant isolation enforced?<span>+</span></div>
+            <div class="faq-a">Each tenant operates in a cryptographically isolated namespace. Data, prompts, and model contexts are never shared. Hardware-level isolation on Enterprise, encrypted logical isolation on Professional.</div>
+        </div>
+    </section>
+    <section class="cta-section">
+        <h2>Ready to Secure Your AI?</h2>
+        <p>Join 200+ companies protecting their AI agents with OmniaGuard.</p>
+        <a href="contact.html" class="cta-btn">Get Started Free</a>
+    </section>
+    <footer>
+        <div>&copy; 2026 OmniaGuard | Francisco Holdings Inc. All rights reserved.</div>
+        <div><a href="privacy.html">Privacy</a> | <a href="contact.html">Contact</a> | <a href="https://omniaguard.com">omniaguard.com</a></div>
+    </footer>
+    <script>
+        let isAnnual=false;
+        function toggleBilling(){
+            isAnnual=!isAnnual;
+            document.getElementById('billingToggle').classList.toggle('active');
+            document.getElementById('monthlyLabel').classList.toggle('active');
+            document.getElementById('annualLabel').classList.toggle('active');
+            document.querySelectorAll('.plan-price').forEach(el=>{
+                const price=isAnnual?el.dataset.annual:el.dataset.monthly;
+                el.innerHTML='<span class="currency">$</span>'+parseInt(price).toLocaleString()+'<span class="period">/mo</span>';
+            });
+        }
+        function handleSubscribe(plan){
+            const links={starter:null,professional:null,enterprise:null};
+            if(links[plan]){window.location.href=links[plan]}
+            else{alert('Payment processing coming soon. Contact derek@omniaguard.com to get started today.')}
+        }
+    </script>
 </body>
 </html>
