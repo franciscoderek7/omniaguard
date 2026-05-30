@@ -13,6 +13,9 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for dashboard -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
     <style>
         :root {
@@ -20,6 +23,7 @@
             --chrome-silver: #C0C0C0;
             --gold-accent: #D4AF37;
             --red-accent: #FF0000;
+            --cyan: #00FFFF;
             --text-light: #FFFFFF;
             --text-muted: #888888;
             --glass: rgba(255, 255, 255, 0.05);
@@ -34,7 +38,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
+            background: linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
@@ -44,6 +48,50 @@
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.15em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--cyan); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
         }
 
         /* Hero Section */
@@ -57,18 +105,19 @@
             text-align: center;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/349.jpg') center/cover no-repeat;
             padding: 0 5%;
+            margin-top: 80px;
         }
 
         .hero h1 {
             font-size: clamp(2rem, 5vw, 4rem);
             color: var(--text-light);
             margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
         }
 
         .hero p {
             font-size: 1.2rem;
-            color: var(--gold-accent);
+            color: var(--cyan);
             font-weight: 700;
             margin-bottom: 2rem;
             letter-spacing: 0.1em;
@@ -88,35 +137,29 @@
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
-        /* Navigation */
-        nav {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            padding: 2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .logo {
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
             font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .logo span { color: var(--gold-accent); }
+        .btn:hover {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
 
-        /* Features Section */
-        .features {
+        /* Threat Dashboard */
+        .dashboard {
             padding: 100px 5%;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('images/350.jpg') center/cover fixed no-repeat;
-            position: relative;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(255, 0, 0, 0.05) 100%);
         }
 
         .section-title {
@@ -124,6 +167,96 @@
             margin-bottom: 60px;
             font-size: 2.5rem;
             color: var(--chrome-silver);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .dashboard-card:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 255, 255, 0.08);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        /* Agents Section */
+        .agents {
+            padding: 100px 5%;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .agent-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-5px);
+        }
+
+        .agent-icon {
+            font-size: 2rem;
+            color: var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        .agent-name {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .agent-role {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('images/350.jpg') center/cover fixed no-repeat;
+            position: relative;
         }
 
         .features-grid {
@@ -166,6 +299,83 @@
             font-size: 0.95rem;
         }
 
+        /* Pricing */
+        .pricing {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .price-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-10px);
+        }
+
+        .price-tier {
+            font-size: 0.85rem;
+            color: var(--cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .price-name {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .price-amount {
+            font-size: 2.5rem;
+            color: var(--cyan);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .price-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .price-list {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .price-list li {
+            padding: 10px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .price-list li::before {
+            content: '✓ ';
+            color: var(--cyan);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
         /* Footer */
         footer {
             padding: 60px 5%;
@@ -175,7 +385,7 @@
         }
 
         .footer-branding {
-            color: var(--gold-accent);
+            color: var(--cyan);
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             margin-bottom: 15px;
@@ -187,29 +397,10 @@
             font-size: 0.8rem;
         }
 
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--gold-accent);
-            color: var(--gold-accent);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--gold-accent);
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .section-title { font-size: 1.8rem; }
+            .nav-links { gap: 15px; }
         }
     </style>
 </head>
@@ -218,7 +409,10 @@
     <nav>
         <div class="logo">OMNIA<span>GUARD</span></div>
         <div class="nav-links">
-            <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.7rem;">Deploy Shield</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#agents">Agents</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
         </div>
     </nav>
 
@@ -226,7 +420,108 @@
         <div class="badge-guarantee">ZERO PROMPT INJECTION GUARANTEE</div>
         <h1>OMNIAGUARD</h1>
         <p>Constitutional Shield for Agentic AI</p>
-        <a href="#features" class="btn">Explore Multi-Agent Defense</a>
+        <a href="#dashboard" class="btn">View Live Dashboard</a>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+        <h2 class="section-title">Live Threat Dashboard</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-title"><i class="fas fa-chart-line"></i> Threat Level</div>
+                <div class="chart-container">
+                    <canvas id="threatChart"></canvas>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-title"><i class="fas fa-shield-alt"></i> Agent Status</div>
+                <div class="chart-container">
+                    <canvas id="agentChart"></canvas>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="card-title"><i class="fas fa-globe"></i> Global Coverage</div>
+                <div style="padding: 20px; text-align: center;">
+                    <div style="font-size: 2rem; color: var(--cyan); margin-bottom: 10px;">8 Regions</div>
+                    <div style="color: var(--text-muted); font-size: 0.9rem;">Active monitoring across all continents</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="agents" id="agents">
+        <h2 class="section-title">14 Autonomous Security Agents</h2>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-lock"></i></div>
+                <div class="agent-name">Identity Verification Agent</div>
+                <div class="agent-role">Zero-Trust Layer</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="agent-name">Network Defense Agent</div>
+                <div class="agent-role">Perimeter Protection</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-brain"></i></div>
+                <div class="agent-name">Prompt Injection Detector</div>
+                <div class="agent-role">AI Core Defense</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-database"></i></div>
+                <div class="agent-name">Data Encryption Agent</div>
+                <div class="agent-role">Information Security</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-eye"></i></div>
+                <div class="agent-name">Behavioral Anomaly Agent</div>
+                <div class="agent-role">Threat Detection</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-shield-virus"></i></div>
+                <div class="agent-name">Malware Scanner Agent</div>
+                <div class="agent-role">Endpoint Protection</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-clock"></i></div>
+                <div class="agent-name">Incident Response Agent</div>
+                <div class="agent-role">24/7 Response</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="agent-name">Compliance Monitor Agent</div>
+                <div class="agent-role">Regulatory Adherence</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-server"></i></div>
+                <div class="agent-name">Cloud Security Agent</div>
+                <div class="agent-role">Cloud Infrastructure</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="agent-name">Mobile Defense Agent</div>
+                <div class="agent-role">Device Protection</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-link"></i></div>
+                <div class="agent-name">Supply Chain Agent</div>
+                <div class="agent-role">Third-Party Risk</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-users"></i></div>
+                <div class="agent-name">Access Control Agent</div>
+                <div class="agent-role">Permission Management</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-zap"></i></div>
+                <div class="agent-name">Threat Intelligence Agent</div>
+                <div class="agent-role">Intelligence Gathering</div>
+            </div>
+            <div class="agent-card">
+                <div class="agent-icon"><i class="fas fa-cog"></i></div>
+                <div class="agent-name">Orchestration Agent</div>
+                <div class="agent-role">System Coordination</div>
+            </div>
+        </div>
     </section>
 
     <section class="features" id="features">
@@ -250,12 +545,104 @@
         </div>
     </section>
 
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Enterprise Pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-tier">Starter</div>
+                <div class="price-name">Professional</div>
+                <div class="price-amount">$499</div>
+                <div class="price-sub">per month</div>
+                <ul class="price-list">
+                    <li>Up to 25 devices</li>
+                    <li>6 security agents</li>
+                    <li>Basic threat detection</li>
+                    <li>Email support</li>
+                </ul>
+                <button class="btn" style="width: 100%;">Get Started</button>
+            </div>
+            <div class="price-card">
+                <div class="price-tier">Professional</div>
+                <div class="price-name">Enterprise</div>
+                <div class="price-amount">$2,499</div>
+                <div class="price-sub">per month</div>
+                <ul class="price-list">
+                    <li>Unlimited devices</li>
+                    <li>All 14 agents</li>
+                    <li>Advanced threat detection</li>
+                    <li>24/7 SOC support</li>
+                </ul>
+                <button class="btn" style="width: 100%;">Choose Plan</button>
+            </div>
+            <div class="price-card">
+                <div class="price-tier">Enterprise</div>
+                <div class="price-name">Custom</div>
+                <div class="price-amount">Contact</div>
+                <div class="price-sub">for quote</div>
+                <ul class="price-list">
+                    <li>Multi-company coverage</li>
+                    <li>Dedicated CSM</li>
+                    <li>Custom integrations</li>
+                    <li>SLA guarantee</li>
+                </ul>
+                <button class="btn" style="width: 100%;">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <div class="footer-branding">FRANCISCO HOLDINGS INC.</div>
+        <div class="footer-branding">OMNIAGUARD</div>
         <div class="footer-copyright">
-            &copy; 2026 OMNIAGUARD. ALL RIGHTS RESERVED.
+            <p>&copy; 2026 OMNIAGUARD. Constitutional Shield for Agentic AI.</p>
+            <p>A Francisco Holdings Inc. subsidiary.</p>
         </div>
     </footer>
+
+    <script>
+        // Threat Level Chart
+        const threatCtx = document.getElementById('threatChart').getContext('2d');
+        new Chart(threatCtx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '06:00', '12:00', '18:00', '24:00'],
+                datasets: [{
+                    label: 'Threat Level',
+                    data: [15, 22, 18, 28, 12],
+                    borderColor: '#00FFFF',
+                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { ticks: { color: '#888888' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                    x: { ticks: { color: '#888888' }, grid: { display: false } }
+                }
+            }
+        });
+
+        // Agent Status Chart
+        const agentCtx = document.getElementById('agentChart').getContext('2d');
+        new Chart(agentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active', 'Monitoring', 'Standby'],
+                datasets: [{
+                    data: [10, 3, 1],
+                    backgroundColor: ['#00FFFF', '#D4AF37', '#888888']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#888888' } } }
+            }
+        });
+    </script>
 
 </body>
 </html>
