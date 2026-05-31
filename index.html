@@ -3,646 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIAGUARD — Constitutional Shield for Agentic AI</title>
-    <meta name="description" content="OmniaGuard secures every digital surface with 14 autonomous security agents. Zero Prompt Injection Guarantee.">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Chart.js for dashboard -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
+    <title>OMNIAGUARD | Constitutional Shield</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #000000;
-            --chrome-silver: #C0C0C0;
-            --gold-accent: #D4AF37;
-            --red-accent: #FF0000;
-            --cyan: #00FFFF;
-            --text-light: #FFFFFF;
-            --text-muted: #888888;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --cyan: #00f0ff;
+            --cyan-glow: rgba(0, 240, 255, 0.6);
+            --dark: #0a0e17;
+            --darker: #060912;
+            --glass: rgba(0, 240, 255, 0.08);
+            --border: rgba(0, 240, 255, 0.25);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
-            color: var(--text-light);
-            line-height: 1.6;
+            background: radial-gradient(ellipse at 50% 0%, #0a1a2e 0%, #020408 50%, #000 100%);
+            color: #c0e8ff;
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
         }
-
-        h1, h2, h3, .futuristic {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
         }
-
-        /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 2rem 5%;
+            top: 0; width: 100%;
+            background: rgba(6, 9, 18, 0.8);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
         }
-
         .logo {
             font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
             font-weight: 900;
-            font-size: 1.5rem;
-            color: var(--text-light);
+            color: var(--cyan);
+            text-shadow: 0 0 30px var(--cyan-glow);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.8rem;
         }
-
-        .logo span { color: var(--cyan); }
-
+        .logo-icon {
+            width: 42px; height: 42px;
+            border: 2px solid var(--cyan);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 3s infinite;
+            background: rgba(0, 240, 255, 0.1);
+        }
+        .logo-icon::before {
+            content: '';
+            width: 18px; height: 18px;
+            background: var(--cyan);
+            transform: rotate(45deg);
+            box-shadow: 0 0 20px var(--cyan);
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px var(--cyan-glow); }
+            50% { box-shadow: 0 0 35px var(--cyan-glow); }
+        }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 2.5rem;
+            list-style: none;
         }
-
         .nav-links a {
-            color: var(--text-muted);
+            color: #88b8d8;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: color 0.3s;
+            font-weight: 500;
+            transition: all 0.3s;
         }
-
         .nav-links a:hover {
             color: var(--cyan);
+            text-shadow: 0 0 20px var(--cyan-glow);
         }
-
-        /* Hero Section */
         .hero {
-            position: relative;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/349.jpg') center/cover no-repeat;
-            padding: 0 5%;
-            margin-top: 80px;
+            padding: 10rem 2rem 5rem;
+            background: radial-gradient(ellipse at 50% 30%, rgba(0, 100, 200, 0.15) 0%, transparent 60%);
         }
-
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--cyan);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            letter-spacing: 0.1em;
-        }
-
-        .badge-guarantee {
-            display: inline-block;
-            padding: 10px 25px;
-            border: 2px solid var(--red-accent);
-            color: var(--red-accent);
             font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
             font-weight: 900;
-            font-size: 0.8rem;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            background: rgba(255, 0, 0, 0.05);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+            color: #fff;
+            text-shadow: 0 0 40px var(--cyan-glow);
+            margin-bottom: 1.5rem;
         }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
+        .hero h1 span { color: var(--cyan); text-shadow: 0 0 50px var(--cyan-glow); }
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #88b8d8;
+            margin-bottom: 1rem;
+            max-width: 800px;
+        }
+        .hero-tagline {
             font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--cyan);
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-        }
-
-        /* Threat Dashboard */
-        .dashboard {
-            padding: 100px 5%;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(255, 0, 0, 0.05) 100%);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            font-size: 2.5rem;
-            color: var(--chrome-silver);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .dashboard-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .dashboard-card:hover {
-            border-color: var(--cyan);
-            background: rgba(0, 255, 255, 0.08);
-        }
-
-        .card-title {
             font-size: 1rem;
             color: var(--cyan);
-            margin-bottom: 20px;
+            border: 1px solid var(--cyan);
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            background: var(--glass);
+            margin-bottom: 3rem;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 15px rgba(0,240,255,0.2); }
+            to { box-shadow: 0 0 30px rgba(0,240,255,0.4); }
+        }
+        .btn {
+            padding: 1.2rem 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
+            border: 2px solid var(--cyan);
+            background: transparent;
+            color: var(--cyan);
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 8px;
+            margin: 0.5rem;
         }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin-bottom: 20px;
+        .btn:hover {
+            background: var(--cyan);
+            color: var(--darker);
+            box-shadow: 0 0 40px var(--cyan-glow);
         }
-
-        /* Agents Section */
-        .agents {
-            padding: 100px 5%;
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--darker);
+            box-shadow: 0 0 30px var(--cyan-glow);
         }
-
-        .agents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            padding: 4rem 2rem;
+            background: rgba(0, 240, 255, 0.03);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--cyan);
+            text-shadow: 0 0 30px var(--cyan-glow);
+        }
+        .stat-label {
+            color: #88b8d8;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        section {
+            padding: 7rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
-
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(0, 200, 255, 0.3);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #88b8d8;
+            margin-bottom: 5rem;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
         .agent-card {
             background: var(--glass);
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .agent-card:hover {
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-        }
-
-        .agent-icon {
-            font-size: 2rem;
-            color: var(--cyan);
-            margin-bottom: 10px;
-        }
-
-        .agent-name {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .agent-role {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 5%;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('images/350.jpg') center/cover fixed no-repeat;
+            border-radius: 20px;
+            padding: 2.5rem;
             position: relative;
+            transition: all 0.4s;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: var(--cyan);
+            box-shadow: 0 0 20px var(--cyan);
         }
-
-        .feature-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--red-accent);
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--red-accent);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 100px 5%;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .price-card:hover {
+        .agent-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px var(--cyan-glow);
             border-color: var(--cyan);
-            transform: translateY(-10px);
+            background: rgba(0, 240, 255, 0.15);
         }
-
-        .price-tier {
+        .agent-status {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .agent-status-dot {
+            width: 10px; height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00ff88;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .agent-number {
+            font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
             color: var(--cyan);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
-
-        .price-name {
+        .agent-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+        }
+        .agent-desc { color: #88b8d8; font-size: 0.95rem; line-height: 1.7; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        .pricing-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .pricing-card.featured {
+            border-color: var(--cyan);
+            box-shadow: 0 0 60px var(--cyan-glow);
+            transform: scale(1.05);
+            background: rgba(0, 240, 255, 0.15);
+        }
+        .pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px var(--cyan-glow);
+        }
+        .pricing-tier {
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .price-amount {
-            font-size: 2.5rem;
             color: var(--cyan);
-            font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 1rem;
         }
-
-        .price-sub {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
+        .pricing-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 30px rgba(0,200,255,0.3);
         }
-
-        .price-list {
+        .pricing-price span { font-size: 1rem; color: #88b8d8; }
+        .pricing-features {
             list-style: none;
-            margin-bottom: 30px;
+            margin: 2.5rem 0;
             text-align: left;
         }
-
-        .price-list li {
-            padding: 10px 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--border);
+        .pricing-features li {
+            padding: 0.8rem 0;
+            color: #88b8d8;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
-        .price-list li::before {
-            content: '✓ ';
+        .pricing-features li::before {
+            content: '◈';
             color: var(--cyan);
-            font-weight: 700;
-            margin-right: 10px;
+            margin-right: 0.8rem;
         }
-
-        /* Footer */
         footer {
-            padding: 60px 5%;
-            text-align: center;
+            background: var(--darker);
             border-top: 1px solid var(--border);
-            background: #000;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
         }
-
-        .footer-branding {
-            color: var(--cyan);
+        .footer-logo {
             font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: 0.1em;
+            font-size: 2.5rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px var(--cyan-glow);
         }
-
-        .footer-copyright {
-            color: var(--text-muted);
-            font-size: 0.8rem;
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s;
         }
-
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .section-title { font-size: 1.8rem; }
-            .nav-links { gap: 15px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .stats-bar { gap: 2rem; }
+            .pricing-card.featured { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-
+    <canvas id="particles"></canvas>
     <nav>
-        <div class="logo">OMNIA<span>GUARD</span></div>
-        <div class="nav-links">
-            <a href="#dashboard">Dashboard</a>
-            <a href="#agents">Agents</a>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            OMNIAGUARD
         </div>
+        <ul class="nav-links">
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
     </nav>
-
     <section class="hero">
-        <div class="badge-guarantee">ZERO PROMPT INJECTION GUARANTEE</div>
-        <h1>OMNIAGUARD</h1>
-        <p>Constitutional Shield for Agentic AI</p>
-        <a href="#dashboard" class="btn">View Live Dashboard</a>
-    </section>
-
-    <section class="dashboard" id="dashboard">
-        <h2 class="section-title">Live Threat Dashboard</h2>
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <div class="card-title"><i class="fas fa-chart-line"></i> Threat Level</div>
-                <div class="chart-container">
-                    <canvas id="threatChart"></canvas>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-title"><i class="fas fa-shield-alt"></i> Agent Status</div>
-                <div class="chart-container">
-                    <canvas id="agentChart"></canvas>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-title"><i class="fas fa-globe"></i> Global Coverage</div>
-                <div style="padding: 20px; text-align: center;">
-                    <div style="font-size: 2rem; color: var(--cyan); margin-bottom: 10px;">8 Regions</div>
-                    <div style="color: var(--text-muted); font-size: 0.9rem;">Active monitoring across all continents</div>
-                </div>
-            </div>
+        <h1>OMNI<span>GUARD</span></h1>
+        <p class="hero-subtitle">Constitutional Shield for Agentic AI. Zero Prompt Injection Guarantee.</p>
+        <div class="hero-tagline">⚡ 21 COMPANIES • 14 AGENTS • 0% ASR ⚡</div>
+        <div>
+            <a href="#pricing" class="btn btn-primary">DEPLOY SHIELD</a>
+            <a href="#agents" class="btn">14 AGENTS</a>
         </div>
     </section>
-
-    <section class="agents" id="agents">
-        <h2 class="section-title">14 Autonomous Security Agents</h2>
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-number">21</div>
+            <div class="stat-label">Companies Shielded</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">14</div>
+            <div class="stat-label">Security Agents</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">0%</div>
+            <div class="stat-label">Injection Success</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">$7.38B</div>
+            <div class="stat-label">Market by 2030</div>
+        </div>
+    </div>
+    <section id="agents">
+        <h2 class="section-title">14 AUTONOMOUS SECURITY AGENTS</h2>
+        <p class="section-subtitle">Each agent operates independently. Together, they form an impenetrable mesh.</p>
         <div class="agents-grid">
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-lock"></i></div>
-                <div class="agent-name">Identity Verification Agent</div>
-                <div class="agent-role">Zero-Trust Layer</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 01</div>
+                <div class="agent-name">PERIMETER SENTINEL</div>
+                <div class="agent-desc">First-line prompt injection detection. Scans all inputs in &lt;0.3ms.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-network-wired"></i></div>
-                <div class="agent-name">Network Defense Agent</div>
-                <div class="agent-role">Perimeter Protection</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 02</div>
+                <div class="agent-name">SEMANTIC GUARDIAN</div>
+                <div class="agent-desc">Deep semantic analysis. Detects obfuscated injection attempts.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-brain"></i></div>
-                <div class="agent-name">Prompt Injection Detector</div>
-                <div class="agent-role">AI Core Defense</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 03</div>
+                <div class="agent-name">CONTEXT VAULT</div>
+                <div class="agent-desc">Isolates conversation context. Prevents cross-session poisoning.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-database"></i></div>
-                <div class="agent-name">Data Encryption Agent</div>
-                <div class="agent-role">Information Security</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 04</div>
+                <div class="agent-name">BEHAVIORAL PROFILER</div>
+                <div class="agent-desc">Baseline normal agent behavior. Flags anomalies in real-time.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-eye"></i></div>
-                <div class="agent-name">Behavioral Anomaly Agent</div>
-                <div class="agent-role">Threat Detection</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 05</div>
+                <div class="agent-name">OUTPUT SANITIZER</div>
+                <div class="agent-desc">Scans all AI outputs for hidden instructions or data exfiltration.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-shield-virus"></i></div>
-                <div class="agent-name">Malware Scanner Agent</div>
-                <div class="agent-role">Endpoint Protection</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 06</div>
+                <div class="agent-name">CHAIN BREAKER</div>
+                <div class="agent-desc">Prevents multi-hop prompt chaining and indirect injection.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-clock"></i></div>
-                <div class="agent-name">Incident Response Agent</div>
-                <div class="agent-role">24/7 Response</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 07</div>
+                <div class="agent-name">TOKEN GUARD</div>
+                <div class="agent-desc">Monitors token-level anomalies. Detects adversarial sequences.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-chart-bar"></i></div>
-                <div class="agent-name">Compliance Monitor Agent</div>
-                <div class="agent-role">Regulatory Adherence</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 08</div>
+                <div class="agent-name">MEMORY FORTRESS</div>
+                <div class="agent-desc">Secures vector databases and RAG pipelines against poisoning.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-server"></i></div>
-                <div class="agent-name">Cloud Security Agent</div>
-                <div class="agent-role">Cloud Infrastructure</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 09</div>
+                <div class="agent-name">TOOL CONTROLLER</div>
+                <div class="agent-desc">Restricts agent tool access. Prevents unauthorized API calls.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-mobile-alt"></i></div>
-                <div class="agent-name">Mobile Defense Agent</div>
-                <div class="agent-role">Device Protection</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 10</div>
+                <div class="agent-name">ESCALATION WATCH</div>
+                <div class="agent-desc">Monitors privilege escalation across agent hierarchies.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-link"></i></div>
-                <div class="agent-name">Supply Chain Agent</div>
-                <div class="agent-role">Third-Party Risk</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 11</div>
+                <div class="agent-name">AUDIT ARCHON</div>
+                <div class="agent-desc">Immutable logging of all agent decisions. Forensic-ready.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-users"></i></div>
-                <div class="agent-name">Access Control Agent</div>
-                <div class="agent-role">Permission Management</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 12</div>
+                <div class="agent-name">FEDERATION GUARD</div>
+                <div class="agent-desc">Secures inter-agent communication with encrypted mesh.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-zap"></i></div>
-                <div class="agent-name">Threat Intelligence Agent</div>
-                <div class="agent-role">Intelligence Gathering</div>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 13</div>
+                <div class="agent-name">OMNIA CORE</div>
+                <div class="agent-desc">Central coordination. Self-healing architecture. Zero downtime.</div>
             </div>
-            <div class="agent-card">
-                <div class="agent-icon"><i class="fas fa-cog"></i></div>
-                <div class="agent-name">Orchestration Agent</div>
-                <div class="agent-role">System Coordination</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="features">
-        <h2 class="section-title">Multi-Agent Defense Pipelines</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Autonomous Hardening</h3>
-                <p>14 specialized security agents continuously monitoring and hardening every digital surface in real-time.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-microchip"></i></div>
-                <h3>Agentic AI Defense</h3>
-                <p>Protecting the neural core of your agentic workflows from malicious manipulation and prompt injection.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Global Threat Radar</h3>
-                <p>Unified security across smartphones, servers, and IoT devices through a single neural command layer.</p>
+            <div class="agent-card fade-in">
+                <div class="agent-status"><div class="agent-status-dot"></div></div>
+                <div class="agent-number">AGENT 14</div>
+                <div class="agent-name">CONSTITUTIONAL SHIELD</div>
+                <div class="agent-desc">BENO-X legal framework enforcement. Compliance-as-code.</div>
             </div>
         </div>
     </section>
-
-    <section class="pricing" id="pricing">
-        <h2 class="section-title">Enterprise Pricing</h2>
+    <section id="pricing">
+        <h2 class="section-title">MONETIZE THE SHIELD</h2>
+        <p class="section-subtitle">AI security isn't a cost center — it's a revenue weapon.</p>
         <div class="pricing-grid">
-            <div class="price-card">
-                <div class="price-tier">Starter</div>
-                <div class="price-name">Professional</div>
-                <div class="price-amount">$499</div>
-                <div class="price-sub">per month</div>
-                <ul class="price-list">
-                    <li>Up to 25 devices</li>
-                    <li>6 security agents</li>
-                    <li>Basic threat detection</li>
-                    <li>Email support</li>
+            <div class="pricing-card fade-in">
+                <div class="pricing-tier">STARTER</div>
+                <div class="pricing-price">$2,499<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li>3 Agent Deployment</li>
+                    <li>Basic Injection Detection</li>
+                    <li>Email Support</li>
+                    <li>Monthly Security Report</li>
+                    <li>API Access</li>
                 </ul>
-                <button class="btn" style="width: 100%;">Get Started</button>
+                <a href="#" class="btn">INITIALIZE</a>
             </div>
-            <div class="price-card">
-                <div class="price-tier">Professional</div>
-                <div class="price-name">Enterprise</div>
-                <div class="price-amount">$2,499</div>
-                <div class="price-sub">per month</div>
-                <ul class="price-list">
-                    <li>Unlimited devices</li>
-                    <li>All 14 agents</li>
-                    <li>Advanced threat detection</li>
-                    <li>24/7 SOC support</li>
+            <div class="pricing-card featured fade-in">
+                <div class="pricing-tier">SOVEREIGN</div>
+                <div class="pricing-price">$9,999<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li>14 Full Agent Stack</li>
+                    <li>Zero Injection Guarantee™</li>
+                    <li>24/7 War Room Support</li>
+                    <li>Real-time Threat Intel</li>
+                    <li>BENO-X Legal Integration</li>
+                    <li>Custom Agent Training</li>
+                    <li>White-label SDK License</li>
                 </ul>
-                <button class="btn" style="width: 100%;">Choose Plan</button>
+                <a href="#" class="btn btn-primary">DEPLOY FULL SHIELD</a>
             </div>
-            <div class="price-card">
-                <div class="price-tier">Enterprise</div>
-                <div class="price-name">Custom</div>
-                <div class="price-amount">Contact</div>
-                <div class="price-sub">for quote</div>
-                <ul class="price-list">
-                    <li>Multi-company coverage</li>
-                    <li>Dedicated CSM</li>
-                    <li>Custom integrations</li>
-                    <li>SLA guarantee</li>
+            <div class="pricing-card fade-in">
+                <div class="pricing-tier">ENTERPRISE</div>
+                <div class="pricing-price">Custom</div>
+                <ul class="pricing-features">
+                    <li>Unlimited Agents</li>
+                    <li>Multi-tenant Architecture</li>
+                    <li>Dedicated Security Team</li>
+                    <li>On-premise Deployment</li>
+                    <li>SLA with Financial Backing</li>
+                    <li>Strategic Advisory</li>
                 </ul>
-                <button class="btn" style="width: 100%;">Contact Sales</button>
+                <a href="#" class="btn">CONTACT WAR ROOM</a>
             </div>
         </div>
     </section>
-
     <footer>
-        <div class="footer-branding">OMNIAGUARD</div>
-        <div class="footer-copyright">
-            <p>&copy; 2026 OMNIAGUARD. Constitutional Shield for Agentic AI.</p>
-            <p>A Francisco Holdings Inc. subsidiary.</p>
-        </div>
+        <div class="footer-logo">OMNIAGUARD</div>
+        <p style="color: #666; margin-bottom: 2rem;">Constitutional Shield for Agentic AI</p>
+        <p style="color: #444; font-size: 0.9rem;">
+            © 2026 OmniaGuard Inc. | A Francisco Holdings Company<br>
+            Zero Prompt Injection Guarantee™ | BENO-X Framework Integrated<br>
+            Stealth Deployment | No Founder Attribution | Pure Supremacy
+        </p>
     </footer>
-
     <script>
-        // Threat Level Chart
-        const threatCtx = document.getElementById('threatChart').getContext('2d');
-        new Chart(threatCtx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '06:00', '12:00', '18:00', '24:00'],
-                datasets: [{
-                    label: 'Threat Level',
-                    data: [15, 22, 18, 28, 12],
-                    borderColor: '#00FFFF',
-                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { ticks: { color: '#888888' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
-                    x: { ticks: { color: '#888888' }, grid: { display: false } }
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                opacity: Math.random() * 0.5 + 0.2,
+                color: Math.random() > 0.5 ? '#00f0ff' : '#0088ff'
+            });
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.y > canvas.height) p.y = 0;
+                if (p.y < 0) p.y = canvas.height;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity;
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#00f0ff';
+                        ctx.globalAlpha = 0.1 * (1 - dist / 150);
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
                 }
             }
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
-
-        // Agent Status Chart
-        const agentCtx = document.getElementById('agentChart').getContext('2d');
-        new Chart(agentCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Active', 'Monitoring', 'Standby'],
-                datasets: [{
-                    data: [10, 3, 1],
-                    backgroundColor: ['#00FFFF', '#D4AF37', '#888888']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: '#888888' } } }
-            }
-        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
-
 </body>
 </html>
