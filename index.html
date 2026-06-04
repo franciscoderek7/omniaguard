@@ -172,6 +172,24 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .billing-annual-badge{background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.4);color:var(--gold);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;white-space:nowrap;}
 .save-badge{display:inline-block;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);color:var(--gold);font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;margin-bottom:10px;letter-spacing:.3px;}
 
+/* ===== DEFENSE FORCE ===== */
+#defense-force{padding:80px 0;background:var(--bg2);}
+.df-squad-banner{position:relative;border-radius:16px;overflow:hidden;margin-bottom:40px;border:1px solid rgba(0,212,255,0.2);box-shadow:0 0 80px rgba(0,212,255,0.1);}
+.df-squad-banner img{width:100%;max-height:420px;object-fit:cover;object-position:center top;display:block;}
+.df-squad-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,20,0.9));padding:28px 32px;}
+.df-squad-overlay h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;}
+.df-squad-overlay p{color:var(--gray);font-size:14px;}
+.df-agents-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.df-agent-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);cursor:default;transition:border-color .25s,box-shadow .25s;}
+.df-agent-card:hover{border-color:var(--cyan);box-shadow:0 0 50px rgba(0,212,255,0.15);}
+.df-agent-card img{width:100%;height:340px;object-fit:cover;object-position:center top;display:block;}
+.df-agent-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,20,0.95));padding:20px 20px 18px;}
+.df-agent-name{font-size:16px;font-weight:800;color:var(--white);}
+.df-agent-role{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;}
+.df-agent-red .df-agent-role{color:#ff6b6b;}
+.df-agent-gold .df-agent-role{color:var(--gold);}
+@media(max-width:700px){.df-agents-grid{grid-template-columns:1fr;}.df-agent-card img{height:260px;}}
+
 /* ===== PRICING ===== */
 #pricing{padding:80px 0;background:var(--bg2);}
 .pricing-calc-wrap{background:var(--bg3);border:1px solid var(--border-gold);border-radius:16px;padding:32px;max-width:720px;margin:0 auto 48px;text-align:center;}
@@ -543,6 +561,42 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
     </div>
     <div class="swarm-wrap fade-in">
       <canvas id="swarm-canvas" width="860" height="360"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEFENSE FORCE ===== -->
+<section id="defense-force">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Defense Force</div>
+      <h2>Your AI <span class="cyan">Guardian Agents.</span></h2>
+      <p>OmniaGuard deploys a synchronized force of AI defense agents — each hardened against a specific attack vector, operating in unbreakable formation.</p>
+    </div>
+
+    <div class="df-squad-banner fade-in">
+      <img src="agent-squad.jpg" alt="OmniaGuard AI Defense Force — three guardian agents deployed in synchronized formation" loading="lazy">
+      <div class="df-squad-overlay">
+        <h3>⚔️ Full Defense Deployment — All Agents Active</h3>
+        <p>Three-tier agent architecture. Threat Interceptor flanks, Sovereign Sentinel commands. Zero breach rate guaranteed.</p>
+      </div>
+    </div>
+
+    <div class="df-agents-grid fade-in">
+      <div class="df-agent-card df-agent-red">
+        <img src="agent-red.jpg" alt="OmniaGuard Threat Interceptor Agent" loading="lazy">
+        <div class="df-agent-label">
+          <div class="df-agent-name">Threat Interceptor</div>
+          <div class="df-agent-role">🔴 Active — Front-Line Injection Defense</div>
+        </div>
+      </div>
+      <div class="df-agent-card df-agent-gold">
+        <img src="agent-gold.jpg" alt="OmniaGuard Sovereign Sentinel Agent" loading="lazy">
+        <div class="df-agent-label">
+          <div class="df-agent-name">Sovereign Sentinel</div>
+          <div class="df-agent-role">⚡ Active — Command &amp; Cascade Defense</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
