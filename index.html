@@ -1847,30 +1847,37 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 
    ================================================================ */
 
-/* ── LAYER 1: STRIPE PRICE IDs ── */
+/* ── LAYER 1: STRIPE PRICE IDs ──────────────────────────────────────────
+   DEREK: Go to dashboard.stripe.com → Products → + Add product
+   Create 6 recurring products in CAD. Copy each price_xxx ID below.
+   EXAMPLE real ID format: price_1NxYzABCDEF123456
+   ─────────────────────────────────────────────────────────────────────── */
 var STRIPE_PRICE_IDS = {
-  sentinel_monthly:  '',  /* $499/mo CAD     → Products → OmniaGuard Sentinel  */
-  guardian_monthly:  '',  /* $2,499/mo CAD   → Products → OmniaGuard Guardian  */
-  warden_monthly:    '',  /* $5,000/mo CAD   → Products → OmniaGuard Warden    */
-  protector_monthly: '',  /* $10,000/mo CAD  → Products → OmniaGuard Protector */
-  archon_monthly:    '',  /* $15,000/mo CAD  → Products → OmniaGuard Archon    */
-  sovereign_monthly: '',  /* $25,000/mo CAD  → Products → OmniaGuard Sovereign */
-  sentinel_annual:   '',  /* $4,990/yr CAD   */
-  guardian_annual:   '',  /* $24,990/yr CAD  */
-  warden_annual:     '',  /* $50,000/yr CAD  */
-  protector_annual:  '',  /* $100,000/yr CAD */
-  archon_annual:     '',  /* $150,000/yr CAD */
-  sovereign_annual:  ''   /* $250,000/yr CAD */
+  sentinel_monthly:  'price_SENTINEL_499',    /* REPLACE → $499/mo CAD   */
+  guardian_monthly:  'price_GUARDIAN_2499',   /* REPLACE → $2,499/mo CAD */
+  warden_monthly:    'price_WARDEN_5000',     /* REPLACE → $5,000/mo CAD */
+  protector_monthly: 'price_PROTECTOR_10000', /* REPLACE → $10,000/mo    */
+  archon_monthly:    'price_ARCHON_15000',    /* REPLACE → $15,000/mo    */
+  sovereign_monthly: 'price_SOVEREIGN_25000', /* REPLACE → $25,000/mo    */
+  sentinel_annual:   'price_SENTINEL_ANN',    /* REPLACE → $4,990/yr     */
+  guardian_annual:   'price_GUARDIAN_ANN',    /* REPLACE → $24,990/yr    */
+  warden_annual:     'price_WARDEN_ANN',      /* REPLACE → $50,000/yr    */
+  protector_annual:  'price_PROTECTOR_ANN',   /* REPLACE → $100,000/yr   */
+  archon_annual:     'price_ARCHON_ANN',      /* REPLACE → $150,000/yr   */
+  sovereign_annual:  'price_SOVEREIGN_ANN'    /* REPLACE → $250,000/yr   */
 };
 
-/* ── LAYER 2: STRIPE PAYMENT LINKS ── */
+/* ── LAYER 2: STRIPE PAYMENT LINKS ──────────────────────────────────────
+   DEREK: dashboard.stripe.com → Payment Links → + New → Select product
+   Copy buy.stripe.com/xxx URL and paste below.
+   ─────────────────────────────────────────────────────────────────────── */
 var STRIPE_PAYMENT_LINKS = {
-  sentinel_monthly:  '',  /* https://buy.stripe.com/xxx */
-  guardian_monthly:  '',
-  warden_monthly:    '',
-  protector_monthly: '',
-  archon_monthly:    '',
-  sovereign_monthly: '',
+  sentinel_monthly:  '', /* PASTE: https://buy.stripe.com/sentinel_link  */
+  guardian_monthly:  '', /* PASTE: https://buy.stripe.com/guardian_link  */
+  warden_monthly:    '', /* PASTE: https://buy.stripe.com/warden_link    */
+  protector_monthly: '', /* PASTE: https://buy.stripe.com/protector_link */
+  archon_monthly:    '', /* PASTE: https://buy.stripe.com/archon_link    */
+  sovereign_monthly: '', /* PASTE: https://buy.stripe.com/sovereign_link */
   sentinel_annual:   '',
   guardian_annual:   '',
   warden_annual:     '',
@@ -1879,10 +1886,13 @@ var STRIPE_PAYMENT_LINKS = {
   sovereign_annual:  ''
 };
 
-/* ── CRYPTO ADDRESSES — DEREK: paste wallet addresses below ── */
+/* ── CRYPTO ADDRESSES ────────────────────────────────────────────────────
+   DEREK: Replace the placeholder addresses below with your real wallets.
+   Site will auto-display address, generate QR code, and show copy button.
+   ─────────────────────────────────────────────────────────────────────── */
 var CRYPTO_ADDRESSES = {
-  btc: '',  /* Your Bitcoin address — will display on site + generate QR */
-  xmr: ''   /* Your Monero address */
+  btc: 'bc1qplaceholderreplacewithyourrealbticoinaddress',
+  xmr: '4XplaceholderReplaceWithYourRealMoneroAddressHere00000000000000000000000'
 };
 
 /* ── STRIPE CHECKOUT ── */
@@ -1967,6 +1977,20 @@ function openPaymentModal(tier, price, isAnnual) {
   var emailLinkEl = document.getElementById('po-email-link');
   if (emailLinkEl) {
     emailLinkEl.href = 'mailto:omniaguard1@gmail.com?subject=OmniaGuard+' + encodeURIComponent(tierCapital) + '+Payment&body=I+am+sending+Interac+e-Transfer+for+OmniaGuard+' + encodeURIComponent(tierCapital + ' — ' + fullPrice + ' CAD') + '.+Please+activate+my+account.';
+  }
+
+  /* "Send Interac Now" big CTA — per-tier mailto */
+  var sendNowBtn = document.getElementById('po-send-now-btn');
+  if (sendNowBtn) {
+    var subj = encodeURIComponent('OmniaGuard ' + tierCapital + ' Payment — ' + fullPrice + ' CAD');
+    var body = encodeURIComponent(
+      'Hi,\n\nI am ready to send an Interac e-Transfer for OmniaGuard ' + tierCapital + ' — ' + fullPrice + ' CAD.\n\n' +
+      'Please confirm your Interac email address and I will send the transfer immediately.\n\n' +
+      'Company: [your company]\nContact: [your email or phone]\n\n' +
+      'Tier selected: ' + tierCapital + '\nMonthly amount: ' + fullPrice
+    );
+    sendNowBtn.href = 'mailto:omniaguard1@gmail.com?subject=' + subj + '&body=' + body;
+    sendNowBtn.textContent = '💸 Send ' + fullPrice + ' Interac Transfer Now →';
   }
 
   /* Pre-select tier in contact form */
@@ -2132,6 +2156,15 @@ function initCryptoSection() {
       </div>
     </div>
 
+    <!-- Payment Method Banner -->
+    <div style="padding:10px 32px;background:rgba(0,200,83,0.06);border-bottom:1px solid rgba(0,200,83,0.12);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;">
+      <span style="font-size:11px;font-weight:700;color:#00c853;">✅ Interac e-Transfer — ACTIVE NOW</span>
+      <span style="font-size:11px;color:#3a4458;">|</span>
+      <span style="font-size:11px;font-weight:700;color:#00c853;">✅ Crypto — ACTIVE NOW</span>
+      <span style="font-size:11px;color:#3a4458;">|</span>
+      <span style="font-size:11px;font-weight:700;color:#ffd700;">⚡ Credit Card — Add Stripe key to activate</span>
+    </div>
+
     <!-- Tab Switcher -->
     <div style="display:flex;border-bottom:1px solid rgba(0,212,255,0.1);">
       <button onclick="switchPayTab(0)" id="po-tab-0" style="flex:1;padding:14px 8px;background:rgba(0,200,83,0.08);border:none;border-bottom:2px solid #00c853;color:#00c853;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">🏦 Interac</button>
@@ -2166,7 +2199,10 @@ function initCryptoSection() {
         <strong style="color:#00c853;">Account activated within 4 hours of confirmed transfer.</strong>
       </div>
 
-      <div style="margin-top:16px;text-align:center;">
+      <div style="margin-top:18px;">
+        <a id="po-send-now-btn" href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+Sentinel+Payment+%24499%2Fmo&body=Hi%2C%0A%0AI+am+ready+to+send+an+Interac+e-Transfer+for+OmniaGuard+Sentinel+%E2%80%94+%24499%2Fmo+CAD.%0A%0APlease+confirm+your+Interac+email+and+I+will+send+the+transfer+immediately.%0A%0ACompany%3A+%5Byour+company%5D%0AContact%3A+%5Byour+email%5D" style="display:block;text-align:center;background:linear-gradient(135deg,#00c853,#009944);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">💸 Send Interac Payment Now →</a>
+      </div>
+      <div style="margin-top:10px;text-align:center;">
         <button onclick="switchPayTab(1)" style="background:transparent;border:none;color:#5a6478;font-size:12px;cursor:pointer;text-decoration:underline;">Or submit a contact form instead →</button>
       </div>
     </div>
