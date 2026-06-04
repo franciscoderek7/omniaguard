@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniaGuard — The Counter-Structure — Investor Brief</title>
+<meta name="description" content="OmniaGuard Series Seed Investor Brief. While $1.5 trillion builds centralized surveillance, we're building the only infrastructure that can't be captured.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0d1120;
+  --bg3: #131829;
+  --bg4: #1a2035;
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0,212,255,0.12);
+  --cyan-border: rgba(0,212,255,0.22);
+  --gold: #ffd700;
+  --gold-dim: rgba(255,215,0,0.10);
+  --gold-border: rgba(255,215,0,0.28);
+  --white: #ffffff;
+  --gray: #8892a4;
+  --gray2: #1e2640;
+  --red: #e53e3e;
+  --red-dim: rgba(229,62,62,0.08);
+  --red-border: rgba(229,62,62,0.28);
+  --border: rgba(0,212,255,0.15);
+  --green: #00c853;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* GRID BG */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10,14,26,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.nav-logo-icon { width: 38px; height: 38px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  transition: width 0.25s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--cyan) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  padding: 9px 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+  transition: all 0.2s !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  background: #33ddff !important;
+  box-shadow: 0 0 30px rgba(0,212,255,0.5) !important;
+  color: #000 !important;
+}
+.nav-mobile-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+#mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 70px; left: 0;
+  width: 100%; height: calc(100vh - 70px);
+  background: rgba(10,14,26,0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  flex-direction: column;
+  padding: 32px 24px;
+  overflow-y: auto;
+}
+#mobile-overlay.open { display: flex; }
+#mobile-overlay a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gray2);
+  display: block;
+  transition: color 0.2s;
+}
+#mobile-overlay a:hover { color: var(--cyan); }
+#mobile-overlay .mobile-cta {
+  margin-top: 24px;
+  background: var(--cyan);
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+.container-wide {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HERO / COVER ===== */
+.inv-hero {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0 80px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,215,0,0.04) 0%, transparent 70%);
+  border-bottom: 1px solid var(--gold-border);
+  overflow: hidden;
+}
+.inv-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.seed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 4px;
+  margin-bottom: 32px;
+}
+.seed-badge-dot {
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: goldPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes goldPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--gold); }
+  50% { opacity: 0.5; box-shadow: none; }
+}
+.inv-hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 900;
+  letter-spacing: -3px;
+  line-height: 1.0;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--gold) 0%, #fff5a0 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.inv-hero-sub {
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: #a8b8c8;
+  max-width: 680px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+.inv-hero-sub strong { color: var(--white); }
+.hero-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.hero-stat {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 24px 32px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+.hero-stat-number {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== SHARED SECTION STYLES ===== */
+.inv-section {
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.section-number {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+.section-h2 {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.section-h2 .cyan { color: var(--cyan); }
+.section-h2 .gold { color: var(--gold); }
+.section-h2 .red { color: #ff6060; }
+.section-sub {
+  font-size: 16px;
+  color: var(--gray);
+  max-width: 720px;
+  margin-bottom: 44px;
+  line-height: 1.75;
+}
+
+/* ===== SECTION 1 — THE PROBLEM ===== */
+#inv-s1 { background: var(--bg2); }
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+.problem-card {
+  background: var(--bg3);
+  border: 1px solid var(--red-border);
+  border-radius: 12px;
+  padding: 26px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.problem-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, #ff3b3b, transparent);
+}
+.problem-org {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.problem-num {
+  font-size: 38px;
+  font-weight: 900;
+  color: #ff6060;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.problem-num.amber { color: #ff9040; font-size: 26px; letter-spacing: -0.5px; }
+.problem-desc {
+  font-size: 13px;
+  color: #c0c0d0;
+  line-height: 1.5;
+}
+
+.the-question {
+  background: rgba(229,62,62,0.06);
+  border: 1px solid var(--red-border);
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-bottom: 28px;
+}
+.the-question-q {
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 700;
+  color: #ffc0c0;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.the-question-a {
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 700;
+  color: var(--cyan);
+  line-height: 1.6;
+  padding-left: 20px;
+  border-left: 3px solid var(--cyan);
+}
+
+.pattern-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 700px;
+}
+.pattern-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.pattern-year {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+.pattern-body {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.pattern-body strong { color: var(--white); }
+
+/* ===== SECTION 2 — COUNTER-INFRASTRUCTURE ===== */
+#inv-s2 { background: var(--bg); }
+.counter-tagline {
+  background: rgba(0,212,255,0.06);
+  border-left: 4px solid var(--cyan);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 36px;
+  max-width: 680px;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.product-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 32px rgba(0,212,255,0.08);
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.product-card.roadmap {
+  border-color: rgba(255,215,0,0.2);
+}
+.product-card.roadmap::before {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.product-card.roadmap:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 32px rgba(255,215,0,0.08);
+}
+.product-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  background: rgba(0,212,255,0.10);
+  color: var(--cyan);
+  border: 1px solid rgba(0,212,255,0.25);
+}
+.product-badge.live { background: rgba(0,200,83,0.10); color: #00e676; border-color: rgba(0,200,83,0.3); }
+.product-badge.roadmap-label { background: var(--gold-dim); color: var(--gold); border-color: var(--gold-border); }
+.product-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.product-desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.product-specs {
+  list-style: none;
+}
+.product-specs li {
+  font-size: 13px;
+  color: #a8c0d0;
+  padding: 5px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+.product-specs li::before {
+  content: '→';
+  color: var(--cyan);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.product-card.roadmap .product-specs li::before { color: var(--gold); }
+
+/* counter-structure comparison table */
+.comparison-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  margin-bottom: 12px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.comparison-table thead tr th {
+  padding: 18px 24px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.comparison-table thead th.their-col {
+  background: rgba(229,62,62,0.10);
+  color: #ff7070;
+  border-bottom: 2px solid rgba(229,62,62,0.35);
+  width: 50%;
+}
+.comparison-table thead th.our-col {
+  background: rgba(0,212,255,0.08);
+  color: var(--cyan);
+  border-bottom: 2px solid rgba(0,212,255,0.35);
+  width: 50%;
+}
+.comparison-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.comparison-table tbody tr:last-child { border-bottom: none; }
+.comparison-table tbody tr:hover td { background: rgba(255,255,255,0.015); }
+.comparison-table tbody td {
+  padding: 16px 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  vertical-align: top;
+}
+.comparison-table tbody td.their-cell {
+  color: #c8a8a8;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.comparison-table tbody td.our-cell { color: #a8d0e0; }
+.comparison-table tbody td.their-cell::before {
+  content: '✗  ';
+  color: #ff6060;
+  font-weight: 700;
+}
+.comparison-table tbody td.our-cell::before {
+  content: '✓  ';
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.arch-note {
+  font-size: 13px;
+  color: var(--gray);
+  font-style: italic;
+  padding: 14px 20px;
+  border-left: 2px solid var(--border);
+  margin-top: 4px;
+}
+
+/* ===== SECTION 3 — COMMERCIAL VIABILITY ===== */
+#inv-s3 { background: var(--bg2); }
+.revenue-model {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.revenue-left { }
+.revenue-table-wrap {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.revenue-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.revenue-table thead {
+  background: rgba(255,215,0,0.08);
+  border-bottom: 2px solid var(--gold-border);
+}
+.revenue-table thead th {
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: left;
+}
+.revenue-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.revenue-table tbody tr:last-child { border-bottom: none; }
+.revenue-table tbody tr:hover { background: rgba(255,215,0,0.02); }
+.revenue-table tbody td { padding: 14px 20px; font-size: 14px; color: #c8d0e0; }
+.revenue-table tbody td:first-child { color: var(--white); font-weight: 600; }
+.revenue-table tbody td:last-child { color: var(--gold); font-weight: 700; }
+.revenue-table tbody tr.highlight-row { background: rgba(255,215,0,0.04); }
+.revenue-table tbody tr.highlight-row td { font-size: 15px; }
+.revenue-table tbody tr.highlight-row td:last-child { font-size: 18px; }
+
+.products-pricing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pricing-range-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.pricing-range-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+.pricing-range-desc {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 4px;
+}
+.pricing-range-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--cyan);
+  white-space: nowrap;
+  text-align: right;
+}
+.pricing-range-margin {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 600;
+  text-align: right;
+  margin-top: 2px;
+}
+
+.moat-panel {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  margin-bottom: 0;
+}
+.moat-panel h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.moat-panel p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.moat-points {
+  list-style: none;
+}
+.moat-points li {
+  font-size: 14px;
+  color: #a8c8d8;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,212,255,0.07);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.moat-points li:last-child { border-bottom: none; }
+.moat-points li::before {
+  content: '→';
+  color: var(--cyan);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ===== SECTION 4 — TEAM AND THESIS ===== */
+#inv-s4 { background: var(--bg); }
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.team-card {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.team-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.team-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.team-details {
+  list-style: none;
+}
+.team-details li {
+  font-size: 13px;
+  color: var(--gray);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.team-details li:last-child { border-bottom: none; }
+.team-details li::before {
+  content: '·';
+  color: var(--gold);
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 1;
+  margin-top: -2px;
+  flex-shrink: 0;
+}
+.team-details li strong { color: var(--white); }
+
+.ecosystem-panel {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px;
+  margin-bottom: 28px;
+}
+.ecosystem-panel h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--cyan);
+  margin-bottom: 18px;
+}
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.ecosystem-item {
+  background: var(--bg4);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 18px 16px;
+  text-align: center;
+}
+.ecosystem-number {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--cyan);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.ecosystem-label {
+  font-size: 11px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.thesis-quote {
+  background: rgba(255,215,0,0.06);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 24px 28px;
+  font-size: 17px;
+  font-style: italic;
+  color: #d8c870;
+  line-height: 1.7;
+  max-width: 760px;
+}
+.thesis-quote cite {
+  display: block;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.live-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+  max-width: 700px;
+}
+.live-product-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 14px 20px;
+}
+.live-product-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+.live-product-detail {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,200,83,0.10);
+  border: 1px solid rgba(0,200,83,0.30);
+  color: #00e676;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.live-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: #00c853;
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.roadmap-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+/* ===== SECTION 5 — THE ASK ===== */
+#inv-s5 { background: var(--bg2); }
+.ask-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.ask-card {
+  background: var(--bg3);
+  border-radius: 14px;
+  padding: 30px;
+}
+.ask-card.seeking {
+  border: 1px solid var(--gold-border);
+}
+.ask-card.not-seeking {
+  border: 1px solid var(--red-border);
+}
+.ask-card-title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.ask-card.seeking .ask-card-title { color: var(--gold); }
+.ask-card.not-seeking .ask-card-title { color: #ff7070; }
+.ask-list {
+  list-style: none;
+}
+.ask-list li {
+  font-size: 14px;
+  color: #c0c8d8;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.ask-list li:last-child { border-bottom: none; }
+.ask-card.seeking .ask-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ask-card.not-seeking .ask-list li::before {
+  content: '✗';
+  color: #ff6060;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ask-card.not-seeking .ask-list li .reason {
+  font-size: 12px;
+  color: var(--gray);
+  font-style: italic;
+  display: block;
+  margin-top: 2px;
+}
+
+.contact-panel {
+  background: linear-gradient(135deg, rgba(255,215,0,0.06) 0%, rgba(0,212,255,0.04) 100%);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.contact-panel h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.contact-panel p {
+  font-size: 15px;
+  color: var(--gray);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+.contact-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #000;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 18px 40px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 0 32px rgba(255,215,0,0.35);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.contact-cta-btn:hover {
+  background: #ffe033;
+  box-shadow: 0 0 55px rgba(255,215,0,0.55);
+  transform: translateY(-2px);
+}
+.contact-note {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 16px;
+}
+
+/* ===== CLOSING CTA / FOOTER BANNER ===== */
+.closing-banner {
+  background: rgba(0,212,255,0.04);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 0;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.closing-banner-quote {
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: #c0d8e8;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.closing-banner-quote strong { color: var(--white); font-style: normal; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 28px;
+  position: relative;
+  z-index: 1;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+  text-decoration: none;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .products-grid { grid-template-columns: 1fr; }
+  .revenue-model { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .ask-grid { grid-template-columns: 1fr; }
+  .ecosystem-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .hero-stats-row { gap: 14px; }
+  .hero-stat { min-width: 140px; padding: 18px 20px; }
+  .comparison-table thead th, .comparison-table tbody td { padding: 12px 14px; font-size: 13px; }
+  .ecosystem-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .contact-panel { padding: 28px 20px; }
+  .closing-banner { padding: 40px 0; }
+}
+@media (max-width: 480px) {
+  .inv-hero { padding: 70px 0 56px; }
+  .hero-stats-row { flex-direction: column; align-items: stretch; }
+  .hero-stat { min-width: auto; }
+  .ecosystem-grid { grid-template-columns: 1fr; }
+  .comparison-table { font-size: 12px; }
+  .contact-cta-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 15px; }
+  .live-product-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/omniaguard-site/index.html" class="nav-logo" aria-label="OmniaGuard Home">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L5 9V20C5 28.3 11.6 36.1 20 38C28.4 36.1 35 28.3 35 20V9L20 3Z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1.5"/>
+          <path d="M14 20L18 24L26 16" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      OmniaGuard
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/omniaguard-site/index.html#threat-demo">AI Security</a></li>
+      <li><a href="vpn.html">VPN</a></li>
+      <li><a href="intelligence.html">Intelligence</a></li>
+      <li><a href="investor.html" style="color:#fff;">Investors</a></li>
+      <li><a href="/omniaguard-site/index.html#partnership">Contact</a></li>
+      <li><a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Demo+Request" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- MOBILE OVERLAY -->
+<div id="mobile-overlay">
+  <a href="/omniaguard-site/index.html#threat-demo">AI Security</a>
+  <a href="vpn.html">VPN</a>
+  <a href="intelligence.html">Intelligence</a>
+  <a href="investor.html">Investors</a>
+  <a href="/omniaguard-site/index.html#partnership">Contact</a>
+  <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Demo+Request" class="mobile-cta">Request Demo</a>
+</div>
+
+<!-- ===== HERO / COVER ===== -->
+<section class="inv-hero">
+  <div class="container">
+    <div class="seed-badge">
+      <span class="seed-badge-dot"></span>
+      Series Seed &mdash; Invitation Only
+    </div>
+    <h1 class="inv-hero-title">The Counter-Structure</h1>
+    <p class="inv-hero-sub">
+      While <strong>$1.5 trillion</strong> builds centralized surveillance infrastructure, we&rsquo;re building the only infrastructure <strong>that can&rsquo;t be captured.</strong>
+    </p>
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-number">$696K &rarr; $400M+</div>
+        <div class="hero-stat-label">Year 1 ARR to Year 4 ARR</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">21 &rarr; 392</div>
+        <div class="hero-stat-label">Companies in ecosystem</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">Zero</div>
+        <div class="hero-stat-label">Centralized capture possible</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 1: THE PROBLEM ===== -->
+<section class="inv-section" id="inv-s1">
+  <div class="container">
+    <span class="section-number">Section 01 &mdash; The Problem</span>
+    <h2 class="section-h2">The <span class="red">$1.5 Trillion Misallocation</span></h2>
+    <p class="section-sub">
+      The largest capital deployment in technology history is generating negative commercial returns. The mainstream financial press has not explained this. We have.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-org">Oracle AI ROI</div>
+        <div class="problem-num">-28%</div>
+        <div class="problem-desc">Against capital deployed. Infrastructure vastly outpacing commercial revenue.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-org">Major Tech Sector (Avg.)</div>
+        <div class="problem-num">-35%</div>
+        <div class="problem-desc">Average across major participants deploying AI infrastructure at scale, 2024&ndash;2025.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-org">Amazon / AWS</div>
+        <div class="problem-num amber">Barely<br>Positive</div>
+        <div class="problem-desc">Leadership cited &ldquo;major reservations&rdquo; about AI investment return timelines publicly.</div>
+      </div>
+    </div>
+
+    <div class="the-question">
+      <div class="the-question-q">
+        If this doesn&rsquo;t generate commercial returns at $1.5 trillion in deployment, who is the real customer?
+      </div>
+      <div class="the-question-a">
+        Population-scale monitoring disguised as efficiency infrastructure. The data centers are not built for profit &mdash; they are built for access. Goldman Sachs&rsquo; Q2 2025 research report explicitly questioned whether AI investment would &ldquo;ever&rdquo; generate commercial returns at the current scale of deployment.
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:16px;">The Historical Pattern That Makes This Legible</h3>
+    <div class="pattern-list">
+      <div class="pattern-item">
+        <div class="pattern-year">1960s &ndash; 1990s</div>
+        <div class="pattern-body"><strong>ECHELON</strong> &mdash; Global signals intelligence built as &ldquo;telecommunications infrastructure.&rdquo; Surveillance function undisclosed until 1990s.</div>
+      </div>
+      <div class="pattern-item">
+        <div class="pattern-year">2001 &ndash; 2013</div>
+        <div class="pattern-body"><strong>PRISM</strong> &mdash; Revealed 2013. Microsoft, Google, Apple, Facebook providing direct NSA access under FISA 702. The &ldquo;cloud&rdquo; was also a collection mechanism.</div>
+      </div>
+      <div class="pattern-item">
+        <div class="pattern-year">2020s &ndash; Now</div>
+        <div class="pattern-body"><strong>AI Buildout</strong> &mdash; 3,000 data centers, $1.5T capital, negative ROI. Framed as &ldquo;productivity revolution.&rdquo; Same pattern. Different technology layer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: OUR COUNTER-INFRASTRUCTURE ===== -->
+<section class="inv-section" id="inv-s2">
+  <div class="container">
+    <span class="section-number">Section 02 &mdash; Our Counter-Infrastructure</span>
+    <h2 class="section-h2">We Don&rsquo;t Compete With the <span class="red">Surveillance Stack.</span><br>We Make It <span class="cyan">Irrelevant.</span></h2>
+    <p class="section-sub">
+      OmniaGuard is not a cybersecurity company trying to patch a compromised stack. OmniaGuard is the alternative stack — distributed, cryptographically sovereign, architecturally incapable of centralized capture.
+    </p>
+
+    <div class="counter-tagline">
+      &ldquo;Cryptographic impossibility is not a policy. It cannot be updated by a terms-of-service amendment, overridden by a National Security Letter, or compelled by a FISA order.&rdquo;
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-badge live">Live</div>
+        <div class="product-name">OmniaGuard AI Security</div>
+        <div class="product-desc">
+          Enterprise AI agent security platform. 14-agent swarm, zero prompt injection, cryptographic attestation. Platform-agnostic — protects OpenAI, Anthropic, Google, and custom LLMs.
+        </div>
+        <ul class="product-specs">
+          <li>14-layer defensive swarm, cross-layer correlation</li>
+          <li>Zero prompt injection guarantee — contractual</li>
+          <li>Cryptographic attestation of every security decision</li>
+          <li>7 commercial tiers: $499/mo &rarr; $25,000/mo</li>
+          <li>SOC 2, ISO 42001, PIPEDA, HIPAA-aligned</li>
+        </ul>
+      </div>
+      <div class="product-card">
+        <div class="product-badge live">Launching</div>
+        <div class="product-name">OmniaGuard VPN</div>
+        <div class="product-desc">
+          The world&rsquo;s first constitutionally-framed VPN. WireGuard + Intel SGX / AMD SEV hardware enclaves with 14-agent zero-knowledge verification. Canadian sovereign jurisdiction.
+        </div>
+        <ul class="product-specs">
+          <li>WireGuard protocol — fastest, most auditable</li>
+          <li>SGX/SEV hardware enclaves — operators cannot inspect traffic</li>
+          <li>14-agent ZK verification — security without surveillance</li>
+          <li>Manitoba cooperative roadmap — community-owned nodes</li>
+          <li>$9 &rarr; $99/mo — mass market accessible</li>
+        </ul>
+      </div>
+      <div class="product-card roadmap">
+        <div class="product-badge roadmap-label">Roadmap</div>
+        <div class="product-name">OmniaGuard Compute</div>
+        <div class="product-desc">
+          Manitoba sovereign compute cooperative. Community-owned, cryptographically partitioned, outside Five Eyes compellability for most data categories. The next layer of the counter-structure.
+        </div>
+        <ul class="product-specs">
+          <li>Cooperative ownership — no single compellable entity</li>
+          <li>Canadian jurisdiction — PIPEDA, not FISA</li>
+          <li>Cryptographic partitioning — hardware-enforced separation</li>
+          <li>AI workload hosting — sovereign inference infrastructure</li>
+        </ul>
+      </div>
+      <div class="product-card" style="border-color:rgba(255,215,0,0.2);">
+        <div class="product-badge" style="background:var(--gold-dim);color:var(--gold);border-color:var(--gold-border);">Network</div>
+        <div class="product-name">Ecosystem Architecture</div>
+        <div class="product-desc">
+          21 active companies. 392 planned. The counter-structure is not a single company — it is a distributed network of independently owned, cryptographically sovereign entities.
+        </div>
+        <ul class="product-specs">
+          <li>Kiaros AI — partner network</li>
+          <li>CleanSwarm — environmental sovereignty</li>
+          <li>Tech Pet Cage — operating entity (Ontario registered)</li>
+          <li>Francisco Holdings Inc. — holding structure</li>
+          <li>20% commission structure for all partners</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:17px;font-weight:800;color:var(--white);margin-bottom:18px;">The Counter-Structure at a Glance</h3>
+    <div class="comparison-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th class="their-col">Their Infrastructure</th>
+            <th class="our-col">Our Counter-Infrastructure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="their-cell">3,000 centralized surveillance data centers</td>
+            <td class="our-cell">21 &rarr; 392 distributed, independent sovereign companies</td>
+          </tr>
+          <tr>
+            <td class="their-cell">Corporate-owned, government-accessible by jurisdiction</td>
+            <td class="our-cell">Community-owned, cryptographically sovereign</td>
+          </tr>
+          <tr>
+            <td class="their-cell">&ldquo;AI efficiency&rdquo; cover story</td>
+            <td class="our-cell">&ldquo;Constitutional Shield&rdquo; explicit mission</td>
+          </tr>
+          <tr>
+            <td class="their-cell">Black-box, unauditable, government-compellable</td>
+            <td class="our-cell">Open-stack, zero-knowledge, hardware-secured</td>
+          </tr>
+          <tr>
+            <td class="their-cell">Replacing workers (failing commercially — the tell)</td>
+            <td class="our-cell">Empowering sovereignty (working — the counter-tell)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="arch-note">
+      Architecture is mission. The distributed structure is not a strategic choice — it is the product. A single-entity VPN or AI security company can be compelled. A network of 392 independently owned, cryptographically sovereign companies cannot be.
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: COMMERCIAL VIABILITY ===== -->
+<section class="inv-section" id="inv-s3">
+  <div class="container">
+    <span class="section-number">Section 03 &mdash; Commercial Viability</span>
+    <h2 class="section-h2">Constitutional Mission <span class="gold">and</span> Commercial Returns</h2>
+    <p class="section-sub">
+      This is not &ldquo;mission or money.&rdquo; The constitutional mission is the defensible moat that money alone cannot buy. Constitutional infrastructure creates the only customer loyalty that doesn&rsquo;t erode when a competitor offers a lower price.
+    </p>
+
+    <div class="revenue-model">
+      <div class="revenue-left">
+        <div class="revenue-table-wrap">
+          <table class="revenue-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>ARR Projection</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Year 1 (Current)</td>
+                <td>$696,000</td>
+              </tr>
+              <tr>
+                <td>Year 2</td>
+                <td>$2,000,000</td>
+              </tr>
+              <tr>
+                <td>Year 3</td>
+                <td>$10,000,000</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Year 4</td>
+                <td>$400,000,000+</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--gray);line-height:1.7;padding:0 4px;">
+          Year 4 ARR reflects network effects from the 392-company ecosystem, enterprise white-label licensing, sovereign compute cooperative revenue, and VPN mass-market penetration. The growth is not linear — it is architectural. Each new sovereign entity in the network increases the value of the network for all others.
+        </p>
+      </div>
+
+      <div class="products-pricing-grid">
+        <div class="pricing-range-card">
+          <div>
+            <div class="pricing-range-name">OmniaGuard VPN</div>
+            <div class="pricing-range-desc">Consumer + prosumer + team plans. Mass market, high-margin.</div>
+          </div>
+          <div>
+            <div class="pricing-range-price">$9 &ndash; $99/mo</div>
+            <div class="pricing-range-margin">High margin, recurring</div>
+          </div>
+        </div>
+        <div class="pricing-range-card">
+          <div>
+            <div class="pricing-range-name">AI Security — Sentinel / Guardian</div>
+            <div class="pricing-range-desc">Individual through small business deployments.</div>
+          </div>
+          <div>
+            <div class="pricing-range-price">$499 &ndash; $2,499/mo</div>
+            <div class="pricing-range-margin">Low churn, mission-aligned</div>
+          </div>
+        </div>
+        <div class="pricing-range-card">
+          <div>
+            <div class="pricing-range-name">AI Security — Warden / Protector</div>
+            <div class="pricing-range-desc">Mid-market to enterprise, dedicated SOC.</div>
+          </div>
+          <div>
+            <div class="pricing-range-price">$5,000 &ndash; $10,000/mo</div>
+            <div class="pricing-range-margin">High LTV, expanding</div>
+          </div>
+        </div>
+        <div class="pricing-range-card">
+          <div>
+            <div class="pricing-range-name">AI Security — Archon / Sovereign</div>
+            <div class="pricing-range-desc">National enterprise, government-grade, white-label.</div>
+          </div>
+          <div>
+            <div class="pricing-range-price">$15,000 &ndash; $25,000/mo</div>
+            <div class="pricing-range-margin">Strategic accounts</div>
+          </div>
+        </div>
+        <div class="pricing-range-card" style="border-color:var(--gold-border);">
+          <div>
+            <div class="pricing-range-name">Partner Commission</div>
+            <div class="pricing-range-desc">All 392 ecosystem companies earn on referrals and integration.</div>
+          </div>
+          <div>
+            <div class="pricing-range-price">20% recurring</div>
+            <div class="pricing-range-margin">Network multiplier</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="moat-panel">
+      <h3>Why This Moat Is Defensible</h3>
+      <p>
+        Traditional SaaS companies compete on features, price, and sales execution. OmniaGuard competes on constitutional architecture — the only moat that gets stronger when governments increase surveillance pressure. The more hostile the environment for privacy, the more valuable the constitutional counter-structure becomes.
+      </p>
+      <ul class="moat-points">
+        <li>Constitutional mission creates customer loyalty that price competition cannot erode — clients don&rsquo;t leave a constitutional shield for a 10% discount</li>
+        <li>Distributed architecture is the product — 392 independent entities cannot be compelled as a unit, which is what enterprise and government clients are actually buying</li>
+        <li>Canadian sovereign jurisdiction creates regulatory arbitrage unavailable to US-headquartered competitors subject to FISA, NSL, and EO 12333</li>
+        <li>First-mover advantage in explicitly constitutional framing — existing VPN and security vendors are privacy-policy companies, not architectural-impossibility companies</li>
+        <li>Network effects: each sovereign entity added increases the mathematical impossibility of centralized capture, increasing value for all participants</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: TEAM AND THESIS ===== -->
+<section class="inv-section" id="inv-s4">
+  <div class="container">
+    <span class="section-number">Section 04 &mdash; Team and Thesis</span>
+    <h2 class="section-h2">The <span class="gold">Founder Thesis</span> and Operating Structure</h2>
+    <p class="section-sub">
+      OmniaGuard is built on the conviction that constitutional rights require architectural enforcement. Not policy promises. Not corporate commitments. Cryptographic impossibility.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name"></div>
+        <div class="team-title">Founder &amp; Chief Architect — Francisco Holdings Inc.</div>
+        <ul class="team-details">
+          <li><strong>Operating entity:</strong> Tech Pet Cage (registered Ontario business)</li>
+          <li><strong>Holding entity:</strong> Francisco Holdings Inc., Ontario, Canada</li>
+          <li><strong>Jurisdiction:</strong> Canadian sovereign — PIPEDA primary framework</li>
+          <li><strong>Contact:</strong> contact@omniaguard.com</li>
+          <li><strong>Philosophy:</strong> Privacy by architecture, not policy. Security by cryptographic impossibility, not promise.</li>
+          <li><strong>Ecosystem scope:</strong> 21 active companies, 392 planned</li>
+        </ul>
+      </div>
+      <div class="team-card">
+        <div class="team-name">The Thesis</div>
+        <div class="team-title">What OmniaGuard Is, and What It Is Not</div>
+        <ul class="team-details">
+          <li><strong>We are:</strong> Counter-infrastructure to a surveillance stack that has been built while attention was directed elsewhere</li>
+          <li><strong>We are not:</strong> A cybersecurity company patching a compromised system</li>
+          <li><strong>We are:</strong> An architectural alternative — distributed, sovereign, mathematically uncapturable</li>
+          <li><strong>We are not:</strong> A privacy-policy company making promises that can be updated by board decision</li>
+          <li><strong>We are:</strong> Building the constitutional layer that makes surveillance infrastructure irrelevant for those who deploy it</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ecosystem-panel">
+      <h3>Ecosystem Metrics — Current State</h3>
+      <div class="ecosystem-grid">
+        <div class="ecosystem-item">
+          <div class="ecosystem-number">21</div>
+          <div class="ecosystem-label">Active Companies</div>
+        </div>
+        <div class="ecosystem-item">
+          <div class="ecosystem-number">392</div>
+          <div class="ecosystem-label">Planned Network</div>
+        </div>
+        <div class="ecosystem-item">
+          <div class="ecosystem-number">20%</div>
+          <div class="ecosystem-label">Partner Commission</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--gray);line-height:1.7;">
+        Partners include Kiaros AI, CleanSwarm, and Tech Pet Cage. The partner network is structured as independently owned entities that earn recurring commission on all OmniaGuard products they refer or integrate. This creates a distributed sales network with aligned incentives and no single point of compellability.
+      </p>
+    </div>
+
+    <div class="thesis-quote">
+      &ldquo;Privacy by architecture, not policy. Security by cryptographic impossibility, not promise. Constitutional rights are not protected by the goodwill of corporations — they are enforced by the mathematical properties of the systems we build.&rdquo;
+      <cite> Francisco, OmniaGuard Founder, Francisco Holdings Inc.</cite>
+    </div>
+
+    <div class="live-products-list">
+      <div class="live-product-item">
+        <div>
+          <div class="live-product-name">OmniaGuard AI Security</div>
+          <div class="live-product-detail">7 commercial tiers active — $499/mo through $25,000/mo. 14-agent swarm, zero prompt injection guarantee.</div>
+        </div>
+        <div class="live-badge">Live</div>
+      </div>
+      <div class="live-product-item">
+        <div>
+          <div class="live-product-name">OmniaGuard VPN</div>
+          <div class="live-product-detail">WireGuard + SGX/SEV + 14-agent ZK verification. Canadian sovereign. $9–$99/mo.</div>
+        </div>
+        <div class="live-badge">Launching</div>
+      </div>
+      <div class="live-product-item">
+        <div>
+          <div class="live-product-name">CCLDR</div>
+          <div class="live-product-detail">Active product — Constitutional Civil Liberties Digital Rights framework and tooling.</div>
+        </div>
+        <div class="live-badge">Live</div>
+      </div>
+      <div class="live-product-item">
+        <div>
+          <div class="live-product-name">OmniaGuard Compute Cooperative</div>
+          <div class="live-product-detail">Manitoba sovereign cooperative — community-owned inference infrastructure.</div>
+        </div>
+        <div class="roadmap-badge">Roadmap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: THE ASK ===== -->
+<section class="inv-section" id="inv-s5">
+  <div class="container">
+    <span class="section-number">Section 05 &mdash; The Ask</span>
+    <h2 class="section-h2">Series Seed: <span class="gold">Strategic Capital</span><br>and Sovereign Infrastructure Partners</h2>
+    <p class="section-sub">
+      We are not raising from anyone. We are raising from partners who understand that the counter-structure requires counter-capital — aligned with the mission, not opposed to it by jurisdictional conflict.
+    </p>
+
+    <div class="ask-grid">
+      <div class="ask-card seeking">
+        <div class="ask-card-title">Priority Partners We Are Seeking</div>
+        <ul class="ask-list">
+          <li>Canadian pension funds — long-horizon, mission-aligned, sovereign jurisdiction</li>
+          <li>Credit unions — cooperative ownership model mirrors our ecosystem architecture</li>
+          <li>Sovereign wealth funds — particularly non-Five-Eyes jurisdictions</li>
+          <li>Strategic infrastructure partners — co-build the compute cooperative layer</li>
+          <li>Privacy-aligned family offices — Canada, EU, and non-extradition jurisdictions</li>
+          <li>Cooperative investment vehicles — ownership structure that reinforces our mission</li>
+        </ul>
+      </div>
+      <div class="ask-card not-seeking">
+        <div class="ask-card-title">Capital We Are Not Seeking</div>
+        <ul class="ask-list">
+          <li>US venture capital
+            <span class="reason">Jurisdictional conflict — FISA 702 and NSL compellability creates structural mission incompatibility. US-domiciled investors create US nexus that undermines sovereign architecture.</span>
+          </li>
+          <li>Any investor requiring board observer or information rights that create FISA exposure
+            <span class="reason">Constitutional architecture requires constitutional capital structure. Investor information rights can be compelled by intelligence orders.</span>
+          </li>
+          <li>Strategic investors with government contracts in surveillance-adjacent work
+            <span class="reason">Conflict of interest with constitutional mission. We do not accept capital from entities that profit from the infrastructure we are countering.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contact-panel">
+      <h3>War Room Direct Contact</h3>
+      <p>
+        If you are a sovereign-aligned, mission-compatible capital partner and you have read this brief, the next step is a direct conversation. No pitch deck. No deck submitted to a form. A conversation.
+      </p>
+      <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Investor+Brief+Request" class="contact-cta-btn">
+        Request Investor Brief &nbsp;&rarr;
+      </a>
+      <div class="contact-note">contact@omniaguard.com &mdash; Subject: OmniaGuard Investor Brief Request</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLOSING BANNER ===== -->
+<div class="closing-banner">
+  <div class="container">
+    <div class="closing-banner-quote">
+      &ldquo;The window to build <strong>constitutional infrastructure</strong> before the surveillance stack is complete is closing. <strong>We are building it now.</strong> The question for every sovereign-aligned investor is not whether to participate in the counter-structure &mdash; it is whether to participate while the window remains open.&rdquo;
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/omniaguard-site/index.html" class="footer-logo">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 3L5 9V20C5 28.3 11.6 36.1 20 38C28.4 36.1 35 28.3 35 20V9L20 3Z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1.5"/>
+          <path d="M14 20L18 24L26 16" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        OmniaGuard
+      </a>
+      <div class="footer-links">
+        <a href="/omniaguard-site/index.html#threat-demo">AI Security</a>
+        <a href="vpn.html">VPN</a>
+        <a href="intelligence.html">Intelligence</a>
+        <a href="investor.html">Investors</a>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Contact">Contact</a>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 OmniaGuard. A Francisco Holdings Inc. Project. Ontario, Canada.<br>
+        <span style="font-size:11px;color:rgba(136,146,164,0.6);">This document is an invitation-only investor brief. It does not constitute a public offering. All financial projections are forward-looking and subject to material risk. This is not legal, financial, or investment advice. Consult qualified counsel before making investment decisions.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV MOBILE TOGGLE
+const navToggle = document.getElementById('nav-toggle');
+const mobileOverlay = document.getElementById('mobile-overlay');
+if (navToggle && mobileOverlay) {
+  navToggle.addEventListener('click', () => {
+    mobileOverlay.classList.toggle('open');
+  });
+  mobileOverlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileOverlay.classList.remove('open'));
+  });
+}
+</script>
+�<!-- ===== FLOATING SUPPORT WIDGET ===== -->�<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">�  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">�    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>�    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon–Sat</div>�    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">�      <span style="font-size:20px;">✈️</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot — fastest</div></div>�    </a>�    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">�      <span style="font-size:20px;">📧</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>�    </a>�  </div>�  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">�    💬�  </button>�</div>�
+</body>
+</html>

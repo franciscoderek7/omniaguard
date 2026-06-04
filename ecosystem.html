@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniaGuard Ecosystem — One Shield. Three Layers. Zero Compromise.</title>
+<meta name="description" content="OmniaGuard: AI Security, VPN, and Sovereign Compute. One account, one dashboard, cryptographically unified. The only ecosystem built to make surveillance architecturally impossible.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#0a0e1a;
+  --bg2:#0d1120;
+  --bg3:#111827;
+  --bg4:#0c1022;
+  --cyan:#00d4ff;
+  --cyan-dim:rgba(0,212,255,0.7);
+  --cyan-glow:rgba(0,212,255,0.12);
+  --gold:#ffd700;
+  --gold-dim:rgba(255,215,0,0.15);
+  --white:#ffffff;
+  --gray:#8892a4;
+  --gray2:#1e2537;
+  --green:#00c853;
+  --red:#ff3b3b;
+  --border:rgba(0,212,255,0.12);
+  --border-gold:rgba(255,215,0,0.25);
+  --border-green:rgba(0,200,83,0.3);
+}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* GRID BACKGROUND */
+body::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+  z-index:0;
+  animation:gridPulse 10s ease-in-out infinite;
+}
+@keyframes gridPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+/* SCROLL PROGRESS */
+#progress-bar{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--cyan),var(--gold));
+  z-index:9999;transition:width .1s linear;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,14,26,0.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:70px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;color:var(--white);
+  font-size:20px;font-weight:800;letter-spacing:-.5px;
+}
+.nav-logo-icon{width:38px;height:38px;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:var(--gray);
+  font-size:14px;font-weight:500;letter-spacing:.4px;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:2px;background:var(--cyan);transition:width .25s;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--cyan);}
+.nav-links a.active::after{width:100%;}
+.nav-cta{
+  background:var(--cyan)!important;color:#000!important;
+  font-weight:700!important;padding:9px 20px;border-radius:6px;
+  box-shadow:0 0 20px rgba(0,212,255,0.3);
+  transition:all .2s!important;
+}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:#33ddff!important;box-shadow:0 0 30px rgba(0,212,255,0.5)!important;color:#000!important;}
+.nav-mobile-toggle{
+  display:none;background:none;border:1px solid var(--border);
+  color:var(--cyan);font-size:20px;cursor:pointer;
+  padding:8px 12px;border-radius:6px;
+}
+#mobile-overlay{
+  display:none;position:fixed;top:70px;left:0;width:100%;
+  height:calc(100vh - 70px);
+  background:rgba(10,14,26,0.98);backdrop-filter:blur(20px);
+  z-index:999;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto;
+}
+#mobile-overlay.open{display:flex;}
+#mobile-overlay a{
+  color:var(--white);text-decoration:none;font-size:18px;font-weight:600;
+  padding:18px 0;border-bottom:1px solid var(--gray2);display:block;transition:color .2s;
+}
+#mobile-overlay a:hover{color:var(--cyan);}
+#mobile-overlay .mobile-cta{
+  margin-top:24px;background:var(--cyan);color:#000;font-weight:700;
+  font-size:16px;padding:16px 24px;border-radius:8px;text-align:center;border:none;
+}
+
+/* ===== UTILITY ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+.cyan{color:var(--cyan);}
+.gold{color:var(--gold);}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.section-badge{
+  display:inline-block;background:var(--cyan-glow);border:1px solid var(--border);
+  color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:16px;
+}
+.section-header{text-align:center;margin-bottom:48px;}
+.section-header h2{font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-.5px;margin-bottom:12px;}
+.section-header p{color:var(--gray);font-size:16px;max-width:620px;margin:0 auto;}
+
+/* ===== HERO ===== */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 0 80px;position:relative;overflow:hidden;
+}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;}
+.hero-orb-1{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 70%);
+  top:-150px;left:-120px;
+  animation:orbFloat 14s ease-in-out infinite;
+}
+.hero-orb-2{
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(255,215,0,0.05) 0%,transparent 70%);
+  bottom:-80px;right:-60px;
+  animation:orbFloat 18s ease-in-out infinite reverse;
+}
+.hero-orb-3{
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(0,144,255,0.06) 0%,transparent 70%);
+  top:40%;right:10%;
+  animation:orbFloat 12s ease-in-out infinite;
+}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-40px) scale(1.04);}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(0,212,255,0.07);border:1px solid var(--border);
+  border-radius:30px;padding:8px 22px;margin-bottom:28px;
+  font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;
+}
+.hero-badge-dot{
+  width:7px;height:7px;background:var(--cyan);border-radius:50%;
+  box-shadow:0 0 10px var(--cyan);
+  animation:heroBlink 1.5s ease-in-out infinite;
+}
+@keyframes heroBlink{0%,100%{opacity:1;box-shadow:0 0 10px var(--cyan);}50%{opacity:.3;box-shadow:none;}}
+#hero h1{
+  font-size:clamp(36px,5.5vw,72px);font-weight:900;line-height:1.06;
+  letter-spacing:-2px;margin-bottom:28px;max-width:900px;
+}
+#hero h1 .gradient-text{
+  background:linear-gradient(135deg,var(--cyan) 0%,#0090ff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(16px,2vw,19px);color:var(--gray);max-width:640px;
+  margin-bottom:48px;line-height:1.8;
+}
+.hero-stats{display:flex;flex-wrap:wrap;gap:32px;margin-bottom:16px;}
+.hero-stat{display:flex;flex-direction:column;gap:4px;}
+.hero-stat-num{
+  font-size:clamp(28px,3.5vw,48px);font-weight:900;color:var(--cyan);
+  letter-spacing:-1.5px;line-height:1;
+}
+.hero-stat-label{font-size:13px;color:var(--gray);font-weight:500;letter-spacing:.5px;text-transform:uppercase;}
+.hero-stat-divider{width:1px;height:50px;background:var(--border);align-self:center;}
+
+/* ===== ECOSYSTEM CARDS ===== */
+#ecosystem{padding:100px 0;}
+.eco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.eco-card{
+  background:var(--bg3);border:1px solid var(--border);border-radius:20px;
+  padding:40px 32px;position:relative;overflow:hidden;
+  transition:all .35s ease;cursor:default;
+  display:flex;flex-direction:column;
+}
+.eco-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  transition:background .35s;
+}
+.eco-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,0.4),0 0 40px rgba(0,212,255,0.07);}
+.eco-card:hover::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+.eco-card.gold-accent{border-color:rgba(255,215,0,0.12);}
+.eco-card.gold-accent::before{background:linear-gradient(90deg,transparent,rgba(255,215,0,0.2),transparent);}
+.eco-card.gold-accent:hover{border-color:rgba(255,215,0,0.3);box-shadow:0 30px 60px rgba(0,0,0,0.4),0 0 40px rgba(255,215,0,0.06);}
+.eco-card.gold-accent:hover::before{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.card-glow{
+  position:absolute;top:-60px;right:-60px;width:180px;height:180px;
+  border-radius:50%;filter:blur(60px);pointer-events:none;
+  background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 70%);
+  transition:opacity .35s;
+}
+.eco-card.gold-accent .card-glow{background:radial-gradient(circle,rgba(255,215,0,0.06) 0%,transparent 70%);}
+.eco-card:hover .card-glow{opacity:1.5;}
+.card-icon-wrap{
+  width:64px;height:64px;border-radius:16px;
+  background:rgba(0,212,255,0.08);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:28px;flex-shrink:0;
+  transition:all .35s;
+}
+.eco-card:hover .card-icon-wrap{background:rgba(0,212,255,0.14);border-color:rgba(0,212,255,0.3);}
+.eco-card.gold-accent .card-icon-wrap{background:rgba(255,215,0,0.08);border-color:rgba(255,215,0,0.15);}
+.eco-card.gold-accent:hover .card-icon-wrap{background:rgba(255,215,0,0.14);border-color:rgba(255,215,0,0.3);}
+.card-title-tag{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:8px;
+}
+.eco-card.gold-accent .card-title-tag{color:var(--gold);}
+.card-title{font-size:22px;font-weight:800;letter-spacing:-.3px;margin-bottom:14px;line-height:1.2;}
+.card-desc{font-size:15px;color:var(--gray);line-height:1.75;margin-bottom:28px;flex:1;}
+.card-specs{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.card-spec{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:var(--gray);
+}
+.card-spec-icon{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(0,212,255,0.1);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:10px;
+}
+.eco-card.gold-accent .card-spec-icon{background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.2);}
+.status-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border-radius:6px;padding:6px 14px;
+  font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:20px;width:fit-content;
+}
+.status-live{background:rgba(0,200,83,0.1);border:1px solid var(--border-green);color:var(--green);}
+.status-cyan{background:rgba(0,212,255,0.08);border:1px solid var(--border);color:var(--cyan);}
+.status-gold{background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.2);color:#a89000;}
+.status-dot{width:6px;height:6px;border-radius:50%;animation:blink 1.2s ease-in-out infinite;}
+.status-live .status-dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.status-cyan .status-dot{background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.status-gold .status-dot{background:#a89000;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.card-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;font-size:14px;font-weight:700;
+  color:var(--cyan);border:1px solid var(--border);
+  border-radius:8px;padding:12px 20px;
+  transition:all .25s;margin-top:auto;
+}
+.card-cta:hover{background:var(--cyan-glow);border-color:rgba(0,212,255,0.4);transform:translateX(4px);}
+.eco-card.gold-accent .card-cta{color:var(--gold);border-color:rgba(255,215,0,0.2);}
+.eco-card.gold-accent .card-cta:hover{background:rgba(255,215,0,0.07);border-color:rgba(255,215,0,0.4);}
+
+/* ===== COUNTER-INFRASTRUCTURE ===== */
+#counter-infra{
+  padding:100px 0;
+  background:linear-gradient(180deg,rgba(30,8,8,0.5) 0%,rgba(20,5,5,0.8) 100%);
+  border-top:1px solid rgba(255,59,59,0.12);
+  border-bottom:1px solid rgba(255,59,59,0.12);
+  position:relative;overflow:hidden;
+}
+#counter-infra::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(255,30,30,0.04) 0%,transparent 70%);
+  pointer-events:none;
+}
+.counter-title{font-size:clamp(26px,4vw,46px);font-weight:900;letter-spacing:-.8px;margin-bottom:12px;}
+.counter-sub{color:var(--gray);font-size:17px;max-width:680px;margin:0 auto 60px;line-height:1.7;}
+.counter-sub strong{color:#ff8888;}
+.counter-table-wrap{
+  overflow-x:auto;border-radius:16px;
+  border:1px solid rgba(255,59,59,0.15);
+}
+.counter-table{
+  width:100%;border-collapse:collapse;
+  background:rgba(15,5,5,0.8);
+  backdrop-filter:blur(10px);
+}
+.counter-table th{
+  padding:18px 28px;font-size:12px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  background:rgba(255,30,30,0.06);
+}
+.counter-table th:first-child{color:#ff8888;border-right:1px solid rgba(255,59,59,0.12);}
+.counter-table th:last-child{color:var(--cyan);}
+.counter-table td{
+  padding:18px 28px;font-size:15px;vertical-align:middle;
+  border-top:1px solid rgba(255,59,59,0.07);
+}
+.counter-table td:first-child{
+  color:#cc7777;border-right:1px solid rgba(255,59,59,0.12);
+  font-weight:500;
+}
+.counter-table td:last-child{color:var(--white);font-weight:600;}
+.counter-table tr:nth-child(odd){background:rgba(255,30,30,0.02);}
+.counter-table tr:hover td{background:rgba(0,212,255,0.03);}
+.bad-icon{display:inline-block;color:#ff3b3b;margin-right:10px;}
+.good-icon{display:inline-block;color:var(--cyan);margin-right:10px;}
+
+/* ===== UNIFIED PRICING ===== */
+#unified-pricing{padding:100px 0;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pricing-card{
+  background:var(--bg3);border:1px solid var(--border);border-radius:20px;
+  padding:36px 28px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;transition:all .35s;
+}
+.pricing-card.featured{
+  border-color:rgba(0,212,255,0.3);
+  background:linear-gradient(180deg,rgba(0,212,255,0.05) 0%,var(--bg3) 40%);
+}
+.pricing-card.featured::before{
+  content:'RECOMMENDED';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  background:var(--cyan);color:#000;font-size:10px;font-weight:800;letter-spacing:2px;
+  padding:4px 20px;border-radius:0 0 10px 10px;
+}
+.pricing-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,0.4);}
+.pricing-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+.pricing-name{font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px;}
+.pricing-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;}
+.pricing-amount-num{font-size:42px;font-weight:900;color:var(--cyan);letter-spacing:-1px;}
+.pricing-amount-period{font-size:14px;color:var(--gray);font-weight:500;}
+.pricing-amount-note{font-size:12px;color:var(--gray);margin-bottom:24px;}
+.pricing-divider{height:1px;background:var(--border);margin:20px 0;}
+.pricing-row{
+  display:flex;flex-direction:column;gap:4px;margin-bottom:16px;
+  padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.pricing-row:last-of-type{border-bottom:none;}
+.pricing-row-label{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:2px;
+}
+.pricing-row-val{font-size:14px;color:var(--gray);line-height:1.6;}
+.pricing-row-val strong{color:var(--white);font-weight:600;}
+.pricing-note{font-size:12px;color:#665500;background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.12);border-radius:6px;padding:10px 14px;margin:16px 0;line-height:1.6;}
+.pricing-cta{
+  display:block;text-align:center;text-decoration:none;
+  background:var(--cyan);color:#000;font-weight:700;font-size:14px;
+  padding:14px 20px;border-radius:10px;margin-top:auto;
+  box-shadow:0 0 24px rgba(0,212,255,0.25);
+  transition:all .25s;
+}
+.pricing-cta:hover{background:#33ddff;box-shadow:0 0 40px rgba(0,212,255,0.45);transform:translateY(-2px);}
+.pricing-cta.ghost{
+  background:transparent;color:var(--cyan);
+  border:1px solid var(--border);box-shadow:none;
+}
+.pricing-cta.ghost:hover{background:var(--cyan-glow);border-color:rgba(0,212,255,0.4);}
+.pricing-sovereign{color:var(--gray);font-size:15px;margin-bottom:24px;line-height:1.7;}
+.pricing-sovereign ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+.pricing-sovereign li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray);}
+.pricing-sovereign li::before{content:'→';color:var(--cyan);font-weight:700;flex-shrink:0;}
+
+/* ===== ROADMAP ===== */
+#roadmap{padding:100px 0;background:var(--bg2);border-top:1px solid var(--border);}
+.timeline{position:relative;padding:48px 0 20px;}
+.timeline::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:2px;height:100%;
+  background:linear-gradient(180deg,var(--cyan),rgba(0,212,255,0.1));
+}
+.timeline-item{
+  display:flex;gap:40px;margin-bottom:56px;
+  position:relative;
+}
+.timeline-item:nth-child(odd){flex-direction:row;}
+.timeline-item:nth-child(even){flex-direction:row-reverse;}
+.timeline-content{
+  flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:16px;
+  padding:28px;transition:all .3s;max-width:calc(50% - 40px);
+}
+.timeline-item:nth-child(odd) .timeline-content{margin-right:0;}
+.timeline-item:nth-child(even) .timeline-content{margin-left:0;}
+.timeline-content:hover{border-color:rgba(0,212,255,0.3);box-shadow:0 10px 40px rgba(0,0,0,0.3);}
+.timeline-spacer{flex:1;max-width:calc(50% - 40px);}
+.timeline-dot{
+  position:absolute;left:50%;transform:translate(-50%,-0%);
+  width:18px;height:18px;border-radius:50%;
+  background:var(--cyan);border:3px solid var(--bg);
+  box-shadow:0 0 16px rgba(0,212,255,0.6);
+  top:28px;flex-shrink:0;z-index:2;
+}
+.timeline-dot.now{
+  width:24px;height:24px;
+  animation:dotPulse 1.5s ease-in-out infinite;
+}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 16px rgba(0,212,255,0.6);}50%{box-shadow:0 0 30px rgba(0,212,255,1),0 0 60px rgba(0,212,255,0.4);}}
+.timeline-dot.gold{background:var(--gold);box-shadow:0 0 16px rgba(255,215,0,0.5);}
+.tl-date{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;}
+.timeline-dot.gold ~ .timeline-content .tl-date,.timeline-item:has(.gold) .tl-date{color:var(--gold);}
+.tl-title{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-.2px;}
+.tl-desc{font-size:14px;color:var(--gray);line-height:1.65;}
+.tl-now-pill{
+  display:inline-block;background:rgba(0,200,83,0.1);border:1px solid var(--border-green);
+  color:var(--green);font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-left:10px;vertical-align:middle;
+}
+
+/* ===== FAQ ===== */
+#faq{padding:100px 0;}
+.faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:4px;}
+.faq-item{
+  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:border-color .25s;
+}
+.faq-item:hover{border-color:rgba(0,212,255,0.25);}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 24px;cursor:pointer;font-size:16px;font-weight:600;
+  gap:16px;transition:color .2s;user-select:none;
+}
+.faq-q:hover{color:var(--cyan);}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--cyan-glow);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:16px;color:var(--cyan);
+  transition:transform .3s,background .25s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(0,212,255,0.15);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;
+  font-size:15px;color:var(--gray);line-height:1.75;
+}
+.faq-item.open .faq-a{max-height:300px;padding:0 24px 22px;}
+
+/* ===== FOOTER ===== */
+footer{
+  border-top:1px solid var(--border);
+  padding:56px 24px 40px;
+  background:rgba(10,14,26,0.98);
+  position:relative;z-index:2;
+}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-brand{display:flex;flex-direction:column;gap:14px;}
+.footer-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:20px;font-weight:800;}
+.footer-tagline{font-size:13px;color:var(--gray);max-width:280px;line-height:1.6;}
+.footer-links{display:flex;gap:40px;flex-wrap:wrap;}
+.footer-col{display:flex;flex-direction:column;gap:12px;}
+.footer-col-title{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:4px;}
+.footer-col a{text-decoration:none;color:var(--gray);font-size:14px;transition:color .2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:28px;flex-wrap:wrap;gap:16px;
+}
+.footer-copy{font-size:13px;color:var(--gray);}
+.footer-tg{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--gray);text-decoration:none;
+  background:rgba(0,212,255,0.06);border:1px solid var(--border);
+  padding:8px 16px;border-radius:8px;transition:all .25s;
+}
+.footer-tg:hover{color:var(--white);border-color:rgba(0,212,255,0.3);background:rgba(0,212,255,0.1);}
+
+/* ===== RIPPLE ===== */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.25);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none;}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .eco-grid{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .timeline::before{left:18px;}
+  .timeline-item{flex-direction:column!important;padding-left:48px;}
+  .timeline-dot{left:18px;top:28px;}
+  .timeline-content{max-width:100%!important;}
+  .timeline-spacer{display:none;}
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:flex;align-items:center;}
+  .hero-stats{gap:20px;}
+  .hero-stat-divider{display:none;}
+  .footer-top{flex-direction:column;}
+  .footer-links{gap:24px;}
+}
+@media(max-width:600px){
+  #hero h1{font-size:clamp(30px,8vw,48px);}
+  .counter-table td,.counter-table th{padding:14px 16px;font-size:13px;}
+  .pricing-amount-num{font-size:34px;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- MOBILE OVERLAY -->
+<div id="mobile-overlay">
+  <a href="/index.html">AI Security</a>
+  <a href="/vpn.html">VPN</a>
+  <a href="/ecosystem.html" style="color:var(--cyan);">Ecosystem</a>
+  <a href="/intelligence.html">Intelligence</a>
+  <a href="/investors.html">Investors</a>
+  <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Contact">Contact</a>
+  <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Demo+Request" class="mobile-cta">Request Demo</a>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 3L4 9.5V19C4 27.5 10.5 35 19 37C27.5 35 34 27.5 34 19V9.5L19 3Z" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1.5"/>
+        <path d="M12 19h4l2-5 3 9 2-6h3" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="19" cy="19" r="2.5" fill="rgba(0,212,255,0.4)"/>
+        <path d="M19 11v2M19 26v2M11 19h2M26 19h2" stroke="rgba(0,212,255,0.4)" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+      OmniaGuard
+    </a>
+    <ul class="nav-links">
+      <li><a href="/index.html">AI Security</a></li>
+      <li><a href="/vpn.html">VPN</a></li>
+      <li><a href="/ecosystem.html" class="active">Ecosystem</a></li>
+      <li><a href="/intelligence.html">Intelligence</a></li>
+      <li><a href="/investors.html">Investors</a></li>
+      <li><a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Contact">Contact</a></li>
+      <li><a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Demo+Request" class="nav-cta">Request Demo</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="container">
+    <div class="hero-badge fade-in">
+      <span class="hero-badge-dot"></span>
+      ONE SHIELD. THREE LAYERS. ZERO COMPROMISE.
+    </div>
+    <h1 class="fade-in">The Complete<br><span class="gradient-text">Constitutional Shield</span></h1>
+    <p class="hero-sub fade-in">
+      AI Security. VPN. Sovereign Compute. One account, one dashboard, cryptographically unified.
+      The only ecosystem built to make surveillance <strong style="color:var(--white);">architecturally impossible.</strong>
+    </p>
+    <div class="hero-stats fade-in">
+      <div class="hero-stat">
+        <span class="hero-stat-num">3</span>
+        <span class="hero-stat-label">Integrated Products</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">14</span>
+        <span class="hero-stat-label">Verification Agents</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">1</span>
+        <span class="hero-stat-label">Unified Account</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM CARDS -->
+<section id="ecosystem">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-badge">THE ECOSYSTEM</span>
+      <h2>Three Layers. <span class="cyan">One Architecture.</span></h2>
+      <p>Each product is sovereign by design. Together they form the only unified constitutional privacy stack available today.</p>
+    </div>
+    <div class="eco-grid">
+
+      <!-- Card 1: AI Security -->
+      <div class="eco-card fade-in">
+        <div class="card-glow"></div>
+        <div class="card-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 3L4 8.5V16C4 23 9.5 29.5 16 31C22.5 29.5 28 23 28 16V8.5L16 3Z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1.5"/>
+            <rect x="10" y="13" width="3" height="3" rx="1" fill="rgba(0,212,255,0.6)"/>
+            <rect x="14.5" y="10" width="3" height="3" rx="1" fill="rgba(0,212,255,0.8)"/>
+            <rect x="19" y="13" width="3" height="3" rx="1" fill="rgba(0,212,255,0.6)"/>
+            <rect x="14.5" y="16" width="3" height="3" rx="1" fill="rgba(0,212,255,0.4)"/>
+            <line x1="11.5" y1="14.5" x2="16" y2="11.5" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="20.5" y1="14.5" x2="16" y2="11.5" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="11.5" y1="14.5" x2="16" y2="17.5" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="20.5" y1="14.5" x2="16" y2="17.5" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-title-tag">Product 01 — AI Security</div>
+        <div class="card-title">The 14-Layer Agent Swarm</div>
+        <div class="status-badge status-live">
+          <span class="status-dot"></span>
+          LIVE — DEPLOYING NOW
+        </div>
+        <p class="card-desc">Zero prompt injection. Zero breach guarantee. Constitutional AI protection for every agentic deployment. Enterprise-grade defense built from the ground up to make attacks fail at the architecture layer.</p>
+        <div class="card-specs">
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>14-layer defense swarm</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>7 pricing tiers ($499–$25K/mo)</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>Canadian SOC — zero foreign routing</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>WireGuard-secured agent comms</span>
+          </div>
+        </div>
+        <a href="/index.html#pricing" class="card-cta">View AI Security →</a>
+      </div>
+
+      <!-- Card 2: VPN -->
+      <div class="eco-card fade-in">
+        <div class="card-glow"></div>
+        <div class="card-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="3" fill="rgba(0,212,255,0.8)"/>
+            <circle cx="6" cy="10" r="2" fill="rgba(0,212,255,0.5)"/>
+            <circle cx="26" cy="10" r="2" fill="rgba(0,212,255,0.5)"/>
+            <circle cx="6" cy="22" r="2" fill="rgba(0,212,255,0.5)"/>
+            <circle cx="26" cy="22" r="2" fill="rgba(0,212,255,0.5)"/>
+            <circle cx="16" cy="5" r="2" fill="rgba(0,212,255,0.3)"/>
+            <circle cx="16" cy="27" r="2" fill="rgba(0,212,255,0.3)"/>
+            <line x1="16" y1="13" x2="8" y2="10" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="16" y1="13" x2="24" y2="10" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="16" y1="19" x2="8" y2="22" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="16" y1="19" x2="24" y2="22" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="16" y1="13" x2="16" y2="7" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+            <line x1="16" y1="19" x2="16" y2="25" stroke="#00d4ff" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-title-tag">Product 02 — VPN</div>
+        <div class="card-title">The Network Constitutional Shield</div>
+        <div class="status-badge status-cyan">
+          <span class="status-dot"></span>
+          LAUNCHING JUNE 2026
+        </div>
+        <p class="card-desc">WireGuard + SGX enclaves + 14-agent zero-knowledge verification. The only VPN where it's cryptographically impossible for anyone — including us — to spy on you.</p>
+        <div class="card-specs">
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>WireGuard + SGX/SEV hardware enclaves</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>Zero-knowledge 14-agent verification</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>Canadian sovereign jurisdiction</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon">▸</div>
+            <span>$9–$99/mo — zero logs guaranteed</span>
+          </div>
+        </div>
+        <a href="/vpn.html" class="card-cta">View VPN →</a>
+      </div>
+
+      <!-- Card 3: Compute -->
+      <div class="eco-card gold-accent fade-in">
+        <div class="card-glow"></div>
+        <div class="card-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="6" width="24" height="4" rx="2" fill="rgba(255,215,0,0.15)" stroke="rgba(255,215,0,0.5)" stroke-width="1"/>
+            <rect x="4" y="14" width="24" height="4" rx="2" fill="rgba(255,215,0,0.10)" stroke="rgba(255,215,0,0.4)" stroke-width="1"/>
+            <rect x="4" y="22" width="24" height="4" rx="2" fill="rgba(255,215,0,0.07)" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+            <circle cx="25" cy="8" r="1.5" fill="#ffd700"/>
+            <circle cx="25" cy="16" r="1.5" fill="rgba(255,215,0,0.7)"/>
+            <circle cx="25" cy="24" r="1.5" fill="rgba(255,215,0,0.4)"/>
+            <line x1="8" y1="8" x2="20" y2="8" stroke="rgba(255,215,0,0.3)" stroke-width="0.8"/>
+            <line x1="8" y1="16" x2="18" y2="16" stroke="rgba(255,215,0,0.25)" stroke-width="0.8"/>
+            <line x1="8" y1="24" x2="16" y2="24" stroke="rgba(255,215,0,0.2)" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <div class="card-title-tag" style="color:var(--gold);">Product 03 — Compute</div>
+        <div class="card-title">The Manitoba Sovereign Cooperative</div>
+        <div class="status-badge status-gold">
+          <span class="status-dot"></span>
+          ROADMAP — Q4 2026
+        </div>
+        <p class="card-desc">Community-owned compute infrastructure. The alternative to centralized surveillance centers. Not corporate-owned. Not government-accessible. Mathematically yours.</p>
+        <div class="card-specs">
+          <div class="card-spec">
+            <div class="card-spec-icon" style="background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.2);">▸</div>
+            <span>Manitoba cooperative model</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon" style="background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.2);">▸</div>
+            <span>Distributed ownership structure</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon" style="background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.2);">▸</div>
+            <span>Sovereign Canadian jurisdiction</span>
+          </div>
+          <div class="card-spec">
+            <div class="card-spec-icon" style="background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.2);">▸</div>
+            <span>Community governed — no board override</span>
+          </div>
+        </div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Compute+Waitlist" class="card-cta" style="color:var(--gold);border-color:rgba(255,215,0,0.2);">Join Waitlist →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COUNTER-INFRASTRUCTURE TABLE -->
+<section id="counter-infra">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-badge" style="color:rgba(255,100,100,0.9);background:rgba(255,59,59,0.06);border-color:rgba(255,59,59,0.2);">THREAT LANDSCAPE</span>
+      <h2 class="counter-title">What We're Building <span style="color:#ff6b6b;">Against</span></h2>
+      <p class="counter-sub">
+        3,000 data centers. $1.5 trillion.
+        <strong>-28% to -35% ROI.</strong>
+        If the math doesn't work commercially, someone else is paying.
+      </p>
+    </div>
+    <div class="counter-table-wrap fade-in">
+      <table class="counter-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Their Stack</th>
+            <th style="text-align:left;">OmniaGuard Counter-Stack</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="bad-icon">✕</span>Centralized, capturable</td>
+            <td><span class="good-icon">✓</span>Distributed, architecturally sovereign</td>
+          </tr>
+          <tr>
+            <td><span class="bad-icon">✕</span>Policy-based privacy</td>
+            <td><span class="good-icon">✓</span>Cryptographic impossibility</td>
+          </tr>
+          <tr>
+            <td><span class="bad-icon">✕</span>Corporate-owned, government-accessible</td>
+            <td><span class="good-icon">✓</span>Community-owned, mathematically protected</td>
+          </tr>
+          <tr>
+            <td><span class="bad-icon">✕</span>Black-box algorithms</td>
+            <td><span class="good-icon">✓</span>Open-stack, fully auditable</td>
+          </tr>
+          <tr>
+            <td><span class="bad-icon">✕</span>"AI efficiency" narrative</td>
+            <td><span class="good-icon">✓</span>Constitutional mission</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- UNIFIED PRICING -->
+<section id="unified-pricing">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-badge">UNIFIED PRICING</span>
+      <h2>One Account. <span class="cyan">All Products.</span></h2>
+      <p>One account. All products. Maximum sovereignty. Bundle pricing reflects the full constitutional stack — not piecemeal corporate software.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Personal -->
+      <div class="pricing-card fade-in">
+        <div class="pricing-tier">Bundle Tier 01</div>
+        <div class="pricing-name">Personal</div>
+        <div class="pricing-amount">
+          <span class="pricing-amount-num">$138</span>
+          <span class="pricing-amount-period">/mo</span>
+        </div>
+        <div class="pricing-amount-note">or ~$108/mo billed annually</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">AI Security</div>
+          <div class="pricing-row-val"><strong>Sentinel tier</strong> ($499/mo standalone) — waitlist access</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">VPN</div>
+          <div class="pricing-row-val"><strong>Shield plan</strong> ($9/mo standalone) — active now</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">Compute</div>
+          <div class="pricing-row-val">Reserved cooperative spot (Q4 2026)</div>
+        </div>
+        <div class="pricing-note">
+          VPN available immediately upon signup. AI Security requires security audit clearance — join waitlist to begin vetting.
+        </div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Personal+Bundle" class="pricing-cta ghost">Get Personal Bundle →</a>
+      </div>
+
+      <!-- Professional -->
+      <div class="pricing-card featured fade-in">
+        <div class="pricing-tier">Bundle Tier 02</div>
+        <div class="pricing-name">Professional</div>
+        <div class="pricing-amount">
+          <span class="pricing-amount-num">$58</span>
+          <span class="pricing-amount-period">/mo</span>
+        </div>
+        <div class="pricing-amount-note">Introductory early-access pricing</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">VPN</div>
+          <div class="pricing-row-val"><strong>Guardian plan</strong> ($29/mo standalone) — multi-device, priority nodes</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">AI Security</div>
+          <div class="pricing-row-val"><strong>Guardian tier</strong> on request — audit-gated access</div>
+        </div>
+        <div class="pricing-row">
+          <div class="pricing-row-label">Compute</div>
+          <div class="pricing-row-val">Priority cooperative membership — founding-member pricing locked</div>
+        </div>
+        <div class="pricing-divider"></div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Professional+Bundle" class="pricing-cta">Get Professional Bundle →</a>
+      </div>
+
+      <!-- Sovereign -->
+      <div class="pricing-card fade-in" style="border-color:var(--border-gold);">
+        <div class="pricing-tier" style="color:var(--gold);">Bundle Tier 03</div>
+        <div class="pricing-name" style="color:var(--gold);">Sovereign</div>
+        <div class="pricing-amount">
+          <span class="pricing-amount-num" style="color:var(--gold);">Contact</span>
+        </div>
+        <div class="pricing-amount-note">Custom architecture. Custom pricing.</div>
+        <div class="pricing-divider" style="background:var(--border-gold);"></div>
+        <div class="pricing-sovereign">
+          <ul>
+            <li>Full stack — all tiers, custom architecture</li>
+            <li>Dedicated security engineer assigned</li>
+            <li>Custom Canadian routing configuration</li>
+            <li>Board-level reporting and attestation</li>
+            <li>All three products — full sovereign deployment</li>
+          </ul>
+        </div>
+        <div class="pricing-divider" style="background:var(--border-gold);"></div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+Bundle" class="pricing-cta" style="background:var(--gold);color:#000;box-shadow:0 0 24px rgba(255,215,0,0.25);">Contact for Sovereign →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-badge">ROADMAP</span>
+      <h2>The <span class="cyan">Constitutional Timeline</span></h2>
+      <p>From VPN launch to global constitutional infrastructure — every milestone is on the public record.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <div class="tl-date">June 2026 <span class="tl-now-pill">NOW</span></div>
+          <div class="tl-title">VPN Shield + Guardian Launch</div>
+          <div class="tl-desc">OmniaGuard VPN goes live. Shield and Guardian plans available. WireGuard + SGX enclave verification active. Zero-log constitutional guarantee in effect.</div>
+        </div>
+        <div class="timeline-dot now"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="tl-date">July 2026</div>
+          <div class="tl-title">VPN Sovereign + Enterprise Tiers</div>
+          <div class="tl-desc">Full VPN tier stack unlocked. Enterprise multi-seat deployments. Sovereign jurisdiction options. Dedicated infrastructure for regulated industries.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <div class="tl-date">August 2026</div>
+          <div class="tl-title">AI Security + VPN Unified Dashboard</div>
+          <div class="tl-desc">Cross-product threat intelligence activated. Single pane of glass for all OmniaGuard products. Constitutional audit trail unified across AI Security and VPN stacks.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot gold"></div>
+        <div class="timeline-content" style="border-color:rgba(255,215,0,0.15);">
+          <div class="tl-date" style="color:var(--gold);">Q4 2026</div>
+          <div class="tl-title">Compute Cooperative — Founding Members</div>
+          <div class="tl-desc">Manitoba Sovereign Cooperative opens to founding members. First distributed compute nodes provisioned. Community governance model activated. Waitlist members get priority equity allocation.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-content">
+          <div class="tl-date">2027</div>
+          <div class="tl-title">100 Companies Shielded — Manitoba Coop Operational</div>
+          <div class="tl-desc">100 enterprise deployments across the full ecosystem. Manitoba cooperative fully operational. Carbon-neutral compute milestones hit. Constitutional model attracting global attention.</div>
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot gold"></div>
+        <div class="timeline-content" style="border-color:rgba(255,215,0,0.15);">
+          <div class="tl-date" style="color:var(--gold);">2028</div>
+          <div class="tl-title">392 Companies — Carbon Neutral — Global Replication</div>
+          <div class="tl-desc">392 companies operating under OmniaGuard constitutional protection. Carbon neutral across all infrastructure. Constitutional cooperative model replicated in allied jurisdictions globally.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-badge">FAQ</span>
+      <h2>Questions About the <span class="cyan">Ecosystem</span></h2>
+      <p>The answers you need before you build your sovereignty stack.</p>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item fade-in">
+        <div class="faq-q">
+          Do all products work together?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          Yes. Single account, unified dashboard, cross-product threat intelligence. When VPN detects anomalous routing patterns, AI Security is alerted. When AI Security blocks a prompt injection attempt, the VPN layer logs the source for constitutional audit. Every layer knows what every other layer knows.
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-q">
+          What's the constitutional mission?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          Privacy by architecture, not policy. Every product is built so surveillance is cryptographically impossible — not just prohibited by terms of service. We don't ask you to trust us. We build systems where your trust is irrelevant because the math is on your side. Constitutional privacy means the architecture enforces the guarantee, not a legal document.
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-q">
+          Is this Canadian?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          100%. Zero foreign routing. All infrastructure is Canadian-sovereign. PIPEDA + Bill C-27 compliant by design. The Manitoba cooperative model for Compute means the infrastructure is community-owned within Canadian jurisdiction — not subject to foreign intelligence frameworks or corporate board decisions made offshore.
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-q">
+          How is OmniaGuard different from a regular security company?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          We build against the surveillance stack, not as part of it. Every major security company is embedded in the same ecosystem they claim to protect you from — cloud infrastructure, intelligence-sharing agreements, corporate compliance obligations. Our mission is architectural impossibility of surveillance — not promising we won't look while sitting on the same pipes as everyone else.
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-q">
+          When is the full ecosystem available?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">
+          VPN (Shield + Guardian) is launching June 2026. Full AI Security + VPN integration and unified dashboard goes live August 2026. Compute cooperative founding members are accepted in Q4 2026, with full operational infrastructure in 2027. The roadmap is public, milestone-driven, and not subject to investor pressure to delay.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">
+          <svg width="32" height="32" viewBox="0 0 38 38" fill="none">
+            <path d="M19 3L4 9.5V19C4 27.5 10.5 35 19 37C27.5 35 34 27.5 34 19V9.5L19 3Z" fill="rgba(0,212,255,0.1)" stroke="#00d4ff" stroke-width="1.5"/>
+            <path d="M12 19h4l2-5 3 9 2-6h3" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          OmniaGuard
+        </a>
+        <p class="footer-tagline">A Francisco Holdings Inc. Project.<br>Constitutional AI security infrastructure built in Canada.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Products</div>
+          <a href="/index.html">AI Security</a>
+          <a href="/vpn.html">VPN</a>
+          <a href="/ecosystem.html">Ecosystem</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <a href="/intelligence.html">Intelligence</a>
+          <a href="/investors.html">Investors</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Contact+War+Room">Contact War Room</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Get Started</div>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Personal+Bundle">Personal Bundle</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Professional+Bundle">Professional Bundle</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+Bundle">Sovereign Bundle</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 OmniaGuard. A Francisco Holdings Inc. Project.</span>
+      <a href="https://t.me/OmniguardSec_bot" class="footer-tg" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.007 9.453c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.87.768z"/></svg>
+        @OmniguardSec_bot
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== SCROLL PROGRESS =====
+(function(){
+  var bar = document.getElementById('progress-bar');
+  function updateProgress(){
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive: true});
+})();
+
+// ===== NAV SCROLL SHADOW =====
+(function(){
+  var nav = document.getElementById('main-nav');
+  function onScroll(){
+    if(window.scrollY > 20){nav.classList.add('scrolled');}
+    else{nav.classList.remove('scrolled');}
+  }
+  window.addEventListener('scroll', onScroll, {passive: true});
+})();
+
+// ===== MOBILE TOGGLE =====
+(function(){
+  var btn = document.getElementById('mobile-toggle');
+  var overlay = document.getElementById('mobile-overlay');
+  btn.addEventListener('click', function(){
+    overlay.classList.toggle('open');
+    btn.textContent = overlay.classList.contains('open') ? '✕' : '☰';
+  });
+  overlay.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      overlay.classList.remove('open');
+      btn.textContent = '☰';
+    });
+  });
+})();
+
+// ===== INTERSECTION OBSERVER — FADE IN =====
+(function(){
+  var elements = document.querySelectorAll('.fade-in');
+  if(!window.IntersectionObserver){ elements.forEach(function(el){el.classList.add('visible');}); return; }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  elements.forEach(function(el){ observer.observe(el); });
+})();
+
+// ===== FAQ ACCORDION =====
+(function(){
+  var items = document.querySelectorAll('.faq-item');
+  items.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    q.addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      items.forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen){ item.classList.add('open'); }
+    });
+  });
+})();
+
+// ===== RIPPLE EFFECT ON CTAs =====
+(function(){
+  var btns = document.querySelectorAll('.card-cta, .pricing-cta, .nav-cta');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var rect = btn.getBoundingClientRect();
+      var ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      var size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+      btn.style.position = 'relative';
+      btn.style.overflow = 'hidden';
+      btn.appendChild(ripple);
+      setTimeout(function(){ ripple.remove(); }, 700);
+    });
+  });
+})();
+
+// ===== COUNTER ANIMATION FOR HERO STATS =====
+(function(){
+  var counters = document.querySelectorAll('.hero-stat-num');
+  var animated = false;
+  function animateCounters(){
+    if(animated) return;
+    animated = true;
+    counters.forEach(function(counter){
+      var target = parseInt(counter.textContent, 10);
+      if(isNaN(target)) return;
+      var start = 0;
+      var duration = 1200;
+      var step = target / (duration / 16);
+      var current = start;
+      var timer = setInterval(function(){
+        current += step;
+        if(current >= target){
+          counter.textContent = target;
+          clearInterval(timer);
+        } else {
+          counter.textContent = Math.floor(current);
+        }
+      }, 16);
+    });
+  }
+  if(!window.IntersectionObserver){ animateCounters(); return; }
+  var heroStats = document.querySelector('.hero-stats');
+  if(!heroStats){ animateCounters(); return; }
+  var obs = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ animateCounters(); obs.disconnect(); }
+  },{threshold:0.5});
+  obs.observe(heroStats);
+})();
+</script>
+�<!-- ===== FLOATING SUPPORT WIDGET ===== -->�<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">�  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">�    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>�    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon–Sat</div>�    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">�      <span style="font-size:20px;">✈️</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot — fastest</div></div>�    </a>�    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">�      <span style="font-size:20px;">📧</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>�    </a>�  </div>�  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">�    💬�  </button>�</div>�
+</body>
+</html>
