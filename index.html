@@ -652,7 +652,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="5-minute guaranteed incident response, contractually backed.">5-min incident response SLA</li>
         </ul>
         <div class="jobs-badge">ğŸ›ï¸ National enterprises &amp; critical infra</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+%28%2415%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Archon+plan+at+%2415%2C000%2Fmo." class="btn-tier" id="cta-archon">ğŸ“‹ REQUEST BRIEFING â†’</a>
+        <button onclick="openBriefing('Archon','$15,000/mo')" class="btn-tier" id="cta-archon" style="cursor:pointer;font-family:inherit;">&#x1F4CB; REQUEST BRIEFING &rarr;</button>
       </div>
       <!-- Sovereign (featured) -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -670,7 +670,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="2-minute guaranteed incident response backed by $10M liability coverage.">2-min SLA Â· $10M coverage</li>
         </ul>
         <div class="jobs-badge">ğŸŒ Fortune 500 &amp; governments</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+%28%2425%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sovereign+plan+at+%2425%2C000%2Fmo." class="btn-tier btn-tier-gold" id="cta-sovereign">ğŸ“‹ REQUEST BRIEFING â†’</a>
+        <button onclick="openBriefing('Sovereign','$25,000/mo')" class="btn-tier btn-tier-gold" id="cta-sovereign" style="cursor:pointer;font-family:inherit;">&#x1F4CB; REQUEST BRIEFING &rarr;</button>
       </div>
     </div>
 
@@ -681,8 +681,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="tier-price" style="font-size:28px;margin:8px 0">Contact Us</div>
         <p class="tier-desc" style="margin-bottom:20px">Military, intelligence agencies, and ultra-critical infrastructure. Unlimited agents. Custom architecture. On-premise available. Classified-grade encryption. 24/7 direct hotline.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a href="tel:" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">ğŸ“ CONTACT OPS â†’</a>
-          <a href="mailto:derek@franciscoholdings.com" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">âœ‰ï¸ derek@franciscoholdings.com</a>
+          <a href="https://t.me/OmniguardSec_bot" target="_blank" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">&#x2708;&#xFE0F; @OmniguardSec_bot</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Custom+Enterprise+Inquiry&body=I+need+a+custom+OmniaGuard+deployment.+Please+contact+me." class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">&#x2709;&#xFE0F; contact@omniaguard.com</a>
         </div>
       </div>
     </div>
@@ -1748,7 +1748,184 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 
 })();
 </script>
-Â<!-- ===== CRYPTO PAYMENTS ===== -->Â<section id="crypto" style="padding:72px 0;background:#0d1120;">Â  <div style="max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">Â    <div style="text-align:center;margin-bottom:48px;">Â      <div style="display:inline-block;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Sovereign Payments</div>Â      <h2 style="font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px;">Pay with <span style="color:#ffd700;">Crypto</span></h2>Â      <p style="color:#8892a4;font-size:16px;margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto;">No bank. No card. No identity. Pay privately with Bitcoin or Monero â€” the only payment method that matches our constitutional mission.</p>Â    </div>Â    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;margin:0 auto;">Â      <!-- Bitcoin -->Â      <div style="background:#131829;border:1px solid rgba(247,147,26,0.3);border-radius:16px;padding:32px;text-align:center;">Â        <div style="font-size:40px;margin-bottom:12px;">â‚¿</div>Â        <div style="font-size:18px;font-weight:800;color:#f7931a;margin-bottom:8px;">Bitcoin</div>Â        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">BTC â€” confirmed in ~10 minutes</div>Â        <div style="background:#0a0e1a;border:1px solid rgba(247,147,26,0.2);border-radius:8px;padding:12px;margin-bottom:16px;">Â          <div style="font-family:'Courier New',monospace;font-size:11px;color:#f7931a;word-break:break-all;user-select:all;" id="btc-address">OWNER_REPLACE: ADD_YOUR_BTC_ADDRESS_HERE</div>Â        </div>Â        <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">Scan QR or copy address above</div>Â        <div style="width:120px;height:120px;background:#1e2538;border:1px solid rgba(247,147,26,0.2);border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;color:#8892a4;font-size:11px;">QR coming soon</div>Â        <button onclick="navigator.clipboard.writeText(document.getElementById('btc-address').textContent)" style="margin-top:16px;background:transparent;border:1px solid rgba(247,147,26,0.4);color:#f7931a;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">Copy Address</button>Â      </div>Â      <!-- Monero -->Â      <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:16px;padding:32px;text-align:center;">Â        <div style="font-size:40px;margin-bottom:12px;">É±</div>Â        <div style="font-size:18px;font-weight:800;color:#ff6600;margin-bottom:8px;">Monero</div>Â        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">XMR â€” private by default, untraceable</div>Â        <div style="background:#0a0e1a;border:1px solid rgba(255,102,0,0.2);border-radius:8px;padding:12px;margin-bottom:16px;">Â          <div style="font-family:'Courier New',monospace;font-size:11px;color:#ff6600;word-break:break-all;user-select:all;" id="xmr-address">OWNER_REPLACE: ADD_YOUR_XMR_ADDRESS_HERE</div>Â        </div>Â        <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">Scan QR or copy address above</div>Â        <div style="width:120px;height:120px;background:#1e2538;border:1px solid rgba(255,102,0,0.2);border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;color:#8892a4;font-size:11px;">QR coming soon</div>Â        <button onclick="navigator.clipboard.writeText(document.getElementById('xmr-address').textContent)" style="margin-top:16px;background:transparent;border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">Copy Address</button>Â      </div>Â    </div>Â    <div style="text-align:center;margin-top:32px;">Â      <p style="color:#8892a4;font-size:13px;">After payment, message <a href="https://t.me/OmniguardSec_bot" target="_blank" style="color:#00d4ff;text-decoration:none;">@OmniguardSec_bot</a> with your transaction ID and tier to activate your account within 24 hours.</p>Â      <p style="color:#5a6478;font-size:12px;margin-top:8px;">Monero recommended for maximum privacy. Bitcoin transactions are pseudonymous, not anonymous.</p>Â    </div>Â  </div>Â</section>Â
-Â<!-- ===== FLOATING SUPPORT WIDGET ===== -->Â<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">Â  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">Â    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>Â    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Monâ€“Sat</div>Â    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">Â      <span style="font-size:20px;">âœˆï¸</span>Â      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot â€” fastest</div></div>Â    </a>Â    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">Â      <span style="font-size:20px;">ğŸ“§</span>Â      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>Â    </a>Â  </div>Â  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Â    ğŸ’¬Â  </button>Â</div>Â
+
+<!-- ===== SOVEREIGN PAYMENTS ===== -->
+<section id="crypto" style="padding:72px 0;background:#0d1120;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="display:inline-block;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Sovereign Payments</div>
+      <h2 style="font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px;">Pay with <span style="color:#ffd700;">Crypto</span></h2>
+      <p style="color:#8892a4;font-size:16px;margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto;">No bank. No card. No identity. Pay privately with Bitcoin or Monero â€” the only payment method that matches our constitutional mission.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;margin:0 auto;">
+
+      <!-- Bitcoin -->
+      <div style="background:#131829;border:1px solid rgba(247,147,26,0.3);border-radius:16px;padding:32px;text-align:center;">
+        <div style="font-size:40px;margin-bottom:12px;">&#x20BF;</div>
+        <div style="font-size:18px;font-weight:800;color:#f7931a;margin-bottom:8px;">Bitcoin (BTC)</div>
+        <div style="font-size:12px;color:#8892a4;margin-bottom:24px;">Confirmed in ~10 minutes</div>
+        <div style="background:#0a0e1a;border:1px solid rgba(247,147,26,0.2);border-radius:10px;padding:20px;margin-bottom:20px;">
+          <div style="font-size:28px;margin-bottom:12px;">&#x20BF;</div>
+          <div style="color:#f7931a;font-weight:700;font-size:14px;margin-bottom:8px;">BTC Address</div>
+          <div style="color:#8892a4;font-size:13px;line-height:1.5;">Contact us to receive your payment address.<br>We send it privately over encrypted channel.</div>
+        </div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+BTC+Payment+Request&body=Please+send+me+the+Bitcoin+payment+address+for+OmniaGuard.+My+tier:+" style="display:inline-block;background:rgba(247,147,26,0.12);border:1px solid rgba(247,147,26,0.5);color:#f7931a;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;">Request BTC Address &rarr;</a>
+      </div>
+
+      <!-- Monero -->
+      <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:16px;padding:32px;text-align:center;">
+        <div style="font-size:40px;margin-bottom:12px;">&#x0271;</div>
+        <div style="font-size:18px;font-weight:800;color:#ff6600;margin-bottom:8px;">Monero (XMR)</div>
+        <div style="font-size:12px;color:#8892a4;margin-bottom:24px;">Private by default &mdash; untraceable</div>
+        <div style="background:#0a0e1a;border:1px solid rgba(255,102,0,0.2);border-radius:10px;padding:20px;margin-bottom:20px;">
+          <div style="font-size:28px;margin-bottom:12px;">&#x0271;</div>
+          <div style="color:#ff6600;font-weight:700;font-size:14px;margin-bottom:8px;">XMR Address</div>
+          <div style="color:#8892a4;font-size:13px;line-height:1.5;">Contact us to receive your payment address.<br>Monero recommended for maximum privacy.</div>
+        </div>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+XMR+Payment+Request&body=Please+send+me+the+Monero+payment+address+for+OmniaGuard.+My+tier:+" style="display:inline-block;background:rgba(255,102,0,0.12);border:1px solid rgba(255,102,0,0.5);color:#ff6600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;">Request XMR Address &rarr;</a>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <p style="color:#8892a4;font-size:14px;">After payment, message <a href="https://t.me/OmniguardSec_bot" target="_blank" style="color:#00d4ff;text-decoration:none;font-weight:600;">@OmniguardSec_bot</a> on Telegram with your transaction hash and selected tier. Account activated within 24 hours.</p>
+      <p style="color:#5a6478;font-size:12px;margin-top:8px;">Monero recommended for maximum privacy. Bitcoin transactions are pseudonymous, not anonymous.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FLOATING SUPPORT WIDGET ===== -->
+<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">
+  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>
+    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon&ndash;Sat</div>
+    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">
+      <span style="font-size:20px;">&#x2708;&#xFE0F;</span>
+      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram (Fastest)</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot</div></div>
+    </a>
+    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">
+      <span style="font-size:20px;">&#x1F4E7;</span>
+      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>
+    </a>
+  </div>
+  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    &#x1F4AC;
+  </button>
+</div>
+
+<!-- ===== BRIEFING REQUEST MODAL ===== -->
+<div id="briefing-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;overflow-y:auto;padding:24px 16px;">
+  <div style="max-width:560px;margin:40px auto;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px;position:relative;">
+    <button onclick="document.getElementById('briefing-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:transparent;border:none;color:#8892a4;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Strategic Briefing Request</div>
+    <h2 id="briefing-tier-title" style="font-size:24px;font-weight:800;margin:0 0 4px;">OmniaGuard</h2>
+    <div id="briefing-tier-price" style="color:#ffd700;font-weight:700;font-size:16px;margin-bottom:24px;"></div>
+    <p style="color:#8892a4;font-size:14px;margin-bottom:28px;line-height:1.6;">Complete the form below. Our team will contact you within <strong style="color:#fff;">1 business hour</strong> with a secure briefing packet and Stripe payment link.</p>
+    <form id="briefing-form" onsubmit="submitBriefing(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Full Name *</label>
+          <input id="bf-name" required type="text" placeholder="Jane Smith" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Company *</label>
+          <input id="bf-company" required type="text" placeholder="Acme Corp" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Work Email *</label>
+          <input id="bf-email" required type="email" placeholder="you@company.com" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Phone</label>
+          <input id="bf-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">AI Agents to Protect *</label>
+          <select id="bf-agents" required style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;-webkit-appearance:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            <option value="">Select range</option>
+            <option>1&ndash;10 agents</option>
+            <option>11&ndash;50 agents</option>
+            <option>51&ndash;150 agents</option>
+            <option>151&ndash;250 agents</option>
+            <option>250+ agents</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Industry</label>
+          <select id="bf-industry" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;-webkit-appearance:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            <option value="">Select</option>
+            <option>Financial Services</option>
+            <option>Healthcare</option>
+            <option>Government / Defence</option>
+            <option>Legal</option>
+            <option>Critical Infrastructure</option>
+            <option>Technology</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Use Case / What are you protecting? *</label>
+        <textarea id="bf-usecase" required rows="3" placeholder="Describe your AI environment and what you need protected..." style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;resize:vertical;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'"></textarea>
+      </div>
+      <button type="submit" style="width:100%;background:linear-gradient(135deg,#00d4ff,#0099cc);border:none;color:#000;font-weight:800;font-size:15px;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:0.5px;">&#x1F512; SUBMIT BRIEFING REQUEST &rarr;</button>
+      <p style="color:#5a6478;font-size:11px;text-align:center;margin-top:12px;">Your inquiry opens a secure email to contact@omniaguard.com. Response within 1 business hour.</p>
+    </form>
+    <div id="briefing-success" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:48px;margin-bottom:16px;">&#x2705;</div>
+      <h3 style="color:#00d4ff;font-size:20px;font-weight:800;margin-bottom:8px;">Briefing Request Sent</h3>
+      <p style="color:#8892a4;font-size:14px;line-height:1.6;">Your email client should have opened with your request pre-filled. If it did not open automatically, email us directly at <a href="mailto:contact@omniaguard.com" style="color:#00d4ff;">contact@omniaguard.com</a>.<br><br>Our team responds within <strong style="color:#fff;">1 business hour</strong>.</p>
+      <a href="https://t.me/OmniguardSec_bot" target="_blank" style="display:inline-block;margin-top:20px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;">&#x2708;&#xFE0F; Or message @OmniguardSec_bot now</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBriefing(tier, price) {
+  document.getElementById('briefing-tier-title').textContent = 'OmniaGuard ' + tier;
+  document.getElementById('briefing-tier-price').textContent = price;
+  document.getElementById('briefing-form').style.display = 'block';
+  document.getElementById('briefing-success').style.display = 'none';
+  document.getElementById('briefing-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function submitBriefing(e) {
+  e.preventDefault();
+  var name    = document.getElementById('bf-name').value;
+  var company = document.getElementById('bf-company').value;
+  var email   = document.getElementById('bf-email').value;
+  var phone   = document.getElementById('bf-phone').value || 'Not provided';
+  var agents  = document.getElementById('bf-agents').value;
+  var industry= document.getElementById('bf-industry').value || 'Not specified';
+  var usecase = document.getElementById('bf-usecase').value;
+  var tier    = document.getElementById('briefing-tier-title').textContent;
+  var price   = document.getElementById('briefing-tier-price').textContent;
+  var subject = encodeURIComponent('OmniaGuard Briefing Request â€” ' + tier + ' (' + price + ')');
+  var body = encodeURIComponent(
+    'BRIEFING REQUEST\n' +
+    '================\n' +
+    'Tier:     ' + tier + ' (' + price + ')\n' +
+    'Name:     ' + name + '\n' +
+    'Company:  ' + company + '\n' +
+    'Email:    ' + email + '\n' +
+    'Phone:    ' + phone + '\n' +
+    'Agents:   ' + agents + '\n' +
+    'Industry: ' + industry + '\n' +
+    '\nUse Case:\n' + usecase + '\n' +
+    '\n---\nSent from omniaguard.com briefing form'
+  );
+  window.location.href = 'mailto:contact@omniaguard.com?subject=' + subject + '&body=' + body;
+  document.getElementById('briefing-form').style.display = 'none';
+  document.getElementById('briefing-success').style.display = 'block';
+}
+document.getElementById('briefing-modal').addEventListener('click', function(e) {
+  if (e.target === this) { this.style.display='none'; document.body.style.overflow=''; }
+});
+</script>
+
 </body>
 </html>
