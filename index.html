@@ -581,7 +581,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Cloud-hosted dashboard with threat map, logs, and live device status.">OmniaGuard dashboard</li>
         </ul>
         <div class="jobs-badge">🏠 Individuals &amp; families</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+%28%24499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sentinel+plan+at+%24499%2Fmo." class="btn-tier" id="cta-sentinel">🛡️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('sentinel','$499',false);return false;" class="btn-tier" id="cta-sentinel">🛡️ DEPLOY SHIELD →</a>
       </div>
       <!-- Guardian -->
       <div class="pricing-card fade-in" data-tilt>
@@ -598,7 +598,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractually guaranteed — breach triggers immediate remediation at no cost.">Zero-breach guarantee</li>
         </ul>
         <div class="jobs-badge">🚀 Small businesses &amp; startups</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+%28%242%2C499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Guardian+plan+at+%242%2C499%2Fmo." class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('guardian','$2,499',false);return false;" class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
       </div>
       <!-- Warden -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -616,7 +616,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractual guarantee backed by $2M liability coverage per incident.">$2M breach liability coverage</li>
         </ul>
         <div class="jobs-badge">📈 Growing companies</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+%28%245%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Warden+plan+at+%245%2C000%2Fmo." class="btn-tier btn-tier-gold" id="cta-warden">⚔️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('warden','$5,000',false);return false;" class="btn-tier btn-tier-gold" id="cta-warden">⚔️ DEPLOY SHIELD →</a>
       </div>
     </div>
 
@@ -637,7 +637,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractual guarantee backed by $5M liability coverage per incident.">$5M breach liability coverage</li>
         </ul>
         <div class="jobs-badge">🏢 Large enterprises</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+%28%2410%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Protector+plan+at+%2410%2C000%2Fmo." class="btn-tier" id="cta-protector">⚔️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('protector','$10,000',false);return false;" class="btn-tier" id="cta-protector">⚔️ DEPLOY SHIELD →</a>
       </div>
       <!-- Archon -->
       <div class="pricing-card fade-in" data-tilt>
@@ -1638,21 +1638,21 @@ var billingLabelMonthly = document.getElementById('billing-label-monthly');
 var billingLabelAnnual = document.getElementById('billing-label-annual');
 
 var monthlyData = {
-  sentinel:  { price: '$499',    suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+%28%24499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sentinel+plan+at+%24499%2Fmo.' },
-  guardian:  { price: '$2,499',  suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+%28%242%2C499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Guardian+plan+at+%242%2C499%2Fmo.' },
-  warden:    { price: '$5,000',  suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+%28%245%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Warden+plan+at+%245%2C000%2Fmo.' },
-  protector: { price: '$10,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+%28%2410%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Protector+plan+at+%2410%2C000%2Fmo.' },
-  archon:    { price: '$15,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+%28%2415%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Archon+plan+at+%2415%2C000%2Fmo.' },
-  sovereign: { price: '$25,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+%28%2425%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sovereign+plan+at+%2425%2C000%2Fmo.' }
+  sentinel:  { price: '$499',    suffix: '/mo' },
+  guardian:  { price: '$2,499',  suffix: '/mo' },
+  warden:    { price: '$5,000',  suffix: '/mo' },
+  protector: { price: '$10,000', suffix: '/mo' },
+  archon:    { price: '$15,000', suffix: '/mo' },
+  sovereign: { price: '$25,000', suffix: '/mo' }
 };
 
 var annualData = {
-  sentinel:  { price: '$4,990',   suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+Annual+%28%244%2C990%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Sentinel+plan.' },
-  guardian:  { price: '$24,990',  suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+Annual+%28%2424%2C990%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Guardian+plan.' },
-  warden:    { price: '$50,000',  suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+Annual+%28%2450%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Warden+plan.' },
-  protector: { price: '$100,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+Annual+%28%24100%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Protector+plan.' },
-  archon:    { price: '$150,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+Annual+%28%24150%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Archon+plan.' },
-  sovereign: { price: '$250,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+Annual+%28%24250%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Sovereign+plan.' }
+  sentinel:  { price: '$4,990',   suffix: '/yr' },
+  guardian:  { price: '$24,990',  suffix: '/yr' },
+  warden:    { price: '$50,000',  suffix: '/yr' },
+  protector: { price: '$100,000', suffix: '/yr' },
+  archon:    { price: '$150,000', suffix: '/yr' },
+  sovereign: { price: '$250,000', suffix: '/yr' }
 };
 
 var calcTierAnnualPrices = [
@@ -1679,8 +1679,14 @@ function applyBilling(isAnnual){
     if(saveEl){
       saveEl.style.display = isAnnual ? 'inline-block' : 'none';
     }
-    if(ctaEl){
-      ctaEl.href = dataset[key].link;
+    /* Wire onclick for Stripe routing on the 4 direct-pay tiers */
+    if(ctaEl && ['sentinel','guardian','warden','protector'].indexOf(key) !== -1){
+      var price = dataset[key].price;
+      var annual = isAnnual;
+      (function(k, p, a){
+        ctaEl.href = '#';
+        ctaEl.onclick = function(e){ e.preventDefault(); deployShield(k, p, a); };
+      })(key, price, annual);
     }
   });
 
@@ -1750,6 +1756,138 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 
 })();
 </script>
+
+<script>
+/* ── STRIPE PAYMENT LINKS ── */
+/* DEREK: Paste your buy.stripe.com/xxx URLs below after creating in Stripe dashboard */
+/* Dashboard → Payment Links → Create → Monthly recurring → CAD currency */
+var STRIPE_PAYMENT_LINKS = {
+  sentinel_monthly:  '',  /* $499/mo  CAD — paste: buy.stripe.com/xxx */
+  guardian_monthly:  '',  /* $2,499/mo CAD — paste: buy.stripe.com/xxx */
+  warden_monthly:    '',  /* $5,000/mo CAD — paste: buy.stripe.com/xxx */
+  protector_monthly: '',  /* $10,000/mo CAD — paste: buy.stripe.com/xxx */
+  sentinel_annual:   '',  /* $4,990/yr  CAD — paste: buy.stripe.com/xxx */
+  guardian_annual:   '',  /* $24,990/yr CAD — paste: buy.stripe.com/xxx */
+  warden_annual:     '',  /* $50,000/yr CAD — paste: buy.stripe.com/xxx */
+  protector_annual:  ''   /* $100,000/yr CAD — paste: buy.stripe.com/xxx */
+};
+
+/* Routes to Stripe Payment Link if configured, otherwise shows payment options modal */
+function deployShield(tier, price, isAnnual) {
+  var billingPeriod = isAnnual ? 'annual' : 'monthly';
+  var linkKey = tier + '_' + billingPeriod;
+  var stripeUrl = STRIPE_PAYMENT_LINKS[linkKey];
+
+  if (stripeUrl && stripeUrl.indexOf('buy.stripe.com') !== -1) {
+    window.location.href = stripeUrl;
+    return;
+  }
+
+  var modal = document.getElementById('payment-options-modal');
+  var tierEl = document.getElementById('po-tier-name');
+  var priceEl = document.getElementById('po-price');
+  var interacMsgEl = document.getElementById('po-interac-msg');
+
+  if (tierEl) tierEl.textContent = tier.charAt(0).toUpperCase() + tier.slice(1);
+  if (priceEl) priceEl.textContent = price + (isAnnual ? '/yr' : '/mo');
+
+  var tierCapital = tier.charAt(0).toUpperCase() + tier.slice(1);
+  if (interacMsgEl) interacMsgEl.value = 'OmniaGuard ' + tierCapital + ' — ' + price + (isAnnual ? '/yr' : '/mo') + ' CAD';
+
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closePaymentModal() {
+  var modal = document.getElementById('payment-options-modal');
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+function copyInteracMsg() {
+  var el = document.getElementById('po-interac-msg');
+  if (!el) return;
+  el.select();
+  document.execCommand('copy');
+  var btn = document.getElementById('po-copy-btn');
+  if (btn) {
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy Message'; }, 2000);
+  }
+}
+
+/* Close modal when clicking overlay */
+document.getElementById('payment-options-modal').addEventListener('click', function(e){
+  if (e.target === this) closePaymentModal();
+});
+</script>
+
+<!-- ===== PAYMENT OPTIONS MODAL ===== -->
+<div id="payment-options-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:99999;align-items:center;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="max-width:580px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:40px 36px;position:relative;box-shadow:0 0 60px rgba(0,212,255,0.1);">
+    <button onclick="closePaymentModal()" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;">&#x2715;</button>
+
+    <!-- Header -->
+    <div style="color:#00d4ff;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">Payment Options</div>
+    <h2 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;">OmniaGuard <span id="po-tier-name">Sentinel</span></h2>
+    <div style="color:#ffd700;font-weight:700;font-size:16px;margin-bottom:28px;" id="po-price">$499/mo</div>
+
+    <!-- Option 1: Stripe (coming soon if no link) -->
+    <div style="background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:14px;padding:22px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="font-size:24px;">💳</div>
+        <div>
+          <div style="font-weight:700;color:#fff;font-size:15px;">Credit / Debit Card</div>
+          <div style="font-size:12px;color:#8892a4;">Powered by Stripe — instant activation</div>
+        </div>
+        <div style="margin-left:auto;background:rgba(255,193,7,0.12);border:1px solid rgba(255,193,7,0.4);color:#ffc107;font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;">Coming Soon</div>
+      </div>
+      <p style="font-size:13px;color:#8892a4;line-height:1.6;margin:0;">Stripe payment links activate within 24 hours. <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Payment+Link+Request" style="color:#00d4ff;text-decoration:none;font-weight:600;">Contact us</a> to be notified the moment Stripe goes live for your tier.</p>
+    </div>
+
+    <!-- Option 2: Interac e-Transfer -->
+    <div style="background:#131829;border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:22px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="font-size:24px;">🏦</div>
+        <div>
+          <div style="font-weight:700;color:#fff;font-size:15px;">Interac e-Transfer</div>
+          <div style="font-size:12px;color:#00d4ff;font-weight:600;">Available Now — Activate Today</div>
+        </div>
+        <div style="margin-left:auto;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.4);color:#00c853;font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;">Active</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:11px;color:#8892a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Send to:</div>
+        <div style="background:#0a0e1a;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:12px 16px;font-size:15px;font-weight:700;color:#00d4ff;font-family:monospace;">contact@omniaguard.com</div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;color:#8892a4;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Message / Note (copy &amp; paste):</div>
+        <div style="display:flex;gap:8px;align-items:stretch;">
+          <textarea id="po-interac-msg" readonly style="flex:1;background:#0a0e1a;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:12px 14px;color:#fff;font-size:13px;font-family:monospace;resize:none;height:42px;line-height:1.4;outline:none;">OmniaGuard Sentinel — $499/mo CAD</textarea>
+          <button id="po-copy-btn" onclick="copyInteracMsg()" style="background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:8px;padding:0 16px;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap;font-family:inherit;">Copy Message</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#8892a4;line-height:1.6;">After sending, message <a href="https://t.me/OmniguardSec_bot" target="_blank" style="color:#00d4ff;font-weight:600;">@OmniguardSec_bot</a> on Telegram with your name, tier, and transfer reference number. <strong style="color:#fff;">Account activated within 4 hours.</strong></div>
+    </div>
+
+    <!-- Option 3: Crypto -->
+    <div style="background:#131829;border:1px solid rgba(255,215,0,0.2);border-radius:14px;padding:22px;margin-bottom:24px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="font-size:24px;">₿</div>
+        <div>
+          <div style="font-weight:700;color:#fff;font-size:15px;">Bitcoin / Monero</div>
+          <div style="font-size:12px;color:#8892a4;">Private — no bank required</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#8892a4;line-height:1.6;margin:0;">Request a crypto payment address: <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Crypto+Payment+Request" style="color:#ffd700;font-weight:600;text-decoration:none;">contact@omniaguard.com</a> or via <a href="https://t.me/OmniguardSec_bot" target="_blank" style="color:#ffd700;font-weight:600;text-decoration:none;">@OmniguardSec_bot</a>. Address delivered over encrypted channel within 1 hour.</p>
+    </div>
+
+    <!-- Contact fallback -->
+    <div style="text-align:center;padding-top:8px;border-top:1px solid rgba(0,212,255,0.1);">
+      <p style="font-size:13px;color:#8892a4;">Questions? <a href="mailto:contact@omniaguard.com" style="color:#00d4ff;font-weight:600;">contact@omniaguard.com</a> — response within 1 hour Mon–Sat.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ===== SOVEREIGN PAYMENTS ===== -->
 <section id="crypto" style="padding:72px 0;background:#0d1120;">
