@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Confirmed — OmniaGuard</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#080c14;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:24px;padding:56px 48px;max-width:560px;width:100%;text-align:center}
+  .icon{font-size:64px;margin-bottom:24px}
+  h1{font-size:28px;font-weight:800;margin-bottom:12px;color:#00d4ff}
+  p{color:#8892a4;font-size:16px;line-height:1.7;margin-bottom:20px}
+  .steps{background:#131829;border-radius:12px;padding:24px;text-align:left;margin:28px 0}
+  .step{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
+  .step:last-child{margin-bottom:0}
+  .step-num{background:#00d4ff;color:#000;font-weight:800;font-size:13px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .step-text{color:#fff;font-size:14px;line-height:1.5}
+  .step-text span{color:#8892a4;font-size:13px;display:block;margin-top:2px}
+  .btn{display:inline-block;background:linear-gradient(135deg,#00d4ff,#0099cc);color:#000;font-weight:800;font-size:14px;padding:12px 28px;border-radius:10px;text-decoration:none;margin:8px}
+  .btn-ghost{background:transparent;border:1px solid rgba(0,212,255,0.3);color:#00d4ff}
+  .nav{margin-bottom:32px}
+  .nav a{color:#00d4ff;text-decoration:none;font-weight:700;font-size:16px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="nav"><a href="/">&#x2190; OmniaGuard</a></div>
+  <div class="icon">&#x1F512;</div>
+  <h1>Your Shield Is Deploying</h1>
+  <p>Payment confirmed. Welcome to OmniaGuard. Your AI infrastructure is now protected by the only platform with a <strong style="color:#fff">Zero Prompt Injection Guarantee</strong>.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Check your email for SDK access credentials
+        <span>Sent to the address on your Stripe receipt within 15 minutes</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Message @OmniguardSec_bot on Telegram
+        <span>Reference your Stripe receipt number for priority onboarding</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Deploy your first protected agent
+        <span>Full onboarding guide included in your welcome email</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://t.me/OmniguardSec_bot" target="_blank" class="btn">&#x2708;&#xFE0F; Message @OmniguardSec_bot Now</a>
+  <a href="/" class="btn btn-ghost">Return to OmniaGuard</a>
+
+  <p style="margin-top:24px;font-size:13px;color:#5a6478;">Questions? Email <a href="mailto:contact@omniaguard.com" style="color:#00d4ff;">contact@omniaguard.com</a> — we respond within 1 hour.</p>
+</div>
+</body>
+</html>
