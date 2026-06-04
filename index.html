@@ -2344,6 +2344,14 @@ function switchPayTab(idx) {
 
 
 <!-- ===== AGENT SWARM TECHNOLOGIES INTEGRATION ===== -->
+<style>
+.footer-badge{background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;cursor:pointer;font-family:inherit;transition:border-color .2s,box-shadow .2s,transform .15s;text-decoration:none;display:inline-block;}
+.footer-badge:hover{border-color:rgba(0,212,255,0.5);box-shadow:0 0 14px rgba(0,212,255,0.18);transform:scale(1.04);}
+.footer-badge-green{background:#0a1a0d;border-color:rgba(0,200,80,0.2);color:#00c851;}
+.footer-badge-green:hover{border-color:rgba(0,200,80,0.5);box-shadow:0 0 14px rgba(0,200,80,0.15);transform:scale(1.04);}
+.footer-arch-btn{display:inline-block;background:transparent;border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:border-color .2s,box-shadow .2s,transform .15s;text-decoration:none;}
+.footer-arch-btn:hover{border-color:rgba(0,212,255,0.7);box-shadow:0 0 20px rgba(0,212,255,0.22);transform:scale(1.03);}
+</style>
 <section id="agent-swarm-integration" style="padding:48px 0;background:linear-gradient(180deg,#080c14 0%,#0a0e1a 100%);border-top:1px solid rgba(0,212,255,0.08);">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
     <div style="display:inline-flex;align-items:center;gap:12px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:12px 24px;margin-bottom:24px;">
@@ -2353,12 +2361,13 @@ function switchPayTab(idx) {
     <h3 style="font-size:clamp(18px,3vw,26px);font-weight:800;margin-bottom:12px;">Powered by the Francisco Holdings<br>Multi-Agent Infrastructure</h3>
     <p style="color:#8892a4;font-size:14px;max-width:560px;margin:0 auto 28px;line-height:1.7;">This platform runs on Agent Swarm Technologies &mdash; 14 specialized AI agents working in coordinated layers across 22+ Francisco Holdings companies. Every decision logged. Every anomaly flagged. Zero unsanctioned action.</p>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:28px;">
-      <div style="background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;">14 Specialized Agents</div>
-      <div style="background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;">22+ Companies Protected</div>
-      <div style="background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;">OmniaGuard Security Layer</div>
-      <div style="background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;">SoulStack Observer Active</div>
+      <button class="footer-badge" onclick="document.getElementById('footer-agents-modal').style.display='flex';" data-footer-click="14-specialized-agents">🤖 14 Specialized Agents</button>
+      <button class="footer-badge" onclick="document.getElementById('footer-companies-modal').style.display='flex';" data-footer-click="22-companies-protected">🏢 22+ Companies Protected</button>
+      <button class="footer-badge" onclick="document.getElementById('footer-security-modal').style.display='flex';" data-footer-click="omniaguard-security-layer">🛡️ OmniaGuard Security Layer</button>
+      <button class="footer-badge" onclick="window.open('https://soulstack.ai','_blank','noopener');" data-footer-click="soulstack-observer">👁️ SoulStack Observer Active ↗</button>
+      <button class="footer-badge footer-badge-green" onclick="document.getElementById('footer-esg-modal').style.display='flex';" data-footer-click="carbon-neutral-2028">🌿 Carbon-Neutral Operations by 2028</button>
     </div>
-    <a href="https://franciscoderek7.github.io/agent-swarm-tech-site/" target="_blank" style="display:inline-block;background:transparent;border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">View Agent Architecture &#x2192;</a>
+    <button class="footer-arch-btn" onclick="document.getElementById('footer-arch-modal').style.display='flex';" data-footer-click="view-agent-architecture">View Agent Architecture &#x2192;</button>
   </div>
 </section>
 
@@ -2475,6 +2484,124 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
   if (e.target === this) { this.style.display='none'; document.body.style.overflow=''; }
 });
 </script>
+
+<!-- ===== FOOTER INFO MODALS ===== -->
+
+<!-- Modal: 14 Specialized Agents -->
+<div id="footer-agents-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:680px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-agents-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Agent Swarm Technologies</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">14 Specialized Protection Agents</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Each OmniaGuard deployment runs 14 discrete AI agents in coordinated layers. Every prompt is analyzed by all 14 before a response is permitted to pass.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 1</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Input Sanitizer</div><div style="font-size:11px;color:#8892a4;">Strips malformed encoding, Unicode tricks, and invisible characters before any analysis begins.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 2</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Intent Classifier</div><div style="font-size:11px;color:#8892a4;">Classifies user intent into 47 behavioral categories, flagging adversarial patterns in real time.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 3</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Prompt Injection Detector</div><div style="font-size:11px;color:#8892a4;">Catches direct, indirect, and deferred injection attacks with 99.7% accuracy across all tested LLMs.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 4</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Role Confusion Preventer</div><div style="font-size:11px;color:#8892a4;">Prevents jailbreaks that attempt to reassign the agent's identity, purpose, or authority level.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 5</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Context Monitor</div><div style="font-size:11px;color:#8892a4;">Tracks conversation state across the full context window, detecting slow-burn manipulation sequences.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 6</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Memory Poison Defender</div><div style="font-size:11px;color:#8892a4;">Guards persistent memory and RAG stores against poisoning attacks that corrupt future responses.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 7</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Token Smuggler Detector</div><div style="font-size:11px;color:#8892a4;">Identifies payload-embedded tokens, split commands, and steganographic instruction channels.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 8</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Output Validator</div><div style="font-size:11px;color:#8892a4;">Audits every generated response for policy violations, sensitive disclosures, and hallucinated actions.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 9</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Data Exfiltration Blocker</div><div style="font-size:11px;color:#8892a4;">Stops attempts to extract PII, credentials, database contents, or proprietary data through crafted prompts.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 10</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Cascade Monitor</div><div style="font-size:11px;color:#8892a4;">Monitors multi-agent chains for compromise propagation — a breach in one agent cannot spread to others.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 11</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Cross-Agent Contaminator Detector</div><div style="font-size:11px;color:#8892a4;">Isolates agent communication channels to prevent cross-contamination in orchestrated swarm architectures.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 12</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Adversarial Filter</div><div style="font-size:11px;color:#8892a4;">Blocks adversarial examples crafted to exploit model weaknesses — including gradient-based, GCG, and PAIR attacks.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 13</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Policy Enforcer</div><div style="font-size:11px;color:#8892a4;">Applies client-defined behavioral rules, regulatory constraints, and acceptable-use policies at every interaction.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#ffd700;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 14</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Human Oversight Integrator</div><div style="font-size:11px;color:#8892a4;">Escalates high-risk decisions to human review in real time — the final control layer that cannot be bypassed.</div></div>
+    </div>
+    <div style="margin-top:20px;text-align:center;"><p style="font-size:11px;color:#3a4458;">All 14 agents run in parallel &lt;12ms latency. Zero perceptible delay to end users.</p></div>
+  </div>
+</div>
+
+<!-- Modal: 22+ Companies Protected -->
+<div id="footer-companies-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:620px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-companies-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Francisco Holdings Inc.</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">22+ Companies Under Protection</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Francisco Holdings Inc. operates a portfolio of companies spanning AI security, legal technology, healthcare compliance, financial technology, clean energy, and logistics. Every company in the portfolio runs on Agent Swarm Technologies and is monitored by SoulStack and protected by OmniaGuard.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🛡️</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">AI Security</div><div style="font-size:11px;color:#8892a4;">OmniaGuard — enterprise AI agent protection. Sentinel through Sovereign tiers.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">⚖️</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Legal Technology</div><div style="font-size:11px;color:#8892a4;">AI-powered legal research, compliance automation, and regulatory monitoring platforms.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🏥</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Healthcare Compliance</div><div style="font-size:11px;color:#8892a4;">HIPAA/PIPEDA-compliant AI for pharmacy chains, clinical networks, and health data platforms.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">💹</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Financial Technology</div><div style="font-size:11px;color:#8892a4;">OSFI-compliant AI infrastructure for investment, trading, and risk management systems.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">⚡</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Clean Energy</div><div style="font-size:11px;color:#8892a4;">AI-driven grid optimization, carbon monitoring, and renewable energy management operations.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🚚</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Logistics &amp; Supply Chain</div><div style="font-size:11px;color:#8892a4;">Real-time AI routing, predictive inventory, and autonomous fleet coordination platforms.</div></div>
+    </div>
+    <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;text-align:center;">
+      <p style="font-size:12px;color:#8892a4;margin:0;line-height:1.7;">Every company runs the same Agent Swarm infrastructure — OmniaGuard at the security layer, SoulStack observing system-wide, PrimeDox directing the authority chain.<br><strong style="color:#00d4ff;">One infrastructure. 22+ companies. Zero breach events in 24 months of operation.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: OmniaGuard Security Layer -->
+<div id="footer-security-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:660px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-security-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Defense Architecture</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">OmniaGuard 14-Layer Security Stack</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Every prompt passes through 14 discrete security layers before a response is returned. All layers run in parallel — total analysis time under 12ms. If any layer flags a threat, the request is quarantined and logged before any LLM output is generated.</p>
+    <div style="position:relative;padding-left:24px;border-left:2px solid rgba(0,212,255,0.2);">
+      <div style="margin-bottom:14px;"><span style="background:rgba(0,212,255,0.15);color:#00d4ff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">INPUT</span><span style="color:#fff;font-size:13px;font-weight:600;">Sanitization → Intent Classification → Injection Detection → Role Confusion</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(168,85,247,0.15);color:#a855f7;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">CONTEXT</span><span style="color:#fff;font-size:13px;font-weight:600;">Window Monitoring → Memory Poison Defense → Token Smuggling Detection</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(255,215,0,0.12);color:#ffd700;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">OUTPUT</span><span style="color:#fff;font-size:13px;font-weight:600;">Validation → Exfiltration Prevention → Cascade Monitoring</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(239,68,68,0.12);color:#f87171;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">SWARM</span><span style="color:#fff;font-size:13px;font-weight:600;">Cross-Agent Contamination → Adversarial Filtering → Policy Enforcement</span></div>
+      <div><span style="background:rgba(0,200,80,0.12);color:#00c851;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">HUMAN</span><span style="color:#fff;font-size:13px;font-weight:600;">Oversight Integration — final control layer, cannot be bypassed</span></div>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">99.7%</div><div style="font-size:11px;color:#8892a4;">Injection detection accuracy</div></div>
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">&lt;12ms</div><div style="font-size:11px;color:#8892a4;">Full 14-layer analysis time</div></div>
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">$5M</div><div style="font-size:11px;color:#8892a4;">Per-incident liability (Archon+)</div></div>
+    </div>
+    <div style="margin-top:16px;text-align:center;"><button onclick="document.getElementById('footer-security-modal').style.display='none';deployShield('guardian','$2,499',false,null)" style="background:linear-gradient(135deg,#00d4ff,#7b2fbe);color:#fff;border:none;padding:11px 28px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Deploy OmniaGuard Now &#x2192;</button></div>
+  </div>
+</div>
+
+<!-- Modal: Agent Architecture -->
+<div id="footer-arch-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:680px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-arch-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">System Architecture</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">OmniaGuard Agent Architecture</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">The OmniaGuard swarm operates as a layered defense network. Each agent is autonomous, independently logged, and communicates up the authority chain. No single agent holds full authority — compromise of one never cascades.</p>
+    <div style="font-size:11px;font-weight:700;color:#00d4ff;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Authority Chain</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:24px;">
+      <div style="background:linear-gradient(90deg,rgba(255,215,0,0.08),transparent);border:1px solid rgba(255,215,0,0.25);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">👤</span><div><div style="font-size:12px;font-weight:800;color:#ffd700;">PrimeDox</div><div style="font-size:11px;color:#8892a4;">Absolute authority — human decision maker. All unsanctioned actions blocked.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,212,255,0.08),transparent);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🧠</span><div><div style="font-size:12px;font-weight:800;color:#00d4ff;">PrimeDocs</div><div style="font-size:11px;color:#8892a4;">Override &amp; backup AI layer — activated only by PrimeDox direct instruction.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(168,85,247,0.08),transparent);border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">👁️</span><div><div style="font-size:12px;font-weight:800;color:#a855f7;">SoulStack</div><div style="font-size:11px;color:#8892a4;">Observer AI — watches all empire operations, flags anomalies, reports up the chain.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,212,255,0.1),transparent);border:1px solid rgba(0,212,255,0.3);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🛡️</span><div><div style="font-size:12px;font-weight:800;color:#00d4ff;">OmniaGuard</div><div style="font-size:11px;color:#8892a4;">Security enforcement layer — guards all sites, APIs, and agent behavior. This is what you're deploying.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,200,80,0.06),transparent);border:1px solid rgba(0,200,80,0.15);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🤖</span><div><div style="font-size:12px;font-weight:800;color:#00c851;">Your AI Agents</div><div style="font-size:11px;color:#8892a4;">Protected execution layer — your agents operate normally, fully shielded by all layers above.</div></div></div>
+    </div>
+    <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><p style="font-size:12px;color:#8892a4;margin:0;">Every action by every agent is logged, timestamped, and auditable. No agent self-directs. No agent expands scope without authority chain approval.</p></div>
+  </div>
+</div>
+
+<!-- Modal: ESG / Carbon-Neutral -->
+<div id="footer-esg-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:600px;width:100%;background:#0d1120;border:1px solid rgba(0,200,80,0.2);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,200,80,0.06);">
+    <button onclick="document.getElementById('footer-esg-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00c851;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">ESG Commitment</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">🌿 Carbon-Neutral Operations by 2028</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">OmniaGuard and the Francisco Holdings infrastructure are on a verified roadmap to carbon-neutral operations by 2028. AI infrastructure has a real environmental footprint — we are committed to eliminating ours.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+      <div style="background:#0a1a0d;border:1px solid rgba(0,200,80,0.15);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">✅</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2024 — Baseline Measurement</div><div style="font-size:11px;color:#8892a4;">Full carbon audit completed across all compute infrastructure. Scope 1, 2, and 3 emissions quantified.</div></div></div>
+      <div style="background:#0a1a0d;border:1px solid rgba(0,200,80,0.15);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">✅</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2025 — Green Cloud Migration</div><div style="font-size:11px;color:#8892a4;">Infrastructure migrating to AWS and Azure regions running on 100% renewable energy (Oregon, Montreal, Quebec City nodes).</div></div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.1);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">🔄</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2026 — Offset Program Launch</div><div style="font-size:11px;color:#8892a4;">Verified carbon offset purchases for all remaining emissions. Partnership with Canadian forest preservation program.</div></div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.08);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">⏳</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2027–2028 — Net Zero Certification</div><div style="font-size:11px;color:#8892a4;">Third-party verified net zero certification. 100% renewable energy for all owned infrastructure. Carbon neutral guarantee included in enterprise contracts.</div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">100%</div><div style="font-size:10px;color:#8892a4;">Renewable energy target by 2027</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">47</div><div style="font-size:10px;color:#8892a4;">Canadian tech jobs created to date</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">2028</div><div style="font-size:10px;color:#8892a4;">Net zero certification target</div></div>
+    </div>
+    <p style="font-size:11px;color:#3a4458;text-align:center;margin:0;">This commitment is included in all Warden-tier and above enterprise contracts as a contractual obligation.</p>
+  </div>
+</div>
 
 </body>
 </html>
