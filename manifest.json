@@ -1,27 +1,37 @@
 {
-  "name": "OmniaGuard Security",
+  "name": "OmniaGuard — AI Security",
   "short_name": "OmniaGuard",
-  "description": "Zero Prompt Injection Security for Enterprise AI Agents",
-  "start_url": "/mobile.html",
+  "description": "Enterprise AI agent protection. 14-layer security stack. Zero prompt injection guarantee.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0a0a",
-  "theme_color": "#0a0a0a",
-  "orientation": "portrait",
-  "scope": "/",
+  "background_color": "#080c14",
+  "theme_color": "#00d4ff",
+  "orientation": "portrait-primary",
+  "categories": ["security", "business", "productivity"],
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%2300d4ff' width='192' height='192' rx='40'/%3E%3Ctext x='96' y='125' font-size='80' text-anchor='middle' fill='white'%3E%F0%9F%9B%A1%3C/text%3E%3C/svg%3E",
+      "src": "app/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%2300d4ff' width='512' height='512' rx='100'/%3E%3Ctext x='256' y='340' font-size='220' text-anchor='middle' fill='white'%3E%F0%9F%9B%A1%3C/text%3E%3C/svg%3E",
+      "src": "app/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["security", "business", "productivity"],
-  "prefer_related_applications": false
+  "shortcuts": [
+    {
+      "name": "View Pricing",
+      "url": "/#pricing",
+      "description": "See all OmniaGuard protection tiers"
+    },
+    {
+      "name": "Contact Us",
+      "url": "/contact.html",
+      "description": "Get in touch with our security team"
+    }
+  ]
 }
