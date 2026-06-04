@@ -703,34 +703,92 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <p>Everything you need to know before deploying OmniaGuard.</p>
     </div>
     <div class="faq-list fade-in">
+
+      <div class="faq-item">
+        <button class="faq-q">What exactly is OmniaGuard and what does it do?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is an AI security layer that wraps your existing AI agents and LLM infrastructure with 14 real-time protection layers. It intercepts every input and output — detecting prompt injection, jailbreaks, data exfiltration attempts, and agent cascade attacks before they cause harm. You keep your existing AI stack; OmniaGuard runs silently around it. No retraining, no model changes, no downtime.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">What exactly is the Zero Prompt Injection Guarantee?<span class="faq-icon">+</span></button>
         <div class="faq-body"><div class="faq-body-inner">OmniaGuard contractually guarantees that no prompt injection attack will succeed against your protected AI agents. If a breach occurs at the prompt layer, OmniaGuard provides immediate remediation at zero cost and issues a full incident report within 24 hours. This guarantee is backed by our $5M per-incident liability coverage on Archon tier and above.</div></div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Who is OmniaGuard built for?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is built for any organization deploying AI agents in production — particularly in regulated industries where a breach carries legal, financial, or reputational consequences. Our clients include healthcare providers, legal tech companies, financial services firms, SaaS platforms with AI copilots, and enterprise IT departments running internal AI tooling. If your AI agents touch sensitive data or make autonomous decisions, you need OmniaGuard.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">How long does deployment take?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Standard deployments are live within 48 hours via our Agent Swarm SDK — a lightweight wrapper that integrates with OpenAI, Anthropic, Google, and any custom LLM infrastructure. No retraining, no downtime, no disruption to existing workflows. Our engineers handle the full integration for Warden tier and above.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">Standard deployments are live within 48 hours via our Agent Swarm SDK — a lightweight wrapper that integrates with OpenAI, Anthropic, Google, and any custom LLM infrastructure. No retraining, no downtime, no disruption to existing workflows. Our engineers handle the full integration for Warden tier and above. For Sentinel and Guardian tiers, self-serve documentation gets most teams live in under 2 hours.</div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Is OmniaGuard HIPAA and PIPEDA compliant for healthcare deployments?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Yes. OmniaGuard is purpose-built for regulated industries including healthcare. We are PIPEDA and Bill C-27 compliant, with HIPAA-aligned controls available on Warden tier and above. Our healthcare clients include pharmacy chains, hospital networks, and clinical AI providers. All patient data handling complies with applicable Canadian and US privacy law.</div></div>
-      </div>
+
       <div class="faq-item">
         <button class="faq-q">What AI platforms does OmniaGuard protect?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is platform-agnostic. We protect AI agents built on OpenAI (GPT-4/o), Anthropic (Claude), Google (Gemini), Meta (Llama), Mistral, and any custom fine-tuned models. Our SDK wraps any LLM endpoint and applies all 14 security layers transparently — your agents continue operating normally while fully protected.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is platform-agnostic. We protect AI agents built on OpenAI (GPT-4/o), Anthropic (Claude), Google (Gemini), Meta (Llama), Mistral, Cohere, and any custom fine-tuned models. Our SDK wraps any LLM endpoint and applies all 14 security layers transparently — your agents continue operating normally while fully protected. We also support multi-agent orchestration frameworks including LangChain, AutoGen, and CrewAI.</div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Can we pay via Interac e-Transfer?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Yes. Interac e-Transfer payments are accepted for all tiers. Send to contact@omniaguard.com and include your company name and selected tier in the message. For enterprise tiers (Archon and above), we also accept wire transfer, corporate cheque, and NET-30 invoicing. Contact us to arrange payment.</div></div>
-      </div>
+
       <div class="faq-item">
         <button class="faq-q">What is the 14-layer security stack?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">OmniaGuard's 14-layer stack includes: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, and (14) Real-time human oversight integration.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard's 14-layer stack includes: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, and (14) Real-time human oversight integration. Each layer runs in under 12ms — no perceptible latency to end users.</div></div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is there a free trial or proof of concept available?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. Sentinel tier includes a 14-day trial with full functionality on up to 2 AI agents. No credit card required to start. Enterprise clients (Warden and above) can request a 30-day paid pilot with a dedicated integration engineer — contact us via Telegram or email to arrange. We also offer a live demo environment where you can watch OmniaGuard block real attack sequences in real time.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is OmniaGuard HIPAA and PIPEDA compliant for healthcare deployments?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. OmniaGuard is purpose-built for regulated industries including healthcare. We are PIPEDA and Bill C-27 compliant, with HIPAA-aligned controls available on Warden tier and above. Our healthcare clients include pharmacy chains, hospital networks, and clinical AI providers. All patient data handling complies with applicable Canadian and US privacy law. A signed Business Associate Agreement (BAA) is available for US healthcare clients on Warden tier and above.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What other compliance frameworks does OmniaGuard support?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard supports compliance postures for: PIPEDA / Bill C-27 (Canada), HIPAA (US healthcare), SOC 2 Type II (security controls), ISO 27001 (information security), GDPR (EU data protection), OSFI guidelines (Canadian financial institutions), and NIST AI RMF (AI risk management). Compliance reporting and audit trail exports are available on Guardian tier and above.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Does OmniaGuard slow down my AI agents?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">No. OmniaGuard's 14-layer analysis runs in under 12ms per request — imperceptible to end users in any real-world AI interaction. Our infrastructure is deployed in AWS and Azure regions across Canada and the US, with edge nodes that co-locate with major LLM provider endpoints. For high-throughput workloads processing 100K+ requests per day, we provision dedicated capacity to guarantee zero latency impact.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I cancel at any time?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. All tiers are month-to-month by default with no long-term contract required. You can cancel at any time and your protection remains active through the end of your billing period. Annual plans offer a 20% discount and include a 90-day cancellation window for a prorated refund. For enterprise contracts (Archon and Sovereign), custom terms are negotiated individually — contact us to discuss.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What payment methods do you accept?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">We accept: Credit / debit card (Visa, Mastercard, Amex) via Stripe, Interac e-Transfer (send to contact@omniaguard.com with tier and company in the memo), Bitcoin (BTC), Monero (XMR) for maximum privacy, wire transfer (enterprise tiers), corporate cheque, and NET-30 invoicing for qualified organizations. All prices are in CAD. Contact us to arrange any payment method — we will get you sorted within 1 business hour.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can we pay via Interac e-Transfer?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. Interac e-Transfer is our most popular payment method for Canadian clients. Send your payment to <strong style="color:#00d4ff;">contact@omniaguard.com</strong> and include your company name and selected tier in the message field. Your account is activated within 2 business hours of confirmed receipt. For Archon and Sovereign tiers, we can also arrange wire transfer, corporate cheque, or NET-30 invoicing.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What happens after I pay? How does onboarding work?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">After payment confirms, you receive a welcome email within 1 hour with your API credentials, SDK documentation, and a link to book your onboarding call. Sentinel and Guardian clients get self-serve onboarding with live chat support. Warden and above get a dedicated integration engineer who joins your team's Slack or Telegram and handles the full deployment. You are live and protected within 48 hours — guaranteed.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How does OmniaGuard handle false positives?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard uses a tiered confidence scoring system rather than binary block/allow decisions. Low-confidence detections are flagged and logged without interrupting the user — your team reviews these in the dashboard. High-confidence threats are blocked in real time. You control the sensitivity threshold per agent and per layer. Most clients see fewer than 0.1% false positive rates after the first 7-day calibration window. Warden and above include a dedicated analyst who tunes detection rules for your specific AI use case.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What support do I get after deployment?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">All tiers include email support with a 4-hour response time (Mon–Sat). Guardian and above add real-time Telegram support via <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="color:#00d4ff;font-weight:600;">@OmniguardSec_bot</a>. Warden and above include a named account engineer and weekly security briefings. Archon and Sovereign include 24/7 incident response coverage with a 15-minute SLA for critical breaches. We do not outsource support — you speak directly with OmniaGuard engineers.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">Is the legal framework content on this site considered legal advice?<span class="faq-icon">+</span></button>
         <div class="faq-body"><div class="faq-body-inner">No. Any references to legal frameworks, compliance standards, or regulatory requirements on this site are for educational and informational purposes only. This is not legal representation or legal advice. OmniaGuard recommends engaging qualified legal counsel for advice specific to your organization's regulatory obligations.</div></div>
       </div>
+
     </div>
   </div>
 </section>
@@ -2046,12 +2104,10 @@ function initCryptoSection() {
   s.textContent = '.omnia-spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:omniaSpin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}@keyframes omniaSpin{to{transform:rotate(360deg)}}';
   document.head.appendChild(s);
 
-  /* Modal overlay click close */
-  document.addEventListener('DOMContentLoaded', function(){
-    var m = document.getElementById('payment-options-modal');
-    if (m) m.addEventListener('click', function(e){ if (e.target === this) closePaymentModal(); });
-    initCryptoSection();
-  });
+  /* Modal overlay click close — script runs after DOM, no DOMContentLoaded needed */
+  var m = document.getElementById('payment-options-modal');
+  if (m) m.addEventListener('click', function(e){ if (e.target === this) closePaymentModal(); });
+  initCryptoSection();
 })();
 </script>
 
@@ -2171,7 +2227,7 @@ function initCryptoSection() {
           <div id="btc-qr-placeholder" style="width:80px;height:80px;background:rgba(247,147,26,0.08);border:1px dashed rgba(247,147,26,0.3);border-radius:8px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;">₿</div>
           <div id="btc-address-display" style="font-size:10px;color:#8892a4;word-break:break-all;margin-bottom:10px;font-family:monospace;line-height:1.4;">Send request via Telegram or email</div>
           <button id="btc-copy-btn" style="display:none;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.4);color:#f7931a;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
-          <a id="btc-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard+BTC+Address+Request" style="display:none;font-size:12px;color:#f7931a;text-decoration:none;font-weight:600;">Request Address →</a>
+          <a id="btc-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20BTC%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Bitcoin+(BTC).%0A%0APlease+send+me+the+current+BTC+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+am+ready+to+pay+immediately." style="display:none;font-size:12px;color:#f7931a;text-decoration:none;font-weight:600;">Request Address →</a>
         </div>
         <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:12px;padding:20px;text-align:center;">
           <div style="font-size:28px;margin-bottom:8px;">ɱ</div>
@@ -2179,7 +2235,7 @@ function initCryptoSection() {
           <div id="xmr-qr-placeholder" style="width:80px;height:80px;background:rgba(255,102,0,0.08);border:1px dashed rgba(255,102,0,0.3);border-radius:8px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;">ɱ</div>
           <div id="xmr-address-display" style="font-size:10px;color:#8892a4;word-break:break-all;margin-bottom:10px;font-family:monospace;line-height:1.4;">Send request via Telegram or email</div>
           <button id="xmr-copy-btn" style="display:none;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
-          <a id="xmr-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard+XMR+Address+Request" style="display:none;font-size:12px;color:#ff6600;text-decoration:none;font-weight:600;">Request Address →</a>
+          <a id="xmr-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20XMR%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Monero+(XMR).%0A%0APlease+send+me+the+current+XMR+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0APrefer+Monero+for+maximum+privacy." style="display:none;font-size:12px;color:#ff6600;text-decoration:none;font-weight:600;">Request Address →</a>
         </div>
       </div>
       <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.7;">
@@ -2239,7 +2295,7 @@ function switchPayTab(idx) {
         </div>
 
         <button id="main-btc-copy" onclick="copyToClipboard(window.CRYPTO_ADDRESSES&&window.CRYPTO_ADDRESSES.btc,'main-btc-copy')" style="display:none;background:rgba(247,147,26,0.12);border:1px solid rgba(247,147,26,0.5);color:#f7931a;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
-        <a id="main-btc-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard+BTC+Address+Request" style="display:inline-block;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.4);color:#f7931a;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request BTC Address →</a>
+        <a id="main-btc-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20BTC%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Bitcoin+(BTC).%0A%0APlease+send+me+the+current+BTC+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+am+ready+to+pay+immediately.+Please+confirm+current+rate+in+CAD.%0A%0ATelegram%3A+%40OmniguardSec_bot" style="display:inline-block;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.4);color:#f7931a;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request BTC Address →</a>
       </div>
 
       <!-- Monero -->
@@ -2255,7 +2311,7 @@ function switchPayTab(idx) {
         </div>
 
         <button id="main-xmr-copy" onclick="copyToClipboard(window.CRYPTO_ADDRESSES&&window.CRYPTO_ADDRESSES.xmr,'main-xmr-copy')" style="display:none;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
-        <a id="main-xmr-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard+XMR+Address+Request" style="display:inline-block;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request XMR Address →</a>
+        <a id="main-xmr-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20XMR%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Monero+(XMR).%0A%0APlease+send+me+the+current+XMR+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+prefer+Monero+for+maximum+privacy.+Please+confirm+current+rate+in+CAD.%0A%0ATelegram%3A+%40OmniguardSec_bot" style="display:inline-block;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request XMR Address →</a>
       </div>
 
     </div>
