@@ -88,6 +88,14 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .btn-secondary:hover{background:var(--cyan-glow);border-color:var(--cyan);transform:translateY(-2px);}
 .green-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,200,83,0.07);border:1px solid rgba(0,200,83,0.22);color:var(--green);font-size:13px;font-weight:600;padding:10px 22px;border-radius:8px;margin:28px auto 0;max-width:fit-content;}
 
+/* HERO SPLIT */
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.hero-visual{position:relative;}
+.hero-visual img{width:100%;border-radius:16px;border:1px solid var(--border);box-shadow:0 0 80px rgba(0,212,255,0.18);animation:heroImgPulse 6s ease-in-out infinite;}
+@keyframes heroImgPulse{0%,100%{box-shadow:0 0 80px rgba(0,212,255,0.18);}50%{box-shadow:0 0 120px rgba(0,212,255,0.32);}}
+.hero-visual-badge{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:rgba(10,10,20,0.92);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:1px;white-space:nowrap;backdrop-filter:blur(8px);}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-visual{display:none;}}
+
 /* RIPPLE */
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none;}
 @keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
@@ -374,12 +382,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 <nav id="main-nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="OmniaGuard Home">
-      <div class="nav-logo-icon">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L5 9V20C5 28.3 11.6 36.1 20 38C28.4 36.1 35 28.3 35 20V9L20 3Z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1.5"/>
-          <path d="M14 20L18 24L26 16" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <img src="omniaguard-logo.png" alt="OmniaGuard Shield" class="nav-logo-icon" style="border-radius:6px;">
       OmniaGuard
     </a>
     <ul class="nav-links" id="nav-links">
@@ -410,21 +413,29 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
   <div class="container">
-    <div class="threat-pill">
-      <span class="threat-pill-dot"></span>
-      <span id="hero-threat-count">1,247,832</span>&nbsp;threats blocked today — and counting
-    </div>
-    <h1>The Only AI Security Platform<br>With a <span>Zero Prompt Injection</span><br>Guarantee</h1>
-    <p class="hero-sub">
-      <strong>14-layer Agent Swarm defense.</strong> Real-time threat intelligence across every deployment.
-      <strong>0% breach rate</strong> — contractually guaranteed.
-    </p>
-    <div class="hero-ctas">
-      <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
-      <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="threat-pill">
+          <span class="threat-pill-dot"></span>
+          <span id="hero-threat-count">1,247,832</span>&nbsp;threats blocked today — and counting
+        </div>
+        <h1>The Only AI Security Platform<br>With a <span>Zero Prompt Injection</span><br>Guarantee</h1>
+        <p class="hero-sub">
+          <strong>14-layer Agent Swarm defense.</strong> Real-time threat intelligence across every deployment.
+          <strong>0% breach rate</strong> — contractually guaranteed.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
+          <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
+        </div>
+        <div class="green-badge">
+          🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="hero-ai.webp" alt="OmniaGuard AI Security Control Center — real-time threat monitoring across all AI agent deployments" loading="eager">
+        <div class="hero-visual-badge">⚡ LIVE THREAT MONITORING</div>
+      </div>
     </div>
   </div>
 </section>
