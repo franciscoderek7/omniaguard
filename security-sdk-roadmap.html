@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security SDK Roadmap — OmniaGuard AI Security</title>
+<meta name="description" content="OmniaGuard Security SDK Roadmap: 3-phase path from PWA foundation to kernel-level native threat interception. SR&ED funding, partner candidates, and investor contact.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0a0a14;color:#fff;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+a{color:#00d4ff;text-decoration:none;}
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.18);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px;}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.4px;}
+.nav-logo img{width:34px;height:34px;border-radius:6px;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links a{color:#8a8a9a;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:#fff;text-decoration:none;}
+.nav-links .nav-cta{background:#00d4ff;color:#000;font-weight:700;padding:8px 16px;border-radius:6px;font-size:13px;}
+.nav-links .nav-cta:hover{background:#33ddff;text-decoration:none;}
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:48px 24px 80px;position:relative;z-index:1;}
+/* HERO */
+.roadmap-hero{text-align:center;margin-bottom:64px;}
+.roadmap-hero .tag{display:inline-block;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.roadmap-hero h1{font-size:clamp(26px,4.5vw,50px);font-weight:900;letter-spacing:-1px;margin-bottom:14px;line-height:1.1;}
+.roadmap-hero h1 span{color:#00d4ff;}
+.roadmap-hero p{font-size:16px;color:#8a8a9a;max-width:640px;margin:0 auto;}
+/* PHASES */
+.phases{display:flex;flex-direction:column;gap:36px;margin-bottom:64px;}
+.phase-card{background:#0d0d1a;border-radius:18px;overflow:hidden;border:1px solid rgba(0,212,255,0.12);}
+.phase-card.complete{border-color:rgba(0,200,83,0.3);}
+.phase-card.planning-6m{border-color:rgba(0,212,255,0.3);}
+.phase-card.planning-3y{border-color:rgba(255,215,0,0.25);}
+.phase-header{padding:24px 28px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.phase-num{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;flex-shrink:0;}
+.phase-num.p1{background:rgba(0,200,83,0.12);color:#00c853;}
+.phase-num.p2{background:rgba(0,212,255,0.1);color:#00d4ff;}
+.phase-num.p3{background:rgba(255,215,0,0.08);color:#ffd700;}
+.phase-title-group h2{font-size:20px;font-weight:900;margin-bottom:2px;}
+.phase-title-group .phase-meta{font-size:12px;color:#8a8a9a;}
+.phase-status{margin-left:auto;flex-shrink:0;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.5px;}
+.status-pill.live{background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.35);color:#00c853;}
+.status-pill.roadmap{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;}
+.status-pill.future{background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.25);color:#ffd700;}
+.phase-body{padding:24px 28px;}
+.deliverables{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px;}
+.deliverable{background:#0a0a14;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;}
+.deliverable-check{flex-shrink:0;width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px;}
+.deliverable-check.done{background:rgba(0,200,83,0.15);color:#00c853;}
+.deliverable-check.planned{background:rgba(0,212,255,0.1);color:#00d4ff;}
+.deliverable-check.future{background:rgba(255,215,0,0.08);color:#ffd700;}
+.deliverable-text{font-size:13px;color:#c0c0d0;line-height:1.5;}
+.phase-stats{display:flex;flex-wrap:wrap;gap:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05);}
+.phase-stat{background:#0a0a14;border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 16px;text-align:center;flex:1;min-width:100px;}
+.phase-stat .sv{font-size:16px;font-weight:800;}
+.phase-stat .sl{font-size:10px;color:#8a8a9a;margin-top:2px;text-transform:uppercase;letter-spacing:.5px;}
+/* SRED */
+.sred-section{background:#0d0d1a;border:1px solid rgba(0,212,255,0.15);border-radius:18px;padding:36px;margin-bottom:64px;}
+.sred-section h2{font-size:22px;font-weight:900;margin-bottom:6px;}
+.sred-section .sred-sub{font-size:14px;color:#00d4ff;font-weight:600;margin-bottom:20px;}
+.sred-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:20px;}
+.sred-item{background:#0a0a14;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:16px 18px;}
+.sred-item .sred-label{font-size:11px;font-weight:700;color:#8a8a9a;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;}
+.sred-item .sred-val{font-size:18px;font-weight:800;color:#00c853;}
+.sred-item .sred-note{font-size:12px;color:#8a8a9a;margin-top:4px;line-height:1.5;}
+.sred-cta{font-size:13px;color:#8a8a9a;line-height:1.7;}
+.sred-cta a{color:#00d4ff;}
+/* PARTNERS */
+.partners-section{margin-bottom:64px;}
+.partners-section h2{font-size:22px;font-weight:900;margin-bottom:6px;}
+.partners-section p{font-size:14px;color:#8a8a9a;margin-bottom:24px;}
+.partner-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid rgba(0,212,255,0.12);}
+.partner-table th{background:#0d0d1a;padding:12px 16px;font-size:12px;font-weight:700;color:#8a8a9a;letter-spacing:.6px;text-transform:uppercase;text-align:left;border-bottom:1px solid rgba(0,212,255,0.1);}
+.partner-table td{padding:12px 16px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+.partner-table tr:last-child td{border-bottom:none;}
+.partner-table tr:nth-child(even) td{background:rgba(0,212,255,0.015);}
+.partner-name{font-weight:700;color:#fff;}
+.partner-type{display:inline-block;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:4px;padding:2px 8px;font-size:11px;color:#00d4ff;font-weight:600;}
+/* INVESTOR */
+.investor-section{background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(255,215,0,0.03));border:1px solid rgba(255,215,0,0.2);border-radius:18px;padding:40px;text-align:center;margin-bottom:40px;}
+.investor-section h2{font-size:24px;font-weight:900;margin-bottom:12px;}
+.investor-section p{font-size:14px;color:#8a8a9a;margin-bottom:20px;max-width:560px;margin-left:auto;margin-right:auto;}
+.investor-email{display:inline-flex;align-items:center;gap:10px;background:#0d0d1a;border:1px solid rgba(0,212,255,0.35);border-radius:10px;padding:14px 24px;font-size:15px;font-weight:700;color:#00d4ff;transition:all .2s;}
+.investor-email:hover{background:rgba(0,212,255,0.08);text-decoration:none;}
+/* DISCLAIMER */
+.disclaimer{background:rgba(255,215,0,0.03);border:1px solid rgba(255,215,0,0.15);border-radius:10px;padding:14px 18px;margin-bottom:20px;}
+.disclaimer p{font-size:11px;color:#6a6a7a;line-height:1.7;}
+.disclaimer strong{color:#ffd700;}
+/* FOOTER */
+footer{background:#0d0d1a;border-top:1px solid rgba(0,212,255,0.1);padding:24px;text-align:center;font-size:12px;color:#5a5a7a;position:relative;z-index:1;}
+@media(max-width:680px){.phase-header{flex-wrap:wrap;}.phase-status{margin-left:0;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/omniaguard-logo.png" alt="OmniaGuard">
+      OmniaGuard
+    </a>
+    <ul class="nav-links">
+      <li><a href="/threat-dashboard.html">Dashboard</a></li>
+      <li><a href="/primedox-portal.html">PrimeDox</a></li>
+      <li><a href="/install-guide.html">Install</a></li>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/index.html#pricing" class="nav-cta">Get Protected</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="roadmap-hero">
+    <div class="tag">Technical Roadmap &mdash; Confidential</div>
+    <h1>OmniaGuard <span>Security SDK</span> Roadmap</h1>
+    <p>From PWA Foundation to Kernel-Level Protection &mdash; A 3-phase roadmap to enterprise-grade native threat interception across all platforms.</p>
+  </div>
+
+  <!-- PHASES -->
+  <div class="phases">
+
+    <!-- PHASE 1 -->
+    <div class="phase-card complete">
+      <div class="phase-header">
+        <div class="phase-num p1">1</div>
+        <div class="phase-title-group">
+          <h2>PWA Foundation</h2>
+          <div class="phase-meta">June 2026 &mdash; Bootstrapped</div>
+        </div>
+        <div class="phase-status">
+          <span class="status-pill live">&#x2705; COMPLETE &mdash; LIVE</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Service worker &amp; full offline mode</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">PWA install prompt &amp; manifest</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Simulated threat dashboard with live feed</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Privacy score assessment system</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">PrimeDox AI defense portal</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Cross-platform install guide (Android/iOS/Desktop)</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Push notification framework</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check done">&#x2713;</div>
+            <div class="deliverable-text">Background sync infrastructure</div>
+          </div>
+        </div>
+        <div class="phase-stats">
+          <div class="phase-stat"><div class="sv" style="color:#00c853;">$0</div><div class="sl">Development Cost</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00c853;">Bootstrapped</div><div class="sl">Funding Source</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00c853;">Live</div><div class="sl">Status</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00c853;">omniaguard.com</div><div class="sl">Deployment</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-card planning-6m">
+      <div class="phase-header">
+        <div class="phase-num p2">2</div>
+        <div class="phase-title-group">
+          <h2>White-Label SDK Integration</h2>
+          <div class="phase-meta">6-Month Development Timeline &mdash; SR&amp;ED Eligible</div>
+        </div>
+        <div class="phase-status">
+          <span class="status-pill roadmap">&#x1F4CB; ROADMAP &mdash; 6 MONTHS</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p style="font-size:14px;color:#8a8a9a;margin-bottom:18px;line-height:1.7;">Integrate enterprise-grade mobile threat defense SDK (Lookout or Malwarebytes) as the real threat-blocking engine. OmniaGuard becomes the UI layer, threat visualization system, and PrimeDox AI analysis layer on top of a proven security engine.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">Lookout Mobile Security SDK &mdash; real Android/iOS threat detection and blocking</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">OR Malwarebytes SDK &mdash; malware API with real-time scanning</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">OmniaGuard UI wrapper layer over SDK events</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">Real threat visualization &amp; severity scoring</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">PrimeDox AI analysis of real threat events</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">White-label licensing model (per-seat pricing)</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">Native iOS (Swift) and Android (Kotlin) wrapper apps</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check planned">&#x25CB;</div>
+            <div class="deliverable-text">Enterprise dashboard with real threat telemetry</div>
+          </div>
+        </div>
+        <div class="phase-stats">
+          <div class="phase-stat"><div class="sv" style="color:#00d4ff;">$150K&ndash;$250K</div><div class="sl">Estimated Cost (CAD)</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00d4ff;">IRAP / SR&amp;ED</div><div class="sl">Funding Eligible</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00d4ff;">Per-Seat</div><div class="sl">Revenue Model</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#00d4ff;">Real Blocking</div><div class="sl">Key Deliverable</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-card planning-3y">
+      <div class="phase-header">
+        <div class="phase-num p3">3</div>
+        <div class="phase-title-group">
+          <h2>Proprietary Native SDK</h2>
+          <div class="phase-meta">2&ndash;3 Year Development Timeline &mdash; VC / SR&amp;ED Funded</div>
+        </div>
+        <div class="phase-status">
+          <span class="status-pill future">&#x1F4CB; ROADMAP &mdash; 2&ndash;3 YEARS</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <p style="font-size:14px;color:#8a8a9a;margin-bottom:18px;line-height:1.7;">Full proprietary OmniaGuard SDK with kernel-level threat interception, custom heuristic engine, and OmniaGuard Threat Intelligence Network. Cross-platform coverage: Android, iOS, Windows, macOS, Linux. Patent applications filed.</p>
+        <div class="deliverables">
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">Kernel-level threat interception (Android NDK / iOS XPC)</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">Custom heuristic engine &mdash; behavioural analysis</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">ML-based threat scoring (on-device inference)</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">OmniaGuard Threat Intelligence Network (crowdsourced)</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">Cross-platform: Android, iOS, Windows, macOS, Linux</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">Patent: biometric decision authority system</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">Patent: AI governance architecture for multi-agent security</div>
+          </div>
+          <div class="deliverable">
+            <div class="deliverable-check future">&#x25A1;</div>
+            <div class="deliverable-text">OEM licensing for device manufacturers</div>
+          </div>
+        </div>
+        <div class="phase-stats">
+          <div class="phase-stat"><div class="sv" style="color:#ffd700;">$1M&ndash;$2M</div><div class="sl">Estimated Cost (CAD)</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#ffd700;">VC / SR&amp;ED</div><div class="sl">Funding Source</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#ffd700;">2 Patents</div><div class="sl">Applications Filed</div></div>
+          <div class="phase-stat"><div class="sv" style="color:#ffd700;">OEM + SaaS</div><div class="sl">Revenue Models</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SR&ED -->
+  <section class="sred-section">
+    <h2>SR&amp;ED Funding Opportunity</h2>
+    <div class="sred-sub">Scientific Research &amp; Experimental Development &mdash; 35% Federal Tax Credit (Canada)</div>
+    <p style="font-size:13px;color:#8a8a9a;margin-bottom:24px;line-height:1.7;">OmniaGuard's SDK development work qualifies for SR&amp;ED tax credits under the Government of Canada's program for technology innovation. Both Phase 2 and Phase 3 contain significant eligible experimental development activity.</p>
+    <div class="sred-grid">
+      <div class="sred-item">
+        <div class="sred-label">Phase 2 Eligible Amount</div>
+        <div class="sred-val">$52,500&ndash;$87,500</div>
+        <div class="sred-note">35% federal refundable tax credit on $150K&ndash;$250K eligible expenditure</div>
+      </div>
+      <div class="sred-item">
+        <div class="sred-label">Phase 3 Eligible Amount</div>
+        <div class="sred-val">$350K&ndash;$700K</div>
+        <div class="sred-note">35% refundable on $1M&ndash;$2M; may combine with provincial credits for higher effective rate</div>
+      </div>
+      <div class="sred-item">
+        <div class="sred-label">Application Timeline</div>
+        <div class="sred-val">Annual</div>
+        <div class="sred-note">File T661 form with annual corporate tax return. 18-month filing window after fiscal year end.</div>
+      </div>
+      <div class="sred-item">
+        <div class="sred-label">IRAP Eligibility</div>
+        <div class="sred-val">Up to $50K</div>
+        <div class="sred-note">NRC IRAP can fund Phase 2 technical activities. Apply 6&ndash;12 months before project start.</div>
+      </div>
+    </div>
+    <div class="sred-cta">
+      <strong style="color:#fff;">How to apply:</strong> SR&amp;ED claims are filed with the T661 form as part of your corporate tax return.
+      Contact the <a href="https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html" target="_blank" rel="noopener">CRA SR&amp;ED Program</a> or engage a qualified SR&amp;ED consultant to maximize eligible claims.
+    </div>
+  </section>
+
+  <!-- PARTNER TABLE -->
+  <section class="partners-section">
+    <h2>Integration Partner Candidates</h2>
+    <p>Third-party SDK and API partners evaluated for Phase 2 and Phase 3 integration. Cost estimates based on published pricing and industry benchmarks.</p>
+    <div style="overflow-x:auto;">
+      <table class="partner-table">
+        <thead>
+          <tr>
+            <th>Partner</th>
+            <th>Type</th>
+            <th>Integration Point</th>
+            <th>Est. Cost</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="partner-name">Lookout</span></td>
+            <td><span class="partner-type">SDK</span></td>
+            <td>Mobile threat API &mdash; Android &amp; iOS</td>
+            <td>$50K+/yr</td>
+            <td>Enterprise mobile threat defense, Fortune 500 deployed</td>
+          </tr>
+          <tr>
+            <td><span class="partner-name">Malwarebytes</span></td>
+            <td><span class="partner-type">API</span></td>
+            <td>Malware scanning &amp; remediation</td>
+            <td>$10K+/yr</td>
+            <td>REST API for file and URL scanning, real-time verdicts</td>
+          </tr>
+          <tr>
+            <td><span class="partner-name">Bitdefender</span></td>
+            <td><span class="partner-type">SDK</span></td>
+            <td>Real-time on-device protection</td>
+            <td>$30K+/yr</td>
+            <td>GravityZone SDK; white-label OEM licensing available</td>
+          </tr>
+          <tr>
+            <td><span class="partner-name">VirusTotal</span></td>
+            <td><span class="partner-type">API</span></td>
+            <td>File &amp; URL scanning (70+ AV engines)</td>
+            <td>Free tier / $0</td>
+            <td>Google-owned. Free API for low-volume; premium for production</td>
+          </tr>
+          <tr>
+            <td><span class="partner-name">Zimperium</span></td>
+            <td><span class="partner-type">SDK</span></td>
+            <td>Mobile-specific threat intelligence</td>
+            <td>Custom</td>
+            <td>Specializes in mobile-first; strong iOS on-device ML detection</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- INVESTOR -->
+  <div class="investor-section">
+    <h2>Partner or Invest in OmniaGuard</h2>
+    <p>We are seeking strategic technology partners, white-label licensing partners, and seed-stage investors to accelerate Phase 2 development. OmniaGuard is a Francisco Holdings Inc. technology property.</p>
+    <a href="mailto:invest@omniaguard.com" class="investor-email">
+      &#x1F4E7; invest@omniaguard.com
+    </a>
+    <div style="font-size:12px;color:#5a5a7a;margin-top:14px;">For partnership inquiries, SDK licensing, or investment discussions. All inquiries treated as confidential.</div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p><strong>Disclaimer:</strong> Cost estimates, funding amounts, and partner pricing are estimates based on industry benchmarks and are subject to change. SR&amp;ED eligibility is not guaranteed and depends on specific project activities meeting CRA criteria. Consult a qualified SR&amp;ED specialist. This document does not constitute a securities offering or solicitation.</p>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Francisco Holdings Inc. | OmniaGuard&trade; | Educational security monitoring
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>

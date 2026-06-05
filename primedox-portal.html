@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeDox Defense Portal — OmniaGuard</title>
+<meta name="description" content="PrimeDox AI Constitutional Defense Portal. Charter rights quick reference, 12-appearance sovereignty framework, and emergency document generator.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0a0a14;color:#fff;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+a{color:#00d4ff;text-decoration:none;}
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.18);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px;}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.4px;}
+.nav-logo img{width:34px;height:34px;border-radius:6px;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links a{color:#8a8a9a;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:#fff;text-decoration:none;}
+.nav-links a.active{color:#00d4ff;}
+.nav-links .nav-cta{background:#00d4ff;color:#000;font-weight:700;padding:8px 16px;border-radius:6px;font-size:13px;}
+.nav-links .nav-cta:hover{background:#33ddff;text-decoration:none;}
+/* MAIN */
+main{max-width:1200px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1;}
+.section-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.section-title span{display:inline-block;width:3px;height:20px;background:#ffd700;border-radius:2px;}
+/* HERO */
+.portal-hero{background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(255,215,0,0.04));border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:40px 36px;margin-bottom:36px;text-align:center;}
+.portal-hero h1{font-size:clamp(24px,4vw,42px);font-weight:900;letter-spacing:-.8px;margin-bottom:10px;background:linear-gradient(135deg,#00d4ff,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.portal-hero p{font-size:15px;color:#8a8a9a;max-width:560px;margin:0 auto;}
+.online-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.3);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:#00c853;margin-bottom:18px;}
+.online-dot{width:7px;height:7px;background:#00c853;border-radius:50%;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 #00c853;}50%{box-shadow:0 0 8px #00c853;}}
+/* CHAT */
+.chat-section{margin-bottom:36px;}
+.chat-box{background:#0d0d1a;border:1px solid rgba(0,212,255,0.2);border-radius:14px;overflow:hidden;}
+.chat-header{padding:12px 20px;border-bottom:1px solid rgba(0,212,255,0.1);display:flex;align-items:center;justify-content:space-between;}
+.chat-header-title{font-size:13px;font-weight:700;color:#00d4ff;display:flex;align-items:center;gap:8px;}
+.chat-messages{height:340px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;font-family:'Courier New',Courier,monospace;font-size:13px;}
+.msg{display:flex;flex-direction:column;gap:3px;}
+.msg.system .msg-bubble{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:12px 16px;color:#b0e0ff;max-width:85%;}
+.msg.user .msg-bubble{background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.2);border-radius:8px;padding:10px 14px;color:#ffe88a;max-width:75%;align-self:flex-end;}
+.msg-label{font-size:10px;color:#5a5a7a;letter-spacing:.5px;text-transform:uppercase;}
+.msg.user .msg-label{text-align:right;}
+.chat-input-area{padding:14px 20px;border-top:1px solid rgba(0,212,255,0.1);display:flex;gap:10px;}
+.chat-input{flex:1;background:#0a0a14;border:1px solid rgba(0,212,255,0.25);border-radius:8px;padding:10px 14px;color:#fff;font-size:13px;font-family:'Courier New',Courier,monospace;outline:none;resize:none;}
+.chat-input:focus{border-color:rgba(0,212,255,0.5);}
+.chat-input::placeholder{color:#3a4a5a;}
+.chat-btn{background:#00d4ff;color:#000;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;}
+.chat-btn:hover{background:#33ddff;}
+.chat-clear{background:rgba(255,59,59,0.1);border:1px solid rgba(255,59,59,0.3);color:#ff6b6b;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.chat-clear:hover{background:rgba(255,59,59,0.2);}
+/* TYPEWRITER */
+.typing-cursor::after{content:'|';animation:caret .7s step-end infinite;}
+@keyframes caret{0%,100%{opacity:1;}50%{opacity:0;}}
+/* CHARTER CARDS */
+.charter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:36px;}
+.charter-card{background:#0d0d1a;border:1px solid rgba(255,215,0,0.12);border-radius:12px;padding:20px;cursor:pointer;transition:border-color .2s,transform .2s;}
+.charter-card:hover{border-color:rgba(255,215,0,0.35);transform:translateY(-2px);}
+.charter-section-tag{font-size:11px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.charter-card h3{font-size:15px;font-weight:800;margin-bottom:8px;}
+.charter-card p{font-size:12px;color:#8a8a9a;line-height:1.6;margin-bottom:10px;}
+.charter-expand{display:none;border-top:1px solid rgba(255,215,0,0.1);padding-top:10px;margin-top:4px;}
+.charter-expand.open{display:block;}
+.charter-cases{font-size:11px;color:#5a8a9a;line-height:1.7;}
+.charter-toggle-btn{font-size:11px;color:#ffd700;border:none;background:none;cursor:pointer;padding:0;font-weight:600;}
+/* TIMELINE */
+.timeline{position:relative;margin-bottom:36px;}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#00d4ff,rgba(0,212,255,0.1));border-radius:2px;}
+.timeline-item{position:relative;padding-left:56px;margin-bottom:20px;}
+.timeline-num{position:absolute;left:0;top:0;width:40px;height:40px;background:#0d0d1a;border:2px solid #00d4ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#00d4ff;flex-shrink:0;}
+.timeline-card{background:#0d0d1a;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:16px 18px;}
+.timeline-card h4{font-size:14px;font-weight:800;margin-bottom:4px;}
+.timeline-card .purpose{font-size:12px;color:#00d4ff;margin-bottom:5px;}
+.timeline-card .tactic{font-size:11px;color:#8a8a9a;line-height:1.5;}
+/* DOC GENERATOR */
+.doc-gen-section{margin-bottom:36px;}
+.doc-form{background:#0d0d1a;border:1px solid rgba(0,212,255,0.15);border-radius:14px;padding:28px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{font-size:12px;font-weight:700;color:#8a8a9a;letter-spacing:.4px;text-transform:uppercase;}
+.form-input{background:#0a0a14;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:13px;outline:none;font-family:inherit;transition:border-color .2s;}
+.form-input:focus{border-color:rgba(0,212,255,0.5);}
+.form-input::placeholder{color:#3a4a5a;}
+.charter-checks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.charter-checks label{display:flex;align-items:center;gap:6px;font-size:12px;color:#8a8a9a;cursor:pointer;}
+.charter-checks input{accent-color:#ffd700;}
+.gen-btn{background:linear-gradient(135deg,#ffd700,#ffb300);color:#000;border:none;border-radius:8px;padding:14px 28px;font-size:14px;font-weight:800;cursor:pointer;width:100%;transition:opacity .2s;letter-spacing:.5px;}
+.gen-btn:hover{opacity:.9;}
+.doc-output{display:none;margin-top:20px;}
+.doc-output.visible{display:block;}
+.doc-textarea{width:100%;min-height:240px;background:#0a0a14;border:1px solid rgba(255,215,0,0.2);border-radius:8px;padding:16px;color:#ffe;font-family:'Courier New',Courier,monospace;font-size:12px;line-height:1.7;resize:vertical;outline:none;}
+.doc-actions{display:flex;gap:10px;margin-top:12px;}
+.doc-action-btn{background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.35);color:#00d4ff;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.doc-action-btn:hover{background:rgba(0,212,255,0.2);}
+/* SAVED DEFENSES */
+.saved-section{margin-bottom:36px;}
+.saved-list{display:flex;flex-direction:column;gap:10px;}
+.saved-item{background:#0d0d1a;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.saved-item-info{flex:1;}
+.saved-item-name{font-size:13px;font-weight:700;}
+.saved-item-date{font-size:11px;color:#8a8a9a;}
+.saved-btn{font-size:11px;padding:6px 12px;border-radius:6px;cursor:pointer;background:transparent;border:1px solid;transition:all .2s;}
+.saved-btn.load{border-color:rgba(0,212,255,0.4);color:#00d4ff;}
+.saved-btn.load:hover{background:rgba(0,212,255,0.1);}
+.saved-btn.del{border-color:rgba(255,59,59,0.3);color:#ff6b6b;}
+.saved-btn.del:hover{background:rgba(255,59,59,0.1);}
+.no-saved{font-size:13px;color:#5a5a7a;font-style:italic;padding:10px 0;}
+/* DISCLAIMER */
+.disclaimer{background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:18px 22px;margin-bottom:36px;}
+.disclaimer p{font-size:12px;color:#aaa;line-height:1.7;}
+.disclaimer strong{color:#ffd700;}
+/* FOOTER */
+footer{background:#0d0d1a;border-top:1px solid rgba(0,212,255,0.1);padding:24px;text-align:center;font-size:12px;color:#5a5a7a;position:relative;z-index:1;}
+@media(max-width:640px){.form-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/omniaguard-logo.png" alt="OmniaGuard">
+      OmniaGuard
+    </a>
+    <ul class="nav-links">
+      <li><a href="/threat-dashboard.html">Dashboard</a></li>
+      <li><a href="/primedox-portal.html" class="active">PrimeDox</a></li>
+      <li><a href="/install-guide.html">Install</a></li>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/index.html#pricing" class="nav-cta">Get Protected</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <div class="portal-hero">
+    <div class="online-badge"><span class="online-dot"></span>PrimeDox Online</div>
+    <h1>PrimeDox Defense Portal</h1>
+    <p>Your AI Constitutional Defense System &mdash; Offline Ready. 20+ years of self-represented litigation frameworks at your fingertips.</p>
+  </div>
+
+  <!-- CHAT -->
+  <section class="chat-section">
+    <div class="section-title"><span></span>PrimeDox AI Interface</div>
+    <div class="chat-box">
+      <div class="chat-header">
+        <div class="chat-header-title">
+          <span style="width:8px;height:8px;background:#00c853;border-radius:50%;display:inline-block;"></span>
+          PrimeDox Terminal v1.0 — Offline Ready
+        </div>
+        <button class="chat-clear" onclick="clearChat()">Clear Chat</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <!-- Populated by JS -->
+      </div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="Ask PrimeDox about Charter rights, defense strategy..." onkeydown="chatKeydown(event)"></textarea>
+        <button class="chat-btn" onclick="sendChat()">Ask PrimeDox</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARTER QUICK REFERENCE -->
+  <div class="section-title"><span></span>Charter Rights Quick Reference</div>
+  <div class="charter-grid">
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.7</div>
+      <h3>Life, Liberty &amp; Security</h3>
+      <p>Life, liberty and security of the person. Medical necessity defense foundation. Engages when state action threatens these fundamental interests.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; R v Morgentaler [1988] — security of person<br>
+          &bull; Rodriguez v BC [1993] — life &amp; bodily integrity<br>
+          &bull; Canada v Bedford [2013] — s.7 + Oakes test<br>
+          &bull; Carter v Canada [2015] — medical autonomy
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.8</div>
+      <h3>Unreasonable Search &amp; Seizure</h3>
+      <p>Protection against unreasonable search and seizure. Evidence exclusion under Grant 2009. Requires reasonable expectation of privacy.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; R v Hunter [1984] — reasonable expectation<br>
+          &bull; R v Tessling [2004] — privacy framework<br>
+          &bull; R v Spencer [2014] — digital privacy<br>
+          &bull; R v Fearon [2014] — cell phone search
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.10(b)</div>
+      <h3>Right to Counsel</h3>
+      <p>Right to retain and instruct counsel without delay. Invoke immediately and clearly. State must cease questioning until counsel consulted.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; R v Manninen [1987] — cease questioning<br>
+          &bull; R v Bartle [1994] — duty to inform<br>
+          &bull; R v Sinclair [2010] — scope at trial<br>
+          &bull; R v McCrimmon [2010] — waiver standard
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.12</div>
+      <h3>Cruel &amp; Unusual Treatment</h3>
+      <p>Protection against cruel and unusual treatment or punishment. Disproportionate penalties. Grossly disproportionate sentences challenged here.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; R v Smith [1987] — gross disproportionality test<br>
+          &bull; R v Lyons [1987] — dangerous offender provisions<br>
+          &bull; R v Lloyd [2016] — mandatory minimums struck
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.15</div>
+      <h3>Equal Protection of Law</h3>
+      <p>Equal protection and benefit of the law. Systemic discrimination defense. Analogous grounds analysis for novel protected groups.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; Andrews v Law Society [1989] — equality framework<br>
+          &bull; Egan v Canada [1995] — analogous grounds<br>
+          &bull; Law v Canada [1999] — dignity test<br>
+          &bull; R v Kapp [2008] — revised test
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">Charter s.24(2)</div>
+      <h3>Exclusion of Evidence</h3>
+      <p>Exclusion of evidence obtained in Charter violations. Grant 3-part test: seriousness of breach, impact on accused, society's interest.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Cases &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; R v Grant [2009] — definitive 3-part test<br>
+          &bull; R v Harrison [2009] — balancing approach<br>
+          &bull; R v Morelli [2010] — digital evidence<br>
+          &bull; R v Paterson [2017] — good faith factor
+        </div>
+      </div>
+    </div>
+    <div class="charter-card">
+      <div class="charter-section-tag">BENO-X Framework</div>
+      <h3>Bureaucratic Error Neutralization</h3>
+      <p>Challenge every procedural defect first. Disclosure errors, limitation periods, jurisdictional defects. Administrative errors often nullify proceedings before the merits.</p>
+      <button class="charter-toggle-btn" onclick="toggleCharter(this)">Key Tactics &darr;</button>
+      <div class="charter-expand">
+        <div class="charter-cases">
+          &bull; Challenge validity of charging document<br>
+          &bull; Demand complete Crown disclosure<br>
+          &bull; Identify limitation period defects<br>
+          &bull; Challenge jurisdiction over person or subject matter<br>
+          &bull; Constitutional challenge under s.52
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12-APPEARANCE TIMELINE -->
+  <section>
+    <div class="section-title"><span></span>12-Appearance Sovereignty Framework</div>
+    <p style="font-size:13px;color:#8a8a9a;margin-bottom:24px;">Strategic delay and procedural challenge at each court appearance. Each appearance is an opportunity — not an obligation to proceed.</p>
+    <div class="timeline" id="timeline">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- DOCUMENT GENERATOR -->
+  <section class="doc-gen-section">
+    <div class="section-title"><span></span>Emergency Document Generator</div>
+    <div class="doc-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" class="form-input" id="doc-name" placeholder="Full legal name">
+        </div>
+        <div class="form-group">
+          <label>Case Number</label>
+          <input type="text" class="form-input" id="doc-case" placeholder="e.g. 2024-ON-00123">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Court Name</label>
+          <input type="text" class="form-input" id="doc-court" placeholder="e.g. Ontario Court of Justice">
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" class="form-input" id="doc-date">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>Charter Sections Violated (select all that apply)</label>
+        <div class="charter-checks">
+          <label><input type="checkbox" name="charter" value="s.7"> s.7 — Life &amp; Liberty</label>
+          <label><input type="checkbox" name="charter" value="s.8"> s.8 — Search &amp; Seizure</label>
+          <label><input type="checkbox" name="charter" value="s.9"> s.9 — Arbitrary Detention</label>
+          <label><input type="checkbox" name="charter" value="s.10(a)"> s.10(a) — Reason for Arrest</label>
+          <label><input type="checkbox" name="charter" value="s.10(b)"> s.10(b) — Right to Counsel</label>
+          <label><input type="checkbox" name="charter" value="s.11(b)"> s.11(b) — Trial Within Reasonable Time</label>
+          <label><input type="checkbox" name="charter" value="s.11(d)"> s.11(d) — Presumption of Innocence</label>
+          <label><input type="checkbox" name="charter" value="s.12"> s.12 — Cruel Treatment</label>
+          <label><input type="checkbox" name="charter" value="s.15"> s.15 — Equal Protection</label>
+          <label><input type="checkbox" name="charter" value="s.24(2)"> s.24(2) — Evidence Exclusion</label>
+        </div>
+      </div>
+      <button class="gen-btn" onclick="generateDoc()">Generate Defense Statement</button>
+      <div class="doc-output" id="doc-output">
+        <textarea class="doc-textarea" id="doc-textarea" readonly></textarea>
+        <div class="doc-actions">
+          <button class="doc-action-btn" onclick="copyDoc()">Copy to Clipboard</button>
+          <button class="doc-action-btn" onclick="downloadDoc()">Download .txt</button>
+          <button class="doc-action-btn" onclick="saveDoc()">Save to Vault</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVED DEFENSES -->
+  <section class="saved-section">
+    <div class="section-title"><span></span>Saved Defense Documents</div>
+    <div id="saved-list">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p><strong>Disclaimer:</strong> PrimeDox Portal provides educational frameworks based on 20+ years of self-represented litigation experience. This is NOT legal advice. Consult a licensed lawyer for legal representation. All information is provided for educational purposes only. OmniaGuard does not provide legal services.</p>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Francisco Holdings Inc. | OmniaGuard&trade; | Educational security monitoring
+</footer>
+
+<script src="/app.js" defer></script>
+<script>
+/* ----- CHAT ----- */
+const PRIMEDOX_RESPONSES = [
+  "Charter s.7 protects your life, liberty, and security of the person. Any state action that limits these fundamental interests must comply with principles of fundamental justice. Document every interaction — detail matters at the exclusion hearing.",
+  "Under s.10(b) you have the right to retain and instruct counsel without delay. When arrested, state clearly: 'I wish to speak with a lawyer.' The Crown must cease questioning until that right is fully exercised.",
+  "The Grant 2009 test for s.24(2) uses three criteria: seriousness of the Charter-infringing conduct, impact on the Charter-protected interests of the accused, and society's interest in adjudication on the merits. All three must be weighed.",
+  "Disclosure is a fundamental right under R v Stinchcombe. The Crown must disclose all relevant material — notes, recordings, witness statements — whether inculpatory or exculpatory. Make your disclosure demand in writing at the first appearance.",
+  "Under the BENO-X framework, examine the charging document first. Errors in the information — wrong date, wrong description of offence, missing elements — can void the proceeding entirely without touching the merits.",
+  "s.11(b) of the Charter guarantees trial within a reasonable time. Under R v Jordan [2016], the presumptive ceiling is 18 months for Provincial Court and 30 months for Superior Court. Track every adjournment — Crown-caused delays count.",
+  "An arbitrary detention under s.9 occurs when police lack reasonable and probable grounds. Challenge the basis for the initial stop or detention at a voir dire. If the detention is invalid, all derivative evidence may be excluded.",
+  "s.8 protects against unreasonable search and seizure. A search without prior judicial authorization is presumptively unreasonable — the Crown bears the burden to rebut that presumption. Digital data receives heightened protection.",
+  "Medical necessity as a common law defense requires: (1) imminent risk of harm, (2) no reasonable legal alternative, (3) proportionality between harm avoided and harm caused. Build the evidentiary record carefully.",
+  "The Oakes test under s.1 requires the government to demonstrate a pressing and substantial objective, and means that are proportionate — rationally connected, minimally impairing, and with proportionate effects. Few provisions survive full Oakes analysis.",
+  "Keep a contemporaneous notes. Date, time, location, officer badge numbers, exact words spoken, witnesses present. Courts give significant weight to notes made at the time versus reconstructed memory.",
+  "A successful voir dire to exclude evidence can collapse the Crown's case. Apply for a voir dire early — before trial. The burden is on you to establish the Charter breach; then shifts to Crown on s.24(2).",
+  "Jurisdictional challenges must be raised at the earliest opportunity or they may be waived. Challenge personal jurisdiction (are you the named person?), subject matter jurisdiction, and geographic jurisdiction where applicable.",
+  "An adjournment to prepare a constitutional challenge is almost always granted. Courts routinely allow time for self-represented accused to research and file a Charter application — request it formally and file brief reasons.",
+  "The BENO-X disclosure protocol: request all notes, recordings, laboratory certificates, chain of custody documents, officer training records, and any material in any related file. Gaps in disclosure trigger a stay application."
+];
+
+let chatHistory = [];
+let savedChats = JSON.parse(localStorage.getItem('og_saved_chats') || '[]');
+let responseIndex = 0;
+let isTyping = false;
+
+function initChat() {
+  chatHistory = [];
+  addMessage('system', 'PrimeDox online. Defense systems nominal. How can I assist your case today?');
+  renderChat();
+}
+
+function addMessage(role, text) {
+  chatHistory.push({ role, text, ts: new Date().toLocaleTimeString('en-CA', { hour12: false }) });
+}
+
+function renderChat() {
+  const container = document.getElementById('chat-messages');
+  container.innerHTML = chatHistory.map(m => `
+    <div class="msg ${m.role === 'system' ? 'system' : 'user'}">
+      <div class="msg-label">${m.role === 'system' ? 'PRIMEDOX' : 'YOU'} &bull; ${m.ts}</div>
+      <div class="msg-bubble">${m.text}</div>
+    </div>`).join('');
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendChat() {
+  if (isTyping) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addMessage('user', text);
+  renderChat();
+  isTyping = true;
+
+  // Pick response
+  const response = PRIMEDOX_RESPONSES[responseIndex % PRIMEDOX_RESPONSES.length];
+  responseIndex++;
+
+  // Typewriter effect
+  setTimeout(() => {
+    const msgId = 'msg-' + Date.now();
+    chatHistory.push({ role: 'system', text: '', ts: new Date().toLocaleTimeString('en-CA', { hour12: false }), id: msgId });
+    renderChat();
+    // Find last msg bubble and animate
+    const bubbles = document.querySelectorAll('.msg.system .msg-bubble');
+    const bubble = bubbles[bubbles.length - 1];
+    if (bubble) bubble.classList.add('typing-cursor');
+    let i = 0;
+    const interval = setInterval(() => {
+      chatHistory[chatHistory.length - 1].text = response.slice(0, ++i);
+      const bs = document.querySelectorAll('.msg.system .msg-bubble');
+      const b = bs[bs.length - 1];
+      if (b) b.textContent = chatHistory[chatHistory.length - 1].text;
+      const c = document.getElementById('chat-messages');
+      c.scrollTop = c.scrollHeight;
+      if (i >= response.length) {
+        clearInterval(interval);
+        if (b) b.classList.remove('typing-cursor');
+        isTyping = false;
+        // Auto-save chat if more than 3 exchanges
+        if (chatHistory.length > 6) autoSaveChat();
+      }
+    }, 18);
+  }, 600);
+}
+
+function chatKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+}
+
+function clearChat() {
+  initChat();
+}
+
+function autoSaveChat() {
+  if (chatHistory.length < 4) return;
+  const saved = JSON.parse(localStorage.getItem('og_saved_chats') || '[]');
+  if (saved.length >= 5) saved.pop();
+  saved.unshift({ date: new Date().toLocaleDateString('en-CA'), name: 'Session ' + new Date().toLocaleTimeString('en-CA', { hour12: false }), history: chatHistory.slice() });
+  localStorage.setItem('og_saved_chats', JSON.stringify(saved));
+}
+
+initChat();
+
+/* ----- CHARTER TOGGLE ----- */
+function toggleCharter(btn) {
+  const card = btn.closest('.charter-card');
+  const expand = card.querySelector('.charter-expand');
+  const open = expand.classList.toggle('open');
+  btn.textContent = (btn.textContent.includes('Key') ? (btn.textContent.replace('↓', '').replace('↑', '').trim()) : btn.textContent.trim()) + (open ? ' ↑' : ' ↓');
+}
+
+/* ----- TIMELINE ----- */
+const APPEARANCES = [
+  { name: 'Identity Challenge', purpose: 'Challenge that you are the named accused in the charging document. Request proof of identity nexus.', tactic: 'Force Crown to establish proper identity before any other step can proceed.' },
+  { name: 'Jurisdiction Challenge', purpose: 'Challenge the court\'s jurisdiction over your person and subject matter.', tactic: 'Raise lack of territorial, personal, or subject-matter jurisdiction. Jurisdictional defects are non-waivable.' },
+  { name: 'Disclosure Demand', purpose: 'Formal written demand for complete Crown disclosure under Stinchcombe.', tactic: 'Request all notes, recordings, lab certs, chain of custody, officer training records. Any gap = stay application.' },
+  { name: 'Information Review', purpose: 'Review the charging document for defects — wrong date, incorrect offence description, missing elements.', tactic: 'A fatally defective information can be quashed without going to merits.' },
+  { name: 'Disclosure Compliance', purpose: 'Assess whether Crown disclosure is complete and adequate.', tactic: 'Identify gaps, demand supplementary disclosure, and set record for future stay application under s.24(1).' },
+  { name: 'Charter Application Filing', purpose: 'File formal Charter application identifying all violations and relief sought.', tactic: 's.8, s.9, s.10(b) violations. Request voir dire and evidence exclusion under s.24(2).' },
+  { name: 'Voir Dire — Admissibility', purpose: 'Challenge admissibility of key Crown evidence through Grant 2009 analysis.', tactic: 'Three-part test: Charter breach seriousness, impact on accused, society\'s interest. Successful exclusion can collapse Crown case.' },
+  { name: 's.11(b) Calculation', purpose: 'Calculate total delay and assess Jordan presumptive ceiling breach.', tactic: '18 months (Provincial) / 30 months (Superior). Track every adjournment source — Crown-caused is counted fully.' },
+  { name: 'Expert Evidence Challenge', purpose: 'Challenge qualifications and methodology of Crown expert witnesses.', tactic: 'Mohan criteria: necessity, no exclusionary rule, proper qualification, reliable framework.' },
+  { name: 'Pre-Trial Conference', purpose: 'Use judicial pre-trial to narrow issues, establish procedural fairness record.', tactic: 'Lock in Crown positions on disclosure and admissions. Build record for appeal if outcome unfavourable.' },
+  { name: 'Defence Evidence Preparation', purpose: 'Identify and secure all exculpatory evidence, witnesses, and expert opinions.', tactic: 'Medical records, expert reports, electronic data, alibi witnesses. Subpoena early — records may be destroyed.' },
+  { name: 'Trial or Resolution', purpose: 'Proceed to trial with full Charter record or negotiate informed resolution.', tactic: 'With 11 prior procedural challenges documented, Crown is weakened. Negotiate from strength or argue constitutional exemption at trial.' }
+];
+
+const tl = document.getElementById('timeline');
+tl.innerHTML = APPEARANCES.map((a, i) => `
+  <div class="timeline-item">
+    <div class="timeline-num">${i + 1}</div>
+    <div class="timeline-card">
+      <h4>${a.name}</h4>
+      <div class="purpose">${a.purpose}</div>
+      <div class="tactic"><strong style="color:#ffd700;">Tactical Note:</strong> ${a.tactic}</div>
+    </div>
+  </div>`).join('');
+
+/* ----- DOCUMENT GENERATOR ----- */
+function generateDoc() {
+  const name = document.getElementById('doc-name').value.trim() || '[YOUR NAME]';
+  const caseNum = document.getElementById('doc-case').value.trim() || '[CASE NUMBER]';
+  const court = document.getElementById('doc-court').value.trim() || '[COURT NAME]';
+  const date = document.getElementById('doc-date').value || new Date().toISOString().split('T')[0];
+  const checks = [...document.querySelectorAll('input[name="charter"]:checked')].map(c => c.value);
+
+  const charterList = checks.length ? checks.join(', ') : '[NO SECTIONS SELECTED]';
+  const doc = `NOTICE OF CONSTITUTIONAL QUESTION
+===========================================
+Pursuant to the Canadian Charter of Rights and Freedoms
+
+DATE: ${date}
+COURT: ${court}
+FILE NO.: ${caseNum}
+APPLICANT: ${name}
+
+CHARTER SECTIONS ENGAGED: ${charterList}
+
+TO THE COURT AND CROWN:
+
+I, ${name}, self-represented accused in the above-noted matter, hereby provide notice of my intention to challenge the constitutionality of the proceedings and/or evidence obtained herein, pursuant to sections 32 and 24 of the Canadian Charter of Rights and Freedoms.
+
+GROUNDS:
+${checks.length ? checks.map(s => `
+  ${s} — ${getCharterDesc(s)}`).join('\n') : '  [Charter grounds to be specified]'}
+
+RELIEF SOUGHT:
+1. Declaration that the rights of the Applicant have been infringed.
+2. Exclusion of all evidence obtained in breach of the Charter under s.24(2).
+3. Such further relief as this Honourable Court deems just.
+
+LEGAL FRAMEWORK:
+- R v Grant [2009] SCC 32 (s.24(2) analysis)
+- R v Stinchcombe [1991] 3 SCR 326 (disclosure)
+- R v Jordan [2016] SCC 27 (s.11(b) delay)
+- Canadian Charter of Rights and Freedoms, Part I of the Constitution Act, 1982
+
+DATED: ${date}
+
+____________________________
+${name}
+Self-Represented Accused
+
+---
+[EDUCATIONAL DOCUMENT — NOT LEGAL ADVICE]
+Generated by OmniaGuard PrimeDox Portal
+This document is a template for educational purposes only.
+Consult a licensed lawyer before filing any court document.`;
+
+  document.getElementById('doc-textarea').value = doc;
+  document.getElementById('doc-output').classList.add('visible');
+  document.getElementById('doc-output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function getCharterDesc(s) {
+  const map = {
+    's.7': 'Life, liberty, and security of the person — state action infringes fundamental interests',
+    's.8': 'Unreasonable search and seizure — search conducted without lawful authority',
+    's.9': 'Arbitrary detention — detained without reasonable grounds',
+    's.10(a)': 'Failure to provide reasons for arrest or detention',
+    's.10(b)': 'Right to counsel — access to counsel denied or delayed',
+    's.11(b)': 'Trial within reasonable time — Jordan presumptive ceiling exceeded',
+    's.11(d)': 'Presumption of innocence — reversed onus or other infringement',
+    's.12': 'Cruel and unusual treatment — grossly disproportionate consequence',
+    's.15': 'Equal protection of law — discriminatory application of state power',
+    's.24(2)': 'Exclusion of evidence — evidence obtained in Charter breach'
+  };
+  return map[s] || 'Charter right infringed';
+}
+
+function copyDoc() {
+  navigator.clipboard.writeText(document.getElementById('doc-textarea').value)
+    .then(() => showToast('Copied to clipboard'))
+    .catch(() => { document.getElementById('doc-textarea').select(); document.execCommand('copy'); showToast('Copied'); });
+}
+
+function downloadDoc() {
+  const text = document.getElementById('doc-textarea').value;
+  const name = document.getElementById('doc-name').value.trim() || 'defense';
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'primedox-defense-' + name.replace(/\s+/g, '-').toLowerCase() + '.txt';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function saveDoc() {
+  const saved = JSON.parse(localStorage.getItem('og_saved_docs') || '[]');
+  if (saved.length >= 5) saved.pop();
+  saved.unshift({
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-CA'),
+    name: (document.getElementById('doc-name').value.trim() || 'Defense') + ' — ' + (document.getElementById('doc-case').value.trim() || 'Case'),
+    content: document.getElementById('doc-textarea').value
+  });
+  localStorage.setItem('og_saved_docs', JSON.stringify(saved));
+  renderSaved();
+  showToast('Saved to vault');
+}
+
+function renderSaved() {
+  const saved = JSON.parse(localStorage.getItem('og_saved_docs') || '[]');
+  const container = document.getElementById('saved-list');
+  if (!saved.length) {
+    container.innerHTML = '<p class="no-saved">No saved documents yet. Generate a defense statement to get started.</p>';
+    return;
+  }
+  container.innerHTML = '<div class="saved-list">' + saved.map(d => `
+    <div class="saved-item">
+      <div class="saved-item-info">
+        <div class="saved-item-name">${d.name}</div>
+        <div class="saved-item-date">${d.date}</div>
+      </div>
+      <button class="saved-btn load" onclick="loadDoc(${d.id})">Load</button>
+      <button class="saved-btn del" onclick="deleteDoc(${d.id})">Delete</button>
+    </div>`).join('') + '</div>';
+}
+
+function loadDoc(id) {
+  const saved = JSON.parse(localStorage.getItem('og_saved_docs') || '[]');
+  const d = saved.find(x => x.id === id);
+  if (!d) return;
+  document.getElementById('doc-textarea').value = d.content;
+  document.getElementById('doc-output').classList.add('visible');
+  document.getElementById('doc-output').scrollIntoView({ behavior: 'smooth' });
+}
+
+function deleteDoc(id) {
+  let saved = JSON.parse(localStorage.getItem('og_saved_docs') || '[]');
+  saved = saved.filter(x => x.id !== id);
+  localStorage.setItem('og_saved_docs', JSON.stringify(saved));
+  renderSaved();
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#0d0d1a;border:1px solid rgba(0,212,255,0.4);border-radius:8px;padding:10px 20px;color:#00d4ff;font-size:13px;font-weight:700;z-index:99999;';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// Init date field
+document.getElementById('doc-date').value = new Date().toISOString().split('T')[0];
+renderSaved();
+</script>
+</body>
+</html>

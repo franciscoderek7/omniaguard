@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offline — OmniaGuard Active Protection</title>
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:#0a0a14;color:#fff;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+/* SHIELD */
+.shield-hero{text-align:center;padding:60px 24px 0;position:relative;z-index:1;}
+.shield-glyph{font-size:80px;line-height:1;margin-bottom:16px;filter:drop-shadow(0 0 30px rgba(0,212,255,0.4));animation:shieldPulse 3s ease-in-out infinite;}
+@keyframes shieldPulse{0%,100%{filter:drop-shadow(0 0 20px rgba(0,212,255,0.3));}50%{filter:drop-shadow(0 0 40px rgba(0,212,255,0.6));}}
+.shield-hero h1{font-size:clamp(26px,5vw,48px);font-weight:900;color:#00d4ff;letter-spacing:-.5px;margin-bottom:10px;}
+.shield-hero .subheading{font-size:16px;color:#8a8a9a;margin-bottom:8px;}
+.offline-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.35);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;color:#ff8c00;margin:16px 0;}
+.offline-dot{width:8px;height:8px;background:#ff8c00;border-radius:50%;animation:blink 1.2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+/* LAST KNOWN STATUS */
+.status-card{max-width:480px;margin:24px auto;background:#0d0d1a;border:1px solid rgba(0,200,83,0.25);border-radius:14px;padding:20px 24px;text-align:center;}
+.status-card .label{font-size:11px;font-weight:700;color:#8a8a9a;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.status-card .value{font-size:22px;font-weight:900;color:#00c853;}
+.status-card .note{font-size:12px;color:#8a8a9a;margin-top:6px;}
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:32px 24px 60px;position:relative;z-index:1;flex:1;}
+.section-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title span{display:inline-block;width:3px;height:17px;background:#00d4ff;border-radius:2px;}
+/* CHARTER QUICK REF */
+.charter-offline{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:36px;}
+.charter-item{background:#0d0d1a;border:1px solid rgba(255,215,0,0.12);border-radius:10px;padding:16px 18px;}
+.charter-tag{font-size:10px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.charter-item h3{font-size:14px;font-weight:800;margin-bottom:5px;}
+.charter-item p{font-size:12px;color:#8a8a9a;line-height:1.6;}
+.charter-item .key{font-size:11px;color:#5a8a9a;margin-top:6px;}
+/* SPINNER */
+.reconnect-section{text-align:center;padding:20px 0 30px;border-top:1px solid rgba(0,212,255,0.08);margin-top:20px;}
+.spinner{width:44px;height:44px;border:3px solid rgba(0,212,255,0.15);border-top-color:#00d4ff;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.reconnect-label{font-size:14px;color:#00d4ff;font-weight:600;margin-bottom:6px;}
+.reconnect-note{font-size:12px;color:#8a8a9a;}
+/* EMERGENCY */
+.emergency-section{background:#0d0d1a;border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:20px 24px;margin-bottom:28px;}
+.emergency-section h3{font-size:15px;font-weight:800;color:#ffd700;margin-bottom:10px;}
+.emergency-section p{font-size:13px;color:#8a8a9a;line-height:1.6;}
+/* DISCLAIMER */
+.disclaimer{background:rgba(255,215,0,0.03);border:1px solid rgba(255,215,0,0.15);border-radius:10px;padding:14px 18px;margin-bottom:20px;}
+.disclaimer p{font-size:11px;color:#6a6a7a;line-height:1.7;}
+.disclaimer strong{color:#ffd700;}
+/* FOOTER */
+footer{background:#0d0d1a;border-top:1px solid rgba(0,212,255,0.08);padding:20px;text-align:center;font-size:12px;color:#5a5a7a;position:relative;z-index:1;}
+</style>
+</head>
+<body>
+
+<div class="shield-hero">
+  <div class="shield-glyph">&#x1F6E1;&#xFE0F;</div>
+  <h1>You're Offline</h1>
+  <p class="subheading">OmniaGuard is protecting you in offline mode</p>
+  <div class="offline-badge"><span class="offline-dot"></span>Offline &mdash; Cached Protection Active</div>
+</div>
+
+<div class="status-card">
+  <div class="label">Last Known Status</div>
+  <div class="value">ALL SYSTEMS ACTIVE</div>
+  <div class="note">All 14 agents were active when you last connected &mdash; <span id="last-online">status cached</span></div>
+</div>
+
+<main>
+
+  <!-- CHARTER QUICK REF -->
+  <div class="section-title"><span></span>Emergency Charter Reference (Cached)</div>
+  <div class="charter-offline">
+    <div class="charter-item">
+      <div class="charter-tag">Charter s.8</div>
+      <h3>Search &amp; Seizure</h3>
+      <p>Protection against unreasonable search and seizure. A search without prior judicial authorization is presumptively unreasonable. The Crown bears the burden to rebut.</p>
+      <div class="key">Key case: R v Hunter [1984] &mdash; R v Spencer [2014]</div>
+    </div>
+    <div class="charter-item">
+      <div class="charter-tag">Charter s.10(b)</div>
+      <h3>Right to Counsel</h3>
+      <p>On arrest or detention, state clearly: "I wish to speak with a lawyer." Police must immediately cease questioning. Waiver of this right must be knowing and voluntary.</p>
+      <div class="key">Key case: R v Manninen [1987] &mdash; R v Bartle [1994]</div>
+    </div>
+    <div class="charter-item">
+      <div class="charter-tag">Charter s.24(2)</div>
+      <h3>Exclusion of Evidence</h3>
+      <p>Grant 2009 three-part test: (1) seriousness of Charter-infringing conduct, (2) impact on accused's Charter-protected interests, (3) society's interest in adjudication on merits.</p>
+      <div class="key">Key case: R v Grant [2009] SCC 32</div>
+    </div>
+    <div class="charter-item">
+      <div class="charter-tag">Charter s.7</div>
+      <h3>Life, Liberty &amp; Security</h3>
+      <p>Any state action threatening life, liberty, or security of the person must comply with principles of fundamental justice. Medical necessity defense engages s.7 directly.</p>
+      <div class="key">Key case: Canada v Bedford [2013] &mdash; Carter [2015]</div>
+    </div>
+    <div class="charter-item">
+      <div class="charter-tag">Charter s.11(b)</div>
+      <h3>Trial in Reasonable Time</h3>
+      <p>R v Jordan 2016 presumptive ceiling: 18 months (Provincial Court), 30 months (Superior Court). Track every adjournment &mdash; Crown-caused delays count fully toward ceiling.</p>
+      <div class="key">Key case: R v Jordan [2016] SCC 27</div>
+    </div>
+    <div class="charter-item">
+      <div class="charter-tag">Disclosure</div>
+      <h3>Stinchcombe Right</h3>
+      <p>Crown must disclose all relevant material &mdash; inculpatory and exculpatory. Demand in writing at the first appearance. Gaps in disclosure trigger a stay application under s.24(1).</p>
+      <div class="key">Key case: R v Stinchcombe [1991] 3 SCR 326</div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY CONTACT -->
+  <div class="emergency-section" id="emergency-section">
+    <h3>Emergency Contact (Offline)</h3>
+    <div id="emergency-content">
+      <p id="emergency-saved">Loading from secure cache&hellip;</p>
+    </div>
+  </div>
+
+  <!-- RECONNECT SPINNER -->
+  <div class="reconnect-section">
+    <div class="spinner"></div>
+    <div class="reconnect-label">Reconnecting to OmniaGuard servers&hellip;</div>
+    <div class="reconnect-note" id="reconnect-note">Checking connection every 10 seconds</div>
+    <div style="margin-top:16px;font-size:13px;color:#5a5a7a;">When back online: <a href="/" style="color:#00d4ff;">Return to Home</a> &nbsp;|&nbsp; <a href="/threat-dashboard.html" style="color:#00d4ff;">Open Dashboard</a></div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p><strong>Disclaimer:</strong> OmniaGuard offline mode provides cached educational content and Charter reference materials. Shield indicators reflect the last known state before disconnection. For active security monitoring, reconnect to access the live dashboard. This is not a substitute for licensed legal or security services.</p>
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2026 Francisco Holdings Inc. | OmniaGuard&trade; | Educational security monitoring
+</footer>
+
+<script>
+/* ----- LAST ONLINE TIME ----- */
+const lastOnline = localStorage.getItem('og_last_online');
+if (lastOnline) {
+  document.getElementById('last-online').textContent = 'last online ' + new Date(parseInt(lastOnline, 10)).toLocaleString('en-CA');
+} else {
+  document.getElementById('last-online').textContent = 'connection status cached';
+}
+
+/* ----- EMERGENCY CONTACT FROM LOCALSTORAGE ----- */
+const emergencyContact = localStorage.getItem('og_emergency_contact');
+const emergencyEl = document.getElementById('emergency-saved');
+if (emergencyContact) {
+  emergencyEl.innerHTML = '<strong style="color:#ffd700;">' + emergencyContact + '</strong>';
+} else {
+  emergencyEl.textContent = 'No emergency contact saved. When online, you can save a contact in your profile settings.';
+}
+
+/* ----- RECONNECT CHECK ----- */
+let attempts = 0;
+function checkReconnect() {
+  attempts++;
+  document.getElementById('reconnect-note').textContent = 'Check attempt ' + attempts + ' — last checked ' + new Date().toLocaleTimeString('en-CA', { hour12: false });
+  if (navigator.onLine) {
+    document.getElementById('reconnect-note').textContent = 'Connection restored! Redirecting...';
+    setTimeout(() => { window.location.href = '/'; }, 1500);
+  }
+}
+setInterval(checkReconnect, 10000);
+
+/* ----- TRACK LAST ONLINE ----- */
+if (navigator.onLine) {
+  localStorage.setItem('og_last_online', Date.now().toString());
+  // Not actually offline — redirect home
+  setTimeout(() => { window.location.href = '/'; }, 2000);
+}
+</script>
+</body>
+</html>

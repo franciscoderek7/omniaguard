@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Install OmniaGuard — PWA Setup Guide</title>
+<meta name="description" content="Install OmniaGuard as a Progressive Web App on Android, iOS, Samsung, or desktop. Step-by-step instructions for all platforms.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0a0a14;color:#fff;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+a{color:#00d4ff;text-decoration:none;}
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.18);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px;}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.4px;}
+.nav-logo img{width:34px;height:34px;border-radius:6px;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;flex-wrap:wrap;}
+.nav-links a{color:#8a8a9a;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:#fff;text-decoration:none;}
+.nav-links a.active{color:#00d4ff;}
+.nav-links .nav-cta{background:#00d4ff;color:#000;font-weight:700;padding:8px 16px;border-radius:6px;font-size:13px;}
+.nav-links .nav-cta:hover{background:#33ddff;text-decoration:none;}
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:40px 24px 80px;position:relative;z-index:1;}
+h1{font-size:clamp(24px,4vw,42px);font-weight:900;letter-spacing:-.8px;margin-bottom:12px;text-align:center;}
+.subtitle{text-align:center;font-size:15px;color:#8a8a9a;margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto;}
+/* DETECT BANNER */
+.detect-banner{background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.3);border-radius:12px;padding:16px 20px;margin-bottom:32px;display:flex;align-items:center;gap:14px;font-size:14px;}
+.detect-icon{font-size:22px;flex-shrink:0;}
+.detect-text strong{color:#00d4ff;}
+/* TABS */
+.tab-bar{display:flex;gap:4px;background:#0d0d1a;border:1px solid rgba(0,212,255,0.15);border-radius:10px;padding:4px;margin-bottom:28px;}
+.tab-btn{flex:1;padding:11px;border:none;background:transparent;color:#8a8a9a;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center;}
+.tab-btn.active{background:#00d4ff;color:#000;font-weight:800;}
+.tab-btn:hover:not(.active){background:rgba(0,212,255,0.1);color:#fff;}
+/* INSTRUCTION PANELS */
+.instructions{display:none;}
+.instructions.active{display:block;}
+/* STEPS */
+.steps-list{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.step{display:flex;gap:16px;align-items:flex-start;background:#0d0d1a;border:1px solid rgba(0,212,255,0.12);border-radius:12px;padding:18px 20px;}
+.step-num{width:36px;height:36px;background:rgba(0,212,255,0.1);border:2px solid #00d4ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#00d4ff;flex-shrink:0;}
+.step-content h3{font-size:14px;font-weight:700;margin-bottom:4px;}
+.step-content p{font-size:13px;color:#8a8a9a;line-height:1.6;}
+.step-content code{background:#1a1a2e;padding:2px 8px;border-radius:4px;font-family:monospace;font-size:12px;color:#00d4ff;}
+.device-note{background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.25);border-radius:10px;padding:14px 18px;font-size:13px;color:#ffe88a;display:flex;align-items:flex-start;gap:10px;margin-top:4px;}
+/* BENEFITS */
+.benefits-section{margin:40px 0;}
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:18px;}
+.benefit-card{background:#0d0d1a;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:18px;}
+.benefit-icon{font-size:24px;margin-bottom:8px;}
+.benefit-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.benefit-desc{font-size:12px;color:#8a8a9a;line-height:1.5;}
+/* CTA */
+.cta-section{text-align:center;margin:40px 0 20px;}
+.cta-btn{background:linear-gradient(135deg,#00d4ff,#0099cc);color:#000;border:none;border-radius:12px;padding:18px 36px;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.5px;box-shadow:0 8px 30px rgba(0,212,255,0.25);transition:all .3s;display:inline-block;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,212,255,0.35);}
+.cta-note{font-size:12px;color:#5a5a7a;margin-top:10px;}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9000;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#0d0d1a;border:1px solid rgba(0,212,255,0.3);border-radius:16px;padding:32px;max-width:480px;width:100%;position:relative;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#8a8a9a;font-size:22px;cursor:pointer;}
+.modal h3{font-size:18px;font-weight:800;margin-bottom:16px;color:#00d4ff;}
+.modal p{font-size:13px;color:#8a8a9a;margin-bottom:10px;line-height:1.7;}
+/* FOOTER */
+footer{background:#0d0d1a;border-top:1px solid rgba(0,212,255,0.1);padding:24px;text-align:center;font-size:12px;color:#5a5a7a;position:relative;z-index:1;}
+.section-label{font-size:11px;font-weight:700;color:#00d4ff;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+@media(max-width:500px){.tab-btn{font-size:11px;padding:9px 4px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/omniaguard-logo.png" alt="OmniaGuard">
+      OmniaGuard
+    </a>
+    <ul class="nav-links">
+      <li><a href="/threat-dashboard.html">Dashboard</a></li>
+      <li><a href="/primedox-portal.html">PrimeDox</a></li>
+      <li><a href="/install-guide.html" class="active">Install</a></li>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/index.html#pricing" class="nav-cta">Get Protected</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <h1>Install OmniaGuard on Your Device</h1>
+  <p class="subtitle">OmniaGuard installs as a Progressive Web App &mdash; no app store required. Full offline access, push alerts, and standalone mode on any device.</p>
+
+  <!-- AUTO-DETECTED PLATFORM -->
+  <div class="detect-banner" id="detect-banner">
+    <span class="detect-icon">&#x1F4F1;</span>
+    <div class="detect-text">Detected: <strong id="detected-platform">Detecting...</strong> &mdash; <span id="detected-note">Follow the highlighted instructions below.</span></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn" id="tab-android" onclick="switchTab('android')">Android</button>
+    <button class="tab-btn" id="tab-ios" onclick="switchTab('ios')">iOS / Safari</button>
+    <button class="tab-btn" id="tab-desktop" onclick="switchTab('desktop')">Desktop</button>
+  </div>
+
+  <!-- ANDROID -->
+  <div class="instructions" id="inst-android">
+    <div class="section-label">Android (Chrome)</div>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Open Chrome browser</h3>
+          <p>Open <strong>Google Chrome</strong> on your Android device and navigate to <code>omniaguard.com</code>. Chrome is required — other browsers may not support full PWA installation.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Tap the 3-dot menu</h3>
+          <p>Tap the three vertical dots (<strong>&#8942;</strong>) in the top-right corner of Chrome to open the browser menu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Tap "Add to Home Screen" or "Install App"</h3>
+          <p>Look for <strong>Add to Home Screen</strong> or <strong>Install App</strong> in the menu. This option appears when the site is PWA-ready. On newer Chrome versions it may say "Install OmniaGuard".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Confirm the installation</h3>
+          <p>Tap <strong>Install</strong> in the popup dialog. Chrome may ask for confirmation. Tap Install again to confirm.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Launch from Home Screen</h3>
+          <p>Find the OmniaGuard icon on your Android home screen. Tap it to open OmniaGuard in standalone mode &mdash; no browser chrome, full screen, offline-capable.</p>
+        </div>
+      </div>
+    </div>
+    <div class="device-note">
+      <span>&#x26A0;&#xFE0F;</span>
+      <div><strong>Samsung Galaxy Tab (Android) Note:</strong> On Samsung devices with Samsung Internet, look for the <strong>Install</strong> option in the browser banner that appears at the bottom of the screen. Alternatively, tap the menu icon and select "Add page to" &rarr; "Home screen".</div>
+    </div>
+  </div>
+
+  <!-- iOS -->
+  <div class="instructions" id="inst-ios">
+    <div class="section-label">iOS — Safari Required</div>
+    <div style="background:rgba(255,140,0,0.07);border:1px solid rgba(255,140,0,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#ffb060;margin-bottom:18px;">
+      &#x26A0;&#xFE0F; <strong>Important:</strong> On iPhone and iPad, PWA installation is only supported in <strong>Safari</strong>. Chrome on iOS cannot install apps to the home screen.
+    </div>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Open Safari</h3>
+          <p>Open the <strong>Safari</strong> browser on your iPhone or iPad and navigate to <code>omniaguard.com</code>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Tap the Share button</h3>
+          <p>Tap the <strong>Share button</strong> &mdash; the box with an arrow pointing upward &mdash; at the bottom of the Safari screen (iPhone) or top-right (iPad).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Tap "Add to Home Screen"</h3>
+          <p>Scroll down in the Share sheet and tap <strong>Add to Home Screen</strong>. You may need to scroll to find it. It has a square icon with a plus sign.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Confirm the name and tap "Add"</h3>
+          <p>Safari will show the app name as "OmniaGuard". You can rename it if desired. Tap <strong>Add</strong> in the top-right corner to confirm.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Launch from Home Screen</h3>
+          <p>Find the OmniaGuard icon on your iPhone or iPad home screen. Tap it to open in standalone fullscreen mode without Safari navigation bars.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div class="instructions" id="inst-desktop">
+    <div class="section-label">Desktop — Chrome or Edge</div>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Navigate to omniaguard.com</h3>
+          <p>Open <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong> and go to <code>omniaguard.com</code>. Both browsers support PWA installation on Windows, macOS, and Linux.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Look for the install icon in the address bar</h3>
+          <p>Look for a small <strong>install icon (&oplus;)</strong> or computer-with-arrow icon in the right side of the address bar. If you see it, click it to install directly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Or use the browser menu</h3>
+          <p>Click the <strong>3-dot menu</strong> (Chrome) or <strong>... menu</strong> (Edge) &rarr; look for <strong>Install OmniaGuard</strong> or <strong>Apps &rarr; Install this site as an app</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Click "Install" in the dialog</h3>
+          <p>A dialog will appear asking if you want to install OmniaGuard. Click <strong>Install</strong> to confirm. The app will open in its own window.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>OmniaGuard opens as a standalone app</h3>
+          <p>OmniaGuard will open in its own dedicated window with no browser navigation. Find it in your taskbar, Start menu (Windows), or Applications folder (macOS) for quick access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefits-section">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;">Why install as an app?</h2>
+    <p style="font-size:13px;color:#8a8a9a;margin-bottom:20px;">OmniaGuard as a PWA delivers a native-like experience across all platforms.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F4F5;</div>
+        <div class="benefit-title">Offline Access</div>
+        <div class="benefit-desc">Full access to Dashboard, PrimeDox, and Charter reference even without internet connection.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x26A1;</div>
+        <div class="benefit-title">Faster Load</div>
+        <div class="benefit-desc">All core assets are cached locally. OmniaGuard loads instantly from the home screen — no waiting.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F3E0;</div>
+        <div class="benefit-title">Home Screen Shortcut</div>
+        <div class="benefit-desc">One tap from your home screen or desktop. No need to open a browser and navigate.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F514;</div>
+        <div class="benefit-title">Push Notifications</div>
+        <div class="benefit-desc">Receive threat alerts even when OmniaGuard is not open. (Available in future SDK release.)</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x26F6;</div>
+        <div class="benefit-title">Full-Screen Mode</div>
+        <div class="benefit-desc">Runs without browser bars or navigation chrome — full immersive security interface.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#x1F512;</div>
+        <div class="benefit-title">Private &amp; Secure</div>
+        <div class="benefit-desc">No app store tracking. No account required. Your data stays on your device.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <button class="cta-btn" onclick="triggerInstall()">Install OmniaGuard Now</button>
+    <div class="cta-note">Tap the button above if your browser is ready, or follow the instructions for your platform above.</div>
+  </div>
+</main>
+
+<!-- FALLBACK MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3>Manual Installation Required</h3>
+    <p>Your browser has not yet shown an install prompt. This can happen if:</p>
+    <p>&bull; You've already installed OmniaGuard<br>&bull; Your browser doesn't support PWA installation<br>&bull; You dismissed the install prompt earlier</p>
+    <p>Follow the step-by-step instructions above for your platform to install manually. For best results, use Chrome on Android or Safari on iOS.</p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 Francisco Holdings Inc. | OmniaGuard&trade; | Educational security monitoring
+</footer>
+
+<script src="/app.js" defer></script>
+<script>
+/* ----- PLATFORM DETECTION ----- */
+function detectPlatform() {
+  const ua = navigator.userAgent;
+  let platform = 'desktop';
+  let tab = 'desktop';
+  let note = 'Follow the Desktop instructions below.';
+
+  if (/android/i.test(ua)) {
+    platform = 'Android';
+    tab = 'android';
+    note = 'Follow the Android (Chrome) instructions below.';
+    if (/samsung/i.test(ua) || /SM-/i.test(ua)) {
+      platform = 'Samsung Android';
+      note = 'Follow the Android instructions. See the Samsung-specific note at the bottom.';
+    }
+  } else if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+    platform = 'iOS (iPhone / iPad)';
+    tab = 'ios';
+    note = 'Safari is required on iOS. Follow the iOS instructions below.';
+  } else if (/Macintosh|Windows|Linux/.test(ua)) {
+    platform = 'Desktop (' + (/Chrome/.test(ua) ? 'Chrome' : /Edg/.test(ua) ? 'Edge' : 'Browser') + ')';
+    tab = 'desktop';
+    note = 'Follow the Desktop instructions below.';
+  }
+
+  document.getElementById('detected-platform').textContent = platform;
+  document.getElementById('detected-note').textContent = note;
+  switchTab(tab, true);
+}
+
+function switchTab(tab, auto) {
+  ['android','ios','desktop'].forEach(t => {
+    document.getElementById('inst-'+t).classList.toggle('active', t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+  });
+}
+
+function triggerInstall() {
+  if (typeof ogTriggerInstall === 'function') {
+    ogTriggerInstall();
+  } else {
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+detectPlatform();
+</script>
+</body>
+</html>
