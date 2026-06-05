@@ -18,6 +18,19 @@
 <link rel="apple-touch-icon" sizes="152x152" href="/omniaguard-logo.png">
 <link rel="apple-touch-icon" sizes="167x167" href="/omniaguard-logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/omniaguard-logo.png">
+<!-- iOS Splash Screens — covers iPhone SE through iPhone 16 Pro Max + iPads -->
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:834px) and (device-height:1194px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)">
+<!-- Preload critical assets -->
+<link rel="preload" href="/omniaguard-logo.png" as="image">
+<link rel="preload" href="/pwa-core.js" as="script">
 <style>
 :root {
   --bg: #0a0a14;
@@ -2765,5 +2778,6 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
 </div>
 
 <script src="/app.js" defer></script>
+<script src="/pwa-core.js" defer></script>
 </body>
 </html>

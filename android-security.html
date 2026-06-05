@@ -148,8 +148,17 @@ main{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
 
   <!-- REGISTERED PASSKEYS -->
   <div class="info-card" style="margin-bottom:28px;" id="passkeys-card">
-    <div class="info-card-title">Registered Credentials</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+      <div class="info-card-title" style="margin-bottom:0;">Registered Credentials</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="setPINFallback()" style="background:transparent;border:1px solid rgba(0,212,255,.3);color:var(--cyan);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">+ Set PIN Fallback</button>
+        <button onclick="authenticateWithPIN()" style="background:transparent;border:1px solid rgba(0,200,83,.3);color:var(--green);font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">Use PIN</button>
+      </div>
+    </div>
     <div id="passkey-list-container"><div style="color:var(--gray);font-size:13px;">No credentials registered yet.</div></div>
+    <div style="margin-top:12px;padding:10px 12px;background:var(--bg3);border-radius:8px;font-size:11px;color:var(--gray);">
+      <strong style="color:#fff;">Auto-lock:</strong> App locks after 5 minutes of inactivity. PIN fallback works when biometric is unavailable.
+    </div>
   </div>
 
   <!-- DEVICE SECURITY CHECKLIST -->
@@ -585,6 +594,52 @@ function escHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+/* ---- AUTO-LOCK: 5-minute inactivity timer ---- */
+let _lockTimer = null;
+function resetLockTimer() {
+  if (authState !== 'unlocked') return;
+  clearTimeout(_lockTimer);
+  _lockTimer = setTimeout(() => {
+    if (authState === 'unlocked') {
+      log('Auto-lock: 5 min inactivity.', 'info');
+      lockAuth();
+    }
+  }, 5 * 60 * 1000);
+}
+['touchstart', 'click', 'keydown', 'scroll'].forEach(e => {
+  document.addEventListener(e, resetLockTimer, { passive: true });
+});
+
+/* ---- PIN FALLBACK ---- */
+async function setPINFallback() {
+  const pin = prompt('Set 6-digit PIN fallback (used if biometric fails):');
+  if (!pin || !/^\d{6}$/.test(pin)) { alert('Must be exactly 6 digits.'); return; }
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pin + '_og_salt'));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  localStorage.setItem('og_pin_hash', hex);
+  log('PIN set (SHA-256 hash stored).', 'ok');
+  updatePasskeysList();
+}
+
+async function authenticateWithPIN() {
+  const stored = localStorage.getItem('og_pin_hash');
+  if (!stored) { alert('No PIN set. Register one first.'); return; }
+  const pin = prompt('Enter your 6-digit PIN:');
+  if (!pin) return;
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pin + '_og_salt'));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hex === stored) {
+    log('PIN auth successful.', 'ok');
+    authState = 'unlocked';
+    setUnlocked();
+    localStorage.setItem('og_last_auth', new Date().toISOString());
+    resetLockTimer();
+  } else {
+    log('Incorrect PIN.', 'err');
+    if ('vibrate' in navigator) navigator.vibrate([100,50,100,50,100]);
+  }
+}
+
 /* ---- INIT ---- */
 document.addEventListener('DOMContentLoaded', async () => {
   buildCapTable();
@@ -595,16 +650,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (supported) {
     const hasCredential = !!localStorage.getItem('og_credential_id');
     setLocked(hasCredential);
-    if (hasCredential) {
-      log('Credential found. Tap "Authenticate" to unlock.', 'ok');
-    } else {
-      log('No credential registered. Tap "Register" to set up biometric.', 'info');
-    }
+    log(hasCredential ? 'Credential found. Tap to unlock.' : 'No credential. Tap to register.', 'ok');
   }
 
-  // Vibrate on load (Android confirmation)
   if ('vibrate' in navigator) navigator.vibrate([50, 30, 50]);
 });
 </script>
+<script src="/pwa-core.js" defer></script>
 </body>
 </html>

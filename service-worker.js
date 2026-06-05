@@ -1,5 +1,5 @@
-/* OmniaGuard Service Worker v2 — VPN Monitor + Biometric + Android */
-const CACHE_NAME = 'omniaguard-v2';
+/* OmniaGuard Service Worker v3 — iOS + Android PWA, kill switch, periodic VPN sync */
+const CACHE_NAME = 'omniaguard-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -12,7 +12,9 @@ const STATIC_ASSETS = [
   '/omniaguard-logo.png',
   '/robot-350.jpg',
   '/manifest.json',
-  '/app.js'
+  '/app.js',
+  '/pwa-core.js',
+  '/splash.svg'
 ];
 
 /* ---- INSTALL: pre-cache all static assets ---- */

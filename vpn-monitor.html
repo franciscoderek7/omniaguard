@@ -293,6 +293,71 @@ main{max-width:1100px;margin:0 auto;padding:32px 20px 80px;}
   </div>
 </main>
 
+<!-- DNS CROSS-CHECK SECTION -->
+<div class="info-card" style="margin-bottom:32px;" id="dns-section">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+    <div class="info-card-title" style="margin-bottom:0;">DNS Consistency Check</div>
+    <button class="btn btn-secondary" onclick="runDNSCheck()" id="btn-dns" style="padding:8px 16px;font-size:12px;">Run DNS Check</button>
+  </div>
+  <div style="color:var(--gray);font-size:13px;margin-bottom:12px;">Queries 3 independent IP-detection services. If all agree → no DNS split. If any differ → possible DNS leak or split horizon.</div>
+  <div id="dns-results">
+    <div style="text-align:center;padding:16px;color:var(--gray);font-size:13px;">Click "Run DNS Check" to test DNS consistency.</div>
+  </div>
+</div>
+
+<!-- KILL SWITCH OVERLAY -->
+<div id="kill-switch-overlay" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(20,0,0,0.97);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;">
+  <div style="animation:ksFlash 0.8s ease-in-out infinite alternate;">
+    <div style="font-size:80px;line-height:1;margin-bottom:20px;">🚨</div>
+  </div>
+  <div style="font-size:clamp(28px,6vw,48px);font-weight:900;color:#ff3b3b;letter-spacing:-1px;margin-bottom:8px;">VPN DROPPED</div>
+  <div style="font-size:16px;color:#ff8888;margin-bottom:8px;font-weight:600;">KILL SWITCH ACTIVATED</div>
+  <div style="font-size:14px;color:rgba(255,136,136,.7);margin-bottom:32px;" id="ks-ip-info">IP change detected. Your real IP may be exposed.</div>
+  <div style="background:rgba(255,59,59,.08);border:1px solid rgba(255,59,59,.3);border-radius:16px;padding:20px 24px;margin-bottom:32px;max-width:400px;">
+    <div style="font-size:13px;color:#ff8888;font-weight:600;margin-bottom:8px;">⚠️ EXPOSURE RISK</div>
+    <div style="font-size:12px;color:rgba(255,136,136,.7);line-height:1.6;">Your device is now connecting directly through your ISP. Any unencrypted traffic is visible. Reconnect your VPN immediately.</div>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+    <button onclick="showVPNReconnectGuide()" style="background:#ff3b3b;color:#fff;border:none;border-radius:10px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;">🔒 Reconnect VPN</button>
+    <button onclick="dismissKillSwitch()" style="background:transparent;color:#ff8888;border:1px solid rgba(255,59,59,.4);border-radius:10px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;">Dismiss</button>
+  </div>
+  <div style="margin-top:20px;font-size:11px;color:rgba(255,136,136,.4);">OmniaGuard Kill Switch — Protecting PrimeDox</div>
+</div>
+
+<!-- VPN RECONNECT GUIDE -->
+<div id="reconnect-guide" style="display:none;position:fixed;inset:0;z-index:999998;background:rgba(0,0,0,0.92);flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto;">
+  <div style="max-width:480px;width:100%;background:#0d0d1a;border:1px solid rgba(255,59,59,.3);border-radius:20px;padding:28px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="font-size:18px;font-weight:800;">🔒 Reconnect Your VPN</div>
+      <button onclick="document.getElementById('reconnect-guide').style.display='none'" style="background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;" id="reconnect-steps">
+      <div style="background:#12121f;border-radius:10px;padding:14px;font-size:14px;"><strong>Android:</strong> Pull down notification shade → tap your VPN notification → Connect. Or open your VPN app directly.</div>
+      <div style="background:#12121f;border-radius:10px;padding:14px;font-size:14px;"><strong>iPhone/iPad:</strong> Settings → VPN → toggle ON. Or open your VPN app.</div>
+      <div style="background:#12121f;border-radius:10px;padding:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:8px;">Quick Links (tap to open VPN app):</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <a href="protonvpn://connect" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);color:var(--cyan);text-decoration:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;">ProtonVPN</a>
+          <a href="nordvpn://connect" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);color:var(--cyan);text-decoration:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;">NordVPN</a>
+          <a href="expressvpn://connect" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);color:var(--cyan);text-decoration:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;">ExpressVPN</a>
+          <a href="mullvadvpn://connect" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);color:var(--cyan);text-decoration:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;">Mullvad</a>
+        </div>
+      </div>
+    </div>
+    <button onclick="document.getElementById('reconnect-guide').style.display='none';dismissKillSwitch();" style="width:100%;background:var(--cyan);color:#000;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px;">Done — VPN Reconnected</button>
+  </div>
+</div>
+
+<style>
+@keyframes ksFlash{from{transform:scale(1);}to{transform:scale(1.1);}}
+#dns-results .dns-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg3);border-radius:8px;margin-bottom:6px;font-size:13px;}
+#dns-results .dns-label{color:var(--gray);}
+#dns-results .dns-ip{font-family:'Courier New',monospace;font-weight:700;}
+#dns-results .dns-match{font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;}
+#dns-results .dns-match.ok{background:rgba(0,200,83,.12);color:var(--green);}
+#dns-results .dns-match.warn{background:rgba(255,140,0,.12);color:#ff8c00;}
+</style>
+
 <div id="alert-toast"></div>
 
 <script>
@@ -660,12 +725,15 @@ function startMonitor() {
   badge.className = 'monitor-badge active-pulse';
   document.getElementById('progress-ring').style.display = 'block';
   document.getElementById('next-check-label').textContent = 'Checking now…';
+  // Keep screen on while monitoring (Android Chrome supports Wake Lock)
+  if (window.OmniaGuardPWA) OmniaGuardPWA.requestWakeLock();
   runCheck();
   scheduleNextCheck();
 }
 
 function stopMonitor() {
   state.monitoring = false;
+  if (window.OmniaGuardPWA) OmniaGuardPWA.releaseWakeLock();
   clearTimeout(state.monitorTimer);
   clearInterval(state.countdownTimer);
   document.getElementById('btn-monitor').textContent = '▶ Start Auto-Monitor (30s)';
@@ -701,18 +769,112 @@ function scheduleNextCheck() {
   }, state.monitorInterval * 1000);
 }
 
-/* ---- DISCONNECT ALERT ---- */
+/* ---- KILL SWITCH + DISCONNECT ALERT ---- */
 function fireDisconnectAlert(oldIP, newIP) {
-  showToast(`🚨 VPN DISCONNECTED! IP changed: ${oldIP} → ${newIP}`);
+  // 1. Full-screen kill switch overlay
+  showKillSwitch(oldIP, newIP);
+
+  // 2. Audio alert
+  if (window.OmniaGuardPWA) OmniaGuardPWA.playAlertSound('critical');
+
+  // 3. Vibration pattern — 3 long pulses
+  if ('vibrate' in navigator) navigator.vibrate([400, 150, 400, 150, 600]);
+
+  // 4. Toast (behind overlay, for when overlay is dismissed)
+  showToast(`🚨 VPN DISCONNECTED! ${oldIP} → ${newIP}`);
+
+  // 5. System notification
   if (state.notifGranted) {
-    new Notification('OmniaGuard: VPN Disconnected', {
-      body: `Your IP changed from ${oldIP} to ${newIP}. VPN protection may be down.`,
+    new Notification('🚨 OmniaGuard: VPN Kill Switch', {
+      body: `VPN dropped. IP: ${oldIP} → ${newIP}. Open OmniaGuard to reconnect.`,
       icon: '/omniaguard-logo.png',
       badge: '/omniaguard-logo.png',
-      vibrate: [200, 100, 200, 100, 200],
-      tag: 'vpn-disconnect'
+      vibrate: [300, 100, 300, 100, 500],
+      tag: 'vpn-disconnect',
+      requireInteraction: true,
+      data: { url: '/vpn-monitor.html' }
     });
   }
+
+  // 6. Message service worker for background notification
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: 'VPN_DISCONNECTED', oldIP, newIP });
+  }
+
+  // 7. Badge — red alert
+  if (window.OmniaGuardPWA) OmniaGuardPWA.setBadge(1);
+}
+
+function showKillSwitch(oldIP, newIP) {
+  const overlay = document.getElementById('kill-switch-overlay');
+  document.getElementById('ks-ip-info').textContent = `IP changed: ${oldIP} → ${newIP}`;
+  overlay.style.display = 'flex';
+  // Prevent scrolling while overlay is shown
+  document.body.style.overflow = 'hidden';
+}
+
+function dismissKillSwitch() {
+  document.getElementById('kill-switch-overlay').style.display = 'none';
+  document.getElementById('reconnect-guide').style.display = 'none';
+  document.body.style.overflow = '';
+  if (window.OmniaGuardPWA) OmniaGuardPWA.setBadge(0);
+}
+
+function showVPNReconnectGuide() {
+  document.getElementById('reconnect-guide').style.display = 'flex';
+}
+
+/* ---- DNS CONSISTENCY CHECK ---- */
+async function runDNSCheck() {
+  const btn = document.getElementById('btn-dns');
+  const results = document.getElementById('dns-results');
+  btn.disabled = true;
+  btn.textContent = '⟳ Checking…';
+  results.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray);font-size:13px;">Querying 3 independent resolvers…</div>';
+
+  const endpoints = [
+    { name: 'Cloudflare CDN Trace', url: 'https://1.1.1.1/cdn-cgi/trace', parse: t => { const m = t.match(/ip=(.+)/); return m ? m[1].trim() : null; }, type: 'text' },
+    { name: 'ipify.org',            url: 'https://api.ipify.org?format=json', parse: d => d.ip, type: 'json' },
+    { name: 'ipwho.is',             url: 'https://ipwho.is/', parse: d => d.ip, type: 'json' }
+  ];
+
+  const ips = [];
+  const rows = [];
+
+  for (const ep of endpoints) {
+    try {
+      const r = await fetch(ep.url, { signal: AbortSignal.timeout(5000), cache: 'no-store' });
+      const data = ep.type === 'json' ? await r.json() : await r.text();
+      const ip = ep.parse(data);
+      ips.push(ip);
+      rows.push({ label: ep.name, ip, ok: true });
+    } catch (e) {
+      ips.push(null);
+      rows.push({ label: ep.name, ip: 'TIMEOUT', ok: false });
+    }
+  }
+
+  const validIPs = ips.filter(Boolean);
+  const allMatch = validIPs.length > 0 && validIPs.every(ip => ip === validIPs[0]);
+
+  let html = '';
+  rows.forEach(r => {
+    const matchClass = !r.ok ? 'warn' : allMatch ? 'ok' : 'warn';
+    const matchText = !r.ok ? 'ERROR' : allMatch ? '✓ MATCH' : '⚠ DIFFER';
+    html += `<div class="dns-row">
+      <span class="dns-label">${escHtml(r.label)}</span>
+      <span class="dns-ip ${r.ok ? 'cyan' : 'red'}">${escHtml(r.ip)}</span>
+      <span class="dns-match ${matchClass}">${matchText}</span>
+    </div>`;
+  });
+
+  const summary = allMatch
+    ? '<div style="margin-top:10px;padding:10px 14px;background:rgba(0,200,83,.08);border:1px solid rgba(0,200,83,.2);border-radius:8px;font-size:12px;color:var(--green);">✅ DNS Consistent — All resolvers agree on your IP. No split DNS detected.</div>'
+    : '<div style="margin-top:10px;padding:10px 14px;background:rgba(255,140,0,.08);border:1px solid rgba(255,140,0,.2);border-radius:8px;font-size:12px;color:#ff8c00;">⚠️ DNS Mismatch — Resolvers report different IPs. Possible DNS leak, captive portal, or split-horizon DNS. Run a full test at <a href="https://dnsleaktest.com" target="_blank" style="color:var(--cyan);">dnsleaktest.com</a></div>';
+
+  results.innerHTML = html + summary;
+  btn.disabled = false;
+  btn.textContent = 'Run DNS Check';
 }
 
 function showToast(msg) {
@@ -767,5 +929,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(runCheck, 800);
 });
 </script>
+<script src="/pwa-core.js" defer></script>
 </body>
 </html>
