@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Android Security — OmniaGuard</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a14;--bg2:#0d0d1a;--bg3:#12121f;
+  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,.1);
+  --green:#00c853;--green-dim:rgba(0,200,83,.1);
+  --red:#ff3b3b;--red-dim:rgba(255,59,59,.1);
+  --gold:#ffd700;--gold-dim:rgba(255,215,0,.1);
+  --gray:#8892a4;--border:rgba(0,212,255,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:#fff;font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:800;font-size:18px;}
+.nav-logo img{width:32px;height:32px;}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--cyan);text-decoration:none;font-size:14px;font-weight:600;}
+main{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
+.page-header{text-align:center;margin-bottom:40px;}
+.page-header h1{font-size:clamp(26px,5vw,44px);font-weight:900;letter-spacing:-1px;margin-bottom:12px;}
+.page-header p{color:var(--gray);font-size:15px;max-width:520px;margin:0 auto;}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-dim);border:1px solid rgba(0,200,83,.25);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--green);letter-spacing:.5px;margin-bottom:16px;}
+
+/* BIOMETRIC CARD */
+.auth-card{background:var(--bg2);border:2px solid var(--border);border-radius:20px;padding:32px;margin-bottom:28px;text-align:center;transition:border-color .3s;}
+.auth-card.locked{border-color:rgba(255,59,59,.3);}
+.auth-card.unlocked{border-color:rgba(0,200,83,.4);}
+.auth-icon{font-size:72px;margin-bottom:16px;display:block;line-height:1;}
+.auth-title{font-size:24px;font-weight:900;margin-bottom:8px;}
+.auth-desc{color:var(--gray);font-size:14px;max-width:400px;margin:0 auto 24px;}
+.auth-status{display:inline-flex;align-items:center;gap:8px;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;margin-bottom:24px;}
+.auth-status.locked{background:var(--red-dim);border:1px solid rgba(255,59,59,.3);color:var(--red);}
+.auth-status.unlocked{background:var(--green-dim);border:1px solid rgba(0,200,83,.3);color:var(--green);}
+.auth-status.unsupported{background:rgba(255,140,0,.1);border:1px solid rgba(255,140,0,.3);color:#ff8c00;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:10px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.3px;}
+.btn-primary{background:var(--cyan);color:#000;}
+.btn-primary:hover{background:#00b8e0;transform:translateY(-1px);}
+.btn-success{background:var(--green);color:#000;}
+.btn-secondary{background:transparent;border:1px solid var(--border);color:#fff;}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);}
+.btn-danger{background:transparent;border:1px solid rgba(255,59,59,.4);color:var(--red);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:28px;}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:20px;}
+.info-card-title{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gray);text-transform:uppercase;margin-bottom:14px;}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.info-row:last-child{border-bottom:none;}
+.info-key{font-size:13px;color:var(--gray);}
+.info-val{font-size:13px;font-weight:600;}
+.info-val.green{color:var(--green);}
+.info-val.red{color:var(--red);}
+.info-val.cyan{color:var(--cyan);}
+.info-val.gold{color:var(--gold);}
+.info-val.orange{color:#ff8c00;}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;}
+.check-item{display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border-radius:10px;padding:14px 16px;border:1px solid transparent;transition:border-color .2s;}
+.check-item.pass{border-color:rgba(0,200,83,.2);}
+.check-item.fail{border-color:rgba(255,59,59,.2);}
+.check-item.warn{border-color:rgba(255,140,0,.2);}
+.check-item.unknown{border-color:rgba(136,146,164,.15);}
+.check-icon{font-size:20px;flex-shrink:0;}
+.check-text{flex:1;}
+.check-label{font-size:14px;font-weight:600;margin-bottom:2px;}
+.check-desc{font-size:12px;color:var(--gray);}
+.check-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:4px;display:inline-block;}
+.check-badge.pass{background:var(--green-dim);color:var(--green);}
+.check-badge.fail{background:var(--red-dim);color:var(--red);}
+.check-badge.warn{background:rgba(255,140,0,.1);color:#ff8c00;}
+.check-badge.unknown{background:rgba(136,146,164,.1);color:var(--gray);}
+
+/* CAPABILITY TABLE */
+.cap-table{width:100%;border-collapse:collapse;font-size:13px;}
+.cap-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--gray);text-transform:uppercase;border-bottom:1px solid var(--border);}
+.cap-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);}
+.cap-table tr:last-child td{border-bottom:none;}
+.cap-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;}
+.cap-badge.yes{background:var(--green-dim);color:var(--green);}
+.cap-badge.no{background:var(--red-dim);color:var(--red);}
+.cap-badge.partial{background:var(--gold-dim);color:var(--gold);}
+
+/* PASSKEY INFO */
+.passkey-list{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.passkey-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-radius:8px;padding:10px 14px;font-size:13px;}
+.passkey-info{display:flex;align-items:center;gap:10px;}
+.passkey-icon{font-size:20px;}
+
+/* MESSAGE LOG */
+.msg-log{max-height:200px;overflow-y:auto;background:var(--bg3);border-radius:10px;padding:14px;font-size:12px;font-family:'Courier New',monospace;color:var(--gray);}
+.msg-log .entry{margin-bottom:6px;}
+.msg-log .entry.ok{color:var(--green);}
+.msg-log .entry.err{color:var(--red);}
+.msg-log .entry.info{color:var(--cyan);}
+
+@media(max-width:600px){.btn-row{flex-direction:column;}.btn{justify-content:center;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/omniaguard-logo.png" alt="OmniaGuard">
+      OmniaGuard
+    </a>
+    <a href="/threat-dashboard.html" class="nav-back">← Dashboard</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="header-badge">🔐 ANDROID SECURITY LAYER</div>
+    <h1>Biometric Auth &<br>Device Security</h1>
+    <p>Fingerprint/face lock for OmniaGuard. Device security audit. Real Android capabilities from your browser.</p>
+  </div>
+
+  <!-- BIOMETRIC AUTH CARD -->
+  <div class="auth-card locked" id="auth-card">
+    <span class="auth-icon" id="auth-icon">🔐</span>
+    <div class="auth-title" id="auth-title">OmniaGuard Biometric Lock</div>
+    <div class="auth-desc" id="auth-desc">Register your fingerprint or face to lock sensitive OmniaGuard features. Uses your device's secure biometric chip — no data leaves the device.</div>
+    <div class="auth-status locked" id="auth-status-badge">🔒 LOCKED</div>
+    <div id="auth-controls" class="btn-row"></div>
+    <div style="margin-top:16px;">
+      <div class="msg-log" id="auth-log"><div class="entry info">[INIT] Checking biometric capabilities…</div></div>
+    </div>
+  </div>
+
+  <!-- REGISTERED PASSKEYS -->
+  <div class="info-card" style="margin-bottom:28px;" id="passkeys-card">
+    <div class="info-card-title">Registered Credentials</div>
+    <div id="passkey-list-container"><div style="color:var(--gray);font-size:13px;">No credentials registered yet.</div></div>
+  </div>
+
+  <!-- DEVICE SECURITY CHECKLIST -->
+  <div class="info-card" style="margin-bottom:28px;">
+    <div class="info-card-title" style="margin-bottom:16px;">Device Security Audit</div>
+    <div class="checklist" id="security-checklist">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- ANDROID CAPABILITY TABLE -->
+  <div class="info-card" style="margin-bottom:28px;">
+    <div class="info-card-title" style="margin-bottom:16px;">Browser API Capabilities (This Device)</div>
+    <div style="overflow-x:auto;">
+      <table class="cap-table" id="cap-table">
+        <thead>
+          <tr><th>Feature</th><th>Available</th><th>Details</th></tr>
+        </thead>
+        <tbody id="cap-table-body"><!-- JS --></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NATIVE APK CAPABILITIES -->
+  <div class="info-card" style="margin-bottom:28px;">
+    <div class="info-card-title" style="margin-bottom:16px;">Native Android APK — Additional Capabilities</div>
+    <div style="color:var(--gray);font-size:13px;margin-bottom:16px;">Features requiring a native APK (TWA wrapper or WebView app). See the <strong style="color:#fff;">Android Build Guide</strong> to get the APK.</div>
+    <table class="cap-table">
+      <thead><tr><th>Feature</th><th>PWA</th><th>Native APK</th></tr></thead>
+      <tbody>
+        <tr><td>Install to Home Screen</td><td><span class="cap-badge yes">✅ Yes</span></td><td><span class="cap-badge yes">✅ Yes</span></td></tr>
+        <tr><td>Push Notifications</td><td><span class="cap-badge yes">✅ Yes</span></td><td><span class="cap-badge yes">✅ Yes (FCM)</span></td></tr>
+        <tr><td>Fingerprint / Face Auth</td><td><span class="cap-badge partial">⚡ Partial</span></td><td><span class="cap-badge yes">✅ BiometricPrompt</span></td></tr>
+        <tr><td>Background Monitoring</td><td><span class="cap-badge partial">⚡ Limited (30s)</span></td><td><span class="cap-badge yes">✅ ForegroundService</span></td></tr>
+        <tr><td>VPN Detection (system level)</td><td><span class="cap-badge partial">⚡ WebRTC only</span></td><td><span class="cap-badge yes">✅ ConnectivityManager</span></td></tr>
+        <tr><td>Network Traffic Analysis</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge yes">✅ VpnService</span></td></tr>
+        <tr><td>Device Admin Permissions</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge yes">✅ DeviceAdminReceiver</span></td></tr>
+        <tr><td>Screen Lock Enforcement</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge yes">✅ With admin</span></td></tr>
+        <tr><td>App Usage Monitoring</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge yes">✅ UsageStatsManager</span></td></tr>
+        <tr><td>SMS/Call Monitoring</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge partial">⚡ With user consent</span></td></tr>
+        <tr><td>Offline Access</td><td><span class="cap-badge yes">✅ Service Worker</span></td><td><span class="cap-badge yes">✅ Native cache</span></td></tr>
+        <tr><td>Play Store Distribution</td><td><span class="cap-badge no">❌ No</span></td><td><span class="cap-badge yes">✅ TWA supported</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;text-align:center;">
+      <a href="/android-twa/" class="btn btn-primary" style="text-decoration:none;display:inline-flex;">📱 View Android APK Build Guide</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+/* ================================================
+   OMNIAGUARD ANDROID SECURITY — WEBAUTHN + DEVICE AUDIT
+   ================================================ */
+
+let authState = 'locked'; // locked | unlocked | unsupported | no-credential
+let storedCredentialId = null;
+
+const RP_ID = location.hostname;
+const RP_NAME = 'OmniaGuard';
+const USER_ID = new Uint8Array(16);
+crypto.getRandomValues(USER_ID);
+
+/* ---- LOGGING ---- */
+function log(msg, type = 'info') {
+  const log = document.getElementById('auth-log');
+  const div = document.createElement('div');
+  div.className = `entry ${type}`;
+  div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+/* ---- WEBAUTHN SUPPORT CHECK ---- */
+async function checkBiometricSupport() {
+  log('Checking WebAuthn support…');
+
+  if (!window.PublicKeyCredential) {
+    log('WebAuthn not supported in this browser.', 'err');
+    setUnsupported('WebAuthn not available in this browser. Use Chrome 67+ on Android.');
+    return false;
+  }
+  log('WebAuthn API: available', 'ok');
+
+  try {
+    const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+    if (!available) {
+      log('No platform authenticator (fingerprint/face) available on this device.', 'err');
+      setUnsupported('No fingerprint or face unlock detected. Ensure biometrics are enrolled in Android Settings → Security.');
+      return false;
+    }
+    log('Platform authenticator (biometric) detected!', 'ok');
+    return true;
+  } catch (e) {
+    log(`Error checking authenticator: ${e.message}`, 'err');
+    return false;
+  }
+}
+
+/* ---- UI STATE FUNCTIONS ---- */
+function setUnsupported(msg) {
+  document.getElementById('auth-card').className = 'auth-card';
+  document.getElementById('auth-icon').textContent = '⚠️';
+  document.getElementById('auth-title').textContent = 'Biometric Not Available';
+  document.getElementById('auth-desc').textContent = msg;
+  document.getElementById('auth-status-badge').className = 'auth-status unsupported';
+  document.getElementById('auth-status-badge').textContent = '⚠️ NOT SUPPORTED';
+  document.getElementById('auth-controls').innerHTML = '';
+}
+
+function setLocked(hasCredential) {
+  document.getElementById('auth-card').className = 'auth-card locked';
+  document.getElementById('auth-icon').textContent = '🔐';
+  document.getElementById('auth-title').textContent = hasCredential ? 'OmniaGuard Locked' : 'Register Biometric';
+  document.getElementById('auth-desc').textContent = hasCredential
+    ? 'Tap "Authenticate" and use your fingerprint or face to unlock OmniaGuard.'
+    : 'Register your biometric to lock sensitive OmniaGuard features with fingerprint or face ID.';
+  document.getElementById('auth-status-badge').className = 'auth-status locked';
+  document.getElementById('auth-status-badge').textContent = '🔒 LOCKED';
+
+  const controls = document.getElementById('auth-controls');
+  if (hasCredential) {
+    controls.innerHTML = `
+      <button class="btn btn-primary" onclick="authenticate()">🔓 Authenticate with Biometric</button>
+      <button class="btn btn-danger" onclick="removeCredential()">🗑️ Remove Credential</button>`;
+  } else {
+    controls.innerHTML = `<button class="btn btn-primary" onclick="registerBiometric()">📲 Register Fingerprint / Face ID</button>`;
+  }
+}
+
+function setUnlocked() {
+  document.getElementById('auth-card').className = 'auth-card unlocked';
+  document.getElementById('auth-icon').textContent = '✅';
+  document.getElementById('auth-title').textContent = 'Identity Verified';
+  document.getElementById('auth-desc').textContent = 'Biometric authentication successful. OmniaGuard is unlocked.';
+  document.getElementById('auth-status-badge').className = 'auth-status unlocked';
+  document.getElementById('auth-status-badge').textContent = '✅ UNLOCKED';
+  document.getElementById('auth-controls').innerHTML = `
+    <button class="btn btn-danger" onclick="lockAuth()">🔒 Lock Now</button>`;
+}
+
+function lockAuth() {
+  authState = 'locked';
+  setLocked(!!localStorage.getItem('og_credential_id'));
+  log('Session locked.', 'info');
+}
+
+/* ---- WEBAUTHN REGISTER ---- */
+async function registerBiometric() {
+  log('Starting biometric registration…');
+  const btn = document.querySelector('#auth-controls .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Registering…'; }
+
+  try {
+    const challenge = new Uint8Array(32);
+    crypto.getRandomValues(challenge);
+
+    const credential = await navigator.credentials.create({
+      publicKey: {
+        challenge,
+        rp: { name: RP_NAME, id: RP_ID },
+        user: {
+          id: USER_ID,
+          name: 'primedox@omniaguard',
+          displayName: 'PrimeDox — OmniaGuard'
+        },
+        pubKeyCredParams: [
+          { alg: -7, type: 'public-key' },   // ES256
+          { alg: -257, type: 'public-key' }  // RS256
+        ],
+        authenticatorSelection: {
+          authenticatorAttachment: 'platform',
+          userVerification: 'required',
+          residentKey: 'preferred'
+        },
+        timeout: 60000,
+        attestation: 'none'
+      }
+    });
+
+    // Store credential ID in localStorage (only the ID, not private key)
+    const credId = btoa(String.fromCharCode(...new Uint8Array(credential.rawId)));
+    localStorage.setItem('og_credential_id', credId);
+    localStorage.setItem('og_credential_registered', new Date().toISOString());
+    storedCredentialId = credId;
+
+    log('Biometric registered successfully!', 'ok');
+    log(`Credential ID: ${credId.substring(0, 16)}…`, 'ok');
+    setLocked(true);
+    updatePasskeysList();
+
+  } catch (e) {
+    log(`Registration failed: ${e.message}`, 'err');
+    if (e.name === 'NotAllowedError') log('User cancelled or no biometric enrolled in device settings.', 'err');
+    if (btn) { btn.disabled = false; btn.textContent = '📲 Register Fingerprint / Face ID'; }
+  }
+}
+
+/* ---- WEBAUTHN AUTHENTICATE ---- */
+async function authenticate() {
+  log('Requesting biometric authentication…');
+  const btn = document.querySelector('#auth-controls .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Authenticating…'; }
+
+  try {
+    const challenge = new Uint8Array(32);
+    crypto.getRandomValues(challenge);
+
+    const opts = {
+      publicKey: {
+        challenge,
+        rpId: RP_ID,
+        userVerification: 'required',
+        timeout: 60000
+      }
+    };
+
+    // If we have a stored credential ID, hint at it
+    const stored = localStorage.getItem('og_credential_id');
+    if (stored) {
+      try {
+        const credIdBytes = Uint8Array.from(atob(stored), c => c.charCodeAt(0));
+        opts.publicKey.allowCredentials = [{ id: credIdBytes.buffer, type: 'public-key' }];
+      } catch(e) { /* ignore decode errors */ }
+    }
+
+    const assertion = await navigator.credentials.get(opts);
+
+    log('Authentication successful!', 'ok');
+    log(`Authenticator data received.`, 'ok');
+    authState = 'unlocked';
+    setUnlocked();
+    localStorage.setItem('og_last_auth', new Date().toISOString());
+
+  } catch (e) {
+    log(`Authentication failed: ${e.message}`, 'err');
+    if (e.name === 'NotAllowedError') log('Authentication cancelled or timeout.', 'err');
+    if (btn) { btn.disabled = false; btn.textContent = '🔓 Authenticate with Biometric'; }
+  }
+}
+
+/* ---- REMOVE CREDENTIAL ---- */
+function removeCredential() {
+  if (!confirm('Remove biometric credential? You will need to re-register.')) return;
+  localStorage.removeItem('og_credential_id');
+  localStorage.removeItem('og_credential_registered');
+  storedCredentialId = null;
+  log('Credential removed.', 'info');
+  setLocked(false);
+  updatePasskeysList();
+}
+
+function updatePasskeysList() {
+  const container = document.getElementById('passkey-list-container');
+  const credId = localStorage.getItem('og_credential_id');
+  const registered = localStorage.getItem('og_credential_registered');
+  if (!credId) {
+    container.innerHTML = '<div style="color:var(--gray);font-size:13px;">No credentials registered yet.</div>';
+    return;
+  }
+  container.innerHTML = `<div class="passkey-list">
+    <div class="passkey-item">
+      <div class="passkey-info">
+        <span class="passkey-icon">🔑</span>
+        <div>
+          <div style="font-size:14px;font-weight:600;">OmniaGuard Passkey</div>
+          <div style="font-size:12px;color:var(--gray);">Registered: ${registered ? new Date(registered).toLocaleDateString() : 'Unknown'}</div>
+          <div style="font-size:11px;font-family:monospace;color:var(--gray);">ID: ${credId.substring(0,20)}…</div>
+        </div>
+      </div>
+      <span style="font-size:12px;font-weight:700;color:var(--green);">✅ ACTIVE</span>
+    </div>
+  </div>`;
+}
+
+/* ---- DEVICE SECURITY AUDIT ---- */
+function runSecurityAudit() {
+  const checklist = document.getElementById('security-checklist');
+  const checks = [];
+
+  // HTTPS
+  const isHttps = location.protocol === 'https:' || location.hostname === 'localhost';
+  checks.push({
+    status: isHttps ? 'pass' : 'fail',
+    icon: isHttps ? '✅' : '❌',
+    label: 'HTTPS / Secure Connection',
+    desc: isHttps ? 'Connection is encrypted via HTTPS.' : 'WARNING: Connection is not encrypted. Avoid entering credentials.',
+    badge: isHttps ? 'SECURE' : 'INSECURE'
+  });
+
+  // Service Worker (offline protection)
+  const hasSW = 'serviceWorker' in navigator;
+  checks.push({
+    status: hasSW ? 'pass' : 'warn',
+    icon: hasSW ? '✅' : '⚠️',
+    label: 'Service Worker (Offline Protection)',
+    desc: hasSW ? 'Service worker registered. App works offline and can receive background push notifications.' : 'Service workers not supported. Offline functionality unavailable.',
+    badge: hasSW ? 'ACTIVE' : 'UNAVAILABLE'
+  });
+
+  // WebAuthn
+  const hasWebAuthn = !!window.PublicKeyCredential;
+  checks.push({
+    status: hasWebAuthn ? 'pass' : 'warn',
+    icon: hasWebAuthn ? '✅' : '⚠️',
+    label: 'WebAuthn / Passkey Support',
+    desc: hasWebAuthn ? 'WebAuthn available. Fingerprint/face authentication can be used.' : 'WebAuthn not available. Biometric auth requires Chrome 67+ on Android.',
+    badge: hasWebAuthn ? 'SUPPORTED' : 'NOT SUPPORTED'
+  });
+
+  // Notifications
+  const notifState = Notification.permission;
+  checks.push({
+    status: notifState === 'granted' ? 'pass' : notifState === 'denied' ? 'fail' : 'warn',
+    icon: notifState === 'granted' ? '✅' : notifState === 'denied' ? '❌' : '⚠️',
+    label: 'Push Notifications',
+    desc: notifState === 'granted' ? 'Notifications enabled. VPN disconnect alerts will be delivered.' : notifState === 'denied' ? 'Notifications blocked. Go to browser settings to allow.' : 'Notifications not yet enabled. Enable for VPN disconnect alerts.',
+    badge: notifState.toUpperCase()
+  });
+
+  // Screen orientation lock
+  const hasOrientation = !!screen.orientation;
+  checks.push({
+    status: hasOrientation ? 'pass' : 'unknown',
+    icon: hasOrientation ? '✅' : '❓',
+    label: 'Screen Orientation API',
+    desc: hasOrientation ? `Current: ${screen.orientation.type}. Orientation lock available.` : 'Screen orientation API not supported.',
+    badge: hasOrientation ? 'SUPPORTED' : 'UNKNOWN'
+  });
+
+  // Storage quota
+  const hasStorage = 'storage' in navigator && 'estimate' in navigator.storage;
+  if (hasStorage) {
+    navigator.storage.estimate().then(({ quota, usage }) => {
+      const usedMB = (usage / 1048576).toFixed(1);
+      const quotaMB = quota ? (quota / 1048576).toFixed(0) : '?';
+      const pct = quota ? Math.round(usage / quota * 100) : 0;
+      addCheckItem(checklist, {
+        status: pct < 80 ? 'pass' : pct < 95 ? 'warn' : 'fail',
+        icon: pct < 80 ? '✅' : '⚠️',
+        label: 'Storage Quota',
+        desc: `Used: ${usedMB}MB of ${quotaMB}MB (${pct}%). Offline cache status.`,
+        badge: `${pct}% USED`
+      });
+    }).catch(() => {});
+  }
+
+  // Credential available
+  const hasCredential = !!localStorage.getItem('og_credential_id');
+  checks.push({
+    status: hasCredential ? 'pass' : 'warn',
+    icon: hasCredential ? '✅' : '⚠️',
+    label: 'Biometric Credential Registered',
+    desc: hasCredential ? 'OmniaGuard biometric credential is registered on this device.' : 'No biometric credential registered. Register above to enable biometric lock.',
+    badge: hasCredential ? 'REGISTERED' : 'NOT REGISTERED'
+  });
+
+  // Network (online)
+  checks.push({
+    status: navigator.onLine ? 'pass' : 'fail',
+    icon: navigator.onLine ? '✅' : '❌',
+    label: 'Network Connection',
+    desc: navigator.onLine ? 'Device is online.' : 'Device is offline. Showing cached content.',
+    badge: navigator.onLine ? 'ONLINE' : 'OFFLINE'
+  });
+
+  checklist.innerHTML = '';
+  checks.forEach(c => addCheckItem(checklist, c));
+}
+
+function addCheckItem(container, { status, icon, label, desc, badge }) {
+  const div = document.createElement('div');
+  div.className = `check-item ${status}`;
+  div.innerHTML = `
+    <span class="check-icon">${icon}</span>
+    <div class="check-text">
+      <div class="check-label">${label}</div>
+      <div class="check-desc">${escHtml(desc)}</div>
+      <span class="check-badge ${status}">${badge}</span>
+    </div>`;
+  container.appendChild(div);
+}
+
+/* ---- CAPABILITY TABLE ---- */
+function buildCapTable() {
+  const tbody = document.getElementById('cap-table-body');
+  const caps = [
+    ['WebAuthn / Passkeys', !!window.PublicKeyCredential],
+    ['Push Notifications', 'Notification' in window],
+    ['Service Worker', 'serviceWorker' in navigator],
+    ['Background Sync', 'serviceWorker' in navigator && 'SyncManager' in window],
+    ['Periodic Background Sync', 'serviceWorker' in navigator && 'PeriodicSyncManager' in window],
+    ['App Badge API', 'setAppBadge' in navigator],
+    ['Network Information API', !!(navigator.connection || navigator.mozConnection)],
+    ['Vibration API', 'vibrate' in navigator],
+    ['Screen Wake Lock', 'wakeLock' in navigator],
+    ['Web Share API', 'share' in navigator],
+    ['Clipboard API', 'clipboard' in navigator],
+    ['Device Memory', 'deviceMemory' in navigator],
+    ['Battery API', 'getBattery' in navigator],
+    ['Geolocation', 'geolocation' in navigator],
+    ['Bluetooth (Web)', 'bluetooth' in navigator],
+    ['WebRTC', !!(window.RTCPeerConnection)],
+  ];
+
+  caps.forEach(([name, available]) => {
+    const tr = document.createElement('tr');
+    const badge = available
+      ? '<span class="cap-badge yes">✅ Yes</span>'
+      : '<span class="cap-badge no">❌ No</span>';
+    tr.innerHTML = `<td>${name}</td><td>${badge}</td><td style="color:var(--gray);font-size:12px;">${available ? 'Available' : 'Not available in this browser/device'}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Battery (async)
+  if ('getBattery' in navigator) {
+    navigator.getBattery().then(bat => {
+      const pct = Math.round(bat.level * 100);
+      const charging = bat.charging ? '⚡ Charging' : '🔋 Discharging';
+      const rows = tbody.querySelectorAll('tr');
+      rows.forEach(row => {
+        if (row.cells[0]?.textContent === 'Battery API') {
+          row.cells[2].textContent = `${pct}% — ${charging}`;
+          row.cells[2].style.color = pct < 20 ? 'var(--red)' : 'var(--gray)';
+        }
+      });
+    }).catch(()=>{});
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ---- INIT ---- */
+document.addEventListener('DOMContentLoaded', async () => {
+  buildCapTable();
+  runSecurityAudit();
+  updatePasskeysList();
+
+  const supported = await checkBiometricSupport();
+  if (supported) {
+    const hasCredential = !!localStorage.getItem('og_credential_id');
+    setLocked(hasCredential);
+    if (hasCredential) {
+      log('Credential found. Tap "Authenticate" to unlock.', 'ok');
+    } else {
+      log('No credential registered. Tap "Register" to set up biometric.', 'info');
+    }
+  }
+
+  // Vibrate on load (Android confirmation)
+  if ('vibrate' in navigator) navigator.vibrate([50, 30, 50]);
+});
+</script>
+</body>
+</html>

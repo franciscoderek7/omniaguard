@@ -1,37 +1,96 @@
 {
-  "name": "OmniaGuard — AI Security",
+  "name": "OmniaGuard AI Security",
   "short_name": "OmniaGuard",
-  "description": "Enterprise AI agent protection. 14-layer security stack. Zero prompt injection guarantee.",
-  "start_url": "/",
+  "description": "14-layer AI Agent Swarm defense. Real-time VPN monitoring, biometric auth, threat intelligence.",
+  "start_url": "/?source=pwa",
   "display": "standalone",
-  "background_color": "#080c14",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#0a0a14",
   "theme_color": "#00d4ff",
-  "orientation": "portrait-primary",
-  "categories": ["security", "business", "productivity"],
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "id": "omniaguard-pwa",
   "icons": [
     {
-      "src": "app/icon-192.png",
+      "src": "omniaguard-logo.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "app/icon-512.png",
+      "src": "omniaguard-logo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "View Pricing",
-      "url": "/#pricing",
-      "description": "See all OmniaGuard protection tiers"
+      "purpose": "any"
     },
     {
-      "name": "Contact Us",
-      "url": "/contact.html",
-      "description": "Get in touch with our security team"
+      "src": "omniaguard-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "omniaguard-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "robot-350.jpg",
+      "sizes": "350x350",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "OmniaGuard — AI Security Defense"
+    }
+  ],
+  "categories": ["security", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Threat Dashboard",
+      "short_name": "Dashboard",
+      "url": "/threat-dashboard.html?source=shortcut",
+      "description": "View live threat feed and privacy score",
+      "icons": [{ "src": "omniaguard-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "VPN Monitor",
+      "short_name": "VPN",
+      "url": "/vpn-monitor.html?source=shortcut",
+      "description": "Real-time VPN status and network monitoring",
+      "icons": [{ "src": "omniaguard-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "PrimeDox Portal",
+      "short_name": "Portal",
+      "url": "/primedox-portal.html?source=shortcut",
+      "description": "AI Charter defense portal",
+      "icons": [{ "src": "omniaguard-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Biometric Lock",
+      "short_name": "Biometric",
+      "url": "/android-security.html?source=shortcut",
+      "description": "Fingerprint and face authentication",
+      "icons": [{ "src": "omniaguard-logo.png", "sizes": "96x96" }]
+    }
+  ],
+  "share_target": {
+    "action": "/threat-dashboard.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://omniaguard.com/manifest.json"
     }
   ]
 }
