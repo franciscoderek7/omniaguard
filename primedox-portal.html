@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, viewport-fit=cover">
 <title>PrimeDox Defense Portal — OmniaGuard</title>
 <meta name="description" content="PrimeDox AI Constitutional Defense Portal. Charter rights quick reference, 12-appearance sovereignty framework, and emergency document generator.">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#00d4ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<link rel="apple-touch-icon" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/omniaguard-logo.png">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -16,7 +18,7 @@ body{background:#0a0a14;color:#fff;font-family:system-ui,-apple-system,sans-seri
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
 a{color:#00d4ff;text-decoration:none;}
 /* NAV */
-nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.18);padding:0 24px;}
+nav{position:sticky;top:0;padding-top:env(safe-area-inset-top);z-index:1000;background:rgba(10,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.18);padding:0 24px;}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px;}
 .nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.4px;}
 .nav-logo img{width:34px;height:34px;border-radius:6px;}

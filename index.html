@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script src="https://js.stripe.com/v3/"></script>
 <script>var stripePublicKey = "pk_live_51TG0cIASsTLqnu8VNnDoJjPYgVz73h2lpqhcS1E9bGLGHYl8t6NAvJdri1zk2radt3jb5G0DYuuCMXtNvA81UNeg00RvGs96kz";</script>
 <title>OmniaGuard — AI Cybersecurity Platform | Zero Prompt Injection Guarantee</title>
@@ -13,6 +13,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<link rel="apple-touch-icon" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/omniaguard-logo.png">
 <style>
 :root {
   --bg: #0a0a14;
@@ -34,7 +39,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;/* iOS home indicator safe area */padding-bottom:env(safe-area-inset-bottom);}
 
 /* GRID BG */
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;animation:gridPulse 8s ease-in-out infinite;}
@@ -44,11 +49,12 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--cyan),var(--gold));z-index:9999;transition:width .1s linear;}
 
 /* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;}
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;/* iOS safe area — extends nav bg under status bar */padding-top:env(safe-area-inset-top);}
 nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px;}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:20px;font-weight:800;letter-spacing:-.5px;}
-.nav-logo-icon{width:38px;height:38px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;min-width:0;}
+.nav-logo-icon{width:34px;height:34px;flex-shrink:0;}
+.nav-og-badge{display:none;font-size:9px;font-weight:900;letter-spacing:1.5px;background:var(--cyan);color:#000;padding:2px 6px;border-radius:4px;line-height:1.4;}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
 .nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;letter-spacing:.4px;transition:color .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--cyan);transition:width .25s;}
@@ -57,10 +63,10 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .nav-cta{background:var(--cyan)!important;color:#000!important;font-weight:700!important;padding:9px 20px;border-radius:6px;box-shadow:0 0 20px rgba(0,212,255,0.3);transition:all .2s!important;}
 .nav-cta::after{display:none!important;}
 .nav-cta:hover{background:#33ddff!important;box-shadow:0 0 30px rgba(0,212,255,0.5)!important;color:#000!important;}
-.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;}
+.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;flex-shrink:0;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
 
 /* MOBILE OVERLAY */
-#mobile-overlay{display:none;position:fixed;top:70px;left:0;width:100%;height:calc(100vh - 70px);background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto;}
+#mobile-overlay{display:none;position:fixed;top:0;padding-top:calc(64px + env(safe-area-inset-top));left:0;width:100%;height:100%;background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding-left:24px;padding-right:24px;padding-bottom:calc(24px + env(safe-area-inset-bottom));gap:0;overflow-y:auto;}
 #mobile-overlay.open{display:flex;}
 #mobile-overlay a{color:var(--white);text-decoration:none;font-size:18px;font-weight:600;padding:18px 0;border-bottom:1px solid var(--gray2);display:block;transition:color .2s;}
 #mobile-overlay a:hover{color:var(--cyan);}
@@ -389,7 +395,10 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 }
 @media(max-width:768px){
   .nav-links{display:none;}
-  .nav-mobile-toggle{display:block;}
+  .nav-mobile-toggle{display:flex;}
+  .nav-og-badge{display:inline-block;}
+  .nav-logo{font-size:16px;gap:8px;}
+  .nav-logo-icon{width:30px;height:30px;}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-grid{grid-template-columns:1fr;}
   .pricing-grid-bottom{grid-template-columns:1fr;}
@@ -422,7 +431,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="OmniaGuard Home">
       <img src="omniaguard-logo.png" alt="OmniaGuard Shield" class="nav-logo-icon" style="border-radius:6px;">
-      OmniaGuard
+      OmniaGuard<span class="nav-og-badge">AI</span>
     </a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#swarm-section">Features</a></li>
@@ -430,6 +439,9 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <li><a href="#faq">FAQ</a></li>
       <li><a href="ecosystem.html">Ecosystem</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="threat-dashboard.html">Dashboard</a></li>
+      <li><a href="primedox-portal.html">PrimeDox</a></li>
+      <li><a href="install-guide.html">Install</a></li>
       <li><a href="#pricing" class="nav-cta">Get Protected</a></li>
     </ul>
     <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
@@ -443,6 +455,9 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <a href="#faq">FAQ</a>
   <a href="ecosystem.html">Ecosystem</a>
   <a href="contact.html">Contact</a>
+  <a href="threat-dashboard.html">Dashboard</a>
+  <a href="primedox-portal.html">PrimeDox</a>
+  <a href="install-guide.html">Install</a>
   <a href="#pricing" class="mobile-cta">Get Protected</a>
 </div>
 
@@ -2749,5 +2764,6 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
   </div>
 </div>
 
+<script src="/app.js" defer></script>
 </body>
 </html>
