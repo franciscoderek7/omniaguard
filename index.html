@@ -360,6 +360,27 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 .not-legal{font-size:11px;color:rgba(138,138,154,0.6);margin-top:8px;max-width:600px;}
 
 /* RESPONSIVE */
+/* === HERO ROBOT OVERRIDES === */
+.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;}
+.hero-content{order:2;max-width:720px;}
+.hero-visual{order:1;width:100%;display:flex;justify-content:center;margin-bottom:32px;position:relative;border-radius:0;border:none;box-shadow:none;background:none;}
+.hero-visual img.hero-robot{width:auto;height:60vh;min-height:320px;max-height:600px;object-fit:contain;filter:drop-shadow(0 0 80px rgba(0,212,255,.55));animation:heroRobotFloat 5s ease-in-out infinite;border:none;border-radius:0;box-shadow:none;background:none;}
+@keyframes heroRobotFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+.hero-visual-badge{bottom:-20px;left:50%;transform:translateX(-50%);}
+.hero-sub{max-width:580px;margin:0 auto 40px;}
+.hero-ctas{justify-content:center;}
+.hero-proof{justify-content:center;}
+
+/* === DEFENSE FORCE FIXES — no text overlay === */
+/* Squad banner: text BELOW image, not on top */
+.df-squad-banner{overflow:visible;border-radius:16px;border:1px solid rgba(0,212,255,.2);margin-bottom:40px;}
+.df-squad-banner img{width:100%;max-height:380px;object-fit:contain;object-position:center top;display:block;border-radius:16px 16px 0 0;background:#0a0a14;}
+.df-squad-overlay{position:static;background:rgba(13,13,26,.9);border-radius:0 0 16px 16px;border-top:1px solid rgba(0,212,255,.15);padding:24px 28px;}
+/* Agent cards: text BELOW image, no absolute overlay */
+.df-agent-card{display:flex;flex-direction:column;}
+.df-agent-card img{height:300px;object-fit:contain;object-position:center top;background:#0a0a14;flex-shrink:0;}
+.df-agent-label{position:static;background:rgba(13,13,26,.9);padding:16px 20px;border-top:1px solid rgba(0,212,255,.12);border-radius:0 0 14px 14px;}
+
 @media(max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-grid{grid-template-columns:repeat(2,1fr);}
@@ -437,7 +458,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <span class="threat-pill-dot"></span>
           <span id="hero-threat-count">1,247,832</span>&nbsp;threats blocked today — and counting
         </div>
-        <h1>The Only AI Security Platform<br>With a <span>Zero Prompt Injection</span><br>Guarantee</h1>
+        <h1>14 Agents.<br>One Guardian.<br><span>Zero Breach.</span></h1>
         <p class="hero-sub">
           <strong>14-layer Agent Swarm defense.</strong> Real-time threat intelligence across every deployment.
           <strong>0% breach rate</strong> — contractually guaranteed.
@@ -451,8 +472,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         </div>
       </div>
       <div class="hero-visual">
-        <img src="hero-ai.webp" alt="OmniaGuard AI Security Control Center — real-time threat monitoring across all AI agent deployments" loading="eager">
-        <div class="hero-visual-badge">⚡ LIVE THREAT MONITORING</div>
+        <img src="robot-350.jpg" alt="OmniaGuard Agent Prime — Silver AI Security Guardian" loading="eager" class="hero-robot">
+        <div class="hero-visual-badge">⚡ 14 AGENTS ACTIVE</div>
       </div>
     </div>
   </div>
@@ -587,7 +608,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <img src="agent-red.jpg" alt="OmniaGuard Threat Interceptor Agent" loading="lazy">
         <div class="df-agent-label">
           <div class="df-agent-name">Threat Interceptor</div>
-          <div class="df-agent-role">🔴 Active — Front-Line Injection Defense</div>
+          <div class="df-agent-role">🔴 Active — Front-Line Interception Defense</div>
         </div>
       </div>
       <div class="df-agent-card df-agent-gold">
