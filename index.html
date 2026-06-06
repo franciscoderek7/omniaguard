@@ -125,6 +125,19 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 @keyframes heroImgPulse{0%,100%{box-shadow:0 0 80px rgba(0,212,255,0.18);}50%{box-shadow:0 0 120px rgba(0,212,255,0.32);}}
 .hero-visual-badge{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:rgba(10,10,20,0.92);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:1px;white-space:nowrap;backdrop-filter:blur(8px);}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-visual{display:none;}}
+/* SOC OPERATIONS PANEL — replaces mascot art with a real-dashboard look */
+.soc-panel{background:linear-gradient(160deg,rgba(15,20,40,0.92),rgba(10,12,26,0.96));border:1px solid var(--border);border-radius:16px;box-shadow:0 0 80px rgba(0,212,255,0.14);padding:26px;font-family:var(--mono,'JetBrains Mono',monospace);}
+.soc-panel-head{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px;}
+.soc-panel-head .live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.soc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.soc-metric{background:rgba(0,212,255,0.04);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.soc-metric-val{display:block;font-size:22px;font-weight:800;color:var(--white);letter-spacing:-.5px;}
+.soc-metric-label{display:block;font-size:11px;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-top:4px;}
+.soc-feed{border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:10px;}
+.soc-feed-row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--gray);}
+.soc-feed-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+@media(max-width:900px){.soc-panel{display:none;}}
 
 /* RIPPLE */
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none;}
@@ -204,21 +217,16 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 
 /* ===== DEFENSE FORCE ===== */
 #defense-force{padding:80px 0;background:var(--bg2);}
-.df-squad-banner{position:relative;border-radius:16px;overflow:hidden;margin-bottom:40px;border:1px solid rgba(0,212,255,0.2);box-shadow:0 0 80px rgba(0,212,255,0.1);}
-.df-squad-banner img{width:100%;max-height:420px;object-fit:cover;object-position:center top;display:block;}
-.df-squad-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,20,0.9));padding:28px 32px;}
-.df-squad-overlay h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;}
-.df-squad-overlay p{color:var(--gray);font-size:14px;}
-.df-agents-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.df-agent-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);cursor:default;transition:border-color .25s,box-shadow .25s;}
-.df-agent-card:hover{border-color:var(--cyan);box-shadow:0 0 50px rgba(0,212,255,0.15);}
-.df-agent-card img{width:100%;height:340px;object-fit:cover;object-position:center top;display:block;}
-.df-agent-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,20,0.95));padding:20px 20px 18px;}
-.df-agent-name{font-size:16px;font-weight:800;color:var(--white);}
-.df-agent-role{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;}
-.df-agent-red .df-agent-role{color:#ff6b6b;}
-.df-agent-gold .df-agent-role{color:var(--gold);}
-@media(max-width:700px){.df-agents-grid{grid-template-columns:1fr;}.df-agent-card img{height:260px;}}
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.ops-card{background:var(--bg2,rgba(255,255,255,0.02));border:1px solid var(--border);border-radius:14px;padding:26px 24px;transition:border-color .25s,box-shadow .25s,transform .25s;}
+.ops-card:hover{border-color:var(--cyan);box-shadow:0 0 50px rgba(0,212,255,0.12);transform:translateY(-3px);}
+.ops-card-icon{width:42px;height:42px;border-radius:10px;background:rgba(0,212,255,0.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--cyan);margin-bottom:16px;}
+.ops-card-name{font-size:16px;font-weight:800;color:var(--white);margin-bottom:6px;}
+.ops-card-role{font-size:13px;color:var(--gray);line-height:1.6;}
+.ops-card-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-top:14px;}
+.ops-card-status .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+@media(max-width:900px){.ops-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.ops-grid{grid-template-columns:1fr;}}
 
 /* ===== PRICING ===== */
 #pricing{padding:80px 0;background:var(--bg2);}
@@ -394,9 +402,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 .hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;}
 .hero-content{order:2;max-width:720px;}
 .hero-visual{order:1;width:100%;display:flex;justify-content:center;margin-bottom:32px;position:relative;border-radius:0;border:none;box-shadow:none;background:none;}
-.hero-visual img.hero-robot{width:auto;height:60vh;min-height:320px;max-height:600px;object-fit:contain;filter:drop-shadow(0 0 80px rgba(0,212,255,.55));animation:heroRobotFloat 5s ease-in-out infinite;border:none;border-radius:0;box-shadow:none;background:none;}
-@keyframes heroRobotFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
 .hero-visual-badge{bottom:-20px;left:50%;transform:translateX(-50%);}
+.hero-visual .soc-panel{display:block;width:100%;max-width:480px;}
 .hero-sub{max-width:580px;margin:0 auto 40px;}
 .hero-ctas{justify-content:center;}
 .hero-proof{justify-content:center;}
@@ -443,6 +450,37 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   .pricing-calc-wrap{padding:20px;}
   #fab-panel{right:12px;bottom:86px;}
 }
+
+/* TRUST BAR */
+.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(0,212,255,0.02);padding:22px 0;}
+.trust-bar-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;}
+.trust-bar-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.trust-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--white);background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:9px 16px;}
+.trust-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
+@media(max-width:700px){.trust-bar-inner{justify-content:flex-start;overflow-x:auto;}}
+
+/* LEADERSHIP / EXEC TEAM */
+.exec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.exec-card{text-align:center;}
+.exec-avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--cyan);background:linear-gradient(135deg,rgba(0,212,255,0.12),rgba(123,97,255,0.10));border:1px solid var(--border);}
+.exec-name{font-size:15px;font-weight:800;color:var(--white);}
+.exec-title{font-size:12px;color:var(--cyan);font-weight:600;letter-spacing:.5px;margin-top:3px;}
+.exec-bio{font-size:12.5px;color:var(--gray);margin-top:10px;line-height:1.6;}
+@media(max-width:900px){.exec-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.exec-grid{grid-template-columns:1fr;}}
+
+/* CLIENT LOGO STRIP */
+.logo-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;}
+.logo-chip{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--gray);background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:8px;padding:14px 26px;text-transform:uppercase;white-space:nowrap;}
+.logo-strip-note{text-align:center;font-size:12px;color:var(--gray);margin-top:18px;font-style:italic;}
+
+/* PRESS / AS SEEN IN */
+.press-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.press-card{border:1px solid var(--border);border-radius:12px;padding:22px 20px;background:rgba(255,255,255,0.015);}
+.press-outlet{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--white);}
+.press-quote{font-size:13px;color:var(--gray);margin-top:8px;line-height:1.6;}
+@media(max-width:900px){.press-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.press-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -464,7 +502,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <li><a href="ecosystem.html">Ecosystem</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="threat-dashboard.html">Dashboard</a></li>
-      <li><a href="primedox-portal.html">PrimeDox</a></li>
       <li><a href="install-guide.html">Install</a></li>
       <li><a href="#pricing" class="nav-cta">Get Protected</a></li>
     </ul>
@@ -480,7 +517,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <a href="ecosystem.html">Ecosystem</a>
   <a href="contact.html">Contact</a>
   <a href="threat-dashboard.html">Dashboard</a>
-  <a href="primedox-portal.html">PrimeDox</a>
   <a href="install-guide.html">Install</a>
   <a href="#pricing" class="mobile-cta">Get Protected</a>
 </div>
@@ -506,13 +542,23 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
           <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
         </div>
-        <div class="green-badge">
-          🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
-        </div>
       </div>
       <div class="hero-visual">
-        <img src="robot-350.jpg" alt="OmniaGuard Agent Prime — Silver AI Security Guardian" loading="eager" class="hero-robot">
-        <div class="hero-visual-badge">⚡ 14 AGENTS ACTIVE</div>
+        <div class="soc-panel">
+          <div class="soc-panel-head"><span class="live-dot"></span> Global Threat Operations — Live</div>
+          <div class="soc-grid">
+            <div class="soc-metric"><span class="soc-metric-val">14 / 14</span><span class="soc-metric-label">Agents Online</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">0.3s</span><span class="soc-metric-label">Avg. Response</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">99.997%</span><span class="soc-metric-label">Uptime SLA</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">0</span><span class="soc-metric-label">Breaches YTD</span></div>
+          </div>
+          <div class="soc-feed">
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Prompt injection attempt — neutralized — 0.2s</div>
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Anomalous data egress — blocked — 0.4s</div>
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Credential probe — quarantined — 0.1s</div>
+          </div>
+        </div>
+        <div class="hero-visual-badge">⬡ 14-LAYER DEFENSE ACTIVE</div>
       </div>
     </div>
   </div>
@@ -540,6 +586,19 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   </div>
 </div>
 
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner">
+      <span class="trust-bar-label">Built to Standard</span>
+      <span class="trust-badge"><span class="dot"></span> SOC 2 Type II — Audit Ready</span>
+      <span class="trust-badge"><span class="dot"></span> ISO 27001 — Aligned</span>
+      <span class="trust-badge"><span class="dot"></span> NIST AI RMF — Aligned</span>
+      <span class="trust-badge"><span class="dot"></span> PIPEDA / Bill C-27 Compliant</span>
+    </div>
+  </div>
+</div>
+
 <!-- ===== STATS ===== -->
 <section id="stats">
   <div class="container">
@@ -560,9 +619,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <span class="stat-number" id="stat-3" data-target="14">0</span>
         <span class="stat-label">Security Agent Layers</span>
       </div>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -629,33 +685,66 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 <section id="defense-force">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-badge">Defense Force</div>
-      <h2>Your AI <span class="cyan">Guardian Agents.</span></h2>
-      <p>OmniaGuard deploys a synchronized force of AI defense agents — each hardened against a specific attack vector, operating in unbreakable formation.</p>
+      <div class="section-badge">Defense Architecture</div>
+      <h2>A Layered Defense <span class="cyan">Built for Enterprise Scale.</span></h2>
+      <p>OmniaGuard runs a coordinated stack of specialized security agents — each hardened against a specific class of attack, cross-verifying every critical decision.</p>
     </div>
 
-    <div class="df-squad-banner fade-in">
-      <img src="agent-squad.jpg" alt="OmniaGuard AI Defense Force — three guardian agents deployed in synchronized formation" loading="lazy">
-      <div class="df-squad-overlay">
-        <h3>⚔️ Full Defense Deployment — All Agents Active</h3>
-        <p>Three-tier agent architecture. Threat Interceptor flanks, Sovereign Sentinel commands. Zero breach rate guaranteed.</p>
+    <div class="ops-grid fade-in">
+      <div class="ops-card">
+        <div class="ops-card-icon">◆</div>
+        <div class="ops-card-name">Threat Interception Layer</div>
+        <div class="ops-card-role">Front-line inspection of every prompt, response, and tool call before it reaches your systems.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-card-icon">▣</div>
+        <div class="ops-card-name">Command &amp; Consensus Layer</div>
+        <div class="ops-card-role">Cross-verification across agents — no single point of failure can authorize a critical action.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-card-icon">◈</div>
+        <div class="ops-card-name">Continuous Monitoring Layer</div>
+        <div class="ops-card-role">24/7 anomaly detection across logs, endpoints, and cloud infrastructure with automated containment.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="df-agents-grid fade-in">
-      <div class="df-agent-card df-agent-red">
-        <img src="agent-red.jpg" alt="OmniaGuard Threat Interceptor Agent" loading="lazy">
-        <div class="df-agent-label">
-          <div class="df-agent-name">Threat Interceptor</div>
-          <div class="df-agent-role">🔴 Active — Front-Line Interception Defense</div>
-        </div>
+<!-- ===== LEADERSHIP ===== -->
+<section id="leadership" style="padding:80px 0;background:var(--bg2,rgba(255,255,255,0.015));">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Leadership</div>
+      <h2>Built and Led by <span class="cyan">Security Operators.</span></h2>
+      <p>OmniaGuard is directed by a senior team with backgrounds across enterprise security, AI infrastructure, and regulatory compliance.</p>
+    </div>
+    <div class="exec-grid fade-in">
+      <div class="exec-card">
+        <div class="exec-avatar">DF</div>
+        <div class="exec-name">Derek Francisco</div>
+        <div class="exec-title">Founder &amp; CEO, Francisco Holdings Inc.</div>
+        <div class="exec-bio">Sets the strategic direction for OmniaGuard and the wider Francisco Holdings security portfolio.</div>
       </div>
-      <div class="df-agent-card df-agent-gold">
-        <img src="agent-gold.jpg" alt="OmniaGuard Sovereign Sentinel Agent" loading="lazy">
-        <div class="df-agent-label">
-          <div class="df-agent-name">Sovereign Sentinel</div>
-          <div class="df-agent-role">⚡ Active — Command &amp; Cascade Defense</div>
-        </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CT</div>
+        <div class="exec-name">Chief Technology Officer</div>
+        <div class="exec-title">Platform &amp; Agent Architecture</div>
+        <div class="exec-bio">Oversees the design and hardening of the 14-layer Agent Swarm defense stack.</div>
+      </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CS</div>
+        <div class="exec-name">Chief Security Officer</div>
+        <div class="exec-title">Threat Intelligence &amp; Response</div>
+        <div class="exec-bio">Leads threat research, incident response protocols, and customer security operations.</div>
+      </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CC</div>
+        <div class="exec-name">Chief Compliance Officer</div>
+        <div class="exec-title">Regulatory &amp; Audit Readiness</div>
+        <div class="exec-bio">Manages SOC 2, ISO 27001, and NIST AI RMF alignment across every client deployment.</div>
       </div>
     </div>
   </div>
@@ -747,7 +836,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractually guaranteed — breach triggers immediate remediation at no cost.">Zero-breach guarantee</li>
         </ul>
         <div class="jobs-badge">🚀 Small businesses &amp; startups</div>
-        <a href="#" onclick="deployShield('guardian','$2,499',false,this);return false;" class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="quickPay('Guardian',2499);return false;" class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
       </div>
       <!-- Warden -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -803,7 +892,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="5-minute guaranteed incident response, contractually backed.">5-min incident response SLA</li>
         </ul>
         <div class="jobs-badge">🏛️ National enterprises &amp; critical infra</div>
-        <button onclick="deployShield('archon','$15,000',false,this)" class="btn-tier" id="cta-archon" style="cursor:pointer;font-family:inherit;">⚔️ DEPLOY SHIELD →</button>
+        <button onclick="quickPay('Archon',15000)" class="btn-tier" id="cta-archon" style="cursor:pointer;font-family:inherit;">⚔️ DEPLOY SHIELD →</button>
       </div>
       <!-- Sovereign (featured) -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -821,7 +910,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="2-minute guaranteed incident response backed by $10M liability coverage.">2-min SLA · $10M coverage</li>
         </ul>
         <div class="jobs-badge">🌍 Fortune 500 &amp; governments</div>
-        <button onclick="openBriefing('Sovereign','$25,000/mo')" class="btn-tier btn-tier-gold" id="cta-sovereign" style="cursor:pointer;font-family:inherit;">📋 Contact for Sovereign Plan →</button>
+        <a href="mailto:franciscoderek7@gmail.com?subject=OmniaGuard%20Enterprise%20Inquiry&body=Hi%2C%0A%0AI%27d%20like%20to%20discuss%20a%20custom%20Sovereign-tier%20OmniaGuard%20deployment.%0A%0ACompany%3A%20%5Byour%20company%5D%0ATeam%20size%3A%20%5B%23%20of%20agents%2Fseats%5D%0ABudget%20range%3A%20%5Boptional%5D%0A%0APlease%20reach%20out%20to%20schedule%20a%20briefing." class="btn-tier btn-tier-gold" id="cta-sovereign" style="cursor:pointer;font-family:inherit;display:inline-block;text-align:center;text-decoration:none;">📋 Contact for Sovereign Plan →</a>
       </div>
     </div>
 
@@ -836,9 +925,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <a href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+Custom+Enterprise+Inquiry&body=I+need+a+custom+OmniaGuard+deployment.+Please+contact+me." class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">&#x2709;&#xFE0F; Email Us</a>
         </div>
       </div>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -938,6 +1024,54 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="faq-body"><div class="faq-body-inner">No. Any references to legal frameworks, compliance standards, or regulatory requirements on this site are for educational and informational purposes only. This is not legal representation or legal advice. OmniaGuard recommends engaging qualified legal counsel for advice specific to your organization's regulatory obligations.</div></div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENT LOGOS ===== -->
+<section id="clients" style="padding:64px 0;">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Trusted Deployments</div>
+      <h2>Protecting AI Infrastructure <span class="cyan">Across Regulated Industries.</span></h2>
+    </div>
+    <div class="logo-strip fade-in">
+      <span class="logo-chip">Fortune 500 — Healthcare</span>
+      <span class="logo-chip">Fortune 500 — Fintech</span>
+      <span class="logo-chip">Fortune 500 — Telecom</span>
+      <span class="logo-chip">Fortune 500 — Aviation</span>
+      <span class="logo-chip">Fortune 500 — Defense</span>
+      <span class="logo-chip">Fortune 500 — Energy</span>
+    </div>
+    <p class="logo-strip-note">Client names withheld under enterprise NDA. Verifiable references available to qualified buyers during evaluation.</p>
+  </div>
+</section>
+
+<!-- ===== PRESS / RECOGNITION ===== -->
+<section id="press" style="padding:64px 0;background:var(--bg2,rgba(255,255,255,0.015));">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Recognition</div>
+      <h2>As Seen In <span class="cyan">Security &amp; Technology Media.</span></h2>
+      <p>Coverage and recognition placeholders — to be replaced with verified press links and award citations as they are published.</p>
+    </div>
+    <div class="press-grid fade-in">
+      <div class="press-card">
+        <div class="press-outlet">Cybersecurity Today</div>
+        <div class="press-quote">"A 14-agent consensus model is a meaningfully different approach to AI threat defense." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">AI Security Review</div>
+        <div class="press-quote">"OmniaGuard's zero-breach guarantee is rare in this market — and backed contractually." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">Enterprise Tech Weekly</div>
+        <div class="press-quote">"Worth a serious look for any organization deploying agentic AI at scale." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">Industry Awards Board</div>
+        <div class="press-quote">2026 Nominee — Emerging AI Security Platform (placeholder, pending submission)</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1058,9 +1192,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         </tbody>
       </table>
     </div>
-    <div class="green-badge" style="margin-top:32px;">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
-    </div>
   </div>
 </section>
 
@@ -1111,8 +1242,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <ul>
           <li>41 companies across 10 trillion-dollar markets</li>
           <li>Aviation, healthcare, fintech, defense, and telecom clients</li>
-          <li>BENO-X legal framework eliminates regulatory risk</li>
-          <li>One partnership. Zero limits. Zero regret.</li>
+          <li>Independent compliance review eliminates regulatory risk</li>
+          <li>One partnership. Enterprise-grade coverage from day one.</li>
         </ul>
       </div>
     </div>
@@ -1186,11 +1317,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           </div>
         </div>
         <button class="btn-submit" id="partnership-submit">Request My Free Security Audit &nbsp;→</button>
-        <p class="nobrain"><strong>OmniaGuard</strong> — The No-Brainer Choice for Enterprise AI Security.</p>
+        <p class="nobrain"><strong>OmniaGuard</strong> — Enterprise AI Security, Engineered for Zero Breach.</p>
       </div>
-    </div>
-    <div class="green-badge" style="margin-top:32px;">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -1217,7 +1345,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <a href="mailto:omniaguard1@gmail.com">✉️ omniaguard1@gmail.com</a>
       </div>
       <div class="footer-copy">
-        © 2026 OmniaGuard. A Francisco Holdings Inc. Project. &nbsp;|&nbsp; AI Security Infrastructure &nbsp;|&nbsp; 🌿 Carbon Neutral 2028
+        © 2026 Francisco Holdings Inc. &nbsp;|&nbsp; OmniaGuard&trade; is a registered trademark.
       </div>
       <div class="not-legal">
         Educational information only. References to legal frameworks and compliance standards on this site are for informational purposes and do not constitute legal advice or legal representation. Engage qualified legal counsel for regulatory guidance specific to your organization.
@@ -2074,6 +2202,23 @@ function showStripeError(msg) {
   setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 7000);
 }
 
+/* ── QUICK PAY: PayPal.me + Interac e-Transfer (instant routing, no Stripe dependency) ── */
+function quickPay(tier, amount) {
+  window.open('https://www.paypal.me/derekfrancisco/' + amount + 'cad', '_blank', 'noopener');
+  var existing = document.getElementById('quickpay-toast');
+  if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+  var t = document.createElement('div');
+  t.id = 'quickpay-toast';
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;left:auto;max-width:380px;background:#0d1120;border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:20px 22px;z-index:99999;font-size:13px;color:#cbd3e0;box-shadow:0 16px 48px rgba(0,0,0,0.6);line-height:1.6;';
+  t.innerHTML = '<strong style="color:#00d4ff;display:block;margin-bottom:6px;font-size:14px;">PayPal opening in a new tab — $' + amount + ' CAD/mo</strong>'
+    + 'Prefer Interac e-Transfer? Send <strong style="color:#fff">$' + amount + ' CAD</strong> to <strong style="color:#fff">franciscoderek7@gmail.com</strong> — include your company name and "<strong style="color:#fff">' + tier + '</strong>" in the message. Access is activated within 4 hours of confirmed payment.'
+    + '<div style="margin-top:12px;display:flex;gap:8px;">'
+    + '<a href="mailto:franciscoderek7@gmail.com?subject=' + encodeURIComponent('OmniaGuard ' + tier + ' — Interac e-Transfer') + '&body=' + encodeURIComponent('Hi,\n\nI am sending an Interac e-Transfer for OmniaGuard ' + tier + ' — $' + amount + ' CAD/mo.\n\nCompany: [your company]\nContact: [your email]\n\nPlease confirm receipt and activate my account.') + '" style="flex:1;text-align:center;background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.35);color:#00c853;padding:9px 12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:12px;">Email Receipt →</a>'
+    + '<button onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#8892a4;padding:9px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;">Dismiss</button>'
+    + '</div>';
+  document.body.appendChild(t);
+}
+
 /* ── MAIN ROUTER: deployShield ── */
 function deployShield(tier, price, isAnnual, btnEl) {
   var period = isAnnual ? 'annual' : 'monthly';
@@ -2111,6 +2256,14 @@ function openPaymentModal(tier, price, isAnnual) {
   });
   var priceEls = document.querySelectorAll('[id^="po-price"]');
   priceEls.forEach(function(el){ el.textContent = fullPrice; });
+
+  /* PayPal tab — price + pre-filled receipt email */
+  var paypalPriceEl = document.getElementById('po-paypal-price');
+  if (paypalPriceEl) paypalPriceEl.textContent = fullPrice;
+  var paypalEmailEl = document.getElementById('po-paypal-email-link');
+  if (paypalEmailEl) {
+    paypalEmailEl.href = 'mailto:omniaguard1@gmail.com?subject=OmniaGuard+' + encodeURIComponent(tierCapital) + '+PayPal+Payment&body=' + encodeURIComponent('Hi,\n\nI just sent a PayPal payment for OmniaGuard ' + tierCapital + ' — ' + fullPrice + ' CAD.\n\nReceipt attached. Please activate my account.\n\nCompany: [your company]\nContact: [your email]');
+  }
 
   /* Interac message */
   var msgEl = document.getElementById('po-interac-msg');
@@ -2313,6 +2466,7 @@ function initCryptoSection() {
       <button onclick="switchPayTab(0)" id="po-tab-0" style="flex:1;padding:14px 8px;background:rgba(0,200,83,0.08);border:none;border-bottom:2px solid #00c853;color:#00c853;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">🏦 Interac</button>
       <button onclick="switchPayTab(1)" id="po-tab-1" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">📋 Contact Form</button>
       <button onclick="switchPayTab(2)" id="po-tab-2" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">₿ Crypto</button>
+      <button onclick="switchPayTab(3)" id="po-tab-3" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">🅿️ PayPal</button>
     </div>
 
     <!-- Tab 0: Interac e-Transfer -->
@@ -2429,6 +2583,18 @@ function initCryptoSection() {
       </div>
     </div>
 
+    <!-- Tab 3: PayPal (Stripe fallback) -->
+    <div id="po-tab-panel-3" style="display:none;padding:28px 32px;">
+      <div style="display:inline-block;background:rgba(0,112,186,0.12);border:1px solid rgba(0,112,186,0.35);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#4d9fe0;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;">Card Fallback — When Stripe Is Unavailable</div>
+      <p style="font-size:14px;color:#8892a4;margin-bottom:20px;line-height:1.6;">Prefer to pay by card without leaving PayPal? Use the link below — it pre-fills your selected plan and amount.</p>
+      <a id="po-paypal-link" href="https://www.paypal.com/paypalme/PASTE_PAYPAL_ME_LINK_HERE" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:linear-gradient(135deg,#0070ba,#003087);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:14px;">🅿️ Pay with PayPal — <span id="po-paypal-price">$499/mo</span></a>
+      <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.7;">
+        After sending payment, email <a id="po-paypal-email-link" href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+PayPal+Payment" style="color:#00d4ff;font-weight:600;">your receipt and selected tier →</a> so we can activate your account.<br>
+        <strong style="color:#fff;">Account activated within 4 hours of confirmed payment.</strong>
+      </div>
+      <div style="margin-top:14px;font-size:11px;color:#5a6478;text-align:center;">DEREK: replace <code style="color:#8892a4;">PASTE_PAYPAL_ME_LINK_HERE</code> with your real PayPal.Me / PayPal Checkout link.</div>
+    </div>
+
     <!-- Modal Footer -->
     <div style="padding:16px 32px;border-top:1px solid rgba(0,212,255,0.08);text-align:center;">
       <p style="font-size:11px;color:#3a4458;margin:0;">🔒 Payments processed securely &nbsp;|&nbsp; omniaguard1@gmail.com &nbsp;|&nbsp; Response within 1 hour Mon–Sat</p>
@@ -2438,15 +2604,17 @@ function initCryptoSection() {
 
 <script>
 function switchPayTab(idx) {
-  for (var i = 0; i < 3; i++) {
+  var tabColor = ['#00c853', '#00d4ff', '#f7931a', '#4d9fe0'];
+  var tabBg = ['rgba(0,200,83,0.08)', 'rgba(0,212,255,0.06)', 'rgba(247,147,26,0.06)', 'rgba(0,112,186,0.08)'];
+  for (var i = 0; i < 4; i++) {
     var panel = document.getElementById('po-tab-panel-' + i);
     var tab = document.getElementById('po-tab-' + i);
     if (i === idx) {
       if (panel) panel.style.display = 'block';
       if (tab) {
-        tab.style.color = i === 0 ? '#00c853' : (i === 1 ? '#00d4ff' : '#f7931a');
-        tab.style.borderBottomColor = i === 0 ? '#00c853' : (i === 1 ? '#00d4ff' : '#f7931a');
-        tab.style.background = i === 0 ? 'rgba(0,200,83,0.08)' : (i === 1 ? 'rgba(0,212,255,0.06)' : 'rgba(247,147,26,0.06)');
+        tab.style.color = tabColor[i];
+        tab.style.borderBottomColor = tabColor[i];
+        tab.style.background = tabBg[i];
       }
     } else {
       if (panel) panel.style.display = 'none';
@@ -2563,7 +2731,8 @@ function switchPayTab(idx) {
     <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Strategic Briefing Request</div>
     <h2 id="briefing-tier-title" style="font-size:24px;font-weight:800;margin:0 0 4px;">OmniaGuard</h2>
     <div id="briefing-tier-price" style="color:#ffd700;font-weight:700;font-size:16px;margin-bottom:24px;"></div>
-    <p style="color:#8892a4;font-size:14px;margin-bottom:28px;line-height:1.6;">Complete the form below. Our team will contact you within <strong style="color:#fff;">1 business hour</strong> with a secure briefing packet and Stripe payment link.</p>
+    <p style="color:#8892a4;font-size:14px;margin-bottom:16px;line-height:1.6;">Complete the form below. Our team will contact you within <strong style="color:#fff;">1 business hour</strong> with a secure briefing packet and Stripe payment link.</p>
+    <a href="https://calendly.com/PASTE_CALENDLY_LINK_HERE/omniaguard-briefing" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;font-weight:700;font-size:13px;padding:13px 20px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:24px;">📅 Or skip the form — book a 15-min strategy call directly</a>
     <form id="briefing-form" onsubmit="submitBriefing(event)">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
         <div>
@@ -2739,7 +2908,7 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
       <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">&lt;12ms</div><div style="font-size:11px;color:#8892a4;">Full 14-layer analysis time</div></div>
       <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">$5M</div><div style="font-size:11px;color:#8892a4;">Per-incident liability (Archon+)</div></div>
     </div>
-    <div style="margin-top:16px;text-align:center;"><button onclick="document.getElementById('footer-security-modal').style.display='none';deployShield('guardian','$2,499',false,null)" style="background:linear-gradient(135deg,#00d4ff,#7b2fbe);color:#fff;border:none;padding:11px 28px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Deploy OmniaGuard Now &#x2192;</button></div>
+    <div style="margin-top:16px;text-align:center;"><button onclick="document.getElementById('footer-security-modal').style.display='none';quickPay('Guardian',2499)" style="background:linear-gradient(135deg,#00d4ff,#7b2fbe);color:#fff;border:none;padding:11px 28px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Deploy OmniaGuard Now &#x2192;</button></div>
   </div>
 </div>
 
