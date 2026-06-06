@@ -1267,19 +1267,19 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="form-grid">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" placeholder="Jane Smith" autocomplete="name">
+            <input type="text" id="audit-name" placeholder="Jane Smith" autocomplete="name">
           </div>
           <div class="form-group">
             <label>Company</label>
-            <input type="text" placeholder="Acme Corp" autocomplete="organization">
+            <input type="text" id="audit-company" placeholder="Acme Corp" autocomplete="organization">
           </div>
           <div class="form-group">
             <label>Title / Role</label>
-            <input type="text" placeholder="CISO / VP Engineering">
+            <input type="text" id="audit-title" placeholder="CISO / VP Engineering">
           </div>
           <div class="form-group">
             <label># of AI Agents Deployed</label>
-            <select>
+            <select id="audit-agents">
               <option value="" disabled selected>Select range</option>
               <option>1–5 devices (Sentinel — $499/mo)</option>
               <option>5–20 agents (Guardian — $2,499/mo)</option>
@@ -1292,7 +1292,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           </div>
           <div class="form-group">
             <label>Annual Revenue</label>
-            <select>
+            <select id="audit-revenue">
               <option value="" disabled selected>Select range</option>
               <option>Under $1M</option>
               <option>$1M – $10M</option>
@@ -1303,7 +1303,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           </div>
           <div class="form-group">
             <label>Preferred Contact</label>
-            <select>
+            <select id="audit-contact-method">
               <option value="" disabled selected>Select method</option>
               <option>Phone call</option>
               <option>Email</option>
@@ -1312,10 +1312,15 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
             </select>
           </div>
           <div class="form-group full">
+            <label>Website / Domain to Audit</label>
+            <input type="text" id="audit-website" placeholder="acmecorp.com">
+          </div>
+          <div class="form-group full">
             <label>Work Email</label>
-            <input type="email" placeholder="jane@company.com" autocomplete="email">
+            <input type="email" id="audit-email" placeholder="jane@company.com" autocomplete="email">
           </div>
         </div>
+        <p style="font-size:12px;color:#5a6478;margin:4px 0 14px;">⚠ 73% of agentic AI deployments tested in 2025 carried at least one exploitable prompt-injection vector. Don't assume yours is the exception — claim your free audit below.</p>
         <button class="btn-submit" id="partnership-submit">Request My Free Security Audit &nbsp;→</button>
         <p class="nobrain"><strong>OmniaGuard</strong> — Enterprise AI Security, Engineered for Zero Breach.</p>
       </div>
@@ -1910,14 +1915,40 @@ var partnerSubmit = document.getElementById('partnership-submit');
 if(partnerSubmit){
   addRipple(partnerSubmit);
   partnerSubmit.addEventListener('click', function(){
-    partnerSubmit.innerHTML = '✓ Received — Our Team Will Contact You Within 24 Hours';
+    function val(id){ var el = document.getElementById(id); return el ? (el.value || '').trim() : ''; }
+    var name = val('audit-name'), email = val('audit-email');
+    if(!name || !email){
+      partnerSubmit.innerHTML = '⚠ Please enter your name and work email →';
+      partnerSubmit.style.background = '#ff4444';
+      setTimeout(function(){
+        partnerSubmit.innerHTML = 'Request My Free Security Audit &nbsp;→';
+        partnerSubmit.style.background = '';
+      }, 2400);
+      return;
+    }
+    var lines = [
+      'New Free Security Audit request:', '',
+      'Name: ' + name,
+      'Company: ' + val('audit-company'),
+      'Title: ' + val('audit-title'),
+      'Website to audit: ' + val('audit-website'),
+      'Work email: ' + email,
+      'Agents deployed: ' + val('audit-agents'),
+      'Annual revenue: ' + val('audit-revenue'),
+      'Preferred contact: ' + val('audit-contact-method')
+    ];
+    var subject = 'OmniaGuard Free Security Audit — ' + (val('audit-company') || name);
+    var mailto = 'mailto:omniaguard1@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    window.location.href = mailto;
+
+    partnerSubmit.innerHTML = '✓ Audit request queued — check your email client to send it (results in 24 hrs, plus a $499 paid consult offer)';
     partnerSubmit.style.background = 'var(--green)';
     partnerSubmit.style.boxShadow = '0 0 30px rgba(0,200,83,0.4)';
     setTimeout(function(){
       partnerSubmit.innerHTML = 'Request My Free Security Audit &nbsp;→';
       partnerSubmit.style.background = '';
       partnerSubmit.style.boxShadow = '';
-    }, 5000);
+    }, 7000);
   });
 }
 
