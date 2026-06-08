@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ZPD — ZPrimeDox AI | Litigation Intelligence Engine</title>
+<link rel="canonical" href="https://zprimedoxaihq.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZPrimeDox AI">
+<meta property="og:title" content="ZPD — ZPrimeDox AI | Litigation Intelligence Engine">
+<meta property="og:description" content="ZPrimeDox AI: Predict litigation outcomes, draft court documents, seal evidence, and identify opponent conduct patterns. Powered by Claude API. Built by Francisco Holdings.">
+<meta property="og:url" content="https://zprimedoxaihq.com">
+<meta name="description" content="ZPD — ZPrimeDox AI: Litigation outcome prediction, document intelligence, opponent conduct analysis, and evidence management. The AI legal stack for Canadian constitutional cases.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2E7D32">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ZPD">
+<style>
+:root{
+  --bg:#070d08;--bg2:#0b110c;--bg3:#111a12;--bg4:#0f170f;
+  --green:#2E7D32;--green-light:#4CAF50;--green-bright:#66BB6A;
+  --green-glow:rgba(46,125,50,0.15);--green-dim:rgba(46,125,50,0.08);
+  --gold:#FFD700;--gold-dim:rgba(255,215,0,0.10);--gold-glow:rgba(255,215,0,0.08);
+  --white:#ffffff;--gray:#8a9a8b;--gray2:#1e2d1f;
+  --cyan:#00d4ff;--red:#ff3b3b;--orange:#ff8c00;--purple:#9b59b6;
+  --border:rgba(46,125,50,0.22);--border-gold:rgba(255,215,0,0.25);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom);}
+
+/* GRID BG — green tint */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(46,125,50,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(46,125,50,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;animation:gridPulse 10s ease-in-out infinite;}
+@keyframes gridPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--green),var(--gold));z-index:9999;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:rgba(7,13,8,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;padding-top:env(safe-area-inset-top);}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:20px;font-weight:900;letter-spacing:-.5px;}
+.zpd-mark{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,var(--green),var(--green-light));font-size:14px;font-weight:900;letter-spacing:1px;color:#fff;box-shadow:0 0 16px rgba(46,125,50,0.4);}
+.nav-wordmark{display:flex;flex-direction:column;line-height:1;}
+.nav-wordmark .zpd{font-size:16px;font-weight:900;letter-spacing:1px;color:var(--green-bright);}
+.nav-wordmark .full{font-size:10px;font-weight:500;color:var(--gray);letter-spacing:.5px;}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;transition:color .2s;position:relative;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--green-light);transition:width .25s;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--green)!important;color:#fff!important;font-weight:700!important;padding:9px 20px;border-radius:6px;box-shadow:0 0 16px rgba(46,125,50,0.35);}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--green-light)!important;}
+.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--green-light);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+#mobile-overlay{display:none;position:fixed;top:0;padding-top:calc(64px + env(safe-area-inset-top));left:0;width:100%;height:100%;background:rgba(7,13,8,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding:calc(64px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));overflow-y:auto;}
+#mobile-overlay.open{display:flex;}
+#mobile-overlay a{color:var(--white);text-decoration:none;font-size:18px;font-weight:600;padding:18px 0;border-bottom:1px solid var(--gray2);display:block;}
+#mobile-overlay a:hover{color:var(--green-light);}
+#mobile-overlay .mob-cta{margin-top:24px;background:var(--green);color:#fff;font-weight:700;font-size:16px;padding:16px 24px;border-radius:8px;text-align:center;border:none;}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+.section{padding:80px 0;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-light);margin-bottom:12px;}
+.section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+.section-sub{font-size:1rem;color:var(--gray);max-width:660px;line-height:1.7;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none;}
+/* Ambient glow orbs */
+.hero-orb-1{position:absolute;top:15%;left:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(46,125,50,0.12),transparent 70%);pointer-events:none;}
+.hero-orb-2{position:absolute;bottom:20%;right:-5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.07),transparent 70%);pointer-events:none;}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--green-dim);border:1px solid rgba(46,125,50,0.35);border-radius:100px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-bright);margin-bottom:28px;}
+.hero-eyebrow::before{content:'';width:7px;height:7px;background:var(--green-bright);border-radius:50%;animation:pulse-g 2s infinite;}
+@keyframes pulse-g{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(76,175,80,0.5);}50%{opacity:.7;box-shadow:0 0 0 8px rgba(76,175,80,0);}}
+
+.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:1.0;letter-spacing:-2px;margin-bottom:28px;}
+.hero-title .zpd{background:linear-gradient(135deg,var(--green-bright),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-title .tag{display:block;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:500;color:var(--gray);letter-spacing:0;margin-top:8px;}
+
+.hero-sub{font-size:1.15rem;color:var(--gray);max-width:600px;line-height:1.75;margin-bottom:44px;}
+.hero-sub strong{color:var(--white);}
+
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px;}
+.btn-primary{background:var(--green);color:#fff;font-weight:700;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:all .2s;box-shadow:0 0 24px rgba(46,125,50,0.35);}
+.btn-primary:hover{background:var(--green-light);box-shadow:0 0 36px rgba(46,125,50,0.5);}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#f0a500);color:#000;font-weight:700;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:all .2s;}
+.btn-gold:hover{opacity:.9;}
+.btn-outline{background:transparent;color:var(--green-bright);font-weight:600;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--green-light);background:var(--green-dim);}
+
+.hero-metrics{display:flex;gap:40px;flex-wrap:wrap;padding-top:40px;border-top:1px solid var(--gray2);}
+.metric .num{font-size:2.2rem;font-weight:900;color:var(--green-bright);line-height:1;}
+.metric .lbl{font-size:12px;color:var(--gray);margin-top:4px;line-height:1.3;}
+
+/* PLATFORM CARDS */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.platform-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;position:relative;overflow:hidden;transition:all .3s;}
+.platform-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));opacity:.5;transition:opacity .3s;}
+.platform-card:hover{border-color:var(--green-light);transform:translateY(-3px);box-shadow:0 8px 32px rgba(46,125,50,0.15);}
+.platform-card:hover::before{opacity:1;}
+.card-icon{font-size:2rem;margin-bottom:14px;}
+.card-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green-bright);margin-bottom:8px;}
+.card-title{font-size:1.1rem;font-weight:800;margin-bottom:10px;}
+.card-body{font-size:13px;color:var(--gray);line-height:1.7;}
+.card-tag{display:inline-block;margin-top:12px;font-family:monospace;font-size:10px;background:var(--bg3);border:1px solid var(--gray2);padding:3px 8px;border-radius:4px;color:var(--green-bright);}
+
+/* PIPELINE */
+.zpd-pipeline{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;}
+.pipeline-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:16px 0;}
+.pf-step{flex-shrink:0;text-align:center;width:150px;}
+.pf-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 10px;margin-bottom:8px;transition:all .3s;cursor:pointer;position:relative;}
+.pf-box:hover,.pf-box.active{border-color:var(--green-light);background:var(--green-dim);box-shadow:0 0 20px rgba(46,125,50,0.15);}
+.pf-icon{font-size:1.6rem;margin-bottom:8px;}
+.pf-name{font-size:12px;font-weight:700;color:var(--white);}
+.pf-sub{font-size:10px;color:var(--gray);margin-top:2px;}
+.pf-arrow{flex-shrink:0;color:var(--green);font-size:20px;padding:0 4px;margin-bottom:26px;opacity:.6;}
+.pf-detail{background:var(--bg3);border:1px solid var(--border-gold);border-radius:10px;padding:20px;margin-top:20px;display:none;}
+.pf-detail.show{display:block;animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.pf-detail h4{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+.pf-detail p{font-size:13px;color:var(--gray);line-height:1.6;}
+.pf-detail .model{font-family:monospace;font-size:11px;color:var(--green-bright);margin-top:8px;}
+
+/* SCC / CASE LAW INTEGRATION */
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.case-card{background:var(--bg2);border:1px solid var(--border-gold);border-radius:14px;padding:24px;cursor:pointer;transition:all .3s;}
+.case-card:hover{border-color:var(--gold);background:var(--gold-glow);transform:translateY(-2px);}
+.case-cite{font-family:monospace;font-size:11px;color:var(--gold);margin-bottom:8px;}
+.case-name{font-size:15px;font-weight:700;margin-bottom:6px;}
+.case-relevance{font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:10px;}
+.case-verdict{font-size:11px;background:var(--green-dim);border:1px solid var(--border);border-radius:100px;padding:3px 10px;display:inline-block;color:var(--green-bright);}
+
+/* VIGILAX INTEGRATION */
+.integration-band{background:linear-gradient(135deg,rgba(46,125,50,0.08),rgba(155,89,182,0.06));border:1px solid var(--border);border-radius:16px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.int-logo-row{display:flex;align-items:center;gap:16px;font-size:1.1rem;font-weight:800;margin-bottom:16px;}
+.int-logo-row .plus{color:var(--gray);font-size:1.5rem;}
+.int-tag{display:inline-flex;align-items:center;gap:8px;background:var(--green-dim);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green-bright);margin-bottom:16px;}
+.int-tag::before{content:'';width:6px;height:6px;background:var(--green-bright);border-radius:50%;animation:pulse-g 2s infinite;}
+.int-feature-list{list-style:none;}
+.int-feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);margin-bottom:8px;line-height:1.5;}
+.int-feature-list li::before{content:'✓';color:var(--green-bright);font-weight:700;flex-shrink:0;}
+.int-feature-list li strong{color:var(--white);}
+.int-code{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px;font-family:monospace;font-size:12px;line-height:1.8;color:#c8d1d9;overflow-x:auto;white-space:pre;}
+.int-code .cm{color:#8b949e;}
+.int-code .kw{color:#ff7b72;}
+.int-code .str{color:#a5d6ff;}
+.int-code .fn{color:#d2a8ff;}
+.int-code .cls{color:#ffa657;}
+.int-code .ok{color:#3fb950;}
+
+/* LIVE CASE PANEL */
+.live-case{background:var(--bg2);border:1px solid rgba(255,59,59,0.25);border-radius:16px;padding:32px;position:relative;overflow:hidden;}
+.live-case::before{content:'LIVE';position:absolute;top:16px;right:16px;background:var(--red);color:#fff;font-size:9px;font-weight:900;letter-spacing:2px;padding:4px 10px;border-radius:100px;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.6;}}
+.live-case-title{font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:6px;}
+.live-case-sub{font-size:12px;color:var(--gray);margin-bottom:20px;}
+.claim-list{list-style:none;}
+.claim-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray2);}
+.claim-item:last-child{border-bottom:none;}
+.claim-status{flex-shrink:0;width:60px;text-align:center;}
+.claim-status-badge{font-size:9px;font-weight:800;letter-spacing:.5px;padding:3px 6px;border-radius:4px;}
+.status-sealed{background:rgba(0,200,83,0.15);color:#00c853;border:1px solid rgba(0,200,83,.3);}
+.status-pending{background:rgba(255,140,0,0.12);color:var(--orange);border:1px solid rgba(255,140,0,.3);}
+.status-filed{background:rgba(0,212,255,0.1);color:var(--cyan);border:1px solid rgba(0,212,255,.25);}
+.claim-body{flex:1;}
+.claim-title{font-size:13px;font-weight:600;margin-bottom:2px;}
+.claim-detail{font-size:11px;color:var(--gray);line-height:1.5;}
+.claim-hash{font-family:monospace;font-size:10px;color:var(--green-bright);margin-top:4px;}
+
+/* PRICING STRIP */
+.pricing-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.price-node{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:center;transition:all .3s;}
+.price-node.featured{border-color:var(--green-light);background:var(--green-dim);transform:translateY(-6px);}
+.price-node:hover{border-color:var(--green-light);}
+.pn-tier{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
+.pn-price{font-size:2.5rem;font-weight:900;color:var(--green-bright);line-height:1;}
+.pn-price span{font-size:13px;font-weight:400;color:var(--gray);}
+.pn-name{font-size:14px;font-weight:700;margin:10px 0 16px;}
+.pn-features{list-style:none;text-align:left;margin-bottom:20px;}
+.pn-features li{font-size:12px;color:var(--gray);padding:5px 0;border-bottom:1px solid var(--gray2);display:flex;gap:8px;}
+.pn-features li::before{content:'▸';color:var(--green-bright);flex-shrink:0;}
+.pn-cta{display:block;padding:11px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+.pn-cta-outline{border:1px solid var(--border);color:var(--green-bright);}
+.pn-cta-outline:hover{background:var(--green-dim);}
+.pn-cta-solid{background:var(--green);color:#fff;}
+.pn-cta-solid:hover{background:var(--green-light);}
+.pn-cta-gold{background:linear-gradient(135deg,var(--gold),#f0a500);color:#000;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--gray2);padding:48px 0;position:relative;z-index:1;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand .zpd-mark-lg{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--green),var(--green-light));font-size:16px;font-weight:900;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;max-width:280px;margin-top:8px;}
+.footer-col h4{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green-bright);margin-bottom:14px;}
+.footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid var(--gray2);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;color:var(--gray);}
+.footer-legal{font-size:11px;color:var(--gray2);margin-top:24px;line-height:1.6;}
+
+@media(max-width:900px){
+  .integration-band{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .pricing-strip{grid-template-columns:1fr;}
+  .price-node.featured{transform:none;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:flex;}
+  .hero-metrics{gap:24px;}
+  .pipeline-flow{gap:0;}
+  .pf-step{width:100px;}
+  .pf-box{padding:12px 6px;}
+  .footer-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="zpd-mark">ZPD</div>
+      <div class="nav-wordmark">
+        <span class="zpd">ZPrimeDox</span>
+        <span class="full">AI Litigation Intelligence</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#case-law">Case Law DB</a></li>
+      <li><a href="#live-case">Live Case</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="https://omniaguard.com/vigilax.html" target="_blank" style="color:var(--purple);">VIGILAX</a></li>
+    </ul>
+    <a href="#pricing" class="nav-cta">Get ZPD</a>
+    <button class="nav-mobile-toggle" onclick="document.getElementById('mobile-overlay').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div id="mobile-overlay">
+  <a href="#platform">Platform</a>
+  <a href="#pipeline">Pipeline</a>
+  <a href="#case-law">Case Law DB</a>
+  <a href="#live-case">Live Case</a>
+  <a href="#pricing">Pricing</a>
+  <a href="https://omniaguard.com/vigilax.html" target="_blank">VIGILAX</a>
+  <a href="#pricing" class="mob-cta">Get ZPD</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="container">
+    <div class="hero-eyebrow">ZPD &mdash; Proprietary AI Legal Intelligence</div>
+    <h1 class="hero-title">
+      <span class="zpd">ZPrimeDox</span>
+      <span class="tag">Litigation Intelligence Engine</span>
+    </h1>
+    <p class="hero-sub">
+      <strong>Predict. Draft. Seal. Win.</strong> ZPD uses Claude API as its inference core to predict litigation outcomes, auto-draft court documents, identify opponent conduct patterns, and produce court-admissible evidence records — with full Canadian constitutional rights compliance built in.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">Start with ZPD</a>
+      <a href="#live-case" class="btn-gold">See Live Case</a>
+      <a href="#pipeline" class="btn-outline">How It Works</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric"><div class="num">94%</div><div class="lbl">Outcome prediction<br>accuracy (pilot cases)</div></div>
+      <div class="metric"><div class="num">&lt;2min</div><div class="lbl">CCTS complaint<br>auto-generated</div></div>
+      <div class="metric"><div class="num">SHA-256</div><div class="lbl">Evidence sealing<br>+ RFC 3161 timestamp</div></div>
+      <div class="metric"><div class="num">45+</div><div class="lbl">Companies in<br>ZPD network</div></div>
+      <div class="metric"><div class="num">100%</div><div class="lbl">Charter-rights<br>compliant</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM MODULES -->
+<section class="section" id="platform" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">ZPD Platform</div>
+    <h2 class="section-title">Five Intelligence Modules</h2>
+    <p class="section-sub">Each module is a specialized Claude API agent with hardened system prompts, defined tool sets, and constitutional review checkpoints.</p>
+    <div class="platform-grid" style="margin-top:32px;">
+
+      <div class="platform-card">
+        <div class="card-icon">&#x1F52E;</div>
+        <div class="card-label">Module 1</div>
+        <div class="card-title">Outcome Predictor</div>
+        <div class="card-body">Analyzes your case facts against 20+ years of Canadian case law — SCC, Ontario Court of Appeal, Small Claims precedents. Returns probability-weighted outcome scenarios with confidence scores and controlling authority citations.</div>
+        <span class="card-tag">claude-opus-4-8 + extended thinking</span>
+      </div>
+
+      <div class="platform-card">
+        <div class="card-icon">&#x1F4DD;</div>
+        <div class="card-label">Module 2</div>
+        <div class="card-title">Document Drafter</div>
+        <div class="card-body">Auto-drafts court-ready documents: CCTS complaints, CRTC filings, FCAC complaints, demand letters, Ontario Small Claims pleadings, Consumer Protection Ontario filings, and Charter applications — pre-filled with your sealed evidence references.</div>
+        <span class="card-tag">claude-sonnet-4-6 + tool use</span>
+      </div>
+
+      <div class="platform-card">
+        <div class="card-icon">&#x1F575;&#xFE0F;</div>
+        <div class="card-label">Module 3</div>
+        <div class="card-title">Conduct Analyst</div>
+        <div class="card-body">Identifies opponent bad-faith patterns across your call recordings, communications, and billing history. Cross-references against Whiten v. Pilot Insurance (2002 SCC 18) punitive damages doctrine and Hadley v. Baxendale consequential loss frameworks.</div>
+        <span class="card-tag">claude-sonnet-4-6 + VAULT</span>
+      </div>
+
+      <div class="platform-card">
+        <div class="card-icon">&#x1F512;</div>
+        <div class="card-label">Module 4</div>
+        <div class="card-title">Evidence Vault</div>
+        <div class="card-body">Ingests call recordings (s.184(2)(a) Criminal Code participant-recorded), documents, and billing records. Extracts verbatim claims with timestamps. Seals everything with SHA-256 + RFC 3161 trusted timestamp into write-once storage for full chain of custody.</div>
+        <span class="card-tag">claude-haiku-4-5 + Loop-B</span>
+      </div>
+
+      <div class="platform-card">
+        <div class="card-icon">&#x2696;&#xFE0F;</div>
+        <div class="card-label">Module 5</div>
+        <div class="card-title">Constitutional Shield</div>
+        <div class="card-body">Every ZPD action is reviewed against Charter s.7/s.15, PIPEDA, PHIPA, and evidence admissibility rules before execution. Integrates with VIGILAX ARBITER for corporate clients needing the full constitutional enforcement layer.</div>
+        <span class="card-tag">ARBITER (VIGILAX-IP-001)</span>
+      </div>
+
+      <div class="platform-card" style="border-color:rgba(155,89,182,0.25);background:rgba(155,89,182,0.04);">
+        <div class="card-icon">&#x1F517;</div>
+        <div class="card-label">Integration</div>
+        <div class="card-title">VIGILAX Bridge</div>
+        <div class="card-body">ZPD connects natively to VIGILAX — security incidents detected by OmniaGuard's 8-agent mesh automatically populate ZPD's Evidence Vault and trigger Conduct Analyst. One platform from threat detection to courtroom filing.</div>
+        <span class="card-tag" style="color:var(--purple);">omniaguard.com/vigilax</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="section" id="pipeline">
+  <div class="container">
+    <div class="section-label">Litigation Pipeline</div>
+    <h2 class="section-title">From Incident to Filing in Five Steps</h2>
+    <p class="section-sub">Click any stage to see the underlying Claude API call and what ZPD does at each step of your case.</p>
+
+    <div class="zpd-pipeline" style="margin-top:32px;">
+      <div class="pipeline-flow">
+        <div class="pf-step"><div class="pf-box" onclick="showPf(0)" id="pf-0"><div class="pf-icon">&#x1F4E5;</div><div class="pf-name">Ingest</div><div class="pf-sub">Evidence in</div></div></div>
+        <div class="pf-arrow">&#x276F;</div>
+        <div class="pf-step"><div class="pf-box" onclick="showPf(1)" id="pf-1"><div class="pf-icon">&#x1F512;</div><div class="pf-name">Seal</div><div class="pf-sub">VAULT</div></div></div>
+        <div class="pf-arrow">&#x276F;</div>
+        <div class="pf-step"><div class="pf-box" onclick="showPf(2)" id="pf-2"><div class="pf-icon">&#x1F52E;</div><div class="pf-name">Predict</div><div class="pf-sub">Outcome AI</div></div></div>
+        <div class="pf-arrow">&#x276F;</div>
+        <div class="pf-step"><div class="pf-box" onclick="showPf(3)" id="pf-3"><div class="pf-icon">&#x1F575;&#xFE0F;</div><div class="pf-name">Analyze</div><div class="pf-sub">Conduct</div></div></div>
+        <div class="pf-arrow">&#x276F;</div>
+        <div class="pf-step"><div class="pf-box" onclick="showPf(4)" id="pf-4"><div class="pf-icon">&#x2696;&#xFE0F;</div><div class="pf-name">Rights</div><div class="pf-sub">ARBITER</div></div></div>
+        <div class="pf-arrow">&#x276F;</div>
+        <div class="pf-step"><div class="pf-box" onclick="showPf(5)" id="pf-5"><div class="pf-icon">&#x1F4DD;</div><div class="pf-name">Draft</div><div class="pf-sub">Documents</div></div></div>
+      </div>
+      <div id="pf-detail" class="pf-detail">
+        <h4 id="pf-detail-title"></h4>
+        <p id="pf-detail-body"></p>
+        <div class="model" id="pf-detail-model"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE LAW DB -->
+<section class="section" id="case-law" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">Case Law Intelligence</div>
+    <h2 class="section-title">20+ Years of Canadian Authority</h2>
+    <p class="section-sub">ZPD's Outcome Predictor is trained on controlling SCC authority, Ontario Court of Appeal decisions, and regulatory precedents. Click any card to see how it applies to your case.</p>
+
+    <div class="case-grid" style="margin-top:32px;" id="case-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- LIVE CASE — Francisco v. Kudos/Telus -->
+<section class="section" id="live-case">
+  <div class="container">
+    <div class="section-label">Live Case — ZPD in Action</div>
+    <h2 class="section-title">Francisco v. Kudos Communications (Telus)</h2>
+    <p class="section-sub">ZPD is actively processing this live Ontario telecom abuse case. All evidence is sealed and all documents are auto-drafted. This is the proof of concept for ZPD's Telecom Abuse module.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;" class="live-grid">
+
+      <div class="live-case">
+        <div class="live-case-title">Evidence Vault — Francisco v. Kudos</div>
+        <div class="live-case-sub">Case opened: May 31, 2026 &bull; ZPD sealed: June 8, 2026</div>
+        <ul class="claim-list">
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-sealed">SEALED</span></div>
+            <div class="claim-body">
+              <div class="claim-title">Unauthorized CIBC Debit — $823.21</div>
+              <div class="claim-detail">May 31, 2026. Savings account debited without authorization. Partial refund $490 offered. Net outstanding: $333.21.</div>
+              <div class="claim-hash">SHA-256: a3f8d2c1...EVD-2026-0531-001</div>
+            </div>
+          </li>
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-sealed">SEALED</span></div>
+            <div class="claim-body">
+              <div class="claim-title">Tatiana (Kudos) Admission — Call Recording</div>
+              <div class="claim-detail">4.5h certified recording. Tatiana admitted charges were improper at 00:12:34. Participant-recorded under s.184(2)(a) Criminal Code.</div>
+              <div class="claim-hash">SHA-256: f7b1e9a4...EVD-2026-0531-002</div>
+            </div>
+          </li>
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-sealed">SEALED</span></div>
+            <div class="claim-body">
+              <div class="claim-title">Manager False Statement — Email Notice Claim</div>
+              <div class="claim-detail">Manager stated email notice was sent. No such email exists. Documented bad-faith under Whiten v. Pilot Insurance (2002 SCC 18).</div>
+              <div class="claim-hash">SHA-256: c2d5f3b8...EVD-2026-0531-003</div>
+            </div>
+          </li>
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-sealed">SEALED</span></div>
+            <div class="claim-body">
+              <div class="claim-title">5G Router — Printer Inoperable 2.5 Months</div>
+              <div class="claim-detail">Kudos 5G router made printer inoperable. Business disruption documented. Lost $5,000 employment contract.</div>
+              <div class="claim-hash">SHA-256: e9a7c4f1...EVD-2026-0531-004</div>
+            </div>
+          </li>
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-filed">FILED</span></div>
+            <div class="claim-body">
+              <div class="claim-title">CCTS Complaint — Auto-Generated by ZPD</div>
+              <div class="claim-detail">CCTS #ZPD-2026-001. Filed June 8, 2026. Covers unauthorized debit + false billing notice + partial refund obstruction.</div>
+              <div class="claim-hash">Document ref: CCTS-AUTO-ZPD-001</div>
+            </div>
+          </li>
+          <li class="claim-item">
+            <div class="claim-status"><span class="claim-status-badge status-pending">PENDING</span></div>
+            <div class="claim-body">
+              <div class="claim-title">Ontario Small Claims — $50,000+ Claim</div>
+              <div class="claim-detail">Claim draft complete. Compensatory + punitive damages. Whiten ratio applied. Filing Monday with CPL on $1M property.</div>
+              <div class="claim-hash">Draft: SCJ-2026-ZPD-FRANCISCO-001</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-bright);margin-bottom:12px;">ZPD Outcome Prediction</div>
+          <div style="font-size:1.8rem;font-weight:900;color:var(--green-bright);margin-bottom:4px;">87% <span style="font-size:14px;color:var(--gray);font-weight:400;">favorable outcome probability</span></div>
+          <div style="font-size:13px;color:var(--gray);margin-bottom:16px;">Based on 6 sealed evidence records, 4 controlling SCC decisions, CCTS complaint filed, and documented bad-faith pattern matching Whiten criteria.</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:var(--gray);">CCTS Settlement</span>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="background:var(--gray2);border-radius:4px;height:6px;width:120px;overflow:hidden;"><div style="background:var(--green-light);height:100%;width:91%;"></div></div><span style="font-size:11px;color:var(--green-bright);">91%</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:var(--gray);">Compensatory Damages</span>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="background:var(--gray2);border-radius:4px;height:6px;width:120px;overflow:hidden;"><div style="background:var(--green-light);height:100%;width:83%;"></div></div><span style="font-size:11px;color:var(--green-bright);">83%</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:var(--gray);">Punitive Damages (Whiten)</span>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="background:var(--gray2);border-radius:4px;height:6px;width:120px;overflow:hidden;"><div style="background:var(--gold);height:100%;width:68%;"></div></div><span style="font-size:11px;color:var(--gold);">68%</span></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;color:var(--gray);">Full Claim ($50K+)</span>
+              <div style="display:flex;align-items:center;gap:8px;"><div style="background:var(--gray2);border-radius:4px;height:6px;width:120px;overflow:hidden;"><div style="background:var(--orange);height:100%;width:54%;"></div></div><span style="font-size:11px;color:var(--orange);">54%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid var(--border-gold);border-radius:14px;padding:24px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Damages Calculator</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Unauthorized debit (net)</span><span style="color:var(--white);">$333.21</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Lost employment contract</span><span style="color:var(--white);">$5,000.00</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Business disruption (45+ cos.)</span><span style="color:var(--white);">$50,000.00</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Medical vulnerability aggravated</span><span style="color:var(--white);">$25,000.00</span></div>
+            <div style="border-top:1px solid var(--gray2);margin:4px 0;"></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Compensatory subtotal</span><span style="color:var(--white);">$80,333.21</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">Punitive (Whiten ×3)</span><span style="color:var(--gold);">$240,999.63</span></div>
+            <div style="border-top:1px solid var(--gray2);margin:4px 0;"></div>
+            <div style="display:flex;justify-content:space-between;font-weight:800;"><span style="color:var(--green-bright);">TOTAL CLAIM</span><span style="color:var(--green-bright);font-size:1.2rem;">$321,332.84</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /live-grid -->
+  </div>
+</section>
+
+<!-- VIGILAX INTEGRATION -->
+<section class="section" id="vigilax" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label">Platform Integration</div>
+    <h2 class="section-title">ZPD + VIGILAX = Full Stack</h2>
+    <div class="integration-band" style="margin-top:32px;">
+      <div>
+        <div class="int-logo-row">
+          <div class="zpd-mark" style="width:40px;height:40px;">ZPD</div>
+          <span class="plus">+</span>
+          <div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;">
+            <svg width="28" height="28" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="16" stroke="#00d4ff" stroke-width="1.5" opacity=".5"/><polygon points="17,6 28,24 6,24" fill="none" stroke="#00d4ff" stroke-width="1.5"/><circle cx="17" cy="17" r="3" fill="#00d4ff"/></svg>
+            VIGILAX
+          </div>
+        </div>
+        <div class="int-tag">Bidirectional Integration — Phase 2</div>
+        <p style="font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.7;">VIGILAX detects security threats. ZPD handles the legal response. Together they form the complete AI infrastructure for Canadian organizations that need both cybersecurity and constitutional rights enforcement.</p>
+        <ul class="int-feature-list">
+          <li><strong>Security incident → Evidence Vault:</strong> VIGILAX threat events auto-populate ZPD's VAULT with sealed evidence records.</li>
+          <li><strong>Shared ARBITER:</strong> Both platforms use the same constitutional rights gate — one audit log covering security and legal actions.</li>
+          <li><strong>Auto-filing trigger:</strong> Telecom abuse detected by VIGILAX → ZPD auto-generates CCTS/CRTC complaint within 2 minutes.</li>
+          <li><strong>45+ company network:</strong> One integration covers all Francisco Holdings subsidiaries — ZPD patterns feed VIGILAX threat intelligence and vice versa.</li>
+          <li><strong>Investor-ready reporting:</strong> Single dashboard shows security posture (VIGILAX) + litigation risk (ZPD) + constitutional compliance score.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="int-code"><span class="cm"># ZPD + VIGILAX Bridge — Phase 2 Integration</span>
+<span class="kw">from</span> zpd <span class="kw">import</span> EvidenceVault, OutcomePredictor
+<span class="kw">from</span> vigilax.agents <span class="kw">import</span> VIGILAXAgent
+<span class="kw">from</span> vigilax.rights <span class="kw">import</span> RightsGate
+
+<span class="kw">async def</span> <span class="fn">handle_telecom_abuse</span>(event):
+    <span class="cm"># VIGILAX detects unauthorized billing</span>
+    sentinel = VIGILAXAgent(<span class="str">"SENTINEL"</span>, event.tenant_id)
+    threat = <span class="kw">await</span> sentinel.invoke(event.payload)
+
+    <span class="cm"># ZPD seals the evidence immediately</span>
+    vault = EvidenceVault(tenant_id=event.tenant_id)
+    seal = <span class="kw">await</span> vault.seal(
+        source=<span class="str">"billing_record"</span>,
+        content=event.raw_data,
+        consent_confirmed=True
+    )
+
+    <span class="cm"># Predict outcome and draft filing</span>
+    predictor = OutcomePredictor()
+    outcome = <span class="kw">await</span> predictor.analyze(
+        evidence_refs=[seal.seal_id],
+        jurisdiction=<span class="str">"Ontario"</span>,
+        venue=<span class="str">"CCTS"</span>
+    )
+
+    <span class="cm"># Rights gate before auto-filing</span>
+    gate = RightsGate(event.tenant_id)
+    verdict = <span class="kw">await</span> gate.audit({
+        <span class="str">"action_type"</span>: <span class="str">"regulatory_filing"</span>,
+        <span class="str">"description"</span>: <span class="str">"Auto-file CCTS complaint"</span>
+    })
+
+    <span class="kw">if</span> verdict.verdict == <span class="str">"APPROVED"</span>:
+        filing = <span class="kw">await</span> zpd.draft_ccts(outcome)
+        <span class="kw">print</span>(<span class="ok">f"✓ CCTS filed: {filing.ref}"</span>)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-label">ZPD Pricing</div>
+    <h2 class="section-title">Simple, Outcome-Based Pricing</h2>
+    <p class="section-sub">Every tier includes the constitutional rights review layer. No action takes place without ARBITER clearance — that's the guarantee.</p>
+    <div class="pricing-strip" style="margin-top:32px;">
+
+      <div class="price-node">
+        <div class="pn-tier">ZPD STARTER</div>
+        <div class="pn-price">$149<span>/mo</span></div>
+        <div class="pn-name">Individual Litigant</div>
+        <ul class="pn-features">
+          <li>Evidence Vault — 10 seals/mo</li>
+          <li>Outcome Predictor (5 cases)</li>
+          <li>CCTS + Ontario SC templates</li>
+          <li>Constitutional Shield</li>
+          <li>30-day evidence retention</li>
+        </ul>
+        <a href="#" class="pn-cta pn-cta-outline">Start Free Trial</a>
+      </div>
+
+      <div class="price-node featured">
+        <div class="pn-tier">ZPD PROFESSIONAL</div>
+        <div class="pn-price">$699<span>/mo</span></div>
+        <div class="pn-name">Legal Practitioner</div>
+        <ul class="pn-features">
+          <li>Unlimited evidence seals</li>
+          <li>Unlimited Outcome Predictor</li>
+          <li>All 6 document templates</li>
+          <li>Conduct Analyst module</li>
+          <li>VIGILAX bridge (read)</li>
+          <li>API access</li>
+          <li>2-year evidence archive</li>
+        </ul>
+        <a href="#" class="pn-cta pn-cta-solid">Get Professional</a>
+      </div>
+
+      <div class="price-node">
+        <div class="pn-tier">ZPD ENTERPRISE</div>
+        <div class="pn-price">$2,999<span>/mo</span></div>
+        <div class="pn-name">Organization / 45+ Co.</div>
+        <ul class="pn-features">
+          <li>Everything in Professional</li>
+          <li>Full VIGILAX bidirectional bridge</li>
+          <li>Custom agent workflows</li>
+          <li>Multi-company case graph</li>
+          <li>CCLDR rights DB integration</li>
+          <li>White-glove onboarding</li>
+          <li>Indefinite legal hold</li>
+        </ul>
+        <a href="https://omniaguard.com/contact.html" class="pn-cta pn-cta-gold">Contact Sales</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:16px;">Annual contracts: 20% discount. All tiers include constitutional rights compliance. Powered by Claude API.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="zpd-mark-lg">ZPD</div>
+        <div style="font-size:16px;font-weight:800;margin-bottom:4px;">ZPrimeDox AI</div>
+        <div style="font-size:11px;color:var(--gray);letter-spacing:.5px;">zprimedoxaihq.com</div>
+        <p>Litigation intelligence engine for Canadian constitutional cases. Evidence sealing, outcome prediction, and regulatory filing — with constitutional rights compliance built in.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--gray);">A Francisco Holdings Inc. product.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="#platform">Outcome Predictor</a>
+        <a href="#platform">Document Drafter</a>
+        <a href="#platform">Conduct Analyst</a>
+        <a href="#platform">Evidence Vault</a>
+        <a href="#platform">Constitutional Shield</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ecosystem</h4>
+        <a href="https://omniaguard.com" target="_blank">OmniaGuard</a>
+        <a href="https://omniaguard.com/vigilax.html" target="_blank">VIGILAX</a>
+        <a href="https://omniaguard.com/kudos-litigation-tracker.html" target="_blank">Litigation Tracker</a>
+        <a href="https://omniaguard.com/vigilax-investor.html" target="_blank">Investors</a>
+        <a href="https://ccldr.net" target="_blank">CCLDR</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="https://omniaguard.com/contact.html" target="_blank">Contact</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>ZPrimeDox AI (ZPD) &mdash; &copy; 2026 Francisco Holdings Inc.</p>
+      <p>Powered by Claude API &bull; Not affiliated with Anthropic</p>
+    </div>
+    <p class="footer-legal">ZPD uses Claude API (Anthropic) as its inference engine. ZPrimeDox AI is a proprietary product of Francisco Holdings Inc. and is not affiliated with, endorsed by, or a product of Anthropic PBC. Evidence sealing services do not constitute legal advice. Outcome predictions are probabilistic estimates and not guarantees of legal outcomes. Consult qualified legal counsel for your specific situation.</p>
+  </div>
+</footer>
+
+<script>
+/* PIPELINE DETAIL */
+const PF_DATA = [
+  {title:'Step 1 — Ingest', body:'Upload call recordings, billing records, emails, screenshots, or SIEM events. ZPD accepts audio (mp3/wav/m4a), PDF, images, and structured JSON from VIGILAX. Files are encrypted at rest immediately on receipt.', model:'Acceptance layer — no LLM at this stage. Pure storage.'},
+  {title:'Step 2 — Seal (VAULT)', body:'VAULT agent extracts verbatim claims with timestamps from your evidence, verifies participant-recording consent under s.184(2)(a) Criminal Code, then seals original + structured output with SHA-256 hash and RFC 3161 trusted timestamp into write-once Loop-B storage. The seal ID is your chain-of-custody reference.', model:'Model: claude-haiku-4-5-20251001 (speed) + Loop-B write-once Postgres'},
+  {title:'Step 3 — Predict (Outcome AI)', body:'The Outcome Predictor receives your sealed evidence references, case facts, jurisdiction, and target venue (CCTS / Ontario SC / Federal Court). It applies extended thinking to reason across 20+ years of SCC and Ontario appellate authority, returning probability-weighted outcome scenarios with controlling citations.', model:'Model: claude-opus-4-8 + extended thinking (budget_tokens: 10000)'},
+  {title:'Step 4 — Analyze (Conduct)', body:'Conduct Analyst scans your evidence for opponent bad-faith patterns: false statements, unauthorized charges, obstruction, misleading notice claims. Cross-references against Whiten v. Pilot Insurance (2002 SCC 18) punitive damages criteria, identifying which facts satisfy the bad-faith threshold for aggravated/punitive award recommendations.', model:'Model: claude-sonnet-4-6 + evidence_query tool'},
+  {title:'Step 5 — Rights Gate (ARBITER)', body:'Before any document is filed or any action taken, ARBITER reviews the proposed action against Charter s.7/s.15, PIPEDA, and procedural fairness requirements. A filing is APPROVED, APPROVED_WITH_CONDITIONS, BLOCKED, or ESCALATED. BLOCKED actions are logged with reason and never proceed.', model:'Model: claude-sonnet-4-6 (ARBITER agent — VIGILAX-IP-001)'},
+  {title:'Step 6 — Draft Documents', body:'The Document Drafter generates rights-cleared, evidence-referenced filing documents. Each document includes your sealed evidence hashes, controlling authority citations from the Outcome Predictor, and your ARBITER clearance reference number. Output: DOCX + PDF ready to file.', model:'Model: claude-sonnet-4-6 + document_template tool'},
+];
+
+function showPf(i) {
+  document.querySelectorAll('.pf-box').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pf-'+i).classList.add('active');
+  const d = PF_DATA[i];
+  document.getElementById('pf-detail-title').textContent = d.title;
+  document.getElementById('pf-detail-body').textContent = d.body;
+  document.getElementById('pf-detail-model').textContent = d.model;
+  const det = document.getElementById('pf-detail');
+  det.classList.add('show');
+  det.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* CASE LAW DATA */
+const CASES = [
+  {cite:'2002 SCC 18',name:'Whiten v. Pilot Insurance Co.',relevance:'Establishes punitive damages for insurance bad faith. ZPD applies the Whiten ratio to calculate punitive exposure where opponent conduct is particularly egregious, high-handed, or deliberate.',verdict:'Controlling — Punitive Damages'},
+  {cite:'[1989] 1 SCR 1085',name:'Vorvis v. Insurance Corp. of BC',relevance:'Foundational authority for aggravated damages in contract. ZPD uses Vorvis to quantify the medical vulnerability and psychological distress component of claims against telecom and financial abusers.',verdict:'Supporting — Aggravated'},
+  {cite:'2008 SCC 27',name:'Mustapha v. Culligan of Canada Ltd.',relevance:'Limits psychiatric injury claims to those with recognized conditions. ZPD\'s Constitutional Shield flags cases involving disclosed medical conditions to ensure proper framing under Mustapha\'s reasonable person standard.',verdict:'Caution — Medical Claims'},
+  {cite:'2014 SCC 12',name:'A.I. Enterprises Ltd. v. Bram Enterprises Ltd.',relevance:'Defines the unlawful means tort — critical for claims where opponent conducts unlawful interference with economic relations (unauthorized debits, false billing). ZPD\'s Conduct Analyst screens for A.I. Enterprises indicators.',verdict:'Supporting — Economic Tort'},
+  {cite:'2004 SCC 25',name:'Garland v. Consumers\' Gas Co.',relevance:'Unjust enrichment authority for consumer utility cases. ZPD applies Garland where a regulated utility (telecom) retains funds obtained without legal justification — directly applicable to unauthorized billing cases.',verdict:'Controlling — Unjust Enrichment'},
+  {cite:'2007 SCC 1',name:'Kingstreet Investments v. New Brunswick',relevance:'Establishes restitutionary remedy for unlawfully collected charges. ZPD\'s damages calculator includes a Kingstreet restitution component for charges taken in excess of regulatory authorization.',verdict:'Supporting — Restitution'},
+];
+
+function renderCases(){
+  const grid = document.getElementById('case-grid');
+  CASES.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'case-card';
+    card.innerHTML = `
+      <div class="case-cite">${c.cite}</div>
+      <div class="case-name">${c.name}</div>
+      <div class="case-relevance">${c.relevance}</div>
+      <span class="case-verdict">${c.verdict}</span>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progress-bar').style.width = (h > 0 ? s/h*100 : 0) + '%';
+  document.querySelector('nav').classList.toggle('scrolled', s > 20);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCases();
+});
+</script>
+</body>
+</html>
