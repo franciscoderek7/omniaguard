@@ -66,11 +66,26 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(7,13,8,0.96);backdrop-fil
 .section-sub{font-size:1rem;color:var(--gray);max-width:660px;line-height:1.7;}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 80px;position:relative;overflow:hidden;}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 0 80px;position:relative;overflow:hidden;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none;}
 /* Ambient glow orbs */
 .hero-orb-1{position:absolute;top:15%;left:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(46,125,50,0.12),transparent 70%);pointer-events:none;}
 .hero-orb-2{position:absolute;bottom:20%;right:-5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.07),transparent 70%);pointer-events:none;}
+/* HERO SPLIT LAYOUT */
+.hero-split{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;}
+.hero-left{}
+/* AI ROBOT CLONE */
+.robot-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0;}
+.robot-name-tag{background:rgba(46,125,50,0.15);border:1px solid rgba(46,125,50,0.4);border-radius:100px;padding:6px 18px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--green-bright);display:flex;align-items:center;gap:8px;}
+.robot-name-tag::before{content:'';width:6px;height:6px;background:var(--green-bright);border-radius:50%;animation:pulse-g 2s infinite;}
+.robot-svg{width:220px;height:auto;filter:drop-shadow(0 0 32px rgba(46,125,50,0.35));animation:robotFloat 6s ease-in-out infinite;}
+@keyframes robotFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+.robot-status{font-family:monospace;font-size:10px;color:var(--green-bright);letter-spacing:1px;text-align:center;}
+@media(max-width:900px){
+  .hero-split{grid-template-columns:1fr;}
+  .robot-wrap{order:-1;margin-bottom:16px;}
+  .robot-svg{width:160px;}
+}
 
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:var(--green-dim);border:1px solid rgba(46,125,50,0.35);border-radius:100px;padding:8px 20px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-bright);margin-bottom:28px;}
 .hero-eyebrow::before{content:'';width:7px;height:7px;background:var(--green-bright);border-radius:50%;animation:pulse-g 2s infinite;}
@@ -257,19 +272,179 @@ footer{border-top:1px solid var(--gray2);padding:48px 0;position:relative;z-inde
   <div class="hero-orb-1"></div>
   <div class="hero-orb-2"></div>
   <div class="container">
-    <div class="hero-eyebrow">ZPD &mdash; Proprietary AI Legal Intelligence</div>
-    <h1 class="hero-title">
-      <span class="zpd">ZPrimeDox</span>
-      <span class="tag">Litigation Intelligence Engine</span>
-    </h1>
-    <p class="hero-sub">
-      <strong>Predict. Draft. Seal. Win.</strong> ZPD uses Claude API as its inference core to predict litigation outcomes, auto-draft court documents, identify opponent conduct patterns, and produce court-admissible evidence records — with full Canadian constitutional rights compliance built in.
-    </p>
-    <div class="hero-actions">
-      <a href="#pricing" class="btn-primary">Start with ZPD</a>
-      <a href="#live-case" class="btn-gold">See Live Case</a>
-      <a href="#pipeline" class="btn-outline">How It Works</a>
-    </div>
+    <div class="hero-split">
+      <!-- LEFT: Text content -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">ZPD &mdash; Proprietary AI Legal Intelligence</div>
+        <h1 class="hero-title">
+          <span class="zpd">ZPrimeDox</span>
+          <span class="tag">Litigation Intelligence Engine</span>
+        </h1>
+        <p class="hero-sub">
+          <strong>Predict. Draft. Seal. Win.</strong> ZPD uses Claude API as its inference core to predict litigation outcomes, auto-draft court documents, identify opponent conduct patterns, and produce court-admissible evidence records — with full Canadian constitutional rights compliance built in.
+        </p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn-primary">Start with ZPD</a>
+          <a href="#live-case" class="btn-gold">See Live Case</a>
+          <a href="#pipeline" class="btn-outline">How It Works</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: AI Robot Clone of Derek Francisco -->
+      <div class="robot-wrap">
+        <div class="robot-name-tag">AI DEREK &mdash; ZPD AGENT</div>
+        <svg class="robot-svg" viewBox="0 0 220 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ambient glow behind robot -->
+          <ellipse cx="110" cy="340" rx="70" ry="12" fill="rgba(46,125,50,0.18)"/>
+
+          <!-- ANTENNA -->
+          <line x1="110" y1="4" x2="110" y2="38" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="110" cy="4" r="7" fill="#FFD700">
+            <animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- HEAD -->
+          <rect x="55" y="38" width="110" height="90" rx="20" fill="#0d1f0d" stroke="#4CAF50" stroke-width="2"/>
+          <!-- Head highlight -->
+          <rect x="62" y="44" width="96" height="20" rx="10" fill="rgba(76,175,80,0.06)"/>
+
+          <!-- VISOR / EYES PANEL -->
+          <rect x="68" y="62" width="84" height="30" rx="8" fill="#060e06" stroke="#FFD700" stroke-width="1.5"/>
+          <!-- Left eye glow -->
+          <rect x="74" y="68" width="30" height="18" rx="5" fill="#2E7D32">
+            <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="78" y="72" width="22" height="10" rx="3" fill="#66BB6A"/>
+          <!-- Right eye glow -->
+          <rect x="116" y="68" width="30" height="18" rx="5" fill="#2E7D32">
+            <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="120" y="72" width="22" height="10" rx="3" fill="#66BB6A"/>
+          <!-- Eye scanline -->
+          <line x1="74" y1="77" x2="104" y2="77" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+          <line x1="116" y1="77" x2="146" y2="77" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+
+          <!-- MOUTH / SPEAKER GRILLE -->
+          <rect x="75" y="104" width="70" height="16" rx="5" fill="#060e06" stroke="#4CAF50" stroke-width="1"/>
+          <line x1="88" y1="104" x2="88" y2="120" stroke="#4CAF50" stroke-width="1" opacity=".5"/>
+          <line x1="100" y1="104" x2="100" y2="120" stroke="#4CAF50" stroke-width="1" opacity=".5"/>
+          <line x1="112" y1="104" x2="112" y2="120" stroke="#4CAF50" stroke-width="1" opacity=".5"/>
+          <line x1="124" y1="104" x2="124" y2="120" stroke="#4CAF50" stroke-width="1" opacity=".5"/>
+          <!-- Voice wave animation -->
+          <rect x="82" y="109" width="6" height="6" rx="1" fill="#4CAF50" opacity=".8">
+            <animate attributeName="height" values="6;12;4;10;6" dur="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="109;106;111;107;109" dur="0.8s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="94" y="108" width="6" height="8" rx="1" fill="#4CAF50" opacity=".8">
+            <animate attributeName="height" values="8;4;14;6;8" dur="0.8s" begin="0.1s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="108;112;103;110;108" dur="0.8s" begin="0.1s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="106" y="107" width="6" height="10" rx="1" fill="#FFD700" opacity=".9">
+            <animate attributeName="height" values="10;16;6;12;10" dur="0.8s" begin="0.2s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="107;104;111;106;107" dur="0.8s" begin="0.2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="118" y="109" width="6" height="6" rx="1" fill="#4CAF50" opacity=".8">
+            <animate attributeName="height" values="6;10;4;8;6" dur="0.8s" begin="0.15s" repeatCount="indefinite"/>
+            <animate attributeName="y" values="109;107;113;109;109" dur="0.8s" begin="0.15s" repeatCount="indefinite"/>
+          </rect>
+
+          <!-- NECK -->
+          <rect x="95" y="128" width="30" height="20" rx="6" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <line x1="103" y1="132" x2="103" y2="144" stroke="#4CAF50" stroke-width="1" opacity=".4"/>
+          <line x1="110" y1="132" x2="110" y2="144" stroke="#4CAF50" stroke-width="1" opacity=".4"/>
+          <line x1="117" y1="132" x2="117" y2="144" stroke="#4CAF50" stroke-width="1" opacity=".4"/>
+
+          <!-- TORSO -->
+          <rect x="42" y="148" width="136" height="110" rx="18" fill="#0a180a" stroke="#4CAF50" stroke-width="2"/>
+
+          <!-- CHEST PLATE (gold accent) -->
+          <rect x="58" y="162" width="104" height="72" rx="12" fill="#0d1f0d" stroke="#FFD700" stroke-width="1.5"/>
+
+          <!-- ZPD BADGE on chest -->
+          <rect x="70" y="172" width="80" height="28" rx="7" fill="rgba(255,215,0,0.08)" stroke="#FFD700" stroke-width="1"/>
+          <text x="110" y="191" text-anchor="middle" fill="#FFD700" font-family="monospace" font-size="14" font-weight="900" letter-spacing="3">ZPD</text>
+
+          <!-- Chest circuit lines -->
+          <line x1="68" y1="212" x2="152" y2="212" stroke="#4CAF50" stroke-width="1" opacity=".3"/>
+          <line x1="80" y1="220" x2="80" y2="236" stroke="#4CAF50" stroke-width="1" opacity=".2"/>
+          <line x1="110" y1="220" x2="110" y2="236" stroke="#FFD700" stroke-width="1" opacity=".2"/>
+          <line x1="140" y1="220" x2="140" y2="236" stroke="#4CAF50" stroke-width="1" opacity=".2"/>
+
+          <!-- Power dots row -->
+          <circle cx="84" cy="226" r="5" fill="#4CAF50">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="100" cy="226" r="5" fill="#4CAF50">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" begin="0.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="116" cy="226" r="5" fill="#FFD700">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="132" cy="226" r="5" fill="#4CAF50">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- LEFT SHOULDER JOINT -->
+          <circle cx="36" cy="164" r="14" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- LEFT ARM -->
+          <rect x="16" y="158" width="28" height="80" rx="13" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Left elbow joint -->
+          <circle cx="30" cy="218" r="8" fill="#0a180a" stroke="#FFD700" stroke-width="1"/>
+          <!-- LEFT FOREARM -->
+          <rect x="18" y="224" width="24" height="50" rx="11" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- LEFT HAND -->
+          <rect x="14" y="272" width="32" height="26" rx="10" fill="#0d1f0d" stroke="#FFD700" stroke-width="1.5"/>
+          <!-- Left fingers -->
+          <rect x="18" y="296" width="6" height="14" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+          <rect x="27" y="296" width="6" height="16" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+          <rect x="36" y="296" width="6" height="14" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+
+          <!-- RIGHT SHOULDER JOINT -->
+          <circle cx="184" cy="164" r="14" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- RIGHT ARM -->
+          <rect x="176" y="158" width="28" height="80" rx="13" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Right elbow joint -->
+          <circle cx="190" cy="218" r="8" fill="#0a180a" stroke="#FFD700" stroke-width="1"/>
+          <!-- RIGHT FOREARM -->
+          <rect x="178" y="224" width="24" height="50" rx="11" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- RIGHT HAND (raised — holding document) -->
+          <rect x="174" y="272" width="32" height="26" rx="10" fill="#0d1f0d" stroke="#FFD700" stroke-width="1.5"/>
+          <!-- Right fingers -->
+          <rect x="176" y="296" width="6" height="14" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+          <rect x="185" y="296" width="6" height="16" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+          <rect x="194" y="296" width="6" height="14" rx="3" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1"/>
+
+          <!-- HIP CONNECTOR -->
+          <rect x="55" y="258" width="110" height="16" rx="6" fill="#0a180a" stroke="#4CAF50" stroke-width="1.5"/>
+
+          <!-- LEFT LEG -->
+          <rect x="62" y="272" width="38" height="68" rx="12" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Left knee -->
+          <circle cx="81" cy="310" r="9" fill="#0a180a" stroke="#FFD700" stroke-width="1"/>
+          <!-- LEFT FOOT -->
+          <rect x="54" y="332" width="52" height="22" rx="10" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Foot accent -->
+          <line x1="60" y1="343" x2="100" y2="343" stroke="#4CAF50" stroke-width="1" opacity=".3"/>
+
+          <!-- RIGHT LEG -->
+          <rect x="120" y="272" width="38" height="68" rx="12" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Right knee -->
+          <circle cx="139" cy="310" r="9" fill="#0a180a" stroke="#FFD700" stroke-width="1"/>
+          <!-- RIGHT FOOT -->
+          <rect x="114" y="332" width="52" height="22" rx="10" fill="#0d1f0d" stroke="#4CAF50" stroke-width="1.5"/>
+          <!-- Foot accent -->
+          <line x1="120" y1="343" x2="160" y2="343" stroke="#4CAF50" stroke-width="1" opacity=".3"/>
+
+          <!-- OUTER GLOW RING (decorative) -->
+          <circle cx="110" cy="90" r="74" stroke="rgba(46,125,50,0.12)" stroke-width="1" stroke-dasharray="6 4" fill="none">
+            <animateTransform attributeName="transform" type="rotate" from="0 110 90" to="360 110 90" dur="20s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <div class="robot-status">&#x25CF; ONLINE &bull; ACTIVE &bull; PROTECTING DEREK FRANCISCO</div>
+      </div>
+    </div><!-- /hero-split -->
+
     <div class="hero-metrics">
       <div class="metric"><div class="num">94%</div><div class="lbl">Outcome prediction<br>accuracy (pilot cases)</div></div>
       <div class="metric"><div class="num">&lt;2min</div><div class="lbl">CCTS complaint<br>auto-generated</div></div>
