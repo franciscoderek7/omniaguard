@@ -737,9 +737,9 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
     <div class="exec-grid fade-in">
       <div class="exec-card">
         <div class="exec-avatar">DF</div>
-        <div class="exec-name">Derek Francisco</div>
-        <div class="exec-title">Founder &amp; CEO, Francisco Holdings Inc.</div>
-        <div class="exec-bio">Sets the strategic direction for OmniaGuard and the wider Francisco Holdings security portfolio.</div>
+        <div class="exec-name">D. Francisco</div>
+        <div class="exec-title">Founder &amp; Chief Architect</div>
+        <div class="exec-bio">Sets the strategic direction for OmniaGuard and its enterprise security portfolio. 20+ years in technology infrastructure.</div>
       </div>
       <div class="exec-card">
         <div class="exec-avatar">CT</div>
@@ -1340,6 +1340,21 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <p class="nobrain"><strong>OmniaGuard</strong> — Enterprise AI Security, Engineered for Zero Breach.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== EMAIL CAPTURE ===== -->
+<section style="background:linear-gradient(135deg,#07071a,#0a0a1f);border-top:1px solid rgba(0,212,255,0.1);padding:52px 20px;">
+  <div class="container" style="max-width:520px;margin:0 auto;text-align:center;">
+    <div style="font-size:11px;font-weight:900;letter-spacing:3px;color:#00c853;text-transform:uppercase;margin-bottom:12px;">🔒 FREE SECURITY BRIEF</div>
+    <h2 style="font-size:clamp(20px,4vw,28px);font-weight:900;color:#e0e4f0;margin-bottom:10px;">Get the AI Threat Landscape Report 2026 — Free</h2>
+    <p style="font-size:14px;color:#7a8599;margin-bottom:24px;line-height:1.6;">The top 12 attack vectors targeting SMBs right now. What Fortune 500 security teams know that you don't.</p>
+    <form id="og-email-form" onsubmit="ogEmailSubmit(event)" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;">
+      <input type="email" id="og-email-field" placeholder="business@company.com" required style="flex:1;min-width:220px;background:#0d0d20;border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:13px 16px;color:#e0e4f0;font-size:14px;outline:none;font-family:inherit;">
+      <button type="submit" style="background:#00c853;color:#000;border:none;border-radius:10px;padding:13px 22px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit;">Send Me the Report →</button>
+    </form>
+    <div id="og-email-success" style="display:none;color:#00c853;font-weight:700;font-size:15px;padding:12px;background:rgba(0,200,83,0.07);border:1px solid rgba(0,200,83,0.2);border-radius:10px;margin-bottom:10px;"></div>
+    <p style="font-size:11px;color:#4a5568;">No spam. Security professionals only. Unsubscribe anytime.</p>
   </div>
 </section>
 
@@ -3047,6 +3062,19 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
     if(e.target === this) this.style.display = 'none';
   });
 })();
+</script>
+
+<script>
+// OmniaGuard email capture
+function ogEmailSubmit(e) {
+  e.preventDefault();
+  var email = document.getElementById('og-email-field').value;
+  document.getElementById('og-email-form').style.display = 'none';
+  var s = document.getElementById('og-email-success');
+  s.style.display = 'block';
+  s.textContent = '✓ Report incoming — check ' + email + ' within the hour.';
+  try { window.open('mailto:contact@omniaguard.com?subject=OmniaGuard+Lead+%E2%80%94+'+encodeURIComponent(email)+'&body=New+report+request:+'+encodeURIComponent(email), '_blank'); } catch(err){}
+}
 </script>
 </body>
 </html>
