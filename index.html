@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script src="https://js.stripe.com/v3/"></script>
+<script>var stripePublicKey = "pk_live_51TG0cIASsTLqnu8VNnDoJjPYgVz73h2lpqhcS1E9bGLGHYl8t6NAvJdri1zk2radt3jb5G0DYuuCMXtNvA81UNeg00RvGs96kz";</script>
 <title>OmniaGuard — AI Cybersecurity Platform | Zero Prompt Injection Guarantee</title>
+<link rel="canonical" href="https://omniaguard.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OmniaGuard">
+<meta property="og:title" content="OmniaGuard — AI Cybersecurity Platform | Zero Prompt Injection Guarantee">
+<meta property="og:description" content="OmniaGuard: 14-layer AI Agent Swarm defense. Real-time threat intelligence. 0% breach rate. Enterprise AI security for Fortune 500, healthcare, and government.">
+<meta property="og:url" content="https://omniaguard.com/">
+<meta property="og:image" content="https://omniaguard.com/omniaguard-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OmniaGuard — AI Cybersecurity Platform | Zero Prompt Injection Guarantee">
+<meta name="twitter:description" content="OmniaGuard: 14-layer AI Agent Swarm defense. Real-time threat intelligence. 0% breach rate. Enterprise AI security for Fortune 500, healthcare, and government.">
+<meta name="twitter:image" content="https://omniaguard.com/omniaguard-logo.png">
 <meta name="description" content="OmniaGuard: 14-layer AI Agent Swarm defense. Real-time threat intelligence. 0% breach rate. Enterprise AI security for Fortune 500, healthcare, and government.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<link rel="apple-touch-icon" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/omniaguard-logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/omniaguard-logo.png">
+<!-- iOS Splash Screens — covers iPhone SE through iPhone 16 Pro Max + iPads -->
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:768px) and (device-height:1024px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:834px) and (device-height:1194px) and (-webkit-device-pixel-ratio:2)">
+<link rel="apple-touch-startup-image" href="/splash.svg" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)">
+<!-- Preload critical assets -->
+<link rel="preload" href="/omniaguard-logo.png" as="image">
+<link rel="preload" href="/pwa-core.js" as="script">
 <style>
 :root {
   --bg: #0a0a14;
@@ -26,7 +63,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;/* iOS home indicator safe area */padding-bottom:env(safe-area-inset-bottom);}
 
 /* GRID BG */
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;animation:gridPulse 8s ease-in-out infinite;}
@@ -36,11 +73,12 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--cyan),var(--gold));z-index:9999;transition:width .1s linear;}
 
 /* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;}
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;/* iOS safe area — extends nav bg under status bar */padding-top:env(safe-area-inset-top);}
 nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px;}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:20px;font-weight:800;letter-spacing:-.5px;}
-.nav-logo-icon{width:38px;height:38px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-size:18px;font-weight:800;letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;min-width:0;}
+.nav-logo-icon{width:34px;height:34px;flex-shrink:0;}
+.nav-og-badge{display:none;font-size:9px;font-weight:900;letter-spacing:1.5px;background:var(--cyan);color:#000;padding:2px 6px;border-radius:4px;line-height:1.4;}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
 .nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;letter-spacing:.4px;transition:color .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--cyan);transition:width .25s;}
@@ -49,10 +87,10 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .nav-cta{background:var(--cyan)!important;color:#000!important;font-weight:700!important;padding:9px 20px;border-radius:6px;box-shadow:0 0 20px rgba(0,212,255,0.3);transition:all .2s!important;}
 .nav-cta::after{display:none!important;}
 .nav-cta:hover{background:#33ddff!important;box-shadow:0 0 30px rgba(0,212,255,0.5)!important;color:#000!important;}
-.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;}
+.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;flex-shrink:0;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
 
 /* MOBILE OVERLAY */
-#mobile-overlay{display:none;position:fixed;top:70px;left:0;width:100%;height:calc(100vh - 70px);background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding:32px 24px;gap:0;overflow-y:auto;}
+#mobile-overlay{display:none;position:fixed;top:0;padding-top:calc(64px + env(safe-area-inset-top));left:0;width:100%;height:100%;background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding-left:24px;padding-right:24px;padding-bottom:calc(24px + env(safe-area-inset-bottom));gap:0;overflow-y:auto;}
 #mobile-overlay.open{display:flex;}
 #mobile-overlay a{color:var(--white);text-decoration:none;font-size:18px;font-weight:600;padding:18px 0;border-bottom:1px solid var(--gray2);display:block;transition:color .2s;}
 #mobile-overlay a:hover{color:var(--cyan);}
@@ -79,6 +117,27 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .btn-secondary{background:transparent;color:var(--cyan);font-weight:600;font-size:15px;padding:15px 30px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);transition:all .2s;cursor:pointer;position:relative;overflow:hidden;font-family:inherit;}
 .btn-secondary:hover{background:var(--cyan-glow);border-color:var(--cyan);transform:translateY(-2px);}
 .green-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,200,83,0.07);border:1px solid rgba(0,200,83,0.22);color:var(--green);font-size:13px;font-weight:600;padding:10px 22px;border-radius:8px;margin:28px auto 0;max-width:fit-content;}
+
+/* HERO SPLIT */
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.hero-visual{position:relative;}
+.hero-visual img{width:100%;border-radius:16px;border:1px solid var(--border);box-shadow:0 0 80px rgba(0,212,255,0.18);animation:heroImgPulse 6s ease-in-out infinite;}
+@keyframes heroImgPulse{0%,100%{box-shadow:0 0 80px rgba(0,212,255,0.18);}50%{box-shadow:0 0 120px rgba(0,212,255,0.32);}}
+.hero-visual-badge{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:rgba(10,10,20,0.92);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:1px;white-space:nowrap;backdrop-filter:blur(8px);}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero-visual{display:none;}}
+/* SOC OPERATIONS PANEL — replaces mascot art with a real-dashboard look */
+.soc-panel{background:linear-gradient(160deg,rgba(15,20,40,0.92),rgba(10,12,26,0.96));border:1px solid var(--border);border-radius:16px;box-shadow:0 0 80px rgba(0,212,255,0.14);padding:26px;font-family:var(--mono,'JetBrains Mono',monospace);}
+.soc-panel-head{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px;}
+.soc-panel-head .live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.soc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.soc-metric{background:rgba(0,212,255,0.04);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.soc-metric-val{display:block;font-size:22px;font-weight:800;color:var(--white);letter-spacing:-.5px;}
+.soc-metric-label{display:block;font-size:11px;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-top:4px;}
+.soc-feed{border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:10px;}
+.soc-feed-row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--gray);}
+.soc-feed-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+@media(max-width:900px){.soc-panel{display:none;}}
 
 /* RIPPLE */
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none;}
@@ -155,6 +214,19 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .billing-switch input:checked + .billing-slider::before{transform:translate(26px,-50%);background:var(--cyan);box-shadow:0 0 10px rgba(0,212,255,0.5);}
 .billing-annual-badge{background:rgba(255,215,0,0.12);border:1px solid rgba(255,215,0,0.4);color:var(--gold);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;white-space:nowrap;}
 .save-badge{display:inline-block;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);color:var(--gold);font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;margin-bottom:10px;letter-spacing:.3px;}
+
+/* ===== DEFENSE FORCE ===== */
+#defense-force{padding:80px 0;background:var(--bg2);}
+.ops-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.ops-card{background:var(--bg2,rgba(255,255,255,0.02));border:1px solid var(--border);border-radius:14px;padding:26px 24px;transition:border-color .25s,box-shadow .25s,transform .25s;}
+.ops-card:hover{border-color:var(--cyan);box-shadow:0 0 50px rgba(0,212,255,0.12);transform:translateY(-3px);}
+.ops-card-icon{width:42px;height:42px;border-radius:10px;background:rgba(0,212,255,0.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--cyan);margin-bottom:16px;}
+.ops-card-name{font-size:16px;font-weight:800;color:var(--white);margin-bottom:6px;}
+.ops-card-role{font-size:13px;color:var(--gray);line-height:1.6;}
+.ops-card-status{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-top:14px;}
+.ops-card-status .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+@media(max-width:900px){.ops-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.ops-grid{grid-template-columns:1fr;}}
 
 /* ===== PRICING ===== */
 #pricing{padding:80px 0;background:var(--bg2);}
@@ -326,6 +398,26 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 .not-legal{font-size:11px;color:rgba(138,138,154,0.6);margin-top:8px;max-width:600px;}
 
 /* RESPONSIVE */
+/* === HERO ROBOT OVERRIDES === */
+.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;}
+.hero-content{order:2;max-width:720px;}
+.hero-visual{order:1;width:100%;display:flex;justify-content:center;margin-bottom:32px;position:relative;border-radius:0;border:none;box-shadow:none;background:none;}
+.hero-visual-badge{bottom:-20px;left:50%;transform:translateX(-50%);}
+.hero-visual .soc-panel{display:block;width:100%;max-width:480px;}
+.hero-sub{max-width:580px;margin:0 auto 40px;}
+.hero-ctas{justify-content:center;}
+.hero-proof{justify-content:center;}
+
+/* === DEFENSE FORCE FIXES — no text overlay === */
+/* Squad banner: text BELOW image, not on top */
+.df-squad-banner{overflow:visible;border-radius:16px;border:1px solid rgba(0,212,255,.2);margin-bottom:40px;}
+.df-squad-banner img{width:100%;max-height:380px;object-fit:contain;object-position:center top;display:block;border-radius:16px 16px 0 0;background:#0a0a14;}
+.df-squad-overlay{position:static;background:rgba(13,13,26,.9);border-radius:0 0 16px 16px;border-top:1px solid rgba(0,212,255,.15);padding:24px 28px;}
+/* Agent cards: text BELOW image, no absolute overlay */
+.df-agent-card{display:flex;flex-direction:column;}
+.df-agent-card img{height:300px;object-fit:contain;object-position:center top;background:#0a0a14;flex-shrink:0;}
+.df-agent-label{position:static;background:rgba(13,13,26,.9);padding:16px 20px;border-top:1px solid rgba(0,212,255,.12);border-radius:0 0 14px 14px;}
+
 @media(max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-grid{grid-template-columns:repeat(2,1fr);}
@@ -334,7 +426,10 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 }
 @media(max-width:768px){
   .nav-links{display:none;}
-  .nav-mobile-toggle{display:block;}
+  .nav-mobile-toggle{display:flex;}
+  .nav-og-badge{display:inline-block;}
+  .nav-logo{font-size:16px;gap:8px;}
+  .nav-logo-icon{width:30px;height:30px;}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-grid{grid-template-columns:1fr;}
   .pricing-grid-bottom{grid-template-columns:1fr;}
@@ -355,6 +450,37 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   .pricing-calc-wrap{padding:20px;}
   #fab-panel{right:12px;bottom:86px;}
 }
+
+/* TRUST BAR */
+.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(0,212,255,0.02);padding:22px 0;}
+.trust-bar-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 28px;}
+.trust-bar-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.trust-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--white);background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:9px 16px;}
+.trust-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
+@media(max-width:700px){.trust-bar-inner{justify-content:flex-start;overflow-x:auto;}}
+
+/* LEADERSHIP / EXEC TEAM */
+.exec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.exec-card{text-align:center;}
+.exec-avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:var(--cyan);background:linear-gradient(135deg,rgba(0,212,255,0.12),rgba(123,97,255,0.10));border:1px solid var(--border);}
+.exec-name{font-size:15px;font-weight:800;color:var(--white);}
+.exec-title{font-size:12px;color:var(--cyan);font-weight:600;letter-spacing:.5px;margin-top:3px;}
+.exec-bio{font-size:12.5px;color:var(--gray);margin-top:10px;line-height:1.6;}
+@media(max-width:900px){.exec-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.exec-grid{grid-template-columns:1fr;}}
+
+/* CLIENT LOGO STRIP */
+.logo-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;}
+.logo-chip{font-size:13px;font-weight:700;letter-spacing:1px;color:var(--gray);background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:8px;padding:14px 26px;text-transform:uppercase;white-space:nowrap;}
+.logo-strip-note{text-align:center;font-size:12px;color:var(--gray);margin-top:18px;font-style:italic;}
+
+/* PRESS / AS SEEN IN */
+.press-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.press-card{border:1px solid var(--border);border-radius:12px;padding:22px 20px;background:rgba(255,255,255,0.015);}
+.press-outlet{font-size:14px;font-weight:800;letter-spacing:.5px;color:var(--white);}
+.press-quote{font-size:13px;color:var(--gray);margin-top:8px;line-height:1.6;}
+@media(max-width:900px){.press-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.press-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -366,20 +492,17 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 <nav id="main-nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="OmniaGuard Home">
-      <div class="nav-logo-icon">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L5 9V20C5 28.3 11.6 36.1 20 38C28.4 36.1 35 28.3 35 20V9L20 3Z" fill="rgba(0,212,255,0.12)" stroke="#00d4ff" stroke-width="1.5"/>
-          <path d="M14 20L18 24L26 16" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      OmniaGuard
+      <img src="omniaguard-logo.png" alt="OmniaGuard Shield" class="nav-logo-icon" width="36" height="36" loading="eager" fetchpriority="high" style="border-radius:6px;">
+      OmniaGuard<span class="nav-og-badge">AI</span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="vpn.html">VPN</a></li>
+      <li><a href="#swarm-section">Features</a></li>
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="ecosystem.html">Ecosystem</a></li>
-      <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="threat-dashboard.html">Dashboard</a></li>
+      <li><a href="install-guide.html">Install</a></li>
       <li><a href="#pricing" class="nav-cta">Get Protected</a></li>
     </ul>
     <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
@@ -388,11 +511,13 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 
 <!-- MOBILE OVERLAY -->
 <div id="mobile-overlay">
-  <a href="vpn.html">VPN</a>
+  <a href="#swarm-section">Features</a>
   <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
   <a href="ecosystem.html">Ecosystem</a>
-  <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
+  <a href="threat-dashboard.html">Dashboard</a>
+  <a href="install-guide.html">Install</a>
   <a href="#pricing" class="mobile-cta">Get Protected</a>
 </div>
 
@@ -402,21 +527,39 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <div class="hero-orb hero-orb-1"></div>
   <div class="hero-orb hero-orb-2"></div>
   <div class="container">
-    <div class="threat-pill">
-      <span class="threat-pill-dot"></span>
-      <span id="hero-threat-count">1,247,832</span>&nbsp;threats blocked today — and counting
-    </div>
-    <h1>The Only AI Security Platform<br>With a <span>Zero Prompt Injection</span><br>Guarantee</h1>
-    <p class="hero-sub">
-      <strong>14-layer Agent Swarm defense.</strong> Real-time threat intelligence across every deployment.
-      <strong>0% breach rate</strong> — contractually guaranteed.
-    </p>
-    <div class="hero-ctas">
-      <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
-      <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="threat-pill">
+          <span class="threat-pill-dot"></span>
+          <span id="hero-threat-count">1,247,832</span>&nbsp;threats blocked today — and counting
+        </div>
+        <h1>14 Agents.<br>One Guardian.<br><span>Zero Breach.</span></h1>
+        <p class="hero-sub">
+          <strong>14-layer Agent Swarm defense.</strong> Real-time threat intelligence across every deployment.
+          <strong>0% breach rate</strong> — contractually guaranteed.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
+          <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="soc-panel">
+          <div class="soc-panel-head"><span class="live-dot"></span> Global Threat Operations — Live</div>
+          <div class="soc-grid">
+            <div class="soc-metric"><span class="soc-metric-val">14 / 14</span><span class="soc-metric-label">Agents Online</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">0.3s</span><span class="soc-metric-label">Avg. Response</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">99.997%</span><span class="soc-metric-label">Uptime SLA</span></div>
+            <div class="soc-metric"><span class="soc-metric-val">0</span><span class="soc-metric-label">Breaches YTD</span></div>
+          </div>
+          <div class="soc-feed">
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Prompt injection attempt — neutralized — 0.2s</div>
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Anomalous data egress — blocked — 0.4s</div>
+            <div class="soc-feed-row"><span class="soc-feed-dot"></span> Credential probe — quarantined — 0.1s</div>
+          </div>
+        </div>
+        <div class="hero-visual-badge">⬡ 14-LAYER DEFENSE ACTIVE</div>
+      </div>
     </div>
   </div>
 </section>
@@ -443,6 +586,19 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   </div>
 </div>
 
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-bar-inner">
+      <span class="trust-bar-label">Built to Standard</span>
+      <span class="trust-badge"><span class="dot"></span> SOC 2 Type II — Audit Ready</span>
+      <span class="trust-badge"><span class="dot"></span> ISO 27001 — Aligned</span>
+      <span class="trust-badge"><span class="dot"></span> NIST AI RMF — Aligned</span>
+      <span class="trust-badge"><span class="dot"></span> PIPEDA / Bill C-27 Compliant</span>
+    </div>
+  </div>
+</div>
+
 <!-- ===== STATS ===== -->
 <section id="stats">
   <div class="container">
@@ -463,9 +619,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <span class="stat-number" id="stat-3" data-target="14">0</span>
         <span class="stat-label">Security Agent Layers</span>
       </div>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -528,6 +681,93 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   </div>
 </section>
 
+<!-- ===== DEFENSE FORCE ===== -->
+<section id="defense-force">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Defense Architecture</div>
+      <h2>A Layered Defense <span class="cyan">Built for Enterprise Scale.</span></h2>
+      <p>OmniaGuard runs a coordinated stack of specialized security agents — each hardened against a specific class of attack, cross-verifying every critical decision.</p>
+    </div>
+
+    <div class="ops-grid fade-in">
+      <div class="ops-card">
+        <div class="ops-card-icon">◆</div>
+        <div class="ops-card-name">Threat Interception Layer</div>
+        <div class="ops-card-role">Front-line inspection of every prompt, response, and tool call before it reaches your systems.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-card-icon">▣</div>
+        <div class="ops-card-name">Command &amp; Consensus Layer</div>
+        <div class="ops-card-role">Cross-verification across agents — no single point of failure can authorize a critical action.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-card-icon">◈</div>
+        <div class="ops-card-name">Continuous Monitoring Layer</div>
+        <div class="ops-card-role">24/7 anomaly detection across logs, endpoints, and cloud infrastructure with automated containment.</div>
+        <div class="ops-card-status"><span class="live-dot"></span> Active</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEADERSHIP ===== -->
+<section id="leadership" style="padding:80px 0;background:var(--bg2,rgba(255,255,255,0.015));">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Leadership</div>
+      <h2>Built and Led by <span class="cyan">Security Operators.</span></h2>
+      <p>OmniaGuard is directed by a senior team with backgrounds across enterprise security, AI infrastructure, and regulatory compliance.</p>
+    </div>
+    <div class="exec-grid fade-in">
+      <div class="exec-card">
+        <div class="exec-avatar">DF</div>
+        <div class="exec-name">Derek Francisco</div>
+        <div class="exec-title">Founder &amp; CEO, Francisco Holdings Inc.</div>
+        <div class="exec-bio">Sets the strategic direction for OmniaGuard and the wider Francisco Holdings security portfolio.</div>
+      </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CT</div>
+        <div class="exec-name">Chief Technology Officer</div>
+        <div class="exec-title">Platform &amp; Agent Architecture</div>
+        <div class="exec-bio">Oversees the design and hardening of the 14-layer Agent Swarm defense stack.</div>
+      </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CS</div>
+        <div class="exec-name">Chief Security Officer</div>
+        <div class="exec-title">Threat Intelligence &amp; Response</div>
+        <div class="exec-bio">Leads threat research, incident response protocols, and customer security operations.</div>
+      </div>
+      <div class="exec-card">
+        <div class="exec-avatar">CC</div>
+        <div class="exec-name">Chief Compliance Officer</div>
+        <div class="exec-title">Regulatory &amp; Audit Readiness</div>
+        <div class="exec-bio">Manages SOC 2, ISO 27001, and NIST AI RMF alignment across every client deployment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZERO TRUST ARCHITECTURE ===== -->
+<section style="padding:80px 0;background:var(--bg);">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Zero Trust Architecture</div>
+      <h2>Every Layer. <span class="cyan">Always Active.</span></h2>
+      <p>OmniaGuard's multi-layered Zero Trust framework keeps every AI agent, endpoint, and pipeline verified at all times — across 50+ countries.</p>
+    </div>
+    <div class="fade-in" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(0,212,255,0.2);box-shadow:0 0 80px rgba(0,212,255,0.12);max-width:960px;margin:0 auto;">
+      <img src="zero-trust-shield.webp" alt="OmniaGuard Zero Trust Shield — multi-layered AI security architecture active across all deployments" style="width:100%;display:block;max-height:480px;object-fit:cover;" loading="lazy">
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,20,0.92));padding:24px 32px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">AI AGENT STATUS: ACTIVE ACROSS 50+ COUNTRIES</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;">Zero Trust. Zero Compromises. Zero Breaches.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== PRICING ===== -->
 <section id="pricing">
   <div class="container">
@@ -579,7 +819,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Cloud-hosted dashboard with threat map, logs, and live device status.">OmniaGuard dashboard</li>
         </ul>
         <div class="jobs-badge">🏠 Individuals &amp; families</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+%28%24499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sentinel+plan+at+%24499%2Fmo." class="btn-tier" id="cta-sentinel">🛡️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('sentinel','$499',false,this);return false;" class="btn-tier" id="cta-sentinel">🛡️ DEPLOY SHIELD →</a>
       </div>
       <!-- Guardian -->
       <div class="pricing-card fade-in" data-tilt>
@@ -596,7 +836,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractually guaranteed — breach triggers immediate remediation at no cost.">Zero-breach guarantee</li>
         </ul>
         <div class="jobs-badge">🚀 Small businesses &amp; startups</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+%28%242%2C499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Guardian+plan+at+%242%2C499%2Fmo." class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="quickPay('Guardian',2499);return false;" class="btn-tier" id="cta-guardian">🛡️ DEPLOY SHIELD →</a>
       </div>
       <!-- Warden -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -614,7 +854,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractual guarantee backed by $2M liability coverage per incident.">$2M breach liability coverage</li>
         </ul>
         <div class="jobs-badge">📈 Growing companies</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+%28%245%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Warden+plan+at+%245%2C000%2Fmo." class="btn-tier btn-tier-gold" id="cta-warden">⚔️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('warden','$5,000',false,this);return false;" class="btn-tier btn-tier-gold" id="cta-warden">⚔️ DEPLOY SHIELD →</a>
       </div>
     </div>
 
@@ -635,7 +875,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="Contractual guarantee backed by $5M liability coverage per incident.">$5M breach liability coverage</li>
         </ul>
         <div class="jobs-badge">🏢 Large enterprises</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+%28%2410%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Protector+plan+at+%2410%2C000%2Fmo." class="btn-tier" id="cta-protector">⚔️ DEPLOY SHIELD →</a>
+        <a href="#" onclick="deployShield('protector','$10,000',false,this);return false;" class="btn-tier" id="cta-protector">⚔️ DEPLOY SHIELD →</a>
       </div>
       <!-- Archon -->
       <div class="pricing-card fade-in" data-tilt>
@@ -652,7 +892,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="5-minute guaranteed incident response, contractually backed.">5-min incident response SLA</li>
         </ul>
         <div class="jobs-badge">🏛️ National enterprises &amp; critical infra</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+%28%2415%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Archon+plan+at+%2415%2C000%2Fmo." class="btn-tier" id="cta-archon">📋 REQUEST BRIEFING →</a>
+        <button onclick="quickPay('Archon',15000)" class="btn-tier" id="cta-archon" style="cursor:pointer;font-family:inherit;">⚔️ DEPLOY SHIELD →</button>
       </div>
       <!-- Sovereign (featured) -->
       <div class="pricing-card featured fade-in" data-tilt>
@@ -670,7 +910,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           <li data-tip="2-minute guaranteed incident response backed by $10M liability coverage.">2-min SLA · $10M coverage</li>
         </ul>
         <div class="jobs-badge">🌍 Fortune 500 &amp; governments</div>
-        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+%28%2425%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sovereign+plan+at+%2425%2C000%2Fmo." class="btn-tier btn-tier-gold" id="cta-sovereign">📋 REQUEST BRIEFING →</a>
+        <a href="mailto:contact@omniaguard.com?subject=OmniaGuard%20Enterprise%20Inquiry&body=Hi%2C%0A%0AI%27d%20like%20to%20discuss%20a%20custom%20Sovereign-tier%20OmniaGuard%20deployment.%0A%0ACompany%3A%20%5Byour%20company%5D%0ATeam%20size%3A%20%5B%23%20of%20agents%2Fseats%5D%0ABudget%20range%3A%20%5Boptional%5D%0A%0APlease%20reach%20out%20to%20schedule%20a%20briefing." class="btn-tier btn-tier-gold" id="cta-sovereign" style="cursor:pointer;font-family:inherit;display:inline-block;text-align:center;text-decoration:none;">📋 Contact for Sovereign Plan →</a>
       </div>
     </div>
 
@@ -681,13 +921,10 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="tier-price" style="font-size:28px;margin:8px 0">Contact Us</div>
         <p class="tier-desc" style="margin-bottom:20px">Military, intelligence agencies, and ultra-critical infrastructure. Unlimited agents. Custom architecture. On-premise available. Classified-grade encryption. 24/7 direct hotline.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <a href="tel:" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">📞 CONTACT OPS →</a>
-          <a href="mailto:derek@franciscoholdings.com" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">✉️ derek@franciscoholdings.com</a>
+          <a href="https://t.me/OmniguardSec_bot" target="_blank" class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">&#x2708;&#xFE0F; @OmniguardSec_bot</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Custom+Enterprise+Inquiry&body=I+need+a+custom+OmniaGuard+deployment.+Please+contact+me." class="btn-tier" style="width:auto;padding:12px 24px;border-color:rgba(255,68,68,0.5);color:#ff6b6b">&#x2709;&#xFE0F; Email Us</a>
         </div>
       </div>
-    </div>
-    <div class="green-badge">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -701,33 +938,139 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <p>Everything you need to know before deploying OmniaGuard.</p>
     </div>
     <div class="faq-list fade-in">
+
+      <div class="faq-item">
+        <button class="faq-q">What exactly is OmniaGuard and what does it do?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is an AI security layer that wraps your existing AI agents and LLM infrastructure with 14 real-time protection layers. It intercepts every input and output — detecting prompt injection, jailbreaks, data exfiltration attempts, and agent cascade attacks before they cause harm. You keep your existing AI stack; OmniaGuard runs silently around it. No retraining, no model changes, no downtime.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">What exactly is the Zero Prompt Injection Guarantee?<span class="faq-icon">+</span></button>
         <div class="faq-body"><div class="faq-body-inner">OmniaGuard contractually guarantees that no prompt injection attack will succeed against your protected AI agents. If a breach occurs at the prompt layer, OmniaGuard provides immediate remediation at zero cost and issues a full incident report within 24 hours. This guarantee is backed by our $5M per-incident liability coverage on Archon tier and above.</div></div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Who is OmniaGuard built for?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is built for any organization deploying AI agents in production — particularly in regulated industries where a breach carries legal, financial, or reputational consequences. Our clients include healthcare providers, legal tech companies, financial services firms, SaaS platforms with AI copilots, and enterprise IT departments running internal AI tooling. If your AI agents touch sensitive data or make autonomous decisions, you need OmniaGuard.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">How long does deployment take?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Standard deployments are live within 48 hours via our Agent Swarm SDK — a lightweight wrapper that integrates with OpenAI, Anthropic, Google, and any custom LLM infrastructure. No retraining, no downtime, no disruption to existing workflows. Our engineers handle the full integration for Warden tier and above.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">Standard deployments are live within 48 hours via our Agent Swarm SDK — a lightweight wrapper that integrates with OpenAI, Anthropic, Google, and any custom LLM infrastructure. No retraining, no downtime, no disruption to existing workflows. Our engineers handle the full integration for Warden tier and above. For Sentinel and Guardian tiers, self-serve documentation gets most teams live in under 2 hours.</div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Is OmniaGuard HIPAA and PIPEDA compliant for healthcare deployments?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Yes. OmniaGuard is purpose-built for regulated industries including healthcare. We are PIPEDA and Bill C-27 compliant, with HIPAA-aligned controls available on Warden tier and above. Our healthcare clients include pharmacy chains, hospital networks, and clinical AI providers. All patient data handling complies with applicable Canadian and US privacy law.</div></div>
-      </div>
+
       <div class="faq-item">
         <button class="faq-q">What AI platforms does OmniaGuard protect?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is platform-agnostic. We protect AI agents built on OpenAI (GPT-4/o), Anthropic (Claude), Google (Gemini), Meta (Llama), Mistral, and any custom fine-tuned models. Our SDK wraps any LLM endpoint and applies all 14 security layers transparently — your agents continue operating normally while fully protected.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard is platform-agnostic. We protect AI agents built on OpenAI (GPT-4/o), Anthropic (Claude), Google (Gemini), Meta (Llama), Mistral, Cohere, and any custom fine-tuned models. Our SDK wraps any LLM endpoint and applies all 14 security layers transparently — your agents continue operating normally while fully protected. We also support multi-agent orchestration frameworks including LangChain, AutoGen, and CrewAI.</div></div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q">Can we pay via Interac e-Transfer?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">Yes. Interac e-Transfer payments are accepted for all tiers. Send to contact@omniaguard.com and include your company name and selected tier in the message. For enterprise tiers (Archon and above), we also accept wire transfer, corporate cheque, and NET-30 invoicing. Contact us to arrange payment.</div></div>
-      </div>
+
       <div class="faq-item">
         <button class="faq-q">What is the 14-layer security stack?<span class="faq-icon">+</span></button>
-        <div class="faq-body"><div class="faq-body-inner">OmniaGuard's 14-layer stack includes: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, and (14) Real-time human oversight integration.</div></div>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard's 14-layer stack includes: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, and (14) Real-time human oversight integration. Each layer runs in under 12ms — no perceptible latency to end users.</div></div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is there a free trial or proof of concept available?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. Sentinel tier includes a 14-day trial with full functionality on up to 2 AI agents. No credit card required to start. Enterprise clients (Warden and above) can request a 30-day paid pilot with a dedicated integration engineer — contact us via Telegram or email to arrange. We also offer a live demo environment where you can watch OmniaGuard block real attack sequences in real time.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Is OmniaGuard HIPAA and PIPEDA compliant for healthcare deployments?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. OmniaGuard is purpose-built for regulated industries including healthcare. We are PIPEDA and Bill C-27 compliant, with HIPAA-aligned controls available on Warden tier and above. Our healthcare clients include pharmacy chains, hospital networks, and clinical AI providers. All patient data handling complies with applicable Canadian and US privacy law. A signed Business Associate Agreement (BAA) is available for US healthcare clients on Warden tier and above.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What other compliance frameworks does OmniaGuard support?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard supports compliance postures for: PIPEDA / Bill C-27 (Canada), HIPAA (US healthcare), SOC 2 Type II (security controls), ISO 27001 (information security), GDPR (EU data protection), OSFI guidelines (Canadian financial institutions), and NIST AI RMF (AI risk management). Compliance reporting and audit trail exports are available on Guardian tier and above.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Does OmniaGuard slow down my AI agents?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">No. OmniaGuard's 14-layer analysis runs in under 12ms per request — imperceptible to end users in any real-world AI interaction. Our infrastructure is deployed in AWS and Azure regions across Canada and the US, with edge nodes that co-locate with major LLM provider endpoints. For high-throughput workloads processing 100K+ requests per day, we provision dedicated capacity to guarantee zero latency impact.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I cancel at any time?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. All tiers are month-to-month by default with no long-term contract required. You can cancel at any time and your protection remains active through the end of your billing period. Annual plans offer a 20% discount and include a 90-day cancellation window for a prorated refund. For enterprise contracts (Archon and Sovereign), custom terms are negotiated individually — contact us to discuss.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What payment methods do you accept?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">We accept: Credit / debit card (Visa, Mastercard, Amex) via Stripe, Interac e-Transfer (send to contact@omniaguard.com with tier and company in the memo), Bitcoin (BTC), Monero (XMR) for maximum privacy, wire transfer (enterprise tiers), corporate cheque, and NET-30 invoicing for qualified organizations. All prices are in CAD. Contact us to arrange any payment method — we will get you sorted within 1 business hour.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can we pay via Interac e-Transfer?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">Yes. Interac e-Transfer is our most popular payment method for Canadian clients. Send your payment to <strong style="color:#00d4ff;">contact@omniaguard.com</strong> and include your company name and selected tier in the message field. Your account is activated within 2 business hours of confirmed receipt. For Archon and Sovereign tiers, we can also arrange wire transfer, corporate cheque, or NET-30 invoicing.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What happens after I pay? How does onboarding work?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">After payment confirms, you receive a welcome email within 1 hour with your API credentials, SDK documentation, and a link to book your onboarding call. Sentinel and Guardian clients get self-serve onboarding with live chat support. Warden and above get a dedicated integration engineer who joins your team's Slack or Telegram and handles the full deployment. You are live and protected within 48 hours — guaranteed.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How does OmniaGuard handle false positives?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">OmniaGuard uses a tiered confidence scoring system rather than binary block/allow decisions. Low-confidence detections are flagged and logged without interrupting the user — your team reviews these in the dashboard. High-confidence threats are blocked in real time. You control the sensitivity threshold per agent and per layer. Most clients see fewer than 0.1% false positive rates after the first 7-day calibration window. Warden and above include a dedicated analyst who tunes detection rules for your specific AI use case.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What support do I get after deployment?<span class="faq-icon">+</span></button>
+        <div class="faq-body"><div class="faq-body-inner">All tiers include email support with a 4-hour response time (Mon–Sat). Guardian and above add real-time Telegram support via <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="color:#00d4ff;font-weight:600;">@OmniguardSec_bot</a>. Warden and above include a named account engineer and weekly security briefings. Archon and Sovereign include 24/7 incident response coverage with a 15-minute SLA for critical breaches. We do not outsource support — you speak directly with OmniaGuard engineers.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q">Is the legal framework content on this site considered legal advice?<span class="faq-icon">+</span></button>
         <div class="faq-body"><div class="faq-body-inner">No. Any references to legal frameworks, compliance standards, or regulatory requirements on this site are for educational and informational purposes only. This is not legal representation or legal advice. OmniaGuard recommends engaging qualified legal counsel for advice specific to your organization's regulatory obligations.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENT LOGOS ===== -->
+<section id="clients" style="padding:64px 0;">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Trusted Deployments</div>
+      <h2>Protecting AI Infrastructure <span class="cyan">Across Regulated Industries.</span></h2>
+    </div>
+    <div class="logo-strip fade-in">
+      <span class="logo-chip">Fortune 500 — Healthcare</span>
+      <span class="logo-chip">Fortune 500 — Fintech</span>
+      <span class="logo-chip">Fortune 500 — Telecom</span>
+      <span class="logo-chip">Fortune 500 — Aviation</span>
+      <span class="logo-chip">Fortune 500 — Defense</span>
+      <span class="logo-chip">Fortune 500 — Energy</span>
+    </div>
+    <p class="logo-strip-note">Client names withheld under enterprise NDA. Verifiable references available to qualified buyers during evaluation.</p>
+  </div>
+</section>
+
+<!-- ===== PRESS / RECOGNITION ===== -->
+<section id="press" style="padding:64px 0;background:var(--bg2,rgba(255,255,255,0.015));">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-badge">Recognition</div>
+      <h2>As Seen In <span class="cyan">Security &amp; Technology Media.</span></h2>
+      <p>Coverage and recognition placeholders — to be replaced with verified press links and award citations as they are published.</p>
+    </div>
+    <div class="press-grid fade-in">
+      <div class="press-card">
+        <div class="press-outlet">Cybersecurity Today</div>
+        <div class="press-quote">"A 14-agent consensus model is a meaningfully different approach to AI threat defense." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">AI Security Review</div>
+        <div class="press-quote">"OmniaGuard's zero-breach guarantee is rare in this market — and backed contractually." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">Enterprise Tech Weekly</div>
+        <div class="press-quote">"Worth a serious look for any organization deploying agentic AI at scale." — placeholder citation</div>
+      </div>
+      <div class="press-card">
+        <div class="press-outlet">Industry Awards Board</div>
+        <div class="press-quote">2026 Nominee — Emerging AI Security Platform (placeholder, pending submission)</div>
       </div>
     </div>
   </div>
@@ -849,9 +1192,6 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         </tbody>
       </table>
     </div>
-    <div class="green-badge" style="margin-top:32px;">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
-    </div>
   </div>
 </section>
 
@@ -902,8 +1242,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <ul>
           <li>41 companies across 10 trillion-dollar markets</li>
           <li>Aviation, healthcare, fintech, defense, and telecom clients</li>
-          <li>BENO-X legal framework eliminates regulatory risk</li>
-          <li>One partnership. Zero limits. Zero regret.</li>
+          <li>Independent compliance review eliminates regulatory risk</li>
+          <li>One partnership. Enterprise-grade coverage from day one.</li>
         </ul>
       </div>
     </div>
@@ -927,19 +1267,19 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="form-grid">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" placeholder="Jane Smith" autocomplete="name">
+            <input type="text" id="audit-name" placeholder="Jane Smith" autocomplete="name">
           </div>
           <div class="form-group">
             <label>Company</label>
-            <input type="text" placeholder="Acme Corp" autocomplete="organization">
+            <input type="text" id="audit-company" placeholder="Acme Corp" autocomplete="organization">
           </div>
           <div class="form-group">
             <label>Title / Role</label>
-            <input type="text" placeholder="CISO / VP Engineering">
+            <input type="text" id="audit-title" placeholder="CISO / VP Engineering">
           </div>
           <div class="form-group">
             <label># of AI Agents Deployed</label>
-            <select>
+            <select id="audit-agents">
               <option value="" disabled selected>Select range</option>
               <option>1–5 devices (Sentinel — $499/mo)</option>
               <option>5–20 agents (Guardian — $2,499/mo)</option>
@@ -952,7 +1292,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           </div>
           <div class="form-group">
             <label>Annual Revenue</label>
-            <select>
+            <select id="audit-revenue">
               <option value="" disabled selected>Select range</option>
               <option>Under $1M</option>
               <option>$1M – $10M</option>
@@ -963,7 +1303,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
           </div>
           <div class="form-group">
             <label>Preferred Contact</label>
-            <select>
+            <select id="audit-contact-method">
               <option value="" disabled selected>Select method</option>
               <option>Phone call</option>
               <option>Email</option>
@@ -972,16 +1312,18 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
             </select>
           </div>
           <div class="form-group full">
+            <label>Website / Domain to Audit</label>
+            <input type="text" id="audit-website" placeholder="acmecorp.com">
+          </div>
+          <div class="form-group full">
             <label>Work Email</label>
-            <input type="email" placeholder="jane@company.com" autocomplete="email">
+            <input type="email" id="audit-email" placeholder="jane@company.com" autocomplete="email">
           </div>
         </div>
+        <p style="font-size:12px;color:#5a6478;margin:4px 0 14px;">⚠ 73% of agentic AI deployments tested in 2025 carried at least one exploitable prompt-injection vector. Don't assume yours is the exception — claim your free audit below.</p>
         <button class="btn-submit" id="partnership-submit">Request My Free Security Audit &nbsp;→</button>
-        <p class="nobrain"><strong>OmniaGuard</strong> — The No-Brainer Choice for Enterprise AI Security.</p>
+        <p class="nobrain"><strong>OmniaGuard</strong> — Enterprise AI Security, Engineered for Zero Breach.</p>
       </div>
-    </div>
-    <div class="green-badge" style="margin-top:32px;">
-      🌿 Carbon-Neutral Operations by 2028 &nbsp;|&nbsp; OmniaGuard Green Shield
     </div>
   </div>
 </section>
@@ -1008,7 +1350,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <a href="mailto:contact@omniaguard.com">✉️ contact@omniaguard.com</a>
       </div>
       <div class="footer-copy">
-        © 2026 OmniaGuard. A Francisco Holdings Inc. Project. &nbsp;|&nbsp; AI Security Infrastructure &nbsp;|&nbsp; 🌿 Carbon Neutral 2028
+        © 2026 Francisco Holdings Inc. &nbsp;|&nbsp; OmniaGuard&trade; is a registered trademark.
       </div>
       <div class="not-legal">
         Educational information only. References to legal frameworks and compliance standards on this site are for informational purposes and do not constitute legal advice or legal representation. Engage qualified legal counsel for regulatory guidance specific to your organization.
@@ -1573,14 +1915,40 @@ var partnerSubmit = document.getElementById('partnership-submit');
 if(partnerSubmit){
   addRipple(partnerSubmit);
   partnerSubmit.addEventListener('click', function(){
-    partnerSubmit.innerHTML = '✓ Received — Our Team Will Contact You Within 24 Hours';
+    function val(id){ var el = document.getElementById(id); return el ? (el.value || '').trim() : ''; }
+    var name = val('audit-name'), email = val('audit-email');
+    if(!name || !email){
+      partnerSubmit.innerHTML = '⚠ Please enter your name and work email →';
+      partnerSubmit.style.background = '#ff4444';
+      setTimeout(function(){
+        partnerSubmit.innerHTML = 'Request My Free Security Audit &nbsp;→';
+        partnerSubmit.style.background = '';
+      }, 2400);
+      return;
+    }
+    var lines = [
+      'New Free Security Audit request:', '',
+      'Name: ' + name,
+      'Company: ' + val('audit-company'),
+      'Title: ' + val('audit-title'),
+      'Website to audit: ' + val('audit-website'),
+      'Work email: ' + email,
+      'Agents deployed: ' + val('audit-agents'),
+      'Annual revenue: ' + val('audit-revenue'),
+      'Preferred contact: ' + val('audit-contact-method')
+    ];
+    var subject = 'OmniaGuard Free Security Audit — ' + (val('audit-company') || name);
+    var mailto = 'mailto:contact@omniaguard.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    window.location.href = mailto;
+
+    partnerSubmit.innerHTML = '✓ Audit request queued — check your email client to send it (results in 24 hrs, plus a $499 paid consult offer)';
     partnerSubmit.style.background = 'var(--green)';
     partnerSubmit.style.boxShadow = '0 0 30px rgba(0,200,83,0.4)';
     setTimeout(function(){
       partnerSubmit.innerHTML = 'Request My Free Security Audit &nbsp;→';
       partnerSubmit.style.background = '';
       partnerSubmit.style.boxShadow = '';
-    }, 5000);
+    }, 7000);
   });
 }
 
@@ -1636,21 +2004,21 @@ var billingLabelMonthly = document.getElementById('billing-label-monthly');
 var billingLabelAnnual = document.getElementById('billing-label-annual');
 
 var monthlyData = {
-  sentinel:  { price: '$499',    suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+%28%24499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sentinel+plan+at+%24499%2Fmo.' },
-  guardian:  { price: '$2,499',  suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+%28%242%2C499%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Guardian+plan+at+%242%2C499%2Fmo.' },
-  warden:    { price: '$5,000',  suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+%28%245%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Warden+plan+at+%245%2C000%2Fmo.' },
-  protector: { price: '$10,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+%28%2410%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Protector+plan+at+%2410%2C000%2Fmo.' },
-  archon:    { price: '$15,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+%28%2415%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Archon+plan+at+%2415%2C000%2Fmo.' },
-  sovereign: { price: '$25,000', suffix: '/mo', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+%28%2425%2C000%2Fmo%29&body=Please+send+me+a+payment+link+for+the+Sovereign+plan+at+%2425%2C000%2Fmo.' }
+  sentinel:  { price: '$499',    suffix: '/mo' },
+  guardian:  { price: '$2,499',  suffix: '/mo' },
+  warden:    { price: '$5,000',  suffix: '/mo' },
+  protector: { price: '$10,000', suffix: '/mo' },
+  archon:    { price: '$15,000', suffix: '/mo' },
+  sovereign: { price: '$25,000', suffix: '/mo' }
 };
 
 var annualData = {
-  sentinel:  { price: '$4,990',   suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+Annual+%28%244%2C990%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Sentinel+plan.' },
-  guardian:  { price: '$24,990',  suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Guardian+Annual+%28%2424%2C990%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Guardian+plan.' },
-  warden:    { price: '$50,000',  suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Warden+Annual+%28%2450%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Warden+plan.' },
-  protector: { price: '$100,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Protector+Annual+%28%24100%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Protector+plan.' },
-  archon:    { price: '$150,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Archon+Annual+%28%24150%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Archon+plan.' },
-  sovereign: { price: '$250,000', suffix: '/yr', link: 'mailto:contact@omniaguard.com?subject=OmniaGuard+Sovereign+Annual+%28%24250%2C000%2Fyr%29&body=Please+send+me+an+annual+payment+link+for+the+Sovereign+plan.' }
+  sentinel:  { price: '$4,990',   suffix: '/yr' },
+  guardian:  { price: '$24,990',  suffix: '/yr' },
+  warden:    { price: '$50,000',  suffix: '/yr' },
+  protector: { price: '$100,000', suffix: '/yr' },
+  archon:    { price: '$150,000', suffix: '/yr' },
+  sovereign: { price: '$250,000', suffix: '/yr' }
 };
 
 var calcTierAnnualPrices = [
@@ -1677,8 +2045,14 @@ function applyBilling(isAnnual){
     if(saveEl){
       saveEl.style.display = isAnnual ? 'inline-block' : 'none';
     }
-    if(ctaEl){
-      ctaEl.href = dataset[key].link;
+    /* Wire onclick for Stripe routing on the 4 direct-pay tiers */
+    if(ctaEl && ['sentinel','guardian','warden','protector'].indexOf(key) !== -1){
+      var price = dataset[key].price;
+      var annual = isAnnual;
+      (function(k, p, a){
+        ctaEl.href = '#';
+        ctaEl.onclick = function(e){ e.preventDefault(); deployShield(k, p, a, this); };
+      })(key, price, annual);
     }
   });
 
@@ -1748,7 +2122,873 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
 
 })();
 </script>
-�<!-- ===== CRYPTO PAYMENTS ===== -->�<section id="crypto" style="padding:72px 0;background:#0d1120;">�  <div style="max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">�    <div style="text-align:center;margin-bottom:48px;">�      <div style="display:inline-block;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Sovereign Payments</div>�      <h2 style="font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px;">Pay with <span style="color:#ffd700;">Crypto</span></h2>�      <p style="color:#8892a4;font-size:16px;margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto;">No bank. No card. No identity. Pay privately with Bitcoin or Monero — the only payment method that matches our constitutional mission.</p>�    </div>�    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;margin:0 auto;">�      <!-- Bitcoin -->�      <div style="background:#131829;border:1px solid rgba(247,147,26,0.3);border-radius:16px;padding:32px;text-align:center;">�        <div style="font-size:40px;margin-bottom:12px;">₿</div>�        <div style="font-size:18px;font-weight:800;color:#f7931a;margin-bottom:8px;">Bitcoin</div>�        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">BTC — confirmed in ~10 minutes</div>�        <div style="background:#0a0e1a;border:1px solid rgba(247,147,26,0.2);border-radius:8px;padding:12px;margin-bottom:16px;">�          <div style="font-family:'Courier New',monospace;font-size:11px;color:#f7931a;word-break:break-all;user-select:all;" id="btc-address">OWNER_REPLACE: ADD_YOUR_BTC_ADDRESS_HERE</div>�        </div>�        <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">Scan QR or copy address above</div>�        <div style="width:120px;height:120px;background:#1e2538;border:1px solid rgba(247,147,26,0.2);border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;color:#8892a4;font-size:11px;">QR coming soon</div>�        <button onclick="navigator.clipboard.writeText(document.getElementById('btc-address').textContent)" style="margin-top:16px;background:transparent;border:1px solid rgba(247,147,26,0.4);color:#f7931a;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">Copy Address</button>�      </div>�      <!-- Monero -->�      <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:16px;padding:32px;text-align:center;">�        <div style="font-size:40px;margin-bottom:12px;">ɱ</div>�        <div style="font-size:18px;font-weight:800;color:#ff6600;margin-bottom:8px;">Monero</div>�        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">XMR — private by default, untraceable</div>�        <div style="background:#0a0e1a;border:1px solid rgba(255,102,0,0.2);border-radius:8px;padding:12px;margin-bottom:16px;">�          <div style="font-family:'Courier New',monospace;font-size:11px;color:#ff6600;word-break:break-all;user-select:all;" id="xmr-address">OWNER_REPLACE: ADD_YOUR_XMR_ADDRESS_HERE</div>�        </div>�        <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">Scan QR or copy address above</div>�        <div style="width:120px;height:120px;background:#1e2538;border:1px solid rgba(255,102,0,0.2);border-radius:8px;margin:0 auto;display:flex;align-items:center;justify-content:center;color:#8892a4;font-size:11px;">QR coming soon</div>�        <button onclick="navigator.clipboard.writeText(document.getElementById('xmr-address').textContent)" style="margin-top:16px;background:transparent;border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">Copy Address</button>�      </div>�    </div>�    <div style="text-align:center;margin-top:32px;">�      <p style="color:#8892a4;font-size:13px;">After payment, message <a href="https://t.me/OmniguardSec_bot" target="_blank" style="color:#00d4ff;text-decoration:none;">@OmniguardSec_bot</a> with your transaction ID and tier to activate your account within 24 hours.</p>�      <p style="color:#5a6478;font-size:12px;margin-top:8px;">Monero recommended for maximum privacy. Bitcoin transactions are pseudonymous, not anonymous.</p>�    </div>�  </div>�</section>�
-�<!-- ===== FLOATING SUPPORT WIDGET ===== -->�<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">�  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">�    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>�    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon–Sat</div>�    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">�      <span style="font-size:20px;">✈️</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot — fastest</div></div>�    </a>�    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">�      <span style="font-size:20px;">📧</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>�    </a>�  </div>�  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">�    💬�  </button>�</div>�
+
+<script>
+/* ================================================================
+   OMNIAGUARD — STRIPE PAYMENT INTEGRATION v2
+   3-LAYER FALLBACK: Price IDs → Payment Links → Contact Modal
+   ================================================================
+
+   DEREK SETUP — STRIPE DASHBOARD (dashboard.stripe.com):
+
+   LAYER 1 — PRICE IDs (Full Stripe Checkout):
+     1. Products → + Add product → Name: "OmniaGuard Sentinel"
+     2. Pricing → Recurring → $499 CAD / month
+     3. Save product → copy Price ID (price_1AbcXxx...)
+     4. Repeat for each tier
+     5. Paste below in STRIPE_PRICE_IDS
+
+   LAYER 2 — PAYMENT LINKS (Direct URL, no code needed):
+     1. Payment Links → + New → Select product → Share
+     2. Copy URL (https://buy.stripe.com/xxxxxxxx)
+     3. Paste below in STRIPE_PAYMENT_LINKS
+
+   PUBLISHABLE KEY:
+     Developers → API Keys → Publishable key (pk_live_...)
+     Replace window.stripePublicKey in the <head> script tag
+
+   ================================================================ */
+
+/* ── LAYER 1: STRIPE PRICE IDs ──────────────────────────────────────────
+   DEREK: Go to dashboard.stripe.com → Products → + Add product
+   Create 6 recurring products in CAD. Copy each price_xxx ID below.
+   EXAMPLE real ID format: price_1NxYzABCDEF123456
+   ─────────────────────────────────────────────────────────────────────── */
+var STRIPE_PRICE_IDS = {
+  sentinel_monthly:  'price_SENTINEL_499',    /* REPLACE → $499/mo CAD   */
+  guardian_monthly:  'price_GUARDIAN_2499',   /* REPLACE → $2,499/mo CAD */
+  warden_monthly:    'price_WARDEN_5000',     /* REPLACE → $5,000/mo CAD */
+  protector_monthly: 'price_PROTECTOR_10000', /* REPLACE → $10,000/mo    */
+  archon_monthly:    'price_ARCHON_15000',    /* REPLACE → $15,000/mo    */
+  sovereign_monthly: 'price_SOVEREIGN_25000', /* REPLACE → $25,000/mo    */
+  sentinel_annual:   'price_SENTINEL_ANN',    /* REPLACE → $4,990/yr     */
+  guardian_annual:   'price_GUARDIAN_ANN',    /* REPLACE → $24,990/yr    */
+  warden_annual:     'price_WARDEN_ANN',      /* REPLACE → $50,000/yr    */
+  protector_annual:  'price_PROTECTOR_ANN',   /* REPLACE → $100,000/yr   */
+  archon_annual:     'price_ARCHON_ANN',      /* REPLACE → $150,000/yr   */
+  sovereign_annual:  'price_SOVEREIGN_ANN'    /* REPLACE → $250,000/yr   */
+};
+
+/* ── LAYER 2: STRIPE PAYMENT LINKS ──────────────────────────────────────
+   DEREK: dashboard.stripe.com → Payment Links → + New → Select product
+   Copy buy.stripe.com/xxx URL and paste below.
+   ─────────────────────────────────────────────────────────────────────── */
+var STRIPE_PAYMENT_LINKS = {
+  sentinel_monthly:  '', /* PASTE: https://buy.stripe.com/sentinel_link  */
+  guardian_monthly:  '', /* PASTE: https://buy.stripe.com/guardian_link  */
+  warden_monthly:    '', /* PASTE: https://buy.stripe.com/warden_link    */
+  protector_monthly: '', /* PASTE: https://buy.stripe.com/protector_link */
+  archon_monthly:    '', /* PASTE: https://buy.stripe.com/archon_link    */
+  sovereign_monthly: '', /* PASTE: https://buy.stripe.com/sovereign_link */
+  sentinel_annual:   '',
+  guardian_annual:   '',
+  warden_annual:     '',
+  protector_annual:  '',
+  archon_annual:     '',
+  sovereign_annual:  ''
+};
+
+/* ── CRYPTO ADDRESSES ────────────────────────────────────────────────────
+   DEREK: Replace the placeholder addresses below with your real wallets.
+   Site will auto-display address, generate QR code, and show copy button.
+   ─────────────────────────────────────────────────────────────────────── */
+var CRYPTO_ADDRESSES = {
+  btc: 'bc1qplaceholderreplacewithyourrealbticoinaddress',
+  xmr: '4XplaceholderReplaceWithYourRealMoneroAddressHere00000000000000000000000'
+};
+
+/* ── STRIPE CHECKOUT ── */
+var _checkoutOrig = {};
+
+function stripeCheckout(priceId, tier, price, isAnnual, btnEl) {
+  if (btnEl) {
+    btnEl.disabled = true;
+    _checkoutOrig[tier] = btnEl.innerHTML;
+    btnEl.innerHTML = '<span class="omnia-spinner"></span>Connecting to Stripe...';
+  }
+
+  var stripe = Stripe(window.stripePublicKey || 'pk_live_REPLACE_WITH_REAL_KEY');
+  var period = isAnnual ? 'annual' : 'monthly';
+
+  stripe.redirectToCheckout({
+    lineItems: [{ price: priceId, quantity: 1 }],
+    mode: 'subscription',
+    successUrl: window.location.origin + '/payment-success.html?tier=' + tier + '&session_id={CHECKOUT_SESSION_ID}',
+    cancelUrl: window.location.origin + '/payment-cancel.html?tier=' + tier,
+  }).then(function(result) {
+    if (result.error) {
+      if (btnEl) { btnEl.disabled = false; btnEl.innerHTML = _checkoutOrig[tier] || '🛡️ DEPLOY SHIELD →'; }
+      showStripeError(result.error.message);
+    }
+  }).catch(function(err) {
+    if (btnEl) { btnEl.disabled = false; btnEl.innerHTML = _checkoutOrig[tier] || '🛡️ DEPLOY SHIELD →'; }
+  });
+}
+
+function showStripeError(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:100px;right:24px;background:#140a0a;border:1px solid rgba(255,60,60,0.45);border-radius:12px;padding:16px 20px;max-width:360px;z-index:99999;font-size:13px;color:#ff9090;box-shadow:0 8px 32px rgba(0,0,0,0.6);line-height:1.5;';
+  t.innerHTML = '<strong style="color:#ff4444;display:block;margin-bottom:4px;">Stripe Connection Error</strong>' + (msg || 'Unable to reach Stripe. Please use Interac e-Transfer below.');
+  document.body.appendChild(t);
+  setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 7000);
+}
+
+/* ── QUICK PAY: PayPal.me + Interac e-Transfer (instant routing, no Stripe dependency) ── */
+function quickPay(tier, amount) {
+  window.open('https://www.paypal.me/derekfrancisco/' + amount + 'cad', '_blank', 'noopener');
+  var existing = document.getElementById('quickpay-toast');
+  if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+  var t = document.createElement('div');
+  t.id = 'quickpay-toast';
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;left:auto;max-width:380px;background:#0d1120;border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:20px 22px;z-index:99999;font-size:13px;color:#cbd3e0;box-shadow:0 16px 48px rgba(0,0,0,0.6);line-height:1.6;';
+  t.innerHTML = '<strong style="color:#00d4ff;display:block;margin-bottom:6px;font-size:14px;">PayPal opening in a new tab — $' + amount + ' CAD/mo</strong>'
+    + 'Prefer Interac e-Transfer? Send <strong style="color:#fff">$' + amount + ' CAD</strong> to <strong style="color:#fff">contact@omniaguard.com</strong> — include your company name and "<strong style="color:#fff">' + tier + '</strong>" in the message. Access is activated within 4 hours of confirmed payment.'
+    + '<div style="margin-top:12px;display:flex;gap:8px;">'
+    + '<a href="mailto:contact@omniaguard.com?subject=' + encodeURIComponent('OmniaGuard ' + tier + ' — Interac e-Transfer') + '&body=' + encodeURIComponent('Hi,\n\nI am sending an Interac e-Transfer for OmniaGuard ' + tier + ' — $' + amount + ' CAD/mo.\n\nCompany: [your company]\nContact: [your email]\n\nPlease confirm receipt and activate my account.') + '" style="flex:1;text-align:center;background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.35);color:#00c853;padding:9px 12px;border-radius:8px;text-decoration:none;font-weight:700;font-size:12px;">Email Receipt →</a>'
+    + '<button onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#8892a4;padding:9px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;">Dismiss</button>'
+    + '</div>';
+  document.body.appendChild(t);
+}
+
+/* ── MAIN ROUTER: deployShield ── */
+function deployShield(tier, price, isAnnual, btnEl) {
+  var period = isAnnual ? 'annual' : 'monthly';
+  var key = tier + '_' + period;
+
+  /* Layer 1: Stripe Checkout via Price ID */
+  var priceId = STRIPE_PRICE_IDS[key];
+  if (priceId && /^price_[A-Za-z0-9]+$/.test(priceId)) {
+    stripeCheckout(priceId, tier, price, isAnnual, btnEl);
+    return;
+  }
+
+  /* Layer 2: Stripe Payment Link */
+  var link = STRIPE_PAYMENT_LINKS[key];
+  if (link && link.indexOf('buy.stripe.com') !== -1) {
+    window.location.href = link;
+    return;
+  }
+
+  /* Layer 3: Contact + Interac Modal */
+  openPaymentModal(tier, price, isAnnual);
+}
+
+/* ── PAYMENT OPTIONS MODAL ── */
+function openPaymentModal(tier, price, isAnnual) {
+  var suffix = isAnnual ? '/yr' : '/mo';
+  var tierCapital = tier.charAt(0).toUpperCase() + tier.slice(1);
+  var fullPrice = price + suffix;
+  var modal = document.getElementById('payment-options-modal');
+
+  /* Populate tier/price display */
+  ['po-tier-name','po-tier-name-2','po-tier-select-default'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.textContent = tierCapital;
+  });
+  var priceEls = document.querySelectorAll('[id^="po-price"]');
+  priceEls.forEach(function(el){ el.textContent = fullPrice; });
+
+  /* PayPal tab — price + pre-filled receipt email */
+  var paypalPriceEl = document.getElementById('po-paypal-price');
+  if (paypalPriceEl) paypalPriceEl.textContent = fullPrice;
+  var paypalEmailEl = document.getElementById('po-paypal-email-link');
+  if (paypalEmailEl) {
+    paypalEmailEl.href = 'mailto:contact@omniaguard.com?subject=OmniaGuard+' + encodeURIComponent(tierCapital) + '+PayPal+Payment&body=' + encodeURIComponent('Hi,\n\nI just sent a PayPal payment for OmniaGuard ' + tierCapital + ' — ' + fullPrice + ' CAD.\n\nReceipt attached. Please activate my account.\n\nCompany: [your company]\nContact: [your email]');
+  }
+
+  /* Interac message */
+  var msgEl = document.getElementById('po-interac-msg');
+  if (msgEl) msgEl.value = 'OmniaGuard ' + tierCapital + ' — ' + fullPrice + ' CAD';
+
+  /* Email confirm link */
+  var emailLinkEl = document.getElementById('po-email-link');
+  if (emailLinkEl) {
+    emailLinkEl.href = 'mailto:contact@omniaguard.com?subject=OmniaGuard+' + encodeURIComponent(tierCapital) + '+Payment&body=I+am+sending+Interac+e-Transfer+for+OmniaGuard+' + encodeURIComponent(tierCapital + ' — ' + fullPrice + ' CAD') + '.+Please+activate+my+account.';
+  }
+
+  /* "Send Interac Now" big CTA — per-tier mailto */
+  var sendNowBtn = document.getElementById('po-send-now-btn');
+  if (sendNowBtn) {
+    var subj = encodeURIComponent('OmniaGuard ' + tierCapital + ' Payment — ' + fullPrice + ' CAD');
+    var body = encodeURIComponent(
+      'Hi,\n\nI am ready to send an Interac e-Transfer for OmniaGuard ' + tierCapital + ' — ' + fullPrice + ' CAD.\n\n' +
+      'Please confirm your Interac email address and I will send the transfer immediately.\n\n' +
+      'Company: [your company]\nContact: [your email or phone]\n\n' +
+      'Tier selected: ' + tierCapital + '\nMonthly amount: ' + fullPrice
+    );
+    sendNowBtn.href = 'mailto:contact@omniaguard.com?subject=' + subj + '&body=' + body;
+    sendNowBtn.textContent = '💸 Send ' + fullPrice + ' Interac Transfer Now →';
+  }
+
+  /* Pre-select tier in contact form */
+  var tierSelect = document.getElementById('po-contact-tier');
+  if (tierSelect) {
+    for (var i = 0; i < tierSelect.options.length; i++) {
+      if (tierSelect.options[i].value === tierCapital) {
+        tierSelect.selectedIndex = i; break;
+      }
+    }
+  }
+
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closePaymentModal() {
+  var modal = document.getElementById('payment-options-modal');
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+function copyToClipboard(text, btnId) {
+  var btn = document.getElementById(btnId);
+  try {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+  } catch(e) {}
+  if (btn) {
+    var orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.style.color = '#00c853';
+    setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; }, 2500);
+  }
+}
+
+function copyInteracMsg() {
+  var el = document.getElementById('po-interac-msg');
+  if (el) copyToClipboard(el.value, 'po-copy-btn');
+}
+
+/* ── CONTACT FORM SUBMISSION ── */
+function submitContactForm(e) {
+  e.preventDefault();
+  var form = document.getElementById('po-contact-form');
+  var name = document.getElementById('po-contact-name').value.trim();
+  var email = document.getElementById('po-contact-email').value.trim();
+  var company = document.getElementById('po-contact-company').value.trim();
+  var phone = document.getElementById('po-contact-phone').value.trim();
+  var tier = document.getElementById('po-contact-tier').value;
+  var ready = document.getElementById('po-contact-ready').checked;
+
+  if (!name || !email || !tier) {
+    var errEl = document.getElementById('po-form-error');
+    if (errEl) { errEl.textContent = 'Name, email, and tier are required.'; errEl.style.display = 'block'; }
+    return;
+  }
+
+  var subject = 'OmniaGuard ' + tier + ' — Deployment Request';
+  var body = [
+    'Name: ' + name,
+    'Email: ' + email,
+    'Company: ' + (company || 'Not provided'),
+    'Phone: ' + (phone || 'Not provided'),
+    'Tier: ' + tier,
+    'Ready to pay: ' + (ready ? 'Yes' : 'No'),
+    '',
+    'Sent from omniaguard.com payment modal.'
+  ].join('%0A');
+
+  window.location.href = 'mailto:contact@omniaguard.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+
+  /* Show success */
+  form.style.display = 'none';
+  var successEl = document.getElementById('po-form-success');
+  if (successEl) successEl.style.display = 'block';
+}
+
+/* ── CRYPTO SECTION INIT ── */
+function initCryptoSection() {
+  window.CRYPTO_ADDRESSES = CRYPTO_ADDRESSES; /* expose for copy buttons */
+
+  function setCrypto(coin, addr, color, qrPrefix) {
+    var addrHasValue = addr && addr.length > 10;
+
+    /* Main page elements */
+    var mainAddr = document.getElementById('main-' + coin + '-addr');
+    var mainQR   = document.getElementById('main-' + coin + '-qr');
+    var mainCopy = document.getElementById('main-' + coin + '-copy');
+    var mainReq  = document.getElementById('main-' + coin + '-request');
+    /* Modal elements */
+    var modAddr  = document.getElementById(coin + '-address-display');
+    var modQR    = document.getElementById(coin + '-qr-placeholder');
+    var modCopy  = document.getElementById(coin + '-copy-btn');
+    var modReq   = document.getElementById(coin + '-request-link');
+
+    if (addrHasValue) {
+      var shortAddr = addr.length > 32 ? addr.substring(0,16) + '...' + addr.substring(addr.length-8) : addr;
+
+      if (mainAddr) { mainAddr.textContent = addr; mainAddr.style.color = color; mainAddr.style.fontSize = '10px'; }
+      if (modAddr)  { modAddr.textContent  = shortAddr; modAddr.style.color = color; }
+
+      /* QR codes */
+      var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=' + qrPrefix + encodeURIComponent(addr);
+      [mainQR, modQR].forEach(function(qrEl){
+        if (!qrEl) return;
+        var img = document.createElement('img');
+        img.src = qrUrl;
+        img.alt = coin.toUpperCase() + ' QR';
+        img.style.cssText = 'width:100%;height:100%;object-fit:contain;border-radius:8px;';
+        img.onerror = function(){ qrEl.innerHTML = coin === 'btc' ? '₿' : 'ɱ'; };
+        qrEl.innerHTML = '';
+        qrEl.appendChild(img);
+      });
+
+      /* Show copy, hide request */
+      [mainCopy, modCopy].forEach(function(b){ if (b) b.style.display = 'inline-block'; });
+      [mainReq, modReq].forEach(function(a){ if (a) a.style.display = 'none'; });
+    } else {
+      /* No address yet — show request links */
+      [mainCopy, modCopy].forEach(function(b){ if (b) b.style.display = 'none'; });
+      [mainReq, modReq].forEach(function(a){ if (a) a.style.display = 'inline-block'; });
+    }
+  }
+
+  setCrypto('btc', CRYPTO_ADDRESSES.btc, '#f7931a', 'bitcoin:');
+  setCrypto('xmr', CRYPTO_ADDRESSES.xmr, '#ff6600', 'monero:');
+}
+
+/* ── INIT ── */
+(function(){
+  /* Spinner CSS */
+  var s = document.createElement('style');
+  s.textContent = '.omnia-spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:omniaSpin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}@keyframes omniaSpin{to{transform:rotate(360deg)}}';
+  document.head.appendChild(s);
+
+  /* Modal overlay click close — script runs after DOM, no DOMContentLoaded needed */
+  var m = document.getElementById('payment-options-modal');
+  if (m) m.addEventListener('click', function(e){ if (e.target === this) closePaymentModal(); });
+  initCryptoSection();
+})();
+</script>
+
+<!-- ===== PAYMENT OPTIONS MODAL ===== -->
+<div id="payment-options-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:99999;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="max-width:600px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:0;position:relative;box-shadow:0 0 80px rgba(0,212,255,0.1);margin:auto;">
+
+    <!-- Modal Header -->
+    <div style="padding:28px 32px 0;border-bottom:1px solid rgba(0,212,255,0.1);padding-bottom:20px;position:relative;">
+      <button onclick="closePaymentModal()" style="position:absolute;top:20px;right:20px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8892a4'">&#x2715;</button>
+      <div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">Secure Payment</div>
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+        <h2 style="font-size:20px;font-weight:800;color:#fff;margin:0;">OmniaGuard <span id="po-tier-name" style="color:#00d4ff;">Sentinel</span></h2>
+        <span id="po-price" style="color:#ffd700;font-weight:700;font-size:16px;">$499/mo</span>
+        <span style="color:#8892a4;font-size:12px;">CAD — monthly recurring</span>
+      </div>
+    </div>
+
+    <!-- Payment Method Banner -->
+    <div style="padding:10px 32px;background:rgba(0,200,83,0.06);border-bottom:1px solid rgba(0,200,83,0.12);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;">
+      <span style="font-size:11px;font-weight:700;color:#00c853;">✅ Interac e-Transfer — ACTIVE NOW</span>
+      <span style="font-size:11px;color:#3a4458;">|</span>
+      <span style="font-size:11px;font-weight:700;color:#00c853;">✅ Crypto — ACTIVE NOW</span>
+      <span style="font-size:11px;color:#3a4458;">|</span>
+      <span style="font-size:11px;font-weight:700;color:#ffd700;">⚡ Credit Card — Add Stripe key to activate</span>
+    </div>
+
+    <!-- Tab Switcher -->
+    <div style="display:flex;border-bottom:1px solid rgba(0,212,255,0.1);">
+      <button onclick="switchPayTab(0)" id="po-tab-0" style="flex:1;padding:14px 8px;background:rgba(0,200,83,0.08);border:none;border-bottom:2px solid #00c853;color:#00c853;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">🏦 Interac</button>
+      <button onclick="switchPayTab(1)" id="po-tab-1" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">📋 Contact Form</button>
+      <button onclick="switchPayTab(2)" id="po-tab-2" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">₿ Crypto</button>
+      <button onclick="switchPayTab(3)" id="po-tab-3" style="flex:1;padding:14px 8px;background:transparent;border:none;border-bottom:2px solid transparent;color:#5a6478;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;">🅿️ PayPal</button>
+    </div>
+
+    <!-- Tab 0: Interac e-Transfer -->
+    <div id="po-tab-panel-0" style="padding:28px 32px;">
+      <div style="display:inline-block;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.35);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#00c853;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;">Active Now — Fastest Path to Activation</div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:10px;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Step 1 — Send e-Transfer to:</div>
+        <div style="background:#071814;border:1px solid rgba(0,200,83,0.3);border-radius:8px;padding:13px 18px;font-size:16px;font-weight:800;color:#00d4ff;font-family:'Courier New',monospace;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <span>contact@omniaguard.com</span>
+          <button onclick="copyToClipboard('contact@omniaguard.com','copy-email-btn')" id="copy-email-btn" style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.35);color:#00c853;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;white-space:nowrap;">Copy</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-size:10px;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Step 2 — Transfer Note (paste exactly):</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <textarea id="po-interac-msg" readonly rows="1" style="flex:1;background:#071814;border:1px solid rgba(0,200,83,0.3);border-radius:8px;padding:12px 14px;color:#fff;font-size:13px;font-family:'Courier New',monospace;resize:none;height:44px;line-height:1.5;outline:none;">OmniaGuard Sentinel — $499/mo CAD</textarea>
+          <button id="po-copy-btn" onclick="copyInteracMsg()" style="background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.35);color:#00c853;border-radius:8px;padding:0 16px;cursor:pointer;font-size:11px;font-weight:700;white-space:nowrap;font-family:inherit;height:44px;min-width:64px;">Copy</button>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.8;">
+        <strong style="color:#fff;display:block;margin-bottom:4px;">Step 3 — Confirm your payment:</strong>
+        Message <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="color:#00d4ff;font-weight:700;">@OmniguardSec_bot</a> on Telegram with your reference number &mdash; or
+        <a id="po-email-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard+Payment" style="color:#00d4ff;font-weight:600;">email confirmation →</a><br>
+        <strong style="color:#00c853;">Account activated within 4 hours of confirmed transfer.</strong>
+      </div>
+
+      <div style="margin-top:18px;">
+        <a id="po-send-now-btn" href="mailto:contact@omniaguard.com?subject=OmniaGuard+Sentinel+Payment+%24499%2Fmo&body=Hi%2C%0A%0AI+am+ready+to+send+an+Interac+e-Transfer+for+OmniaGuard+Sentinel+%E2%80%94+%24499%2Fmo+CAD.%0A%0APlease+confirm+your+Interac+email+and+I+will+send+the+transfer+immediately.%0A%0ACompany%3A+%5Byour+company%5D%0AContact%3A+%5Byour+email%5D" style="display:block;text-align:center;background:linear-gradient(135deg,#00c853,#009944);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;">💸 Send Interac Payment Now →</a>
+      </div>
+      <div style="margin-top:10px;text-align:center;">
+        <button onclick="switchPayTab(1)" style="background:transparent;border:none;color:#5a6478;font-size:12px;cursor:pointer;text-decoration:underline;">Or submit a contact form instead →</button>
+      </div>
+    </div>
+
+    <!-- Tab 1: Contact Form -->
+    <div id="po-tab-panel-1" style="display:none;padding:28px 32px;">
+      <div id="po-contact-form-wrap">
+        <p style="font-size:14px;color:#8892a4;margin-bottom:20px;line-height:1.6;">Complete the form below. Our team responds within <strong style="color:#fff;">1 business hour</strong> with payment instructions and account setup.</p>
+        <form id="po-contact-form" onsubmit="submitContactForm(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div>
+              <label style="display:block;font-size:10px;font-weight:700;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Full Name *</label>
+              <input id="po-contact-name" type="text" placeholder="Jane Smith" required style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(0,212,255,0.5)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            </div>
+            <div>
+              <label style="display:block;font-size:10px;font-weight:700;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Work Email *</label>
+              <input id="po-contact-email" type="email" placeholder="you@company.com" required style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(0,212,255,0.5)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div>
+              <label style="display:block;font-size:10px;font-weight:700;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Company</label>
+              <input id="po-contact-company" type="text" placeholder="Acme Corp" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(0,212,255,0.5)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            </div>
+            <div>
+              <label style="display:block;font-size:10px;font-weight:700;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Phone</label>
+              <input id="po-contact-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color 0.2s;box-sizing:border-box;" onfocus="this.style.borderColor='rgba(0,212,255,0.5)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:10px;font-weight:700;color:#8892a4;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">Tier *</label>
+            <select id="po-contact-tier" required style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;cursor:pointer;" onfocus="this.style.borderColor='rgba(0,212,255,0.5)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+              <option value="">Select your tier...</option>
+              <option value="Sentinel">Sentinel — $499/mo (1–5 devices)</option>
+              <option value="Guardian">Guardian — $2,499/mo (5–20 agents)</option>
+              <option value="Warden">Warden — $5,000/mo (20–50 agents)</option>
+              <option value="Protector">Protector — $10,000/mo (50–100 agents)</option>
+              <option value="Archon">Archon — $15,000/mo (100–250 agents)</option>
+              <option value="Sovereign">Sovereign — $25,000/mo (250–500 agents)</option>
+            </select>
+          </div>
+          <div style="margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;">
+            <input id="po-contact-ready" type="checkbox" style="margin-top:3px;width:16px;height:16px;accent-color:#00d4ff;flex-shrink:0;cursor:pointer;">
+            <label for="po-contact-ready" style="font-size:13px;color:#8892a4;cursor:pointer;line-height:1.5;">I am ready to proceed with payment and want to activate OmniaGuard for my AI deployment.</label>
+          </div>
+          <div id="po-form-error" style="display:none;color:#ff6b6b;font-size:13px;margin-bottom:12px;"></div>
+          <button type="submit" style="width:100%;background:linear-gradient(135deg,#00d4ff,#0090ff);border:none;border-radius:10px;padding:15px 24px;color:#000;font-size:14px;font-weight:800;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;font-family:inherit;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">🛡️ Submit Deployment Request →</button>
+        </form>
+      </div>
+      <div id="po-form-success" style="display:none;text-align:center;padding:32px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">✅</div>
+        <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">Request Received</div>
+        <div style="font-size:14px;color:#8892a4;line-height:1.7;">Our team will contact you at your email within <strong style="color:#fff;">1 business hour</strong> with payment instructions and account activation details.</div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Crypto -->
+    <div id="po-tab-panel-2" style="display:none;padding:28px 32px;">
+      <p style="font-size:14px;color:#8892a4;margin-bottom:20px;line-height:1.6;">Pay with Bitcoin or Monero. No bank. No card. No identity required.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div style="background:#131829;border:1px solid rgba(247,147,26,0.3);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:8px;">₿</div>
+          <div style="font-weight:700;color:#f7931a;font-size:14px;margin-bottom:12px;">Bitcoin (BTC)</div>
+          <div id="btc-qr-placeholder" style="width:80px;height:80px;background:rgba(247,147,26,0.08);border:1px dashed rgba(247,147,26,0.3);border-radius:8px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;">₿</div>
+          <div id="btc-address-display" style="font-size:10px;color:#8892a4;word-break:break-all;margin-bottom:10px;font-family:monospace;line-height:1.4;">Send request via Telegram or email</div>
+          <button id="btc-copy-btn" style="display:none;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.4);color:#f7931a;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
+          <a id="btc-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20BTC%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Bitcoin+(BTC).%0A%0APlease+send+me+the+current+BTC+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+am+ready+to+pay+immediately." style="display:none;font-size:12px;color:#f7931a;text-decoration:none;font-weight:600;">Request Address →</a>
+        </div>
+        <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:12px;padding:20px;text-align:center;">
+          <div style="font-size:28px;margin-bottom:8px;">ɱ</div>
+          <div style="font-weight:700;color:#ff6600;font-size:14px;margin-bottom:12px;">Monero (XMR)</div>
+          <div id="xmr-qr-placeholder" style="width:80px;height:80px;background:rgba(255,102,0,0.08);border:1px dashed rgba(255,102,0,0.3);border-radius:8px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:22px;">ɱ</div>
+          <div id="xmr-address-display" style="font-size:10px;color:#8892a4;word-break:break-all;margin-bottom:10px;font-family:monospace;line-height:1.4;">Send request via Telegram or email</div>
+          <button id="xmr-copy-btn" style="display:none;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
+          <a id="xmr-request-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20XMR%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Monero+(XMR).%0A%0APlease+send+me+the+current+XMR+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0APrefer+Monero+for+maximum+privacy." style="display:none;font-size:12px;color:#ff6600;text-decoration:none;font-weight:600;">Request Address →</a>
+        </div>
+      </div>
+      <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.7;">
+        After payment: message <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="color:#00d4ff;font-weight:700;">@OmniguardSec_bot</a> with your transaction hash and selected tier.<br>
+        <strong style="color:#fff;">Account activated within 24 hours of confirmed transaction.</strong>
+      </div>
+    </div>
+
+    <!-- Tab 3: PayPal (Stripe fallback) -->
+    <div id="po-tab-panel-3" style="display:none;padding:28px 32px;">
+      <div style="display:inline-block;background:rgba(0,112,186,0.12);border:1px solid rgba(0,112,186,0.35);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#4d9fe0;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;">Card Fallback — When Stripe Is Unavailable</div>
+      <p style="font-size:14px;color:#8892a4;margin-bottom:20px;line-height:1.6;">Prefer to pay by card without leaving PayPal? Use the link below — it pre-fills your selected plan and amount.</p>
+      <a id="po-paypal-link" href="https://www.paypal.com/paypalme/PASTE_PAYPAL_ME_LINK_HERE" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:linear-gradient(135deg,#0070ba,#003087);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:14px;">🅿️ Pay with PayPal — <span id="po-paypal-price">$499/mo</span></a>
+      <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.7;">
+        After sending payment, email <a id="po-paypal-email-link" href="mailto:contact@omniaguard.com?subject=OmniaGuard+PayPal+Payment" style="color:#00d4ff;font-weight:600;">your receipt and selected tier →</a> so we can activate your account.<br>
+        <strong style="color:#fff;">Account activated within 4 hours of confirmed payment.</strong>
+      </div>
+      <div style="margin-top:14px;font-size:11px;color:#5a6478;text-align:center;">DEREK: replace <code style="color:#8892a4;">PASTE_PAYPAL_ME_LINK_HERE</code> with your real PayPal.Me / PayPal Checkout link.</div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div style="padding:16px 32px;border-top:1px solid rgba(0,212,255,0.08);text-align:center;">
+      <p style="font-size:11px;color:#3a4458;margin:0;">🔒 Payments processed securely &nbsp;|&nbsp; contact@omniaguard.com &nbsp;|&nbsp; Response within 1 hour Mon–Sat</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchPayTab(idx) {
+  var tabColor = ['#00c853', '#00d4ff', '#f7931a', '#4d9fe0'];
+  var tabBg = ['rgba(0,200,83,0.08)', 'rgba(0,212,255,0.06)', 'rgba(247,147,26,0.06)', 'rgba(0,112,186,0.08)'];
+  for (var i = 0; i < 4; i++) {
+    var panel = document.getElementById('po-tab-panel-' + i);
+    var tab = document.getElementById('po-tab-' + i);
+    if (i === idx) {
+      if (panel) panel.style.display = 'block';
+      if (tab) {
+        tab.style.color = tabColor[i];
+        tab.style.borderBottomColor = tabColor[i];
+        tab.style.background = tabBg[i];
+      }
+    } else {
+      if (panel) panel.style.display = 'none';
+      if (tab) { tab.style.color = '#5a6478'; tab.style.borderBottomColor = 'transparent'; tab.style.background = 'transparent'; }
+    }
+  }
+}
+</script>
+
+<!-- ===== SOVEREIGN PAYMENTS ===== -->
+<section id="crypto" style="padding:72px 0;background:#0d1120;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;position:relative;z-index:2;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="display:inline-block;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:24px;padding:8px 20px;font-size:12px;font-weight:700;color:#ffd700;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Sovereign Payments</div>
+      <h2 style="font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px;">Pay with <span style="color:#ffd700;">Crypto</span></h2>
+      <p style="color:#8892a4;font-size:16px;margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto;">No bank. No card. No identity. Pay privately with Bitcoin or Monero — the only payment method that matches OmniaGuard's privacy mission.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;margin:0 auto;">
+
+      <!-- Bitcoin -->
+      <div style="background:#131829;border:1px solid rgba(247,147,26,0.3);border-radius:16px;padding:28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:10px;">₿</div>
+        <div style="font-size:17px;font-weight:800;color:#f7931a;margin-bottom:4px;">Bitcoin (BTC)</div>
+        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">~10 min confirmation</div>
+
+        <!-- QR Code — auto-populated when BTC address is set in CRYPTO_ADDRESSES -->
+        <div id="main-btc-qr" style="width:120px;height:120px;background:rgba(247,147,26,0.06);border:1px dashed rgba(247,147,26,0.3);border-radius:10px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden;">₿</div>
+
+        <div id="main-btc-addr" style="font-size:11px;color:#8892a4;word-break:break-all;margin-bottom:14px;font-family:'Courier New',monospace;line-height:1.5;min-height:32px;padding:0 8px;">
+          Address provided privately — request via Telegram or email
+        </div>
+
+        <button id="main-btc-copy" onclick="copyToClipboard(window.CRYPTO_ADDRESSES&&window.CRYPTO_ADDRESSES.btc,'main-btc-copy')" style="display:none;background:rgba(247,147,26,0.12);border:1px solid rgba(247,147,26,0.5);color:#f7931a;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
+        <a id="main-btc-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20BTC%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Bitcoin+(BTC).%0A%0APlease+send+me+the+current+BTC+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+am+ready+to+pay+immediately.+Please+confirm+current+rate+in+CAD.%0A%0ATelegram%3A+%40OmniguardSec_bot" style="display:inline-block;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.4);color:#f7931a;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request BTC Address →</a>
+      </div>
+
+      <!-- Monero -->
+      <div style="background:#131829;border:1px solid rgba(255,102,0,0.3);border-radius:16px;padding:28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:10px;">ɱ</div>
+        <div style="font-size:17px;font-weight:800;color:#ff6600;margin-bottom:4px;">Monero (XMR)</div>
+        <div style="font-size:12px;color:#8892a4;margin-bottom:20px;">Private by default &mdash; untraceable</div>
+
+        <div id="main-xmr-qr" style="width:120px;height:120px;background:rgba(255,102,0,0.06);border:1px dashed rgba(255,102,0,0.3);border-radius:10px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;overflow:hidden;">ɱ</div>
+
+        <div id="main-xmr-addr" style="font-size:11px;color:#8892a4;word-break:break-all;margin-bottom:14px;font-family:'Courier New',monospace;line-height:1.5;min-height:32px;padding:0 8px;">
+          Address provided privately — request via Telegram or email
+        </div>
+
+        <button id="main-xmr-copy" onclick="copyToClipboard(window.CRYPTO_ADDRESSES&&window.CRYPTO_ADDRESSES.xmr,'main-xmr-copy')" style="display:none;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;margin-bottom:8px;">Copy Address</button>
+        <a id="main-xmr-request" href="mailto:contact@omniaguard.com?subject=OmniaGuard%20XMR%20Address%20Request&body=Hi%2C%0A%0AI+would+like+to+pay+for+OmniaGuard+via+Monero+(XMR).%0A%0APlease+send+me+the+current+XMR+payment+address.%0A%0ACompany%3A+%5Byour+company%5D%0ATier+selected%3A+%5Bsentinel+%2F+guardian+%2F+warden+%2F+protector+%2F+archon+%2F+sovereign%5D%0A%0AI+prefer+Monero+for+maximum+privacy.+Please+confirm+current+rate+in+CAD.%0A%0ATelegram%3A+%40OmniguardSec_bot" style="display:inline-block;background:rgba(255,102,0,0.1);border:1px solid rgba(255,102,0,0.4);color:#ff6600;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:700;">Request XMR Address →</a>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <p style="color:#8892a4;font-size:14px;">After payment: message <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="color:#00d4ff;text-decoration:none;font-weight:600;">@OmniguardSec_bot</a> with your transaction hash and tier. Account activated within 24 hours.</p>
+      <p style="color:#3a4458;font-size:12px;margin-top:8px;">Monero recommended for maximum privacy. Bitcoin is pseudonymous, not anonymous.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FLOATING SUPPORT WIDGET ===== -->
+<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">
+  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">
+    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>
+    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon&ndash;Sat</div>
+    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">
+      <span style="font-size:20px;">&#x2708;&#xFE0F;</span>
+      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram (Fastest)</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot</div></div>
+    </a>
+    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">
+      <span style="font-size:20px;">&#x1F4E7;</span>
+      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Email Support</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>
+    </a>
+  </div>
+  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    &#x1F4AC;
+  </button>
+</div>
+
+
+<!-- ===== AGENT SWARM TECHNOLOGIES INTEGRATION ===== -->
+<style>
+.footer-badge{background:#0d1120;border:1px solid rgba(0,212,255,0.15);border-radius:8px;padding:8px 16px;font-size:12px;color:#00d4ff;font-weight:700;cursor:pointer;font-family:inherit;transition:border-color .2s,box-shadow .2s,transform .15s;text-decoration:none;display:inline-block;}
+.footer-badge:hover{border-color:rgba(0,212,255,0.5);box-shadow:0 0 14px rgba(0,212,255,0.18);transform:scale(1.04);}
+.footer-badge-green{background:#0a1a0d;border-color:rgba(0,200,80,0.2);color:#00c851;}
+.footer-badge-green:hover{border-color:rgba(0,200,80,0.5);box-shadow:0 0 14px rgba(0,200,80,0.15);transform:scale(1.04);}
+.footer-arch-btn{display:inline-block;background:transparent;border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:border-color .2s,box-shadow .2s,transform .15s;text-decoration:none;}
+.footer-arch-btn:hover{border-color:rgba(0,212,255,0.7);box-shadow:0 0 20px rgba(0,212,255,0.22);transform:scale(1.03);}
+</style>
+<section id="agent-swarm-integration" style="padding:48px 0;background:linear-gradient(180deg,#080c14 0%,#0a0e1a 100%);border-top:1px solid rgba(0,212,255,0.08);">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
+    <div style="display:inline-flex;align-items:center;gap:12px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:12px 24px;margin-bottom:24px;">
+      <div style="width:32px;height:32px;background:linear-gradient(135deg,rgba(0,212,255,0.2),rgba(123,47,190,0.2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">&#x1F916;</div>
+      <span style="font-size:11px;font-weight:700;letter-spacing:2px;color:#00d4ff;text-transform:uppercase;">Agent Swarm Technologies</span>
+    </div>
+    <h3 style="font-size:clamp(18px,3vw,26px);font-weight:800;margin-bottom:12px;">Powered by the Francisco Holdings<br>Multi-Agent Infrastructure</h3>
+    <p style="color:#8892a4;font-size:14px;max-width:560px;margin:0 auto 28px;line-height:1.7;">This platform runs on Agent Swarm Technologies &mdash; 14 specialized AI agents working in coordinated layers across 22+ Francisco Holdings companies. Every decision logged. Every anomaly flagged. Zero unsanctioned action.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:28px;">
+      <button class="footer-badge" onclick="document.getElementById('footer-agents-modal').style.display='flex';" data-footer-click="14-specialized-agents">🤖 14 Specialized Agents</button>
+      <button class="footer-badge" onclick="document.getElementById('footer-companies-modal').style.display='flex';" data-footer-click="22-companies-protected">🏢 22+ Companies Protected</button>
+      <button class="footer-badge" onclick="document.getElementById('footer-security-modal').style.display='flex';" data-footer-click="omniaguard-security-layer">🛡️ OmniaGuard Security Layer</button>
+      <button class="footer-badge" onclick="window.open('https://soulstack.ai','_blank','noopener');" data-footer-click="soulstack-observer">👁️ SoulStack Observer Active ↗</button>
+      <button class="footer-badge footer-badge-green" onclick="document.getElementById('footer-esg-modal').style.display='flex';" data-footer-click="carbon-neutral-2028">🌿 Carbon-Neutral Operations by 2028</button>
+    </div>
+    <button class="footer-arch-btn" onclick="document.getElementById('footer-arch-modal').style.display='flex';" data-footer-click="view-agent-architecture">View Agent Architecture &#x2192;</button>
+  </div>
+</section>
+
+<!-- ===== BRIEFING REQUEST MODAL ===== -->
+<div id="briefing-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;overflow-y:auto;padding:24px 16px;">
+  <div style="max-width:560px;margin:40px auto;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px;position:relative;">
+    <button onclick="document.getElementById('briefing-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:transparent;border:none;color:#8892a4;font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Strategic Briefing Request</div>
+    <h2 id="briefing-tier-title" style="font-size:24px;font-weight:800;margin:0 0 4px;">OmniaGuard</h2>
+    <div id="briefing-tier-price" style="color:#ffd700;font-weight:700;font-size:16px;margin-bottom:24px;"></div>
+    <p style="color:#8892a4;font-size:14px;margin-bottom:16px;line-height:1.6;">Complete the form below. Our team will contact you within <strong style="color:#fff;">1 business hour</strong> with a secure briefing packet and Stripe payment link.</p>
+    <a href="https://calendly.com/PASTE_CALENDLY_LINK_HERE/omniaguard-briefing" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;font-weight:700;font-size:13px;padding:13px 20px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:24px;">📅 Or skip the form — book a 15-min strategy call directly</a>
+    <form id="briefing-form" onsubmit="submitBriefing(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Full Name *</label>
+          <input id="bf-name" required type="text" placeholder="Jane Smith" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Company *</label>
+          <input id="bf-company" required type="text" placeholder="Acme Corp" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Work Email *</label>
+          <input id="bf-email" required type="email" placeholder="you@company.com" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Phone</label>
+          <input id="bf-phone" type="tel" placeholder="+1 (555) 000-0000" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">AI Agents to Protect *</label>
+          <select id="bf-agents" required style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;-webkit-appearance:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            <option value="">Select range</option>
+            <option>1&ndash;10 agents</option>
+            <option>11&ndash;50 agents</option>
+            <option>51&ndash;150 agents</option>
+            <option>151&ndash;250 agents</option>
+            <option>250+ agents</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Industry</label>
+          <select id="bf-industry" style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;-webkit-appearance:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'">
+            <option value="">Select</option>
+            <option>Financial Services</option>
+            <option>Healthcare</option>
+            <option>Government / Defence</option>
+            <option>Legal</option>
+            <option>Critical Infrastructure</option>
+            <option>Technology</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:24px;">
+        <label style="display:block;color:#8892a4;font-size:12px;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Use Case / What are you protecting? *</label>
+        <textarea id="bf-usecase" required rows="3" placeholder="Describe your AI environment and what you need protected..." style="width:100%;background:#131829;border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 14px;color:#fff;font-size:14px;box-sizing:border-box;resize:vertical;outline:none;" onfocus="this.style.borderColor='rgba(0,212,255,0.6)'" onblur="this.style.borderColor='rgba(0,212,255,0.2)'"></textarea>
+      </div>
+      <button type="submit" style="width:100%;background:linear-gradient(135deg,#00d4ff,#0099cc);border:none;color:#000;font-weight:800;font-size:15px;padding:14px;border-radius:10px;cursor:pointer;letter-spacing:0.5px;">&#x1F512; SUBMIT BRIEFING REQUEST &rarr;</button>
+      <p style="color:#5a6478;font-size:11px;text-align:center;margin-top:12px;">Your inquiry opens a secure email to contact@omniaguard.com. Response within 1 business hour.</p>
+    </form>
+    <div id="briefing-success" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:48px;margin-bottom:16px;">&#x2705;</div>
+      <h3 style="color:#00d4ff;font-size:20px;font-weight:800;margin-bottom:8px;">Briefing Request Sent</h3>
+      <p style="color:#8892a4;font-size:14px;line-height:1.6;">Your email client should have opened with your request pre-filled. If it did not open automatically, email us directly at <a href="mailto:contact@omniaguard.com" style="color:#00d4ff;">contact@omniaguard.com</a>.<br><br>Our team responds within <strong style="color:#fff;">1 business hour</strong>.</p>
+      <a href="https://t.me/OmniguardSec_bot" target="_blank" style="display:inline-block;margin-top:20px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:#00d4ff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;">&#x2708;&#xFE0F; Or message @OmniguardSec_bot now</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBriefing(tier, price) {
+  document.getElementById('briefing-tier-title').textContent = 'OmniaGuard ' + tier;
+  document.getElementById('briefing-tier-price').textContent = price;
+  document.getElementById('briefing-form').style.display = 'block';
+  document.getElementById('briefing-success').style.display = 'none';
+  document.getElementById('briefing-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function submitBriefing(e) {
+  e.preventDefault();
+  var name    = document.getElementById('bf-name').value;
+  var company = document.getElementById('bf-company').value;
+  var email   = document.getElementById('bf-email').value;
+  var phone   = document.getElementById('bf-phone').value || 'Not provided';
+  var agents  = document.getElementById('bf-agents').value;
+  var industry= document.getElementById('bf-industry').value || 'Not specified';
+  var usecase = document.getElementById('bf-usecase').value;
+  var tier    = document.getElementById('briefing-tier-title').textContent;
+  var price   = document.getElementById('briefing-tier-price').textContent;
+  var subject = encodeURIComponent('OmniaGuard Briefing Request — ' + tier + ' (' + price + ')');
+  var body = encodeURIComponent(
+    'BRIEFING REQUEST\n' +
+    '================\n' +
+    'Tier:     ' + tier + ' (' + price + ')\n' +
+    'Name:     ' + name + '\n' +
+    'Company:  ' + company + '\n' +
+    'Email:    ' + email + '\n' +
+    'Phone:    ' + phone + '\n' +
+    'Agents:   ' + agents + '\n' +
+    'Industry: ' + industry + '\n' +
+    '\nUse Case:\n' + usecase + '\n' +
+    '\n---\nSent from omniaguard.com briefing form'
+  );
+  window.location.href = 'mailto:contact@omniaguard.com?subject=' + subject + '&body=' + body;
+  document.getElementById('briefing-form').style.display = 'none';
+  document.getElementById('briefing-success').style.display = 'block';
+}
+document.getElementById('briefing-modal').addEventListener('click', function(e) {
+  if (e.target === this) { this.style.display='none'; document.body.style.overflow=''; }
+});
+</script>
+
+<!-- ===== FOOTER INFO MODALS ===== -->
+
+<!-- Modal: 14 Specialized Agents -->
+<div id="footer-agents-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:680px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-agents-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Agent Swarm Technologies</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">14 Specialized Protection Agents</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Each OmniaGuard deployment runs 14 discrete AI agents in coordinated layers. Every prompt is analyzed by all 14 before a response is permitted to pass.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 1</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Input Sanitizer</div><div style="font-size:11px;color:#8892a4;">Strips malformed encoding, Unicode tricks, and invisible characters before any analysis begins.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 2</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Intent Classifier</div><div style="font-size:11px;color:#8892a4;">Classifies user intent into 47 behavioral categories, flagging adversarial patterns in real time.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 3</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Prompt Injection Detector</div><div style="font-size:11px;color:#8892a4;">Catches direct, indirect, and deferred injection attacks with 99.7% accuracy across all tested LLMs.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 4</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Role Confusion Preventer</div><div style="font-size:11px;color:#8892a4;">Prevents jailbreaks that attempt to reassign the agent's identity, purpose, or authority level.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 5</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Context Monitor</div><div style="font-size:11px;color:#8892a4;">Tracks conversation state across the full context window, detecting slow-burn manipulation sequences.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 6</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Memory Poison Defender</div><div style="font-size:11px;color:#8892a4;">Guards persistent memory and RAG stores against poisoning attacks that corrupt future responses.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 7</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Token Smuggler Detector</div><div style="font-size:11px;color:#8892a4;">Identifies payload-embedded tokens, split commands, and steganographic instruction channels.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 8</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Output Validator</div><div style="font-size:11px;color:#8892a4;">Audits every generated response for policy violations, sensitive disclosures, and hallucinated actions.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 9</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Data Exfiltration Blocker</div><div style="font-size:11px;color:#8892a4;">Stops attempts to extract PII, credentials, database contents, or proprietary data through crafted prompts.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 10</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Cascade Monitor</div><div style="font-size:11px;color:#8892a4;">Monitors multi-agent chains for compromise propagation — a breach in one agent cannot spread to others.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 11</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Cross-Agent Contaminator Detector</div><div style="font-size:11px;color:#8892a4;">Isolates agent communication channels to prevent cross-contamination in orchestrated swarm architectures.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#a855f7;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 12</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Adversarial Filter</div><div style="font-size:11px;color:#8892a4;">Blocks adversarial examples crafted to exploit model weaknesses — including gradient-based, GCG, and PAIR attacks.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#00d4ff;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 13</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Policy Enforcer</div><div style="font-size:11px;color:#8892a4;">Applies client-defined behavioral rules, regulatory constraints, and acceptable-use policies at every interaction.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px 14px;"><div style="font-size:10px;color:#ffd700;font-weight:700;letter-spacing:1px;margin-bottom:3px;">LAYER 14</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Human Oversight Integrator</div><div style="font-size:11px;color:#8892a4;">Escalates high-risk decisions to human review in real time — the final control layer that cannot be bypassed.</div></div>
+    </div>
+    <div style="margin-top:20px;text-align:center;"><p style="font-size:11px;color:#3a4458;">All 14 agents run in parallel &lt;12ms latency. Zero perceptible delay to end users.</p></div>
+  </div>
+</div>
+
+<!-- Modal: 22+ Companies Protected -->
+<div id="footer-companies-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:620px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-companies-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Francisco Holdings Inc.</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">22+ Companies Under Protection</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Francisco Holdings Inc. operates a portfolio of companies spanning AI security, legal technology, healthcare compliance, financial technology, clean energy, and logistics. Every company in the portfolio runs on Agent Swarm Technologies and is monitored by SoulStack and protected by OmniaGuard.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🛡️</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">AI Security</div><div style="font-size:11px;color:#8892a4;">OmniaGuard — enterprise AI agent protection. Sentinel through Sovereign tiers.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">⚖️</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Legal Technology</div><div style="font-size:11px;color:#8892a4;">AI-powered legal research, compliance automation, and regulatory monitoring platforms.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🏥</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Healthcare Compliance</div><div style="font-size:11px;color:#8892a4;">HIPAA/PIPEDA-compliant AI for pharmacy chains, clinical networks, and health data platforms.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">💹</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Financial Technology</div><div style="font-size:11px;color:#8892a4;">OSFI-compliant AI infrastructure for investment, trading, and risk management systems.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">⚡</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Clean Energy</div><div style="font-size:11px;color:#8892a4;">AI-driven grid optimization, carbon monitoring, and renewable energy management operations.</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;"><div style="font-size:18px;margin-bottom:6px;">🚚</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">Logistics &amp; Supply Chain</div><div style="font-size:11px;color:#8892a4;">Real-time AI routing, predictive inventory, and autonomous fleet coordination platforms.</div></div>
+    </div>
+    <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;text-align:center;">
+      <p style="font-size:12px;color:#8892a4;margin:0;line-height:1.7;">Every company runs the same Agent Swarm infrastructure — OmniaGuard at the security layer, SoulStack observing system-wide, PrimeDox directing the authority chain.<br><strong style="color:#00d4ff;">One infrastructure. 22+ companies. Zero breach events in 24 months of operation.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: OmniaGuard Security Layer -->
+<div id="footer-security-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:660px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-security-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Defense Architecture</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">OmniaGuard 14-Layer Security Stack</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">Every prompt passes through 14 discrete security layers before a response is returned. All layers run in parallel — total analysis time under 12ms. If any layer flags a threat, the request is quarantined and logged before any LLM output is generated.</p>
+    <div style="position:relative;padding-left:24px;border-left:2px solid rgba(0,212,255,0.2);">
+      <div style="margin-bottom:14px;"><span style="background:rgba(0,212,255,0.15);color:#00d4ff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">INPUT</span><span style="color:#fff;font-size:13px;font-weight:600;">Sanitization → Intent Classification → Injection Detection → Role Confusion</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(168,85,247,0.15);color:#a855f7;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">CONTEXT</span><span style="color:#fff;font-size:13px;font-weight:600;">Window Monitoring → Memory Poison Defense → Token Smuggling Detection</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(255,215,0,0.12);color:#ffd700;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">OUTPUT</span><span style="color:#fff;font-size:13px;font-weight:600;">Validation → Exfiltration Prevention → Cascade Monitoring</span></div>
+      <div style="margin-bottom:14px;"><span style="background:rgba(239,68,68,0.12);color:#f87171;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">SWARM</span><span style="color:#fff;font-size:13px;font-weight:600;">Cross-Agent Contamination → Adversarial Filtering → Policy Enforcement</span></div>
+      <div><span style="background:rgba(0,200,80,0.12);color:#00c851;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:8px;">HUMAN</span><span style="color:#fff;font-size:13px;font-weight:600;">Oversight Integration — final control layer, cannot be bypassed</span></div>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">99.7%</div><div style="font-size:11px;color:#8892a4;">Injection detection accuracy</div></div>
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">&lt;12ms</div><div style="font-size:11px;color:#8892a4;">Full 14-layer analysis time</div></div>
+      <div style="flex:1;min-width:140px;background:#131829;border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00d4ff;">$5M</div><div style="font-size:11px;color:#8892a4;">Per-incident liability (Archon+)</div></div>
+    </div>
+    <div style="margin-top:16px;text-align:center;"><button onclick="document.getElementById('footer-security-modal').style.display='none';quickPay('Guardian',2499)" style="background:linear-gradient(135deg,#00d4ff,#7b2fbe);color:#fff;border:none;padding:11px 28px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Deploy OmniaGuard Now &#x2192;</button></div>
+  </div>
+</div>
+
+<!-- Modal: Agent Architecture -->
+<div id="footer-arch-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:680px;width:100%;background:#0d1120;border:1px solid rgba(0,212,255,0.25);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,212,255,0.08);">
+    <button onclick="document.getElementById('footer-arch-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">System Architecture</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">OmniaGuard Agent Architecture</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">The OmniaGuard swarm operates as a layered defense network. Each agent is autonomous, independently logged, and communicates up the authority chain. No single agent holds full authority — compromise of one never cascades.</p>
+    <div style="font-size:11px;font-weight:700;color:#00d4ff;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Authority Chain</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:24px;">
+      <div style="background:linear-gradient(90deg,rgba(255,215,0,0.08),transparent);border:1px solid rgba(255,215,0,0.25);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">👤</span><div><div style="font-size:12px;font-weight:800;color:#ffd700;">PrimeDox</div><div style="font-size:11px;color:#8892a4;">Absolute authority — human decision maker. All unsanctioned actions blocked.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,212,255,0.08),transparent);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🧠</span><div><div style="font-size:12px;font-weight:800;color:#00d4ff;">PrimeDocs</div><div style="font-size:11px;color:#8892a4;">Override &amp; backup AI layer — activated only by PrimeDox direct instruction.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(168,85,247,0.08),transparent);border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">👁️</span><div><div style="font-size:12px;font-weight:800;color:#a855f7;">SoulStack</div><div style="font-size:11px;color:#8892a4;">Observer AI — watches all empire operations, flags anomalies, reports up the chain.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,212,255,0.1),transparent);border:1px solid rgba(0,212,255,0.3);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🛡️</span><div><div style="font-size:12px;font-weight:800;color:#00d4ff;">OmniaGuard</div><div style="font-size:11px;color:#8892a4;">Security enforcement layer — guards all sites, APIs, and agent behavior. This is what you're deploying.</div></div></div>
+      <div style="text-align:center;font-size:16px;color:#3a4458;">↓</div>
+      <div style="background:linear-gradient(90deg,rgba(0,200,80,0.06),transparent);border:1px solid rgba(0,200,80,0.15);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:12px;"><span style="font-size:16px;">🤖</span><div><div style="font-size:12px;font-weight:800;color:#00c851;">Your AI Agents</div><div style="font-size:11px;color:#8892a4;">Protected execution layer — your agents operate normally, fully shielded by all layers above.</div></div></div>
+    </div>
+    <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px;text-align:center;"><p style="font-size:12px;color:#8892a4;margin:0;">Every action by every agent is logged, timestamped, and auditable. No agent self-directs. No agent expands scope without authority chain approval.</p></div>
+  </div>
+</div>
+
+<!-- Modal: ESG / Carbon-Neutral -->
+<div id="footer-esg-modal" onclick="if(event.target===this)this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;">
+  <div style="max-width:600px;width:100%;background:#0d1120;border:1px solid rgba(0,200,80,0.2);border-radius:20px;padding:36px 32px;position:relative;margin:auto;box-shadow:0 0 60px rgba(0,200,80,0.06);">
+    <button onclick="document.getElementById('footer-esg-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:rgba(0,200,80,0.08);border:1px solid rgba(0,200,80,0.2);color:#8892a4;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;">&times;</button>
+    <div style="color:#00c851;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">ESG Commitment</div>
+    <h2 style="font-size:22px;font-weight:800;margin:0 0 6px;">🌿 Carbon-Neutral Operations by 2028</h2>
+    <p style="color:#8892a4;font-size:13px;margin-bottom:24px;line-height:1.6;">OmniaGuard and the Francisco Holdings infrastructure are on a verified roadmap to carbon-neutral operations by 2028. AI infrastructure has a real environmental footprint — we are committed to eliminating ours.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+      <div style="background:#0a1a0d;border:1px solid rgba(0,200,80,0.15);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">✅</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2024 — Baseline Measurement</div><div style="font-size:11px;color:#8892a4;">Full carbon audit completed across all compute infrastructure. Scope 1, 2, and 3 emissions quantified.</div></div></div>
+      <div style="background:#0a1a0d;border:1px solid rgba(0,200,80,0.15);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">✅</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2025 — Green Cloud Migration</div><div style="font-size:11px;color:#8892a4;">Infrastructure migrating to AWS and Azure regions running on 100% renewable energy (Oregon, Montreal, Quebec City nodes).</div></div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.1);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">🔄</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2026 — Offset Program Launch</div><div style="font-size:11px;color:#8892a4;">Verified carbon offset purchases for all remaining emissions. Partnership with Canadian forest preservation program.</div></div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.08);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;"><span style="font-size:18px;flex-shrink:0;">⏳</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;">2027–2028 — Net Zero Certification</div><div style="font-size:11px;color:#8892a4;">Third-party verified net zero certification. 100% renewable energy for all owned infrastructure. Carbon neutral guarantee included in enterprise contracts.</div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">100%</div><div style="font-size:10px;color:#8892a4;">Renewable energy target by 2027</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">47</div><div style="font-size:10px;color:#8892a4;">Canadian tech jobs created to date</div></div>
+      <div style="background:#131829;border:1px solid rgba(0,200,80,0.12);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:18px;font-weight:800;color:#00c851;">2028</div><div style="font-size:10px;color:#8892a4;">Net zero certification target</div></div>
+    </div>
+    <p style="font-size:11px;color:#3a4458;text-align:center;margin:0;">This commitment is included in all Warden-tier and above enterprise contracts as a contractual obligation.</p>
+  </div>
+</div>
+
+<script src="/app.js" defer></script>
+<script src="/pwa-core.js" defer></script>
 </body>
 </html>

@@ -2,8 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, viewport-fit=cover">
 <title>About OmniaGuard — Constitutional AI Security. Built for Humans.</title>
+<link rel="canonical" href="https://omniaguard.com/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OmniaGuard">
+<meta property="og:title" content="About OmniaGuard — Constitutional AI Security. Built for Humans.">
+<meta property="og:description" content="OmniaGuard is a product of Francisco Holdings Inc., a Canadian technology holding company building privacy-sovereign infrastructure for the AI era. Founded 2024.">
+<meta property="og:url" content="https://omniaguard.com/about.html">
+<meta property="og:image" content="https://omniaguard.com/omniaguard-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About OmniaGuard — Constitutional AI Security. Built for Humans.">
+<meta name="twitter:description" content="OmniaGuard is a product of Francisco Holdings Inc., a Canadian technology holding company building privacy-sovereign infrastructure for the AI era. Founded 2024.">
+<meta name="twitter:image" content="https://omniaguard.com/omniaguard-logo.png">
 <meta name="description" content="OmniaGuard is a product of Francisco Holdings Inc., a Canadian technology holding company building privacy-sovereign infrastructure for the AI era. Founded 2024.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +39,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
+body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom);}
 
 /* GRID BG */
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;animation:gridPulse 8s ease-in-out infinite;}
@@ -38,7 +49,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--cyan),var(--gold));z-index:9999;transition:width .1s linear;}
 
 /* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:1000;background:rgba(10,14,26,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;}
+nav{position:sticky;top:0;padding-top:env(safe-area-inset-top);z-index:1000;background:rgba(10,14,26,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;transition:box-shadow .3s;}
 nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px;}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-size:20px;font-weight:800;letter-spacing:-.5px;}
