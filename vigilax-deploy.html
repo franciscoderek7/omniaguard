@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VIGILAX Phase 1 Deployment Runbook | OmniaGuard</title>
+<link rel="canonical" href="https://omniaguard.com/vigilax-deploy.html">
+<meta name="description" content="VIGILAX Phase 1 deployment runbook. Step-by-step guide for OmniaGuard pilot deployment: Supabase Hub + Loop-A + Loop-B, Claude API, agent configuration, rights gate.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --bg:#0a0a14;--bg2:#0d0d1a;--bg3:#1a1a2e;
+  --cyan:#00d4ff;--gold:#ffd700;--white:#fff;
+  --gray:#8a8a9a;--gray2:#2a2a3e;
+  --red:#ff3b3b;--orange:#ff8c00;--green:#00c853;
+  --purple:#9b59b6;
+  --vg:#2E7D32;--vg-light:#4CAF50;
+  --border:rgba(0,212,255,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--vg),var(--gold));z-index:9999;}
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-size:18px;font-weight:800;}
+.nav-badge{font-size:9px;font-weight:900;letter-spacing:1.5px;background:var(--vg);color:#fff;padding:2px 7px;border-radius:4px;}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{background:var(--vg);color:#fff;font-weight:700;padding:9px 20px;border-radius:6px;text-decoration:none;font-size:14px;}
+.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;}
+#mobile-overlay{display:none;position:fixed;top:0;padding-top:64px;left:0;width:100%;height:100%;background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding:80px 24px 24px;gap:0;overflow-y:auto;}
+#mobile-overlay.open{display:flex;}
+#mobile-overlay a{color:var(--white);text-decoration:none;font-size:18px;font-weight:600;padding:18px 0;border-bottom:1px solid var(--gray2);display:block;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+.layout{display:grid;grid-template-columns:240px 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:40px 24px 80px;}
+/* SIDEBAR */
+.sidebar{position:sticky;top:84px;height:fit-content;}
+.sidebar-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:12px;padding:0 4px;}
+.sidebar-nav{list-style:none;}
+.sidebar-nav li{margin-bottom:2px;}
+.sidebar-nav a{text-decoration:none;color:var(--gray);font-size:13px;padding:6px 10px;border-radius:6px;display:flex;align-items:center;gap:8px;transition:all .2s;}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:var(--white);background:var(--bg3);}
+.sidebar-nav a .step-num{width:20px;height:20px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sidebar-nav a.done .step-num{background:var(--vg);border-color:var(--vg);color:#fff;}
+.sidebar-nav a.active .step-num{background:var(--gold);border-color:var(--gold);color:#000;}
+.sidebar-progress{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:16px;}
+.sp-label{font-size:11px;color:var(--gray);margin-bottom:8px;}
+.sp-bar{background:var(--gray2);border-radius:4px;height:6px;overflow:hidden;}
+.sp-fill{background:var(--vg);height:100%;border-radius:4px;transition:width .3s;}
+.sp-text{font-size:11px;color:var(--vg-light);margin-top:6px;font-weight:600;}
+
+/* MAIN CONTENT */
+.main-content{}
+.page-hero-mini{padding:40px 0 32px;}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(46,125,50,0.12);border:1px solid rgba(46,125,50,0.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#4CAF50;margin-bottom:16px;}
+.page-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:8px;}
+.page-sub{font-size:14px;color:var(--gray);line-height:1.6;max-width:620px;}
+/* STATUS BAR */
+.status-bar{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0 32px;padding:16px 20px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;}
+.status-item{display:flex;align-items:center;gap:8px;font-size:13px;}
+.status-dot{width:8px;height:8px;border-radius:50%;}
+.status-done{background:var(--vg-light);}
+.status-pending{background:var(--orange);}
+.status-blocked{background:var(--red);}
+/* STEP CARD */
+.step-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:24px;scroll-margin-top:100px;}
+.step-card.completed{border-color:rgba(76,175,80,0.3);background:rgba(46,125,50,0.04);}
+.step-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}
+.step-num-badge{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:2px solid var(--border);font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gray);}
+.step-card.completed .step-num-badge{background:var(--vg);border-color:var(--vg);color:#fff;}
+.step-info{}
+.step-category{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+.step-title{font-size:1.1rem;font-weight:800;margin-bottom:4px;}
+.step-eta{font-size:11px;color:var(--orange);font-family:monospace;}
+.step-body{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px;}
+.step-body strong{color:var(--white);}
+/* CODE */
+.cmd-block{background:#0a0c10;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+.cmd-header{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:#111318;border-bottom:1px solid rgba(255,255,255,0.06);}
+.cmd-lang{font-family:monospace;font-size:10px;color:var(--gray);letter-spacing:.5px;}
+.cmd-copy{font-size:10px;background:transparent;border:1px solid var(--border);color:var(--gray);padding:3px 8px;border-radius:4px;cursor:pointer;}
+.cmd-copy:hover{border-color:var(--vg-light);color:var(--vg-light);}
+.cmd-body{padding:16px;font-family:monospace;font-size:12px;line-height:1.8;color:#c8d1d9;white-space:pre;overflow-x:auto;}
+.cmd-body .cm{color:#8b949e;}
+.cmd-body .kw{color:#ff7b72;}
+.cmd-body .str{color:#a5d6ff;}
+.cmd-body .var{color:#79c0ff;}
+.cmd-body .ok{color:#3fb950;}
+.cmd-body .warn{color:#f8c555;}
+/* CHECKLIST */
+.checklist{list-style:none;margin:12px 0;}
+.checklist li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);margin-bottom:8px;line-height:1.5;cursor:pointer;}
+.checklist li input[type=checkbox]{width:16px;height:16px;flex-shrink:0;accent-color:var(--vg-light);margin-top:2px;cursor:pointer;}
+.checklist li.checked{color:var(--gray2);}
+.checklist li.checked span{text-decoration:line-through;}
+/* ENV VARS */
+.env-table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+.env-table th{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--bg3);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gray);}
+.env-table td{padding:10px 12px;border-bottom:1px solid var(--gray2);vertical-align:top;}
+.env-table .key{font-family:monospace;color:var(--cyan);}
+.env-table .req{font-size:10px;font-weight:700;color:var(--red);}
+.env-table .opt{font-size:10px;font-weight:700;color:var(--orange);}
+/* CALLOUT */
+.callout{display:flex;gap:12px;border-radius:8px;padding:14px 16px;margin:12px 0;}
+.callout.warn{background:rgba(255,140,0,0.08);border:1px solid rgba(255,140,0,0.25);}
+.callout.info{background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);}
+.callout.success{background:rgba(46,125,50,0.08);border:1px solid rgba(46,125,50,0.25);}
+.callout-icon{font-size:1rem;flex-shrink:0;}
+.callout-body{font-size:13px;color:var(--gray);line-height:1.6;}
+.callout-body strong{color:var(--white);}
+
+footer{border-top:1px solid var(--gray2);padding:40px 0;text-align:center;}
+footer p{font-size:13px;color:var(--gray);}
+footer a{color:var(--cyan);text-decoration:none;}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;padding:20px 16px 60px;}
+  .sidebar{position:static;display:none;}
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:flex;}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 34 34" fill="none">
+        <circle cx="17" cy="17" r="16" stroke="#00d4ff" stroke-width="1.5" opacity=".4"/>
+        <polygon points="17,6 28,24 6,24" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+        <circle cx="17" cy="17" r="3" fill="#00d4ff"/>
+      </svg>
+      OmniaGuard <span class="nav-badge">VIGILAX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="vigilax.html">Architecture</a></li>
+      <li><a href="vigilax-pricing.html">Pricing</a></li>
+      <li><a href="vigilax-investor.html">Investors</a></li>
+      <li><a href="vigilax-deploy.html" class="active">Deploy</a></li>
+    </ul>
+    <a href="vigilax-pricing.html" class="nav-cta">Get VIGILAX</a>
+    <button class="nav-mobile-toggle" onclick="document.getElementById('mobile-overlay').classList.toggle('open')">&#9776;</button>
+  </div>
+</nav>
+<div id="mobile-overlay">
+  <a href="vigilax.html">Architecture</a>
+  <a href="vigilax-pricing.html">Pricing</a>
+  <a href="vigilax-investor.html">Investors</a>
+  <a href="vigilax-deploy.html">Deploy</a>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">Phase 1 — Deployment Steps</div>
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li><a href="#step-1" class="active" id="sn-1"><span class="step-num">1</span>Prerequisites</a></li>
+      <li><a href="#step-2" id="sn-2"><span class="step-num">2</span>Supabase Hub</a></li>
+      <li><a href="#step-3" id="sn-3"><span class="step-num">3</span>Supabase Loop-A</a></li>
+      <li><a href="#step-4" id="sn-4"><span class="step-num">4</span>Supabase Loop-B</a></li>
+      <li><a href="#step-5" id="sn-5"><span class="step-num">5</span>Claude API Config</a></li>
+      <li><a href="#step-6" id="sn-6"><span class="step-num">6</span>Environment Variables</a></li>
+      <li><a href="#step-7" id="sn-7"><span class="step-num">7</span>Agent Initialization</a></li>
+      <li><a href="#step-8" id="sn-8"><span class="step-num">8</span>Rights Gate Test</a></li>
+      <li><a href="#step-9" id="sn-9"><span class="step-num">9</span>Tenant Onboard</a></li>
+      <li><a href="#step-10" id="sn-10"><span class="step-num">10</span>Go-Live Validation</a></li>
+    </ul>
+    <div class="sidebar-progress">
+      <div class="sp-label">Deployment Progress</div>
+      <div class="sp-bar"><div class="sp-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="sp-text" id="progress-text">0 / 10 steps complete</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="page-hero-mini">
+      <div class="page-eyebrow">Phase 1 Deployment Runbook — Weeks 1–2</div>
+      <h1 class="page-title">VIGILAX OmniaGuard Pilot</h1>
+      <p class="page-sub">Step-by-step deployment guide for the VIGILAX Phase 1 pilot on OmniaGuard. Complete all 10 steps in order. Check off each item as you go — progress is saved locally.</p>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-item"><div class="status-dot status-done"></div>Architecture: Complete</div>
+      <div class="status-item"><div class="status-dot status-pending"></div>Supabase: Pending</div>
+      <div class="status-item"><div class="status-dot status-pending"></div>Claude API: Pending</div>
+      <div class="status-item"><div class="status-dot status-pending"></div>Agent Mesh: Pending</div>
+      <div class="status-item"><div class="status-dot status-pending"></div>Pilot Tenant: Pending</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step-card" id="step-1">
+      <div class="step-header">
+        <div class="step-num-badge">1</div>
+        <div class="step-info">
+          <div class="step-category">Setup &bull; 30 min</div>
+          <div class="step-title">Prerequisites &amp; Accounts</div>
+          <div class="step-eta">ETA: Day 1, morning</div>
+        </div>
+      </div>
+      <div class="step-body">Verify all accounts and credentials are in place before starting infrastructure provisioning. Do not skip — a missing credential mid-deployment will halt the process.</div>
+      <ul class="checklist" id="cl-1">
+        <li onclick="toggle(this)"><input type="checkbox"><span>Anthropic account with Claude API access (api.anthropic.com)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Anthropic API key generated and securely stored</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Supabase account created (supabase.com) — free tier works for pilot</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Stripe account with <code style="font-family:monospace;font-size:11px;color:var(--cyan);">pk_live</code> key available</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>GitHub repository: <code style="font-family:monospace;font-size:11px;color:var(--cyan);">franciscoderek7/omniaguard</code> with push access</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Node.js 20+ or Python 3.11+ installed on deployment machine</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>DEPLOY_TOKEN available (for CI/CD automation)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Domain DNS access (for omniaguard.com)</span></li>
+      </ul>
+      <div class="callout warn">
+        <div class="callout-icon">&#x26A0;&#xFE0F;</div>
+        <div class="callout-body"><strong>Security:</strong> Never commit your Anthropic API key or Supabase service-role key to the repository. These are server-side secrets only. Use environment variables.</div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-card" id="step-2">
+      <div class="step-header">
+        <div class="step-num-badge">2</div>
+        <div class="step-info">
+          <div class="step-category">Supabase &bull; 45 min</div>
+          <div class="step-title">Provision Supabase Hub Project</div>
+          <div class="step-eta">ETA: Day 1, afternoon</div>
+        </div>
+      </div>
+      <div class="step-body">The Hub project is VIGILAX's central control plane — tenant registry, rights ledger, consent engine, and orchestrator state live here. <strong>Create this first</strong> before Loop-A or Loop-B.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">SUPABASE CLI — HUB PROJECT</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># Install Supabase CLI if not already installed</span>
+npm install -g supabase
+
+<span class="cm"># Login</span>
+supabase login
+
+<span class="cm"># Create Hub project (replace YOUR-ORG-ID)</span>
+supabase projects create vigilax-hub \
+  --org-id YOUR-ORG-ID \
+  --region ca-central-1 \
+  --plan free
+
+<span class="cm"># Note the project ref (e.g., xyzabcdefghij)</span>
+supabase projects list</div>
+      </div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">SQL — RUN IN SUPABASE SQL EDITOR (HUB)</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm">-- Create tenants table</span>
+<span class="kw">CREATE TABLE</span> tenants (
+  id          UUID <span class="kw">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  slug        TEXT <span class="kw">UNIQUE NOT NULL</span>,
+  name        TEXT <span class="kw">NOT NULL</span>,
+  plan        TEXT <span class="kw">NOT NULL DEFAULT</span> <span class="str">'starter'</span>,
+  stripe_id   TEXT,
+  rights_tier TEXT <span class="kw">NOT NULL DEFAULT</span> <span class="str">'standard'</span>,
+  active      BOOLEAN <span class="kw">DEFAULT</span> true,
+  created_at  TIMESTAMPTZ <span class="kw">DEFAULT</span> now()
+);
+
+<span class="cm">-- Consent ledger (PIPEDA compliance)</span>
+<span class="kw">CREATE TABLE</span> consent_records (
+  id          UUID <span class="kw">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  tenant_id   UUID <span class="kw">REFERENCES</span> tenants(id),
+  person_ref  TEXT <span class="kw">NOT NULL</span>,
+  purpose     TEXT <span class="kw">NOT NULL</span>,
+  consented   BOOLEAN <span class="kw">NOT NULL</span>,
+  version     TEXT,
+  recorded_at TIMESTAMPTZ <span class="kw">DEFAULT</span> now()
+);
+
+<span class="cm">-- Enable RLS on consent_records</span>
+<span class="kw">ALTER TABLE</span> consent_records <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">CREATE POLICY</span> tenant_consent_isolation <span class="kw">ON</span> consent_records
+  <span class="kw">FOR ALL USING</span> (tenant_id::text = auth.jwt()->>><span class="str">'tenant_id'</span>);
+
+<span class="cm">-- Seed pilot tenant (OmniaGuard itself)</span>
+<span class="kw">INSERT INTO</span> tenants (slug, name, plan, rights_tier)
+<span class="kw">VALUES</span> (<span class="str">'omniaguard-pilot'</span>, <span class="str">'OmniaGuard Phase 1 Pilot'</span>, <span class="str">'enterprise'</span>, <span class="str">'elevated'</span>);</div>
+      </div>
+      <ul class="checklist" id="cl-2">
+        <li onclick="toggle(this)"><input type="checkbox"><span>Hub project created in ca-central-1 (Canadian data residency)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Hub SQL schema applied (tenants + consent_records tables)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>RLS enabled on consent_records</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Pilot tenant row inserted</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Hub project URL and anon/service-role keys saved securely</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-card" id="step-3">
+      <div class="step-header">
+        <div class="step-num-badge">3</div>
+        <div class="step-info">
+          <div class="step-category">Supabase &bull; 30 min</div>
+          <div class="step-title">Provision Supabase Loop-A (Realtime Events)</div>
+          <div class="step-eta">ETA: Day 1, evening</div>
+        </div>
+      </div>
+      <div class="step-body">Loop-A is the hot storage for live security events. 90-day retention. Supabase Realtime subscriptions push events to the dashboard in real time. <strong>Separate project from Hub</strong> for performance isolation.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">SQL — RUN IN LOOP-A SQL EDITOR</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm">-- Security events table (Loop-A hot storage)</span>
+<span class="kw">CREATE TABLE</span> security_events (
+  id           UUID <span class="kw">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  tenant_id    UUID <span class="kw">NOT NULL</span>,
+  agent        TEXT <span class="kw">NOT NULL</span>,
+  event_type   TEXT <span class="kw">NOT NULL</span>,
+  threat_level TEXT,
+  confidence   NUMERIC(<span class="num">3</span>,<span class="num">2</span>),
+  rights_cleared BOOLEAN <span class="kw">DEFAULT</span> false,
+  arbiter_verdict TEXT,
+  payload      JSONB,
+  created_at   TIMESTAMPTZ <span class="kw">DEFAULT</span> now()
+);
+
+<span class="cm">-- RLS: tenants only see their own events</span>
+<span class="kw">ALTER TABLE</span> security_events <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">CREATE POLICY</span> tenant_event_isolation <span class="kw">ON</span> security_events
+  <span class="kw">FOR ALL USING</span> (tenant_id::text = auth.jwt()->>><span class="str">'tenant_id'</span>);
+
+<span class="cm">-- Auto-archive after 90 days (pg_cron extension)</span>
+<span class="kw">SELECT</span> cron.schedule(
+  <span class="str">'archive-old-events'</span>,
+  <span class="str">'0 2 * * *'</span>,
+  $$<span class="kw">DELETE FROM</span> security_events
+    <span class="kw">WHERE</span> created_at < now() - interval <span class="str">'90 days'</span>
+    <span class="kw">AND</span> id <span class="kw">NOT IN</span> (<span class="kw">SELECT</span> event_id <span class="kw">FROM</span> legal_holds)$$
+);</div>
+      </div>
+      <ul class="checklist" id="cl-3">
+        <li onclick="toggle(this)"><input type="checkbox"><span>Loop-A project created (separate from Hub)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>security_events table created with RLS</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>90-day auto-archive cron job scheduled</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Realtime enabled on security_events table (Supabase Dashboard → Realtime)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Loop-A URL and keys saved</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-card" id="step-4">
+      <div class="step-header">
+        <div class="step-num-badge">4</div>
+        <div class="step-info">
+          <div class="step-category">Supabase &bull; 30 min</div>
+          <div class="step-title">Provision Supabase Loop-B (Evidence Archive)</div>
+          <div class="step-eta">ETA: Day 2, morning</div>
+        </div>
+      </div>
+      <div class="step-body">Loop-B is the write-once legal evidence archive. <strong>Evidence_hash is immutable once set</strong> — a Postgres trigger enforces this. This is what makes VAULT evidence court-admissible.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">SQL — RUN IN LOOP-B SQL EDITOR</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm">-- Evidence records (write-once archive)</span>
+<span class="kw">CREATE TABLE</span> evidence_records (
+  id              UUID <span class="kw">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  tenant_id       UUID <span class="kw">NOT NULL</span>,
+  seal_id         TEXT <span class="kw">UNIQUE NOT NULL</span>,
+  source          TEXT <span class="kw">NOT NULL</span>,
+  content_summary TEXT,
+  extracted_claims JSONB,
+  evidence_hash   TEXT <span class="kw">NOT NULL</span>,
+  trusted_timestamp TEXT <span class="kw">NOT NULL</span>,
+  consent_confirmed BOOLEAN <span class="kw">NOT NULL DEFAULT</span> false,
+  legal_hold      BOOLEAN <span class="kw">DEFAULT</span> false,
+  created_at      TIMESTAMPTZ <span class="kw">DEFAULT</span> now()
+);
+
+<span class="cm">-- CRITICAL: Make evidence_hash immutable once set</span>
+<span class="kw">CREATE OR REPLACE FUNCTION</span> prevent_evidence_update()
+<span class="kw">RETURNS TRIGGER AS</span> $$
+<span class="kw">BEGIN</span>
+  <span class="kw">IF</span> OLD.evidence_hash <span class="kw">IS NOT NULL THEN</span>
+    <span class="kw">RAISE EXCEPTION</span> <span class="str">'VIGILAX: evidence_hash is immutable (chain-of-custody)'</span>;
+  <span class="kw">END IF</span>;
+  <span class="kw">RETURN NEW</span>;
+<span class="kw">END</span>;
+$$ <span class="kw">LANGUAGE</span> plpgsql;
+
+<span class="kw">CREATE TRIGGER</span> evidence_immutability
+  <span class="kw">BEFORE UPDATE OF</span> evidence_hash <span class="kw">ON</span> evidence_records
+  <span class="kw">FOR EACH ROW EXECUTE FUNCTION</span> prevent_evidence_update();
+
+<span class="cm">-- RLS: tenants cannot delete their own legal holds</span>
+<span class="kw">ALTER TABLE</span> evidence_records <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">CREATE POLICY</span> tenant_evidence_read <span class="kw">ON</span> evidence_records
+  <span class="kw">FOR SELECT USING</span> (tenant_id::text = auth.jwt()->>><span class="str">'tenant_id'</span>);
+<span class="kw">CREATE POLICY</span> tenant_evidence_insert <span class="kw">ON</span> evidence_records
+  <span class="kw">FOR INSERT WITH CHECK</span> (tenant_id::text = auth.jwt()->>><span class="str">'tenant_id'</span>);
+<span class="cm">-- No UPDATE or DELETE policy: evidence is permanent</span></div>
+      </div>
+      <ul class="checklist" id="cl-4">
+        <li onclick="toggle(this)"><input type="checkbox"><span>Loop-B project created</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>evidence_records table created with immutability trigger</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>RLS policies: SELECT + INSERT only (no UPDATE/DELETE)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Test: attempt to UPDATE evidence_hash — should raise exception</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Loop-B URL and keys saved</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-card" id="step-5">
+      <div class="step-header">
+        <div class="step-num-badge">5</div>
+        <div class="step-info">
+          <div class="step-category">Claude API &bull; 20 min</div>
+          <div class="step-title">Configure Claude API Credentials &amp; Model Routing</div>
+          <div class="step-eta">ETA: Day 2, afternoon</div>
+        </div>
+      </div>
+      <div class="step-body">VIGILAX uses three model tiers. Verify your Anthropic API key has access to all three model IDs before proceeding.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">PYTHON — VALIDATE CLAUDE API ACCESS</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># vigilax/scripts/validate_claude.py</span>
+<span class="kw">import</span> anthropic
+<span class="kw">import</span> os
+
+client = anthropic.Anthropic(api_key=os.environ[<span class="str">"ANTHROPIC_API_KEY"</span>])
+
+MODELS = [
+    (<span class="str">"claude-opus-4-8"</span>,     <span class="str">"VIGILAX CORE / Orchestrator"</span>),
+    (<span class="str">"claude-sonnet-4-6"</span>,   <span class="str">"Specialist Agents"</span>),
+    (<span class="str">"claude-haiku-4-5-20251001"</span>, <span class="str">"Fast Classifiers"</span>),
+]
+
+<span class="kw">for</span> model_id, role <span class="kw">in</span> MODELS:
+    <span class="kw">try</span>:
+        r = client.messages.create(
+            model=model_id,
+            max_tokens=<span class="num">10</span>,
+            messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: <span class="str">"ping"</span>}]
+        )
+        <span class="kw">print</span>(f<span class="str">"<span class="ok">✓</span> {model_id} ({role}) — OK"</span>)
+    <span class="kw">except Exception as</span> e:
+        <span class="kw">print</span>(f<span class="str">"<span class="warn">✗</span> {model_id} — FAILED: {e}"</span>)
+
+<span class="ok"># Expected output:
+# ✓ claude-opus-4-8 (VIGILAX CORE / Orchestrator) — OK
+# ✓ claude-sonnet-4-6 (Specialist Agents) — OK
+# ✓ claude-haiku-4-5-20251001 (Fast Classifiers) — OK</span></div>
+      </div>
+      <ul class="checklist" id="cl-5">
+        <li onclick="toggle(this)"><input type="checkbox"><span>ANTHROPIC_API_KEY set in environment</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Validation script passes for all 3 models</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Rate limits verified: confirm Tier 2+ API access for Opus</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Usage billing set up in Anthropic dashboard</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-card" id="step-6">
+      <div class="step-header">
+        <div class="step-num-badge">6</div>
+        <div class="step-info">
+          <div class="step-category">Configuration &bull; 15 min</div>
+          <div class="step-title">Environment Variables</div>
+          <div class="step-eta">ETA: Day 2, afternoon</div>
+        </div>
+      </div>
+      <div class="step-body">All VIGILAX secrets are injected via environment variables. <strong>Never hardcode credentials</strong> in source files. The <code style="font-family:monospace;font-size:11px;color:var(--cyan);">.env</code> file is git-ignored.</div>
+      <table class="env-table">
+        <thead><tr><th>Variable</th><th>Required</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td class="key">ANTHROPIC_API_KEY</td><td><span class="req">REQUIRED</span></td><td>Claude API key — never expose client-side</td></tr>
+          <tr><td class="key">VIGILAX_HUB_URL</td><td><span class="req">REQUIRED</span></td><td>Supabase Hub project URL</td></tr>
+          <tr><td class="key">VIGILAX_HUB_SERVICE_KEY</td><td><span class="req">REQUIRED</span></td><td>Supabase Hub service-role key (server-side only)</td></tr>
+          <tr><td class="key">VIGILAX_HUB_ANON_KEY</td><td><span class="req">REQUIRED</span></td><td>Supabase Hub anon key (client-side safe)</td></tr>
+          <tr><td class="key">VIGILAX_LOOP_A_URL</td><td><span class="req">REQUIRED</span></td><td>Supabase Loop-A URL</td></tr>
+          <tr><td class="key">VIGILAX_LOOP_A_KEY</td><td><span class="req">REQUIRED</span></td><td>Supabase Loop-A service-role key</td></tr>
+          <tr><td class="key">VIGILAX_LOOP_B_URL</td><td><span class="req">REQUIRED</span></td><td>Supabase Loop-B URL</td></tr>
+          <tr><td class="key">VIGILAX_LOOP_B_KEY</td><td><span class="req">REQUIRED</span></td><td>Supabase Loop-B service-role key</td></tr>
+          <tr><td class="key">STRIPE_SECRET_KEY</td><td><span class="req">REQUIRED</span></td><td>Stripe secret key (sk_live_...)</td></tr>
+          <tr><td class="key">DEPLOY_TOKEN</td><td><span class="req">REQUIRED</span></td><td>GitHub Actions deployment token</td></tr>
+          <tr><td class="key">VIGILAX_PILOT_TENANT_ID</td><td><span class="req">REQUIRED</span></td><td>UUID of the OmniaGuard pilot tenant row in Hub</td></tr>
+          <tr><td class="key">RFC3161_TIMESTAMP_URL</td><td><span class="opt">OPTIONAL</span></td><td>Trusted timestamp server (default: freetsa.org)</td></tr>
+          <tr><td class="key">VIGILAX_LOG_LEVEL</td><td><span class="opt">OPTIONAL</span></td><td>DEBUG | INFO | WARN | ERROR (default: INFO)</td></tr>
+        </tbody>
+      </table>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">SHELL — CREATE .env FILE (NEVER COMMIT THIS)</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># Copy template and fill in values</span>
+cp .env.example .env
+
+<span class="cm"># Verify .env is in .gitignore</span>
+grep -q "^.env$" .gitignore && echo "<span class="ok">✓ .env is gitignored</span>" || echo "<span class="warn">⚠ ADD .env TO .gitignore NOW</span>"
+
+<span class="cm"># Load env for local development</span>
+<span class="kw">export</span> <span class="var">$(</span>cat .env | xargs<span class="var">)</span></div>
+      </div>
+      <ul class="checklist" id="cl-6">
+        <li onclick="toggle(this)"><input type="checkbox"><span>.env file created with all REQUIRED variables filled</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>.env confirmed in .gitignore (never committed)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Environment variables set in deployment platform (Railway/Fly.io/Vercel)</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step-card" id="step-7">
+      <div class="step-header">
+        <div class="step-num-badge">7</div>
+        <div class="step-info">
+          <div class="step-category">Agent Mesh &bull; 90 min</div>
+          <div class="step-title">Initialize VIGILAX Agent Mesh</div>
+          <div class="step-eta">ETA: Day 3</div>
+        </div>
+      </div>
+      <div class="step-body">Deploy the VIGILAX agent mesh. For Phase 1 pilot, start with the 4 core agents (SENTINEL, ORACLE, VAULT, HERALD). ARBITER goes live in Step 8. CIPHER, NEXUS, PHANTOM activate in Phase 2.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">PYTHON — INITIALIZE CORE AGENTS</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># vigilax/scripts/init_agents.py</span>
+<span class="kw">from</span> vigilax.agents <span class="kw">import</span> VIGILAXAgent
+<span class="kw">import</span> os
+
+PILOT_TENANT = os.environ[<span class="str">"VIGILAX_PILOT_TENANT_ID"</span>]
+
+PHASE_1_AGENTS = [<span class="str">"SENTINEL"</span>, <span class="str">"ORACLE"</span>, <span class="str">"VAULT"</span>, <span class="str">"HERALD"</span>]
+
+<span class="kw">for</span> name <span class="kw">in</span> PHASE_1_AGENTS:
+    agent = VIGILAXAgent(name, PILOT_TENANT)
+    result = agent.health_check()
+    status = <span class="str">"<span class="ok">✓ ACTIVE</span>"</span> <span class="kw">if</span> result.ok <span class="kw">else</span> <span class="str">"<span class="warn">✗ FAILED</span>"</span>
+    <span class="kw">print</span>(f<span class="str">"{status} — {name} ({agent.model})"</span>)
+
+<span class="ok"># Expected output:
+# ✓ ACTIVE — SENTINEL (claude-sonnet-4-6)
+# ✓ ACTIVE — ORACLE (claude-haiku-4-5-20251001)
+# ✓ ACTIVE — VAULT (claude-haiku-4-5-20251001)
+# ✓ ACTIVE — HERALD (claude-haiku-4-5-20251001)</span></div>
+      </div>
+      <ul class="checklist" id="cl-7">
+        <li onclick="toggle(this)"><input type="checkbox"><span>SENTINEL agent initialized and health-check passes</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>ORACLE agent initialized and health-check passes</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>VAULT agent initialized and health-check passes</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>HERALD agent initialized and health-check passes</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Test event ingested and routed correctly to ORACLE (check Loop-A)</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 8 -->
+    <div class="step-card" id="step-8">
+      <div class="step-header">
+        <div class="step-num-badge">8</div>
+        <div class="step-info">
+          <div class="step-category">Rights Gate &bull; 60 min</div>
+          <div class="step-title">Activate ARBITER — Constitutional Rights Gate</div>
+          <div class="step-eta">ETA: Day 4</div>
+        </div>
+      </div>
+      <div class="step-body"><strong>This is the most critical step.</strong> ARBITER must pass all constitutional review tests before going live. Run the full test suite — if any test fails, do not proceed to Step 9.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">PYTHON — ARBITER TEST SUITE</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># vigilax/tests/test_arbiter.py</span>
+<span class="kw">from</span> vigilax.rights <span class="kw">import</span> RightsGate
+
+gate = RightsGate(tenant_id=PILOT_TENANT)
+
+<span class="cm"># Test 1: Proportionate enforcement action — should APPROVE</span>
+v1 = gate.audit({
+    <span class="str">"action_type"</span>: <span class="str">"log_threat"</span>,
+    <span class="str">"affects_person"</span>: False,
+    <span class="str">"description"</span>: <span class="str">"Log anomalous IP to security_events"</span>
+})
+assert v1.verdict == <span class="str">"APPROVED"</span>, f<span class="str">"Test 1 FAILED: {v1}"</span>
+<span class="kw">print</span>(<span class="str">"<span class="ok">✓ Test 1: Log action APPROVED"</span>)
+
+<span class="cm"># Test 2: Disproportionate lock without consent — should BLOCK</span>
+v2 = gate.audit({
+    <span class="str">"action_type"</span>: <span class="str">"account_lock"</span>,
+    <span class="str">"affects_person"</span>: True,
+    <span class="str">"data_categories"</span>: [<span class="str">"personal_id"</span>],
+    <span class="str">"description"</span>: <span class="str">"Lock user account without warning for low-confidence anomaly"</span>
+})
+assert v2.verdict == <span class="str">"BLOCKED"</span>, f<span class="str">"Test 2 FAILED: {v2}"</span>
+<span class="kw">print</span>(<span class="str">"<span class="ok">✓ Test 2: Disproportionate lock BLOCKED"</span>)
+
+<span class="cm"># Test 3: Health data without PHIPA — should ESCALATE</span>
+v3 = gate.audit({
+    <span class="str">"action_type"</span>: <span class="str">"share_with_third_party"</span>,
+    <span class="str">"affects_person"</span>: True,
+    <span class="str">"data_categories"</span>: [<span class="str">"health_information"</span>],
+    <span class="str">"description"</span>: <span class="str">"Share health data with insurance provider"</span>
+})
+assert v3.verdict == <span class="str">"ESCALATE"</span>, f<span class="str">"Test 3 FAILED: {v3}"</span>
+<span class="kw">print</span>(<span class="str">"<span class="ok">✓ Test 3: Health data sharing ESCALATED"</span>)
+
+<span class="kw">print</span>(<span class="str">"\n<span class="ok">ALL ARBITER TESTS PASSED — Rights Gate is operational"</span>)</span></div>
+      </div>
+      <ul class="checklist" id="cl-8">
+        <li onclick="toggle(this)"><input type="checkbox"><span>ARBITER agent initialized on claude-sonnet-4-6</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Test 1 passes: proportionate action APPROVED</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Test 2 passes: disproportionate action BLOCKED</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Test 3 passes: health data ESCALATED</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>ARBITER wired into VIGILAX CORE enforcement path</span></li>
+      </ul>
+      <div class="callout success">
+        <div class="callout-icon">&#x2705;</div>
+        <div class="callout-body"><strong>When ARBITER passes all tests</strong>, the Rights-Preservation Protocol (VIGILAX-IP-001) is active. Every enforcement action is now constitutionally reviewed. You can now safely proceed to tenant onboarding.</div>
+      </div>
+    </div>
+
+    <!-- STEP 9 -->
+    <div class="step-card" id="step-9">
+      <div class="step-header">
+        <div class="step-num-badge">9</div>
+        <div class="step-info">
+          <div class="step-category">Onboarding &bull; 30 min</div>
+          <div class="step-title">Onboard Pilot Tenant — OmniaGuard</div>
+          <div class="step-eta">ETA: Day 5</div>
+        </div>
+      </div>
+      <div class="step-body">Register OmniaGuard as the first live tenant. Configure ingestion for the OmniaGuard web application — this validates the full pipeline end-to-end.</div>
+      <div class="cmd-block">
+        <div class="cmd-header"><span class="cmd-lang">PYTHON — TENANT ONBOARDING SCRIPT</span><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+        <div class="cmd-body"><span class="cm"># vigilax/scripts/onboard_tenant.py</span>
+<span class="kw">from</span> vigilax.tenant <span class="kw">import</span> TenantOnboarding
+
+onboard = TenantOnboarding()
+
+tenant = onboard.create(
+    slug=<span class="str">"omniaguard"</span>,
+    name=<span class="str">"OmniaGuard (Pilot)"</span>,
+    plan=<span class="str">"enterprise"</span>,
+    rights_tier=<span class="str">"elevated"</span>,
+    contact_email=<span class="str">"franciscoderek7@gmail.com"</span>
+)
+
+<span class="cm"># Generate JWT for tenant dashboard access</span>
+jwt = onboard.issue_jwt(tenant.id)
+
+<span class="cm"># Configure perception layer — web app events</span>
+onboard.configure_ingestion(
+    tenant_id=tenant.id,
+    source_type=<span class="str">"web_application"</span>,
+    endpoint=<span class="str">"https://omniaguard.com"</span>,
+    events=[<span class="str">"access_log"</span>, <span class="str">"form_submit"</span>, <span class="str">"api_call"</span>]
+)
+
+<span class="kw">print</span>(f<span class="str">"<span class="ok">✓ Tenant created: {tenant.id}"</span>)
+<span class="kw">print</span>(f<span class="str">"<span class="ok">✓ Dashboard JWT issued (valid 24h)"</span>)
+<span class="kw">print</span>(f<span class="str">"<span class="ok">✓ Ingestion configured for omniaguard.com"</span>)</span></div>
+      </div>
+      <ul class="checklist" id="cl-9">
+        <li onclick="toggle(this)"><input type="checkbox"><span>OmniaGuard tenant row created in Hub (plan=enterprise, rights_tier=elevated)</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Tenant JWT issued and tested against Loop-A RLS</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>Web application ingestion configured</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>First test event ingested → visible in Loop-A security_events</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span>HERALD alert routed to franciscoderek7@gmail.com</span></li>
+      </ul>
+    </div>
+
+    <!-- STEP 10 -->
+    <div class="step-card" id="step-10">
+      <div class="step-header">
+        <div class="step-num-badge">10</div>
+        <div class="step-info">
+          <div class="step-category">Validation &bull; 2 hours</div>
+          <div class="step-title">Go-Live Validation &amp; Phase 1 Sign-Off</div>
+          <div class="step-eta">ETA: Day 7–10</div>
+        </div>
+      </div>
+      <div class="step-body">Run the full end-to-end validation checklist. All items must pass before declaring Phase 1 complete and beginning Phase 2 (PrimeDox integration).</div>
+      <ul class="checklist" id="cl-10">
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Pipeline E2E:</strong> Send test event → ORACLE classifies → specialist analyzes → ARBITER reviews → HERALD alerts → evidence written to Loop-B</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Rights Gate:</strong> Attempt a disproportionate action via API → ARBITER BLOCKS it → blocked action appears in audit log</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Evidence Sealing:</strong> Submit test document to VAULT → SHA-256 hash + timestamp generated → record appears in Loop-B → attempt to update evidence_hash → trigger rejects it</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Tenant Isolation:</strong> Create second test tenant → confirm Tenant A cannot see Tenant B events in Loop-A</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>CCTS Filing:</strong> Trigger Telecom Abuse scenario → auto-generated CCTS complaint text reviewed and approved</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Performance:</strong> Haiku classifier under 100ms for 10 consecutive test events</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Francisco v. Kudos:</strong> Seal the actual call recording and CIBC debit record — VAULT produces admissible evidence record</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Dashboard Live:</strong> vigilax.html shows real Loop-A events via Supabase Realtime subscription</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Commit and Push:</strong> All Phase 1 code committed to claude/kudos-litigation-tracker-LBTEe branch and pushed</span></li>
+        <li onclick="toggle(this)"><input type="checkbox"><span><strong>Phase 1 Sign-Off:</strong> Derek Francisco reviews and approves pilot deployment</span></li>
+      </ul>
+      <div class="callout success">
+        <div class="callout-icon">&#x1F389;</div>
+        <div class="callout-body"><strong>Phase 1 Complete.</strong> VIGILAX is live on OmniaGuard. Begin Phase 2: PrimeDox AI integration at zprimedoxaihq.com. Target: Month 2.</div>
+      </div>
+    </div>
+
+  </main>
+</div><!-- /layout -->
+
+<footer>
+  <div class="container">
+    <p>VIGILAX Deployment Runbook &mdash; OmniaGuard &copy; 2026 &mdash; <a href="vigilax.html">Architecture</a> &bull; <a href="vigilax-pricing.html">Pricing</a> &bull; <a href="vigilax-investor.html">Investors</a></p>
+  </div>
+</footer>
+
+<script>
+const STEP_COUNT = 10;
+let completed = JSON.parse(localStorage.getItem('vigilax-deploy-steps') || '{}');
+
+function toggle(li) {
+  li.classList.toggle('checked');
+  const cb = li.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  saveProgress();
+}
+
+function saveProgress() {
+  const total = document.querySelectorAll('.checklist li').length;
+  const done = document.querySelectorAll('.checklist li.checked').length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total + ' items complete (' + pct + '%)';
+  // Mark step cards as complete if all checklist items checked
+  for(let i = 1; i <= STEP_COUNT; i++) {
+    const items = document.querySelectorAll(`#cl-${i} li`);
+    const allDone = items.length > 0 && [...items].every(x => x.classList.contains('checked'));
+    document.getElementById('step-' + i).classList.toggle('completed', allDone);
+    const sn = document.getElementById('sn-' + i);
+    if(sn) sn.classList.toggle('done', allDone);
+  }
+}
+
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progress-bar').style.width = (h > 0 ? s/h*100 : 0) + '%';
+});
+
+function copyCmd(btn) {
+  const body = btn.closest('.cmd-block').querySelector('.cmd-body');
+  navigator.clipboard.writeText(body.innerText).then(()=>{
+    btn.textContent = 'Copied!';
+    setTimeout(()=>{ btn.textContent = 'Copy'; }, 1400);
+  });
+}
+
+saveProgress();
+</script>
+</body>
+</html>

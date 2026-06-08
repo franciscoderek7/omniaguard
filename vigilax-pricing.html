@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VIGILAX Pricing — OmniaGuard AI Security Engine</title>
+<link rel="canonical" href="https://omniaguard.com/vigilax-pricing.html">
+<meta name="description" content="VIGILAX pricing: Basic $99/mo, Professional $499/mo, Enterprise $2,499/mo. AI security engine with constitutional rights protection. 20% annual discount.">
+<script src="https://js.stripe.com/v3/"></script>
+<script>var stripePublicKey = "pk_live_51TG0cIASsTLqnu8VNnDoJjPYgVz73h2lpqhcS1E9bGLGHYl8t6NAvJdri1zk2radt3jb5G0DYuuCMXtNvA81UNeg00RvGs96kz";</script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --bg:#0a0a14;--bg2:#0d0d1a;--bg3:#1a1a2e;
+  --cyan:#00d4ff;--gold:#ffd700;--white:#fff;
+  --gray:#8a8a9a;--gray2:#2a2a3e;
+  --red:#ff3b3b;--orange:#ff8c00;--green:#00c853;
+  --purple:#9b59b6;
+  --vigilax-green:#2E7D32;--vigilax-green-light:#4CAF50;
+  --border:rgba(0,212,255,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--vigilax-green),var(--gold));z-index:9999;}
+nav{position:sticky;top:0;z-index:1000;background:rgba(10,10,20,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-size:18px;font-weight:800;}
+.nav-badge{font-size:9px;font-weight:900;letter-spacing:1.5px;background:var(--vigilax-green);color:#fff;padding:2px 7px;border-radius:4px;}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{background:var(--vigilax-green)!important;color:#fff!important;font-weight:700!important;padding:9px 20px;border-radius:6px;}
+.nav-mobile-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:6px;}
+#mobile-overlay{display:none;position:fixed;top:0;padding-top:64px;left:0;width:100%;height:100%;background:rgba(10,10,20,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;padding:80px 24px 24px;gap:0;overflow-y:auto;}
+#mobile-overlay.open{display:flex;}
+#mobile-overlay a{color:var(--white);text-decoration:none;font-size:18px;font-weight:600;padding:18px 0;border-bottom:1px solid var(--gray2);display:block;}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+/* HERO */
+.page-hero{padding:100px 0 60px;text-align:center;}
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(46,125,50,0.12);border:1px solid rgba(46,125,50,0.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#4CAF50;margin-bottom:20px;}
+.page-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;margin-bottom:16px;line-height:1.1;}
+.page-title .g{background:linear-gradient(135deg,var(--vigilax-green-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:1.05rem;color:var(--gray);max-width:560px;margin:0 auto 32px;}
+.toggle-group{display:inline-flex;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:4px;}
+.toggle-btn{padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--gray);transition:all .2s;}
+.toggle-btn.active{background:var(--vigilax-green);color:#fff;}
+.discount-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--gold);margin-left:10px;}
+
+/* PRICING CARDS */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:40px 0;}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;transition:all .3s;}
+.price-card.featured{border:2px solid var(--vigilax-green);background:rgba(46,125,50,0.06);transform:translateY(-8px);}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--vigilax-green);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:100px;}
+.price-card:hover{border-color:var(--vigilax-green-light);}
+.price-tier{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
+.price-tier.t-basic{color:var(--cyan);}
+.price-tier.t-pro{color:var(--vigilax-green-light);}
+.price-tier.t-ent{color:var(--gold);}
+.price-name{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+.price-tagline{font-size:13px;color:var(--gray);margin-bottom:24px;min-height:36px;}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;}
+.price-amount .num{font-size:3rem;font-weight:900;line-height:1;}
+.price-amount .cur{font-size:1.2rem;font-weight:700;color:var(--gray);align-self:flex-start;padding-top:6px;}
+.price-amount .period{font-size:13px;color:var(--gray);}
+.price-annual{font-size:12px;color:var(--gold);margin-bottom:24px;min-height:18px;}
+.price-cta{display:block;width:100%;padding:13px;border-radius:8px;font-size:14px;font-weight:700;text-align:center;cursor:pointer;border:none;transition:all .2s;text-decoration:none;margin-bottom:28px;}
+.cta-basic{background:transparent;border:1px solid var(--cyan);color:var(--cyan);}
+.cta-basic:hover{background:rgba(0,212,255,0.1);}
+.cta-pro{background:var(--vigilax-green);color:#fff;box-shadow:0 4px 20px rgba(46,125,50,0.35);}
+.cta-pro:hover{background:var(--vigilax-green-light);}
+.cta-ent{background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;}
+.cta-ent:hover{opacity:.9;}
+.price-divider{border:none;border-top:1px solid var(--gray2);margin-bottom:20px;}
+.price-feature{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);margin-bottom:10px;line-height:1.5;}
+.price-feature .check{color:var(--vigilax-green-light);flex-shrink:0;font-weight:700;}
+.price-feature .cross{color:var(--gray2);flex-shrink:0;}
+.price-feature .bold{color:var(--white);font-weight:600;}
+
+/* COMPARISON TABLE */
+.compare-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:32px;}
+.compare-table th{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border);background:var(--bg3);}
+.compare-table th:not(:first-child){text-align:center;}
+.compare-table td{padding:14px 16px;border-bottom:1px solid var(--gray2);vertical-align:middle;}
+.compare-table td:not(:first-child){text-align:center;}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table .row-group{background:rgba(46,125,50,0.04);font-weight:700;color:var(--white);font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.tick-yes{color:var(--vigilax-green-light);font-size:1.1rem;}
+.tick-no{color:var(--gray2);font-size:1.1rem;}
+.tick-partial{color:var(--orange);font-size:0.85rem;}
+
+/* FAQ */
+.faq-list{margin-top:24px;}
+.faq-item{border-bottom:1px solid var(--gray2);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:16px 0;cursor:pointer;font-weight:600;font-size:14px;}
+.faq-q:hover{color:var(--vigilax-green-light);}
+.faq-a{font-size:13px;color:var(--gray);line-height:1.7;padding:0 0 16px 0;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;color:var(--gray);font-size:18px;}
+
+/* GUARANTEE BAND */
+.guarantee-band{background:rgba(46,125,50,0.08);border:1px solid rgba(46,125,50,0.25);border-radius:14px;padding:36px;text-align:center;margin:40px 0;}
+.guarantee-band h3{font-size:1.4rem;font-weight:800;color:#4CAF50;margin-bottom:8px;}
+.guarantee-band p{font-size:14px;color:var(--gray);max-width:560px;margin:0 auto 16px;}
+.guarantee-items{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;}
+.guarantee-item{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:6px;}
+.guarantee-item::before{content:'✓';color:#4CAF50;font-weight:700;}
+
+footer{border-top:1px solid var(--gray2);padding:40px 0;text-align:center;}
+footer p{font-size:13px;color:var(--gray);}
+footer a{color:var(--cyan);text-decoration:none;}
+
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr;}
+  .price-card.featured{transform:none;}
+  .nav-links{display:none;}
+  .nav-mobile-toggle{display:flex;}
+}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 34 34" fill="none">
+        <circle cx="17" cy="17" r="16" stroke="#00d4ff" stroke-width="1.5" opacity=".4"/>
+        <polygon points="17,6 28,24 6,24" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+        <circle cx="17" cy="17" r="3" fill="#00d4ff"/>
+      </svg>
+      OmniaGuard <span class="nav-badge">VIGILAX</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="vigilax.html">Architecture</a></li>
+      <li><a href="vigilax-pricing.html" class="active">Pricing</a></li>
+      <li><a href="agents.html">Agents</a></li>
+      <li><a href="vigilax-investor.html">Investors</a></li>
+      <li><a href="kudos-litigation-tracker.html" style="color:var(--red);">Litigation LIVE</a></li>
+    </ul>
+    <a href="#pricing-grid" class="nav-cta">Start Free Trial</a>
+    <button class="nav-mobile-toggle" onclick="document.getElementById('mobile-overlay').classList.toggle('open')">&#9776;</button>
+  </div>
+</nav>
+<div id="mobile-overlay">
+  <a href="vigilax.html">Architecture</a>
+  <a href="vigilax-pricing.html">Pricing</a>
+  <a href="agents.html">Agents</a>
+  <a href="vigilax-investor.html">Investors</a>
+  <a href="kudos-litigation-tracker.html" style="color:var(--red);">Litigation LIVE</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-eyebrow">Transparent Pricing &bull; No Lock-In</div>
+    <h1 class="page-title">VIGILAX<br><span class="g">Protect Your Business</span></h1>
+    <p class="page-sub">AI security with constitutional rights protection built in. From single-company monitoring to 45+ company federation. Annual contracts at 20% off.</p>
+    <div>
+      <div class="toggle-group">
+        <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Monthly</button>
+        <button class="toggle-btn" id="btn-annual" onclick="setBilling('annual')">Annual</button>
+      </div>
+      <span class="discount-badge">&#x2193; Save 20% annually</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING CARDS -->
+<section style="padding-bottom:80px;">
+  <div class="container" id="pricing-grid">
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="price-card">
+        <div class="price-tier t-basic">VIGILAX BASIC</div>
+        <div class="price-name">Single Company</div>
+        <div class="price-tagline">Network monitoring, real-time alerts, and foundational threat detection for one organization.</div>
+        <div class="price-amount">
+          <span class="cur">$</span>
+          <span class="num" id="basic-num">99</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-annual" id="basic-annual">&nbsp;</div>
+        <a href="#" class="price-cta cta-basic" onclick="startCheckout('basic')">Start Free Trial &rarr;</a>
+        <hr class="price-divider">
+        <div class="price-feature"><span class="check">&#10003;</span><span>1 company deployment</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Real-time network traffic monitoring</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>SENTINEL + ORACLE agents active</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Email + dashboard alerts (HERALD)</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Basic threat classification pipeline</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Evidence sealing (VAULT) — 90 days</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>PIPEDA compliance baseline</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">Automated response &amp; countermeasures</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">Constitutional Rights Gate (ARBITER)</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">Multi-site federation</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">REST API access</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">Custom agent configuration</span></div>
+      </div>
+
+      <!-- PROFESSIONAL — FEATURED -->
+      <div class="price-card featured">
+        <div class="price-tier t-pro">VIGILAX PROFESSIONAL</div>
+        <div class="price-name">Multi-Site</div>
+        <div class="price-tagline">Full 8-agent mesh, automated response, constitutional rights layer, and API access for growing organizations.</div>
+        <div class="price-amount">
+          <span class="cur">$</span>
+          <span class="num" id="pro-num">499</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-annual" id="pro-annual">&nbsp;</div>
+        <a href="#" class="price-cta cta-pro" onclick="startCheckout('professional')">Get Professional &rarr;</a>
+        <hr class="price-divider">
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">Up to 5 company sites</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Full 8-agent VIGILAX mesh</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">Automated countermeasures</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">Constitutional Rights Gate (ARBITER)</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Charter s.7/s.15 + PIPEDA + PHIPA</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Behavioral biometrics &amp; endpoint telemetry</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">REST API access</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>SIEM integration (Splunk, QRadar, Sentinel)</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Cloud connectors (AWS + Azure + GCP)</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Evidence archive — 2 years</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Legal-grade incident reports (PDF)</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">45+ company federation</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">Custom agent prompts &amp; workflows</span></div>
+        <div class="price-feature"><span class="cross">&#10007;</span><span style="color:var(--gray2);">White-glove onboarding</span></div>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="price-card">
+        <div class="price-tier t-ent">VIGILAX ENTERPRISE</div>
+        <div class="price-name">Full Federation</div>
+        <div class="price-tagline">Complete 45+ company deployment with custom agents, white-glove onboarding, and direct access to the OmniaGuard team.</div>
+        <div class="price-amount">
+          <span class="cur">$</span>
+          <span class="num" id="ent-num">2,499</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="price-annual" id="ent-annual">&nbsp;</div>
+        <a href="contact.html" class="price-cta cta-ent">Contact Sales &rarr;</a>
+        <hr class="price-divider">
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">Unlimited companies — 45+ federation</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Everything in Professional</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">Custom agent prompts &amp; workflows</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span><span class="bold">White-glove onboarding</span></span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Cross-company threat intelligence graph</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Federated learning — network-wide pattern recognition</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>PHANTOM red team on demand</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>PrimeDox AI document intelligence</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>CCLDR legal rights layer integration</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Telecom Abuse Detection Module (CCTS/CRTC auto-filing)</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Evidence archive — indefinite legal hold</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>SLA: 99.9% uptime, 1h response time</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Dedicated Supabase Hub + Loop-A + Loop-B</span></div>
+        <div class="price-feature"><span class="check">&#10003;</span><span>Provisional patent support documentation</span></div>
+      </div>
+
+    </div><!-- /pricing-grid -->
+
+    <!-- GUARANTEE BAND -->
+    <div class="guarantee-band">
+      <h3>OmniaGuard Guarantee</h3>
+      <p>Every VIGILAX deployment comes with our Constitutional Rights Guarantee — no enforcement action executes without ARBITER clearance. If we ever fail to block a constitutionally-violating action, your next month is free.</p>
+      <div class="guarantee-items">
+        <div class="guarantee-item">30-day free trial</div>
+        <div class="guarantee-item">Cancel any time</div>
+        <div class="guarantee-item">No data lock-in</div>
+        <div class="guarantee-item">Annual 20% discount</div>
+        <div class="guarantee-item">Evidence portability</div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:4px;">Full Feature Comparison</h2>
+    <p style="font-size:14px;color:var(--gray);margin-bottom:0;">Every feature, every tier. No hidden asterisks.</p>
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:40%;">Feature</th>
+            <th style="color:var(--cyan);">Basic<br><small style="color:var(--gray);font-weight:400;">$99/mo</small></th>
+            <th style="color:#4CAF50;">Professional<br><small style="color:var(--gray);font-weight:400;">$499/mo</small></th>
+            <th style="color:var(--gold);">Enterprise<br><small style="color:var(--gray);font-weight:400;">$2,499/mo</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-group"><td colspan="4">Agent Mesh</td></tr>
+          <tr><td>SENTINEL (perimeter defense)</td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>ORACLE (predictive intel)</td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>HERALD (alerting)</td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>VAULT (evidence sealing)</td><td><span class="tick-partial">90 days</span></td><td><span class="tick-partial">2 years</span></td><td><span class="tick-yes">Indefinite</span></td></tr>
+          <tr><td>CIPHER (crypto analysis)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>NEXUS (network topology)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>ARBITER (rights gate)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>PHANTOM (red team)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">On demand</span></td></tr>
+
+          <tr class="row-group"><td colspan="4">Constitutional Rights Layer</td></tr>
+          <tr><td>PIPEDA compliance baseline</td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>Charter s.7 + s.15 review</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>PHIPA health data guard</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>s.184(2)(a) evidence chain</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>Telecom Abuse Detection (CCTS/CRTC)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+
+          <tr class="row-group"><td colspan="4">Deployment</td></tr>
+          <tr><td>Companies / sites</td><td>1</td><td>Up to 5</td><td>Unlimited (45+)</td></tr>
+          <tr><td>Cloud connectors (AWS/Azure/GCP)</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>SIEM integration</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>REST API access</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>Custom agent workflows</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>White-glove onboarding</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>SLA uptime guarantee</td><td>99%</td><td>99.5%</td><td>99.9%</td></tr>
+
+          <tr class="row-group"><td colspan="4">Support</td></tr>
+          <tr><td>Response time</td><td>48h</td><td>8h</td><td>1h</td></tr>
+          <tr><td>Dedicated account manager</td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-no">&#10007;</span></td><td><span class="tick-yes">&#10003;</span></td></tr>
+          <tr><td>Annual discount</td><td>20%</td><td>20%</td><td>20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <h2 style="font-size:1.5rem;font-weight:800;margin:60px 0 4px;">Frequently Asked Questions</h2>
+    <p style="font-size:14px;color:var(--gray);margin-bottom:8px;">Everything you need to know before deploying VIGILAX.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What makes VIGILAX different from other AI security products?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">VIGILAX is the only AI security system with a Constitutional Rights Gate built into the enforcement layer. Every proposed action — account lock, IP block, data freeze, legal filing — is reviewed by ARBITER, a specialized agent that applies Canadian Charter rights, PIPEDA, and PHIPA before any action executes. No other product does this.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Can I use VIGILAX for legal proceedings and regulatory complaints?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes. The VAULT agent produces court-admissible evidence records with SHA-256 hash + RFC 3161 trusted timestamp + chain-of-custody log. VIGILAX Professional and Enterprise can generate formatted CCTS, CRTC, FCAC, and Ontario Small Claims filings automatically from sealed evidence records.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          How does multi-tenant isolation work?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Each tenant gets row-level security isolation in Supabase — your data is cryptographically separated from other tenants at the database layer. Your agents operate with your tenant context only. Cross-company threat intelligence is shared in anonymized, aggregated form only — never raw event data.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What happens to my data if I cancel?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Evidence records under active legal proceedings are retained per your jurisdiction's requirements — they are never deleted unilaterally. All other data is exported to you in JSON format within 72 hours of cancellation, then permanently deleted from our systems within 30 days. You own your data.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Is VIGILAX patented?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">VIGILAX has five provisional patent claims pending, including the Constitutional Rights Gate (VIGILAX-IP-001), participant-recorded evidence sealing (VIGILAX-IP-002), and the three-tier LLM routing architecture (VIGILAX-IP-003). Enterprise customers receive access to the provisional patent documentation as part of white-glove onboarding.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What is the annual contract discount?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">All three tiers receive a 20% discount when billed annually. Basic: $949/year (vs $1,188). Professional: $4,790/year (vs $5,988). Enterprise: $23,990/year (vs $29,988). Annual contracts require a signed agreement and include an SLA upgrade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>VIGILAX &mdash; OmniaGuard &copy; 2026 &mdash; <a href="vigilax.html">Architecture</a> &bull; <a href="vigilax-investor.html">Investors</a> &bull; <a href="index.html">OmniaGuard Home</a></p>
+    <p style="margin-top:8px;font-size:11px;color:var(--gray2);">VIGILAX is a proprietary AI security engine. Claude API is used as the inference engine. This product is not affiliated with or endorsed by Anthropic.</p>
+  </div>
+</footer>
+
+<script>
+var stripe = Stripe(stripePublicKey);
+
+const PRICES = {
+  monthly: { basic: 99, pro: 499, ent: '2,499' },
+  annual:  { basic: 79, pro: 399, ent: '1,999' }
+};
+
+function setBilling(mode) {
+  document.getElementById('btn-monthly').classList.toggle('active', mode==='monthly');
+  document.getElementById('btn-annual').classList.toggle('active', mode==='annual');
+  const p = PRICES[mode];
+  document.getElementById('basic-num').textContent = p.basic;
+  document.getElementById('pro-num').textContent = p.pro;
+  document.getElementById('ent-num').textContent = p.ent;
+  if(mode === 'annual') {
+    document.getElementById('basic-annual').innerHTML = '&#x1F4B0; Save $240/year';
+    document.getElementById('pro-annual').innerHTML = '&#x1F4B0; Save $1,200/year';
+    document.getElementById('ent-annual').innerHTML = '&#x1F4B0; Save $6,000/year';
+  } else {
+    document.getElementById('basic-annual').innerHTML = '&nbsp;';
+    document.getElementById('pro-annual').innerHTML = '&nbsp;';
+    document.getElementById('ent-annual').innerHTML = '&nbsp;';
+  }
+}
+
+function startCheckout(tier) {
+  // Stripe Checkout integration point
+  // Replace PRICE_ID values with live Stripe price IDs
+  const PRICE_IDS = {
+    basic:        'price_vigilax_basic_monthly',
+    professional: 'price_vigilax_pro_monthly',
+  };
+  const priceId = PRICE_IDS[tier];
+  if (!priceId) return;
+  stripe.redirectToCheckout({
+    lineItems: [{ price: priceId, quantity: 1 }],
+    mode: 'subscription',
+    successUrl: window.location.origin + '/payment-success.html',
+    cancelUrl: window.location.origin + '/vigilax-pricing.html',
+  }).then(r => { if(r.error) alert(r.error.message); });
+}
+
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progress-bar').style.width = (h > 0 ? s/h*100 : 0) + '%';
+});
+</script>
+</body>
+</html>
