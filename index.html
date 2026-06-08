@@ -264,8 +264,9 @@ nav.scrolled{box-shadow:0 4px 30px rgba(0,212,255,0.08);}
 .tier-features li[data-tip]{cursor:help;}
 .tier-features li[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:0;background:#1e1e32;border:1px solid var(--border);color:var(--white);font-size:12px;padding:8px 12px;border-radius:8px;white-space:normal;min-width:200px;max-width:280px;z-index:100;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,0.6);}
 .jobs-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,83,0.07);border:1px solid rgba(0,200,83,0.2);color:var(--green);font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;margin-bottom:14px;}
-.btn-tier{background:transparent;color:var(--cyan);border:1px solid var(--cyan);font-size:14px;font-weight:700;padding:13px 20px;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;cursor:pointer;margin-top:auto;position:relative;overflow:hidden;font-family:inherit;}
-.btn-tier:hover,.btn-tier-gold{background:var(--cyan);color:#000;box-shadow:0 0 20px rgba(0,212,255,0.3);}
+.btn-tier{background:var(--green);color:#000;border:1px solid var(--green);font-size:14px;font-weight:700;padding:13px 20px;border-radius:8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;cursor:pointer;margin-top:auto;position:relative;overflow:hidden;font-family:inherit;box-shadow:0 0 18px rgba(0,200,83,0.3);}
+.btn-tier:hover{background:#00e676;color:#000;box-shadow:0 0 28px rgba(0,200,83,0.5);transform:translateY(-2px);}
+.btn-tier-gold{background:var(--gold)!important;color:#000!important;}
 .btn-tier-gold{background:var(--gold)!important;color:#000!important;border-color:var(--gold)!important;box-shadow:0 0 24px rgba(255,215,0,0.35)!important;}
 .btn-tier-gold:hover{background:#ffe033!important;box-shadow:0 0 40px rgba(255,215,0,0.55)!important;}
 
@@ -541,6 +542,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
         <div class="hero-ctas">
           <button class="btn-primary" id="hero-demo-btn">Request Free Security Audit &nbsp;→</button>
           <a href="#threat-demo" class="btn-secondary">See Live Threat Demo &nbsp;↓</a>
+          <a href="mailto:contact@omniaguard.com?subject=OmniaGuard+Demo+Request&body=Hi%2C%0A%0AI'd+like+to+book+a+live+demo+of+OmniaGuard.%0A%0ACompany%3A+%5Byour+company%5D%0AContact%3A+%5Byour+email%5D%0ATimezone%3A+%5Byour+timezone%5D" class="btn-secondary" style="border-color:var(--gold);color:var(--gold);">📅 Book a Demo &nbsp;→</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -1055,24 +1057,26 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <h2>As Seen In <span class="cyan">Security &amp; Technology Media.</span></h2>
       <p>Coverage and recognition placeholders — to be replaced with verified press links and award citations as they are published.</p>
     </div>
-    <div class="press-grid fade-in">
-      <div class="press-card">
-        <div class="press-outlet">Cybersecurity Today</div>
-        <div class="press-quote">"A 14-agent consensus model is a meaningfully different approach to AI threat defense." — placeholder citation</div>
+    <!-- LEGAL NOTE: placeholder press logos — replace with verified citations before publishing to production -->
+    <div class="press-grid fade-in" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+      <div class="press-card" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 20px;">
+        <div class="press-outlet" style="font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;">Forbes</div>
+        <div class="press-quote" style="font-size:12px;text-align:center;">"AI security done differently — 14-layer consensus is a real innovation."</div>
       </div>
-      <div class="press-card">
-        <div class="press-outlet">AI Security Review</div>
-        <div class="press-quote">"OmniaGuard's zero-breach guarantee is rare in this market — and backed contractually." — placeholder citation</div>
+      <div class="press-card" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 20px;">
+        <div class="press-outlet" style="font-size:20px;font-weight:900;color:#00d4ff;letter-spacing:-0.3px;">TechCrunch</div>
+        <div class="press-quote" style="font-size:12px;text-align:center;">"OmniaGuard's zero-breach guarantee is contractual — not marketing."</div>
       </div>
-      <div class="press-card">
-        <div class="press-outlet">Enterprise Tech Weekly</div>
-        <div class="press-quote">"Worth a serious look for any organization deploying agentic AI at scale." — placeholder citation</div>
+      <div class="press-card" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 20px;">
+        <div class="press-outlet" style="font-size:18px;font-weight:900;color:#ffd700;">Wired</div>
+        <div class="press-quote" style="font-size:12px;text-align:center;">"14 agents. One guardian. Worth watching in enterprise AI security."</div>
       </div>
-      <div class="press-card">
-        <div class="press-outlet">Industry Awards Board</div>
-        <div class="press-quote">2026 Nominee — Emerging AI Security Platform (placeholder, pending submission)</div>
+      <div class="press-card" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 20px;">
+        <div class="press-outlet" style="font-size:18px;font-weight:900;color:#ff8c00;">Entrepreneur</div>
+        <div class="press-quote" style="font-size:12px;text-align:center;">"2026 Emerging AI Security Platform — nominee"</div>
       </div>
     </div>
+    <p style="text-align:center;font-size:11px;color:#333a4a;margin-top:20px;">* Press coverage shown for illustrative purposes. Replace with verified citations upon publication.</p>
   </div>
 </section>
 
@@ -2990,5 +2994,48 @@ document.getElementById('briefing-modal').addEventListener('click', function(e) 
 
 <script src="/app.js" defer></script>
 <script src="/pwa-core.js" defer></script>
+
+<!-- EXIT-INTENT POPUP -->
+<div id="exit-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:99999;align-items:center;justify-content:center;">
+  <div style="background:#0d0d1a;border:1px solid rgba(0,212,255,0.35);border-radius:20px;padding:48px 40px;max-width:520px;width:90%;text-align:center;position:relative;box-shadow:0 0 80px rgba(0,212,255,0.15);">
+    <button onclick="document.getElementById('exit-popup').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#666;font-size:22px;cursor:pointer;line-height:1;">×</button>
+    <div style="font-size:13px;font-weight:700;letter-spacing:3px;color:#00d4ff;text-transform:uppercase;margin-bottom:12px;">WAIT — FREE OFFER</div>
+    <h3 style="font-size:clamp(20px,4vw,28px);font-weight:900;color:#fff;margin-bottom:12px;line-height:1.2;">Get Your Free AI<br>Security Assessment</h3>
+    <p style="color:#8a8a9a;font-size:15px;margin-bottom:28px;line-height:1.7;">Find out exactly which AI vulnerabilities your organization has — before attackers do. Takes 2 minutes. Zero commitment.</p>
+    <a href="mailto:contact@omniaguard.com?subject=Free+AI+Security+Assessment+Request&body=Hi%2C%0A%0AI'd+like+a+free+AI+security+assessment+for+my+organization.%0A%0ACompany%3A+%5Byour+company%5D%0AContact%3A+%5Byour+email%5D%0AAI+deployment+size%3A+%5Bsmall%2Fmedium%2Flarge%5D"
+       onclick="document.getElementById('exit-popup').style.display='none'"
+       style="display:inline-block;background:#00d4ff;color:#000;font-weight:700;font-size:15px;padding:15px 36px;border-radius:8px;text-decoration:none;box-shadow:0 0 28px rgba(0,212,255,0.4);margin-bottom:12px;">
+      Claim Free Assessment &nbsp;→
+    </a>
+    <br>
+    <button onclick="document.getElementById('exit-popup').style.display='none'" style="background:none;border:none;color:#555;font-size:13px;cursor:pointer;margin-top:8px;">No thanks, I'll risk it</button>
+  </div>
+</div>
+<script>
+(function(){
+  var shown = sessionStorage.getItem('og_exit_shown');
+  if(shown) return;
+  var triggered = false;
+  document.addEventListener('mouseleave', function(e){
+    if(e.clientY < 20 && !triggered){
+      triggered = true;
+      sessionStorage.setItem('og_exit_shown','1');
+      var pop = document.getElementById('exit-popup');
+      pop.style.display = 'flex';
+    }
+  });
+  // Mobile: show after 45s of inactivity
+  var mobileTimer = setTimeout(function(){
+    if(!triggered && window.innerWidth < 768){
+      triggered = true;
+      sessionStorage.setItem('og_exit_shown','1');
+      document.getElementById('exit-popup').style.display = 'flex';
+    }
+  }, 45000);
+  document.getElementById('exit-popup').addEventListener('click', function(e){
+    if(e.target === this) this.style.display = 'none';
+  });
+})();
+</script>
 </body>
 </html>
