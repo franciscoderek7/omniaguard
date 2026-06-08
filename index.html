@@ -486,6 +486,18 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 </head>
 <body>
 
+<!-- URGENCY TOP BAR -->
+<div id="og-topbar" style="background:linear-gradient(90deg,#080818,#0a0a22,#080818);border-bottom:1px solid rgba(0,200,83,0.25);padding:9px 16px;text-align:center;font-size:13px;color:#8a9ab0;position:relative;z-index:1001;">
+  <span style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+    <span style="width:8px;height:8px;border-radius:50%;background:#00c853;display:inline-block;box-shadow:0 0 8px #00c853;animation:pulse 2s infinite;flex-shrink:0;"></span>
+    <strong style="color:#fff;">OmniaGuard is actively protecting organizations right now.</strong>
+    Deploy from <strong style="color:#00c853;">$499/mo CAD</strong> — activate in 4 hours.
+    <a href="pay.html" style="color:#00d4ff;font-weight:800;text-decoration:none;border:1px solid rgba(0,212,255,0.4);border-radius:6px;padding:3px 12px;transition:all .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='transparent'">Choose Your Tier →</a>
+    <a href="#" onclick="document.getElementById('og-topbar').style.display='none';return false;" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#4a5568;font-size:16px;text-decoration:none;line-height:1;">&times;</a>
+  </span>
+</div>
+<style>@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}</style>
+
 <!-- SCROLL PROGRESS BAR -->
 <div id="progress-bar"></div>
 
@@ -503,6 +515,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <li><a href="ecosystem.html">Ecosystem</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="threat-dashboard.html">Dashboard</a></li>
+      <li><a href="pay.html" style="color:#00c853;font-weight:800;">⚡ Pay Now</a></li>
       <li><a href="#pricing" class="nav-cta">Get Protected</a></li>
     </ul>
     <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
