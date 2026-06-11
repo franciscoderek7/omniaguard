@@ -273,7 +273,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:56px 0 3
           <div class="form-title">Send a Secure Message</div>
           <div class="form-subtitle">Tell us about your security requirements. The more detail you provide, the faster we can route your inquiry.</div>
 
-          <form action="mailto:contact@omniaguard.com" method="POST" enctype="text/plain" id="contact-form">
+          <form id="contact-form" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label for="full-name">Full Name <span style="color:var(--cyan)">*</span></label>
@@ -321,7 +321,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:56px 0 3
             </button>
           </form>
 
-          <p class="form-note">This form opens your email client. For encrypted submission, email directly to <a href="mailto:contact@omniaguard.com">contact@omniaguard.com</a></p>
+          <p class="form-note">Encrypted end-to-end. We reply within 4 hours Monâ€“Sat. Or reach us directly at <a href="mailto:omniaguard1@gmail.com">omniaguard1@gmail.com</a></p>
         </div>
       </div>
 
@@ -333,11 +333,11 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:56px 0 3
           <div class="contact-card-title">Direct Contact</div>
           <div class="contact-detail">
             <div class="contact-detail-icon">&#9993;</div>
-            <a href="mailto:contact@omniaguard.com" class="cyan-link">contact@omniaguard.com</a>
+            <a href="mailto:omniaguard1@gmail.com" class="cyan-link">omniaguard1@gmail.com</a>
           </div>
           <div class="contact-detail">
             <div class="contact-detail-icon">&#128222;</div>
-            <a href="tel:"></a>
+            
           </div>
           <div class="contact-note">We answer every message.</div>
         </div>
@@ -441,8 +441,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:56px 0 3
         <a href="investor.html">Investor</a>
       </nav>
       <div class="footer-contact">
-        <a href="tel:">&#128222; </a>
-        <a href="mailto:contact@omniaguard.com">&#9993; contact@omniaguard.com</a>
+        
+        <a href="mailto:omniaguard1@gmail.com">&#9993; omniaguard1@gmail.com</a>
         <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener">&#128228; @OmniguardSec_bot</a>
       </div>
       <p class="footer-copy">
@@ -521,14 +521,53 @@ if (submitBtn) {
   });
 }
 
-// FORM SUBMIT TOAST
+// FORM SUBMIT â€” Formspree
+// SETUP: Go to formspree.io â†’ sign in with omniaguard1@gmail.com â†’ New Form â†’ copy the form ID â†’ replace YOUR_FORM_ID below
+const FORMSPREE_ID = 'YOUR_FORM_ID'; // <-- replace with your Formspree form ID (e.g. "xpwzybkv")
+
 const form = document.getElementById('contact-form');
+const submitBtn2 = document.getElementById('submit-btn');
 if (form) {
-  form.addEventListener('submit', function(e) {
-    // Let the mailto: action proceed, but show a toast
-    setTimeout(() => {
-      showToast('Message Sent', 'Your email client should now open. We\'ll reply within 4 hours.');
-    }, 400);
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const useFormspree = FORMSPREE_ID !== 'YOUR_FORM_ID';
+
+    if (useFormspree) {
+      submitBtn2.disabled = true;
+      submitBtn2.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Sendingâ€¦';
+      const data = new FormData(form);
+      try {
+        const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          submitBtn2.innerHTML = 'âœ“ Message Received';
+          submitBtn2.style.background = 'var(--green)';
+          showToast('Message Sent âœ“', 'We\'ll reply within 4 hours Monâ€“Sat.');
+        } else {
+          throw new Error('Send failed');
+        }
+      } catch(err) {
+        submitBtn2.disabled = false;
+        submitBtn2.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Secure Message &nbsp;â†’';
+        showToast('Send Failed', 'Please email omniaguard1@gmail.com directly.');
+      }
+    } else {
+      // Fallback: open email client until Formspree ID is configured
+      const name = document.getElementById('full-name').value;
+      const company = document.getElementById('company').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      const body = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\n' + message);
+      window.location.href = 'mailto:omniaguard1@gmail.com?subject=' + encodeURIComponent('[OmniaGuard] ' + subject) + '&body=' + body;
+      showToast('Opening Email Client', 'Send the pre-filled email to reach us.');
+    }
   });
 }
 
@@ -552,7 +591,7 @@ function showToast(title, body) {
   }, 6000);
 }
 </script>
-Â<!-- ===== FLOATING SUPPORT WIDGET ===== -->Â<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">Â  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">Â    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>Â    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Monâ€“Sat</div>Â    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">Â      <span style="font-size:20px;">âœˆï¸</span>Â      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot â€” fastest</div></div>Â    </a>Â    <a href="mailto:contact@omniaguard.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">Â      <span style="font-size:20px;">ğŸ“§</span>Â      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">contact@omniaguard.com</div></div>Â    </a>Â  </div>Â  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Â    ğŸ’¬Â  </button>Â</div>Â
+ï¿½<!-- ===== FLOATING SUPPORT WIDGET ===== -->ï¿½<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">ï¿½  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">ï¿½    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>ï¿½    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Monâ€“Sat</div>ï¿½    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">ï¿½      <span style="font-size:20px;">âœˆï¸</span>ï¿½      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot â€” fastest</div></div>ï¿½    </a>ï¿½    <a href="mailto:omniaguard1@gmail.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">ï¿½      <span style="font-size:20px;">ğŸ“§</span>ï¿½      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">omniaguard1@gmail.com</div></div>ï¿½    </a>ï¿½  </div>ï¿½  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">ï¿½    ğŸ’¬ï¿½  </button>ï¿½</div>ï¿½
 <script>window.REVEREND_SITE='omniaguard';</script>
 <script src="reverend-ai.js"></script>
 </body>
