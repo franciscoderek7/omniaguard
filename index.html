@@ -514,6 +514,8 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <li><a href="#faq">FAQ</a></li>
       <li><a href="ecosystem.html">Ecosystem</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="vault.html">🔐 Vault</a></li>
+      <li><a href="data-broker.html">🛡️ Privacy</a></li>
       <li><a href="threat-dashboard.html">Dashboard</a></li>
       <li><a href="pay.html" style="color:#00c853;font-weight:800;">⚡ Pay Now</a></li>
       <li><a href="#pricing" class="nav-cta">Get Protected</a></li>
@@ -529,7 +531,10 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
   <a href="#faq">FAQ</a>
   <a href="ecosystem.html">Ecosystem</a>
   <a href="contact.html">Contact</a>
+  <a href="vault.html">🔐 Encrypted Vault</a>
+  <a href="data-broker.html">🛡️ Privacy Shield</a>
   <a href="threat-dashboard.html">Dashboard</a>
+  <a href="install-guide.html">📲 Install App</a>
   <a href="#pricing" class="mobile-cta">Get Protected</a>
 </div>
 
@@ -613,6 +618,48 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
     </div>
   </div>
 </div>
+
+<!-- ===== GET THE APP ===== -->
+<section id="get-app" style="padding:56px 0;background:#0d1120;border-top:1px solid rgba(0,212,255,.1);border-bottom:1px solid rgba(0,212,255,.1);">
+  <div class="container" style="text-align:center;">
+    <div style="display:inline-block;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);color:#00d4ff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;">📲 Install OmniaGuard — All Platforms</div>
+    <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:10px;">Works on <span style="background:linear-gradient(135deg,#00d4ff,#7b2fbe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Every Device</span></h2>
+    <p style="color:#8892a4;font-size:15px;max-width:540px;margin:0 auto 32px;">Install OmniaGuard as a native app — offline mode, push alerts, biometric login, encrypted vault. No App Store required.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:28px;">
+      <button onclick="installAndroid()" id="btn-android" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#3ddc84,#1a9e54);color:#000;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;min-height:48px;">🤖 Install on Android</button>
+      <a href="install-guide.html#ios" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#555,#1a1a1a);color:#fff;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;text-decoration:none;min-height:48px;border:1px solid rgba(255,255,255,.15);">🍎 Install on iPhone / iPad</a>
+      <button onclick="installDesktop()" id="btn-desktop" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#0078d4,#005a9e);color:#fff;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;min-height:48px;">🪟 Install on Windows</button>
+      <a href="install-guide.html#mac" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#333,#111);color:#fff;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;text-decoration:none;min-height:48px;border:1px solid rgba(255,255,255,.15);">🍏 Install on macOS</a>
+      <a href="install-guide.html#linux" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e95420,#b03214);color:#fff;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;text-decoration:none;min-height:48px;">🐧 Install on Linux</a>
+      <a href="vault.html" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(0,212,255,.05));border:1px solid rgba(0,212,255,.35);color:#00d4ff;font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;text-decoration:none;min-height:48px;">🔐 Open Encrypted Vault</a>
+    </div>
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+      <span style="font-size:12px;color:#8892a4;">✓ AES-256 Encrypted</span>
+      <span style="font-size:12px;color:#8892a4;">✓ Offline Mode</span>
+      <span style="font-size:12px;color:#8892a4;">✓ Face ID / Fingerprint</span>
+      <span style="font-size:12px;color:#8892a4;">✓ Zero Cloud Storage</span>
+      <span style="font-size:12px;color:#8892a4;">✓ Push Alerts</span>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var deferred = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); deferred = e;
+    var ab = document.getElementById('btn-android');
+    var db = document.getElementById('btn-desktop');
+    if (ab) { ab.style.display = 'inline-flex'; }
+    if (db) { db.style.display = 'inline-flex'; }
+  });
+  window.installAndroid = function(){ if (deferred){ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }); } else { window.location.href='/install-guide.html'; } };
+  window.installDesktop = function(){ if (deferred){ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }); } else { window.location.href='/install-guide.html#desktop'; } };
+  /* Auto-show Android button on Android Chrome even before event fires */
+  var ua = navigator.userAgent;
+  if (/Android/.test(ua)) document.getElementById('btn-android').style.display='inline-flex';
+  if (/Windows/.test(ua) || /Linux/.test(ua) && !/Android/.test(ua)) document.getElementById('btn-desktop').style.display='inline-flex';
+})();
+</script>
 
 <!-- ===== STATS ===== -->
 <section id="stats">
@@ -1473,15 +1520,23 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
       <div class="footer-links">
         <a href="#threat-demo">Live Demo</a>
         <a href="#pricing">Pricing</a>
+        <a href="vault.html">🔐 Encrypted Vault</a>
+        <a href="data-broker.html">🛡️ Privacy Shield</a>
+        <a href="install-guide.html">📲 Install App</a>
         <a href="#faq">FAQ</a>
         <a href="#compliance">Compliance</a>
         <a href="#testimonials">Clients</a>
         <a href="#partnership">Contact</a>
         <a href="mailto:omniaguard1@gmail.com">✉️ omniaguard1@gmail.com</a>
-        <a href="mailto:omniaguard1@gmail.com">✉️ omniaguard1@gmail.com</a>
+      </div>
+      <!-- INVESTOR CTA -->
+      <div style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:12px;padding:20px 28px;text-align:center;max-width:600px;margin:8px auto 0;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#00d4ff;text-transform:uppercase;margin-bottom:8px;">💼 Investor Relations</div>
+        <div style="font-size:14px;color:#c8d0dc;margin-bottom:14px;">Advisory $50K · Strategic $250K · Sovereign $1M · Dynasty $5M+</div>
+        <a href="mailto:omniaguard1@gmail.com?subject=OmniaGuard%20Investment%20Inquiry&body=Hello%2C%0A%0AI%20am%20interested%20in%20investing%20in%20OmniaGuard.%0A%0AInvestment%20level%3A%20%5BAdvisory%20%2450K%20%2F%20Strategic%20%24250K%20%2F%20Sovereign%20%241M%20%2F%20Dynasty%20%245M%2B%5D%0A%0AOrganization%3A%20%5Byour%20firm%5D%0AContact%3A%20%5Byour%20email%5D" style="display:inline-block;background:linear-gradient(135deg,#00d4ff,#7b2fbe);color:#fff;font-weight:700;font-size:13px;padding:10px 24px;border-radius:8px;text-decoration:none;">Invest in OmniaGuard →</a>
       </div>
       <div class="footer-copy">
-        © 2026 Francisco Holdings Inc. &nbsp;|&nbsp; OmniaGuard&trade; is a registered trademark.
+        © 2026 &nbsp;|&nbsp; OmniaGuard&trade; — Enterprise AI Security
       </div>
       <div class="not-legal">
         Educational information only. References to legal frameworks and compliance standards on this site are for informational purposes and do not constitute legal advice or legal representation. Engage qualified legal counsel for regulatory guidance specific to your organization.
@@ -2324,7 +2379,7 @@ var STRIPE_PAYMENT_LINKS = {
    Site will auto-display address, generate QR code, and show copy button.
    ─────────────────────────────────────────────────────────────────────── */
 var CRYPTO_ADDRESSES = {
-  btc: 'CONTACT_FOR_BTC_ADDRESS',
+  btc: 'bc1qqdjsf6senn899jmrav2x6hd32q94ma5ukh6z4x',
   xmr: 'CONTACT_FOR_XMR_ADDRESS'
 };
 
