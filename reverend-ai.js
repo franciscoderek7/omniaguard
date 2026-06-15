@@ -17,7 +17,7 @@
       color: '#27ae60',
       accent: '#1a7a40',
       greeting: "I'm Doc Weedlaw AI. Facing a cannabis charge? Ask me anything about your rights or BENO-X.",
-      consultLink: 'https://franciscoholdingsinc.com/book.html',
+      consultLink: 'https://paypal.me/franciscoderek7/500CAD',
       consultLabel: 'Book Consultation ($500)',
     },
     'primedox': {
@@ -35,7 +35,7 @@
       color: '#c9a84c',
       accent: '#9a7a2e',
       greeting: "Welcome to Francisco Holdings. I help founders get clarity fast. What challenge are you facing?",
-      consultLink: 'https://franciscoholdingsinc.com/book.html',
+      consultLink: 'https://paypal.me/franciscoderek7/500CAD',
       consultLabel: 'Book Strategy Session ($500)',
     },
     'weedlaw': {
