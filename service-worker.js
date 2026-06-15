@@ -1,20 +1,15 @@
-/* OmniaGuard Service Worker v3 — iOS + Android PWA, kill switch, periodic VPN sync */
-const CACHE_NAME = 'omniaguard-v3';
+/* OmniaGuard Service Worker v2 */
+const CACHE_NAME = 'omniaguard-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/vault.html',
+  '/data-broker.html',
   '/threat-dashboard.html',
-  '/primedox-portal.html',
   '/install-guide.html',
   '/offline.html',
-  '/vpn-monitor.html',
-  '/android-security.html',
   '/omniaguard-logo.png',
-  '/robot-350.jpg',
-  '/manifest.json',
-  '/app.js',
-  '/pwa-core.js',
-  '/splash.svg'
+  '/manifest.json'
 ];
 
 /* ---- INSTALL: pre-cache all static assets ---- */
@@ -120,55 +115,7 @@ async function syncThreatAlerts() {
     const response = await fetch('/api/threats/sync', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
     if (!response.ok) throw new Error('Sync failed');
   } catch (e) {
+    // Silently fail — will retry on next sync opportunity
     console.log('[OmniaGuard SW] Background sync deferred:', e.message);
   }
 }
-
-/* ---- PERIODIC BACKGROUND SYNC (Android Chrome) ---- */
-self.addEventListener('periodicsync', event => {
-  if (event.tag === 'vpn-status-check') {
-    event.waitUntil(periodicVPNCheck());
-  }
-});
-
-async function periodicVPNCheck() {
-  try {
-    // Notify all open clients to run a VPN check
-    const clientList = await self.clients.matchAll({ type: 'window' });
-    clientList.forEach(client => {
-      client.postMessage({ type: 'PERIODIC_VPN_CHECK' });
-    });
-    // If no clients open, fire a silent background notification
-    if (clientList.length === 0) {
-      await self.registration.showNotification('OmniaGuard VPN Check', {
-        body: 'Background VPN status check complete. Tap to view.',
-        icon: '/omniaguard-logo.png',
-        badge: '/omniaguard-logo.png',
-        tag: 'vpn-periodic',
-        silent: true,
-        data: { url: '/vpn-monitor.html' }
-      });
-    }
-  } catch (e) {
-    console.log('[OmniaGuard SW] Periodic VPN check error:', e.message);
-  }
-}
-
-/* ---- VPN DISCONNECT PUSH NOTIFICATION ---- */
-self.addEventListener('message', event => {
-  if (event.data && event.data.type === 'VPN_DISCONNECTED') {
-    self.registration.showNotification('🚨 OmniaGuard: VPN Disconnected', {
-      body: `IP changed: ${event.data.oldIP} → ${event.data.newIP}. VPN protection may be down.`,
-      icon: '/omniaguard-logo.png',
-      badge: '/omniaguard-logo.png',
-      tag: 'vpn-disconnect',
-      requireInteraction: true,
-      vibrate: [300, 100, 300, 100, 300],
-      data: { url: '/vpn-monitor.html' },
-      actions: [
-        { action: 'view', title: '🔍 Check Now' },
-        { action: 'dismiss', title: 'Dismiss' }
-      ]
-    });
-  }
-});

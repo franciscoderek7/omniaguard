@@ -17,6 +17,8 @@
 <meta name="twitter:title" content="OmniaGuard — AI Cybersecurity Platform | Zero Prompt Injection Guarantee">
 <meta name="twitter:description" content="OmniaGuard: 14-layer AI Agent Swarm defense. Real-time threat intelligence. 0% breach rate. Enterprise AI security for Fortune 500, healthcare, and government.">
 <meta name="twitter:image" content="https://omniaguard.com/omniaguard-logo.png">
+<meta name="twitter:site" content="@omniaguard">
+<meta name="robots" content="index, follow">
 <meta name="description" content="OmniaGuard: 14-layer AI Agent Swarm defense. Real-time threat intelligence. 0% breach rate. Enterprise AI security for Fortune 500, healthcare, and government.">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#00d4ff">
@@ -482,7 +484,18 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
 .press-quote{font-size:13px;color:var(--gray);margin-top:8px;line-height:1.6;}
 @media(max-width:900px){.press-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.press-grid{grid-template-columns:1fr;}}
+/* Mobile baseline */
+body{overflow-x:hidden;}
+@media(max-width:480px){
+  body{font-size:16px;}
+  a,button,[role="button"]{min-height:44px;}
+  img{max-width:100%;height:auto;}
+  #toast-container{left:12px;right:12px;bottom:12px;}
+  .btn-tier{min-height:44px;}
+}
 </style>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%23000'/><text y='.9em' font-size='80' text-anchor='middle' x='50'>🛡</text></svg>">
 </head>
 <body>
 
@@ -493,7 +506,7 @@ footer{background:var(--bg3);border-top:1px solid var(--border);padding:48px 0 2
     <strong style="color:#fff;">OmniaGuard is actively protecting organizations right now.</strong>
     Deploy from <strong style="color:#00c853;">$499/mo CAD</strong> — activate in 4 hours.
     <a href="pay.html" style="color:#00d4ff;font-weight:800;text-decoration:none;border:1px solid rgba(0,212,255,0.4);border-radius:6px;padding:3px 12px;transition:all .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='transparent'">Choose Your Tier →</a>
-    <a href="#" onclick="document.getElementById('og-topbar').style.display='none';return false;" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#4a5568;font-size:16px;text-decoration:none;line-height:1;">&times;</a>
+    <button onclick="document.getElementById('og-topbar').style.display='none'" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#4a5568;font-size:16px;background:none;border:none;cursor:pointer;padding:4px;line-height:1;">&times;</button>
   </span>
 </div>
 <style>@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}</style>
@@ -2403,7 +2416,7 @@ function stripeCheckout(priceId, tier, price, isAnnual, btnEl) {
     btnEl.innerHTML = '<span class="omnia-spinner"></span>Connecting to Stripe...';
   }
 
-  var stripe = Stripe(window.stripePublicKey || 'pk_live_REPLACE_WITH_REAL_KEY');
+  var stripe = Stripe(window.stripePublicKey || 'pk_live_51TG0cIASsTLqnu8VNnDoJjPYgVz73h2lpqhcS1E9bGLGHYl8t6NAvJdri1zk2radt3jb5G0DYuuCMXtNvA81UNeg00RvGs96kz');
   var period = isAnnual ? 'annual' : 'monthly';
 
   stripe.redirectToCheckout({
@@ -2431,7 +2444,7 @@ function showStripeError(msg) {
 
 /* ── QUICK PAY: PayPal.me + Interac e-Transfer (instant routing, no Stripe dependency) ── */
 function quickPay(tier, amount) {
-  window.open('https://www.paypal.me/derekfrancisco/' + amount + 'cad', '_blank', 'noopener');
+  window.open('https://www.paypal.com/paypalme/franciscoderek7?country.x=CA&locale.x=en_CA&amount=' + amount + 'cad', '_blank', 'noopener');
   var existing = document.getElementById('quickpay-toast');
   if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
   var t = document.createElement('div');
@@ -2814,7 +2827,7 @@ function initCryptoSection() {
     <div id="po-tab-panel-3" style="display:none;padding:28px 32px;">
       <div style="display:inline-block;background:rgba(0,112,186,0.12);border:1px solid rgba(0,112,186,0.35);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#4d9fe0;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;">Card Fallback — When Stripe Is Unavailable</div>
       <p style="font-size:14px;color:#8892a4;margin-bottom:20px;line-height:1.6;">Prefer to pay by card without leaving PayPal? Use the link below — it pre-fills your selected plan and amount.</p>
-      <a id="po-paypal-link" href="https://www.paypal.com/paypalme/derekfrancisco" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:linear-gradient(135deg,#0070ba,#003087);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:14px;">🅿️ Pay with PayPal — <span id="po-paypal-price">$499/mo</span></a>
+      <a id="po-paypal-link" href="https://www.paypal.com/paypalme/franciscoderek7?country.x=CA&locale.x=en_CA" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:linear-gradient(135deg,#0070ba,#003087);color:#fff;font-weight:800;font-size:14px;padding:14px 24px;border-radius:10px;text-decoration:none;letter-spacing:0.3px;margin-bottom:14px;">🅿️ Pay with PayPal — <span id="po-paypal-price">$499/mo</span></a>
       <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:14px 16px;font-size:12px;color:#8892a4;line-height:1.7;">
         After sending payment, email <a id="po-paypal-email-link" href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+PayPal+Payment" style="color:#00d4ff;font-weight:600;">your receipt and selected tier →</a> so we can activate your account.<br>
         <strong style="color:#fff;">Account activated within 4 hours of confirmed payment.</strong>
@@ -3244,5 +3257,11 @@ function ogEmailSubmit(e) {
 </script>
 <script>window.REVEREND_SITE='omniaguard';</script>
 <script src="reverend-ai.js"></script>
+<!-- Sentinel AI Chat Widget — OmniaGuard (Loop B: anonymous, no Derek name) -->
+<script>window.PRIMEDOX_API_URL = '';</script>
+<script src="https://cdn.jsdelivr.net/gh/franciscoderek7/primedoxai-deploy@main/agents/agent-config.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/franciscoderek7/primedoxai-deploy@main/agents/chat-widget.js" data-agent="sentinel"></script>
+<script src="https://cdn.jsdelivr.net/gh/franciscoderek7/primedoxai-deploy@main/agents/referral-engine.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/franciscoderek7/primedoxai-deploy@main/agents/payment-provider.js"></script>
 </body>
 </html>
