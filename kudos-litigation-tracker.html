@@ -1,395 +1,702 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Francisco v. Kudos/Telus — Live Case | CCLDR</title>
-<link rel="canonical" href="https://ccldr.net/cases/francisco-v-kudos">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CCLDR — Canadian Constitutional Law &amp; Digital Rights">
-<meta property="og:title" content="LIVE: Francisco v. Kudos/Telus — The Case That Could Change Canadian Telecom Law">
-<meta property="og:description" content="$823.21 stolen. 29 hours of phone abuse. A manager caught lying on record. Derek Francisco is fighting back — and winning. Follow this landmark case live on CCLDR.">
-<meta property="og:url" content="https://ccldr.net/cases/francisco-v-kudos">
-<meta property="og:image" content="https://omniaguard.com/omniaguard-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LIVE: Francisco v. Kudos/Telus — Canadian Telecom Rights Case">
-<meta name="twitter:description" content="$823.21 stolen. Manager caught lying on record. 29 hours of documented abuse. Follow the case live — CCLDR Members only.">
-<meta name="description" content="Francisco v. Kudos Communications (Telus) — live Canadian constitutional litigation. Unauthorized billing, recorded admissions, punitive damages. Follow the case on CCLDR.">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#00d4ff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<style>
-:root{
-  --bg:#07080f;--bg2:#0d0e1a;--bg3:#12142a;
-  --cyan:#00d4ff;--gold:#ffd700;--red:#ff3b3b;
-  --orange:#ff8c00;--green:#00c853;
-  --white:#fff;--gray:#8a8a9a;--gray2:#1e2030;
-  --border:rgba(0,212,255,.15);--border-red:rgba(255,59,59,.25);--border-gold:rgba(255,215,0,.2);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
-.container{max-width:860px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When Automated Billing Fails Canadians — A Real Case Study | Derek Francisco</title>
+  <meta name="description" content="How AI billing systems failed one Canadian — and what every consumer, bank, and telecom needs to know. Free educational case study with live legal rights guide.">
+  <link rel="canonical" href="https://ccldr.net/cases/francisco-v-kudos">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --gold: #ffd700;
+      --gold-dim: #b8960a;
+      --green: #2E7D32;
+      --green-bright: #4CAF50;
+      --cyan: #00d4ff;
+      --red: #f85149;
+      --orange: #ff8c00;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-/* NAV */
-nav{background:rgba(7,8,15,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;}
-.nav-inner{max-width:860px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{text-decoration:none;color:var(--white);font-weight:900;font-size:16px;letter-spacing:.5px;}
-.nav-logo span{color:var(--cyan);}
-.nav-cta{background:var(--red);color:#fff;font-weight:700;font-size:13px;padding:8px 18px;border-radius:6px;text-decoration:none;display:flex;align-items:center;gap:6px;animation:ctaPulse 3s ease-in-out infinite;}
-@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,59,.4);}50%{box-shadow:0 0 0 8px rgba(255,59,59,0);}}
-.nav-home{color:var(--gray);text-decoration:none;font-size:13px;margin-right:16px;}
-.nav-home:hover{color:var(--white);}
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand { font-weight: 800; font-size: 1.05rem; color: var(--gold); text-decoration: none; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
 
-/* LIVE BANNER */
-.live-banner{background:rgba(255,59,59,.08);border-bottom:1px solid rgba(255,59,59,.25);padding:10px 24px;text-align:center;font-size:13px;font-weight:600;color:#ff8888;display:flex;align-items:center;justify-content:center;gap:10px;}
-.live-dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;animation:blink 1s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--red);}50%{opacity:.3;box-shadow:none;}}
+    .hero { padding: 80px 40px 56px; text-align: center; max-width: 860px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,215,0,.1);
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      padding: 5px 18px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 620px; margin: 0 auto 36px; line-height: 1.75; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-/* HERO */
-.case-hero{padding:60px 0 40px;text-align:center;}
-.case-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,59,59,.08);border:1px solid var(--border-red);border-radius:100px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ff8888;margin-bottom:20px;}
-.case-hero h1{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;line-height:1.1;letter-spacing:-.5px;margin-bottom:16px;}
-.case-hero h1 .v{color:var(--red);}
-.case-hero h1 .vs{color:var(--gray);font-weight:400;font-size:.7em;}
-.case-sub{font-size:1.05rem;color:var(--gray);max-width:600px;margin:0 auto 28px;line-height:1.7;}
-.case-sub strong{color:var(--white);}
-.case-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--gray);margin-bottom:32px;}
-.case-meta span{display:flex;align-items:center;gap:5px;}
-.case-meta span::before{content:'•';color:var(--cyan);}
+    .btn-primary {
+      background: var(--gold); color: #000;
+      padding: 13px 26px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; font-size: 0.92rem;
+      transition: opacity 0.2s; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      padding: 13px 26px; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.92rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
 
-/* HOOK STATS — teaser data */
-.hook-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 auto 40px;max-width:700px;}
-.hook-stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 10px;text-align:center;}
-.hook-stat .n{font-size:1.6rem;font-weight:900;color:var(--red);line-height:1;}
-.hook-stat .l{font-size:11px;color:var(--gray);margin-top:4px;line-height:1.3;}
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 40px;
+    }
+    .stats-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 24px; text-align: center;
+    }
+    .stat-val { font-size: 2rem; font-weight: 800; color: var(--gold); display: block; }
+    .stat-lbl { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
 
-/* TEASER TIMELINE */
-.teaser-section{margin-bottom:40px;}
-.teaser-title{font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.teaser-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.timeline-preview{display:flex;flex-direction:column;gap:0;}
-.tl-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--gray2);position:relative;}
-.tl-date{flex-shrink:0;width:80px;font-family:monospace;font-size:11px;color:var(--cyan);padding-top:2px;text-align:right;}
-.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
-.tl-dot.red{background:var(--red);box-shadow:0 0 8px rgba(255,59,59,.5);}
-.tl-dot.gold{background:var(--gold);}
-.tl-dot.green{background:var(--green);}
-.tl-body{}
-.tl-event{font-size:14px;font-weight:600;margin-bottom:3px;}
-.tl-detail{font-size:12px;color:var(--gray);line-height:1.5;}
+    section { max-width: 960px; margin: 0 auto; padding: 64px 40px; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 16px; }
+    .section-intro { font-size: 1rem; color: var(--muted); max-width: 680px; margin-bottom: 40px; line-height: 1.75; }
 
-/* PAYWALL LOCK */
-.paywall-blur{position:relative;overflow:hidden;border-radius:12px;}
-.paywall-blur::after{content:'';position:absolute;bottom:0;left:0;right:0;top:30%;background:linear-gradient(transparent,var(--bg) 60%);pointer-events:none;z-index:1;}
-.tl-item.locked{opacity:.25;filter:blur(3px);user-select:none;}
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .problem-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .problem-card.highlight { border-color: var(--gold-dim); background: rgba(255,215,0,.03); }
+    .problem-card .icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+    .problem-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .problem-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
 
-.paywall-gate{background:linear-gradient(135deg,rgba(255,59,59,.06),rgba(255,215,0,.04));border:2px solid rgba(255,215,0,.3);border-radius:16px;padding:40px 32px;text-align:center;margin:0 auto;max-width:640px;position:relative;z-index:2;}
-.paywall-gate::before{content:'🔒 MEMBERS ONLY';font-size:10px;font-weight:800;letter-spacing:2px;color:var(--gold);background:rgba(255,215,0,.1);border:1px solid var(--border-gold);border-radius:100px;padding:4px 14px;display:inline-block;margin-bottom:16px;}
-.paywall-gate h2{font-size:1.5rem;font-weight:900;margin-bottom:10px;line-height:1.2;}
-.paywall-gate h2 em{color:var(--gold);font-style:normal;}
-.paywall-gate p{font-size:14px;color:var(--gray);margin-bottom:24px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto;}
-.paywall-gate p strong{color:var(--white);}
-.paywall-features{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;text-align:left;max-width:380px;margin-left:auto;margin-right:auto;}
-.pf-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--gray);}
-.pf-item::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
-.pf-item strong{color:var(--white);}
-.paywall-cta{display:inline-block;background:linear-gradient(135deg,var(--red),#cc0000);color:#fff;font-weight:800;font-size:16px;padding:16px 40px;border-radius:10px;text-decoration:none;margin-bottom:10px;transition:all .2s;box-shadow:0 4px 24px rgba(255,59,59,.35);}
-.paywall-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,59,59,.5);}
-.paywall-sub-cta{display:inline-block;color:var(--gray);font-size:13px;text-decoration:underline;margin-left:16px;vertical-align:middle;}
-.paywall-price{font-size:12px;color:var(--gray);margin-top:8px;}
-.paywall-price strong{color:var(--gold);}
+    .timeline { position: relative; padding-left: 36px; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 6px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--green-bright), var(--border));
+    }
+    .timeline-event {
+      position: relative; margin-bottom: 28px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      cursor: pointer; transition: border-color 0.2s, transform 0.15s;
+    }
+    .timeline-event:hover { border-color: var(--gold-dim); transform: translateX(3px); }
+    .timeline-event::before {
+      content: ''; position: absolute;
+      left: -43px; top: 26px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(255,215,0,.6);
+    }
+    .timeline-event.resolved::before { background: var(--green-bright); box-shadow: 0 0 8px rgba(76,175,80,.6); }
+    .event-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+    .event-date { font-size: 0.78rem; font-weight: 600; color: var(--muted); font-family: monospace; }
+    .event-tag {
+      font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .tag-banking { background: rgba(0,212,255,.12); color: var(--cyan); border: 1px solid rgba(0,212,255,.25); }
+    .tag-telecom { background: rgba(46,125,50,.18); color: var(--green-bright); border: 1px solid rgba(76,175,80,.28); }
+    .tag-legal { background: rgba(255,215,0,.1); color: var(--gold); border: 1px solid rgba(255,215,0,.25); }
+    .tag-rights { background: rgba(248,81,73,.1); color: var(--red); border: 1px solid rgba(248,81,73,.25); }
+    .tag-pending { background: rgba(255,140,0,.12); color: var(--orange); border: 1px solid rgba(255,140,0,.25); }
+    .event-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .event-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+    .toggle-btn {
+      background: none; border: none; color: var(--gold);
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      padding: 0; display: flex; align-items: center; gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .toggle-btn:hover { opacity: 0.75; }
+    .rights-panel {
+      display: none; margin-top: 14px;
+      background: rgba(255,215,0,.05);
+      border-left: 3px solid var(--gold);
+      padding: 16px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.88rem; color: var(--text); line-height: 1.7;
+    }
+    .rights-panel.open { display: block; }
+    .rights-label {
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--gold); text-transform: uppercase;
+      letter-spacing: .08em; margin-bottom: 8px;
+    }
+    .rights-panel strong { color: var(--text); }
+    .rights-panel em { color: var(--gold); font-style: normal; }
 
-/* ENTICE PANEL */
-.entice-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0;}
-.entice-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
-.entice-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold));}
-.entice-lock{position:absolute;top:12px;right:12px;font-size:14px;opacity:.5;}
-.entice-title{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--white);}
-.entice-preview{font-size:12px;color:var(--gray);line-height:1.5;}
-.entice-preview .blur{filter:blur(4px);user-select:none;color:var(--gray);}
+    .corporate-wrap {
+      background: linear-gradient(135deg, rgba(46,125,50,.07) 0%, rgba(255,215,0,.04) 100%);
+      border: 1px solid rgba(255,215,0,.18);
+      border-radius: 16px;
+      padding: 52px 48px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 36px; }
+    .company-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      position: relative; overflow: hidden;
+    }
+    .company-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .card-cibc::before { background: linear-gradient(90deg, #c41e3a, #e8a020); }
+    .card-kudos::before { background: linear-gradient(90deg, #6200ea, #0091ea); }
+    .card-telus::before { background: linear-gradient(90deg, #4B0082, #00A651); }
+    .company-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+    .company-role { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+    .company-issue { font-size: 0.87rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .company-offer {
+      background: rgba(255,215,0,.07); border: 1px solid rgba(255,215,0,.18);
+      border-radius: 8px; padding: 14px 16px;
+      font-size: 0.84rem; color: var(--text); line-height: 1.6;
+    }
+    .offer-hl { color: var(--gold); font-weight: 700; }
+    .corp-actions { margin-top: 36px; text-align: center; }
+    .corp-actions p { color: var(--muted); font-size: 0.92rem; margin-bottom: 20px; }
 
-/* WHAT'S AT STAKE */
-.stakes-band{background:linear-gradient(135deg,rgba(255,59,59,.06),rgba(255,140,0,.04));border:1px solid var(--border-red);border-radius:16px;padding:32px;margin:32px 0;}
-.stakes-band h3{font-size:1.1rem;font-weight:800;color:var(--red);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.stakes-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.stake-item{font-size:13px;color:var(--gray);display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
-.stake-item::before{content:'⚖';flex-shrink:0;}
-.stake-item strong{color:var(--white);}
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .service-card:hover { border-color: var(--gold-dim); }
+    .service-icon {
+      width: 46px; height: 46px;
+      background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.2);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 16px;
+    }
+    .service-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .service-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .price-row { display: flex; align-items: baseline; gap: 8px; }
+    .price-was { font-size: 0.8rem; color: var(--muted); text-decoration: line-through; }
+    .price-now { font-size: 1.15rem; font-weight: 800; color: var(--gold); }
+    .price-badge { font-size: 0.68rem; background: var(--green); color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
 
-/* SOCIAL PROOF */
-.proof-band{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;margin:24px 0;}
-.proof-band p{font-size:14px;color:var(--gray);line-height:1.6;}
-.proof-band p strong{color:var(--gold);}
-.proof-numbers{display:flex;gap:32px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
-.pn{text-align:center;}
-.pn .num{font-size:1.5rem;font-weight:900;color:var(--cyan);}
-.pn .lbl{font-size:11px;color:var(--gray);}
+    .community-band {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 40px; text-align: center;
+    }
+    .community-band h2 { margin-bottom: 12px; }
+    .community-band > p { color: var(--muted); max-width: 560px; margin: 0 auto 32px; font-size: 1rem; line-height: 1.75; }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; max-width: 800px; margin: 0 auto 40px; text-align: left;
+    }
+    .benefit-item { display: flex; gap: 10px; font-size: 0.88rem; }
+    .bcheck { color: var(--green-bright); flex-shrink: 0; font-weight: 700; }
+    .join-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
+    .join-note { font-size: 0.78rem; color: var(--muted); margin-top: 12px; }
 
-/* BOTTOM CTA */
-.bottom-cta{background:linear-gradient(135deg,rgba(255,59,59,.08),rgba(255,215,0,.05));border:2px solid var(--border-gold);border-radius:16px;padding:48px 32px;text-align:center;margin:40px 0;}
-.bottom-cta h2{font-size:1.8rem;font-weight:900;margin-bottom:12px;line-height:1.2;}
-.bottom-cta h2 .gold{color:var(--gold);}
-.bottom-cta p{font-size:14px;color:var(--gray);max-width:500px;margin:0 auto 28px;line-height:1.7;}
-.cta-stack{display:flex;flex-direction:column;align-items:center;gap:10px;}
-.cta-main{display:inline-block;background:linear-gradient(135deg,var(--red),#cc0000);color:#fff;font-weight:800;font-size:17px;padding:18px 48px;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(255,59,59,.35);}
-.cta-main:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(255,59,59,.5);}
-.cta-alt{color:var(--gray);font-size:13px;}
-.cta-alt a{color:var(--cyan);text-decoration:none;}
-.cta-alt a:hover{text-decoration:underline;}
-.urgency{display:inline-flex;align-items:center;gap:8px;background:rgba(255,140,0,.1);border:1px solid rgba(255,140,0,.3);border-radius:100px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px;margin-bottom:20px;}
+    footer {
+      padding: 40px; text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.84rem; color: var(--muted);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
 
-/* ELAPSED COUNTER */
-.elapsed-band{background:var(--bg3);border:1px solid var(--border-red);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:24px;}
-.elapsed-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);}
-.elapsed-count{font-family:monospace;font-size:1.1rem;font-weight:800;color:var(--white);}
-
-footer{border-top:1px solid var(--gray2);padding:32px 0;text-align:center;}
-footer p{font-size:12px;color:var(--gray);}
-footer a{color:var(--cyan);text-decoration:none;}
-
-@media(max-width:600px){
-  .hook-stats{grid-template-columns:repeat(2,1fr);}
-  .entice-grid{grid-template-columns:1fr;}
-  .stakes-list{grid-template-columns:1fr;}
-  .paywall-gate{padding:28px 20px;}
-  .paywall-cta{display:block;margin-bottom:12px;}
-  .paywall-sub-cta{margin-left:0;display:block;margin-top:8px;}
-}
-</style>
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+      .hero { padding: 56px 20px 40px; }
+      section { padding: 48px 20px; }
+      .stats-bar { padding: 24px 20px; }
+      .corporate-wrap { padding: 32px 22px; margin: 0 20px; }
+      .community-band { padding: 56px 20px; }
+      footer { padding: 32px 20px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- LIVE BANNER -->
-<div class="live-banner">
-  <div class="live-dot"></div>
-  Case is ACTIVE &mdash; New developments added as they happen &mdash; <strong style="color:var(--white);margin-left:4px;">Members see everything first</strong>
-</div>
-
 <nav>
-  <div class="nav-inner">
-    <a href="https://ccldr.net" class="nav-logo">CCLDR <span>/ CCC</span></a>
-    <div style="display:flex;align-items:center;">
-      <a href="index.html" class="nav-home">← OmniaGuard</a>
-      <a href="https://ccldr.net/join" class="nav-cta">
-        <span>🔒</span> Unlock Full Case
-      </a>
-    </div>
-  </div>
+  <a href="/" class="nav-brand">Derek Francisco</a>
+  <ul class="nav-links">
+    <li><a href="https://ccldr.net">CCLDR</a></li>
+    <li><a href="/vigilax.html">VIGILAX</a></li>
+    <li><a href="/zpd.html">ZPrimeDox</a></li>
+    <li><a href="https://ccldr.net/join" style="color:var(--gold);font-weight:700;">Join Community</a></li>
+  </ul>
 </nav>
 
-<!-- HERO -->
-<section class="case-hero">
-  <div class="container">
-    <div class="case-eyebrow">🇨🇦 Live Constitutional Litigation — Ontario</div>
-    <h1>
-      <span class="v">Francisco</span>
-      <span class="vs"> v. </span>
-      Kudos Communications<br>
-      <span style="font-size:.55em;color:var(--gray);font-weight:500;">(Telus Authorized Dealer)</span>
-    </h1>
-    <p class="case-sub">
-      <strong>$823.21 stolen from a savings account without authorization.</strong> A Kudos representative admitted it on a recorded call. A manager lied about sending an email that was never sent. And Derek Francisco — Canada's #1 Cannabis Constitutional Advocate — is fighting back with 4.5 hours of certified recordings and every SCC tool available.
-    </p>
+<div class="hero">
+  <div class="hero-badge">Live Case Study · Educational Series</div>
+  <h1>When Automated Billing<br><span>Fails Canadians</span></h1>
+  <p class="hero-sub">
+    A real case. Real documents. Real law. I'm not sharing this to shame anyone —
+    I'm sharing it because every Canadian deserves to know their rights when tech systems fail them,
+    and every company deserves a genuine chance to fix the problem before it escalates.
+  </p>
+  <div class="hero-ctas">
+    <a href="#case-study" class="btn-primary">Explore the Case Study →</a>
+    <a href="#corporate-offer" class="btn-secondary">Message to CIBC, Kudos &amp; Telus</a>
+  </div>
+</div>
 
-    <!-- Elapsed time -->
-    <div class="elapsed-band">
-      <div class="elapsed-label">🔴 Time since unauthorized debit</div>
-      <div class="elapsed-count" id="elapsed">Loading...</div>
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div><span class="stat-val">$823</span><span class="stat-lbl">Unauthorized Debit</span></div>
+    <div><span class="stat-val">29h+</span><span class="stat-lbl">On Hold &amp; Transferred</span></div>
+    <div><span class="stat-val">4</span><span class="stat-lbl">Regulatory Bodies</span></div>
+    <div><span class="stat-val">$321K</span><span class="stat-lbl">Total Damages Claimed</span></div>
+    <div><span class="stat-val">100%</span><span class="stat-lbl">Documented &amp; Recorded</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Context — Why This Matters</div>
+  <h2>This Isn't About One Bad Day.<br>It's a National Tech Problem.</h2>
+  <p class="section-intro">
+    Canadian banks and telecoms are deploying AI-driven billing systems faster than their
+    compliance teams can keep up. The result? Consumers get caught in automation errors with
+    no clear path to resolution. Here's what's happening — and what you can do about it.
+  </p>
+  <div class="problem-grid">
+    <div class="problem-card highlight">
+      <span class="icon">🏦</span>
+      <h3>Merchant Pre-Authorization Abuse</h3>
+      <p>Banks process merchant-initiated debits without adequate consent verification. When merchants
+         charge incorrectly, dispute resolution is slow and consumer-hostile. Payments Canada Rule H1
+         requires immediate reversal of unauthorized PADs — most consumers don't know to ask for it.</p>
     </div>
-
-    <div class="case-meta">
-      <span>Filed: May 31, 2026</span>
-      <span>Jurisdiction: Ontario</span>
-      <span>Venues: CCTS · CRTC · Ontario SC</span>
-      <span>Claim: $321,000+</span>
+    <div class="problem-card">
+      <span class="icon">📱</span>
+      <h3>AI Billing Gaps in Telecom</h3>
+      <p>Automated billing systems apply charges based on contract interpretations consumers never agreed to.
+         The CCTS receives thousands of complaints annually — most involve billing errors that better AI
+         guardrails would catch before they ever hit your account.</p>
     </div>
-
-    <!-- Hook stats -->
-    <div class="hook-stats">
-      <div class="hook-stat"><div class="n">$823</div><div class="l">Unauthorized debit — CIBC savings</div></div>
-      <div class="hook-stat"><div class="n">29h+</div><div class="l">Documented phone abuse on record</div></div>
-      <div class="hook-stat"><div class="n">4.5h</div><div class="l">Certified call recordings sealed</div></div>
-      <div class="hook-stat"><div class="n">$321K</div><div class="l">Total claim with punitive damages</div></div>
+    <div class="problem-card">
+      <span class="icon">⚖️</span>
+      <h3>Your Rights Are Stronger Than You Know</h3>
+      <p>Most Canadians don't know they can legally record calls with companies under s.184(2)(a) of the
+         Criminal Code. Or that CCTS rulings are binding. Or that unauthorized debits trigger mandatory
+         bank investigation timelines. You deserve to know this.</p>
+    </div>
+    <div class="problem-card">
+      <span class="icon">🔐</span>
+      <h3>PIPEDA &amp; AI Decision Rights</h3>
+      <p>When companies use AI to make billing decisions about your account, you have PIPEDA rights to
+         know what data was used, how it was processed, and to contest automated decisions.
+         Most companies don't proactively tell you. Now you know.</p>
     </div>
   </div>
 </section>
 
-<!-- TEASER TIMELINE (2 free events + locked) -->
-<div class="container">
+<section id="case-study">
+  <div class="section-label">Case Study — Francisco v. Kudos / Telus / CIBC · 2026</div>
+  <h2>The Full Timeline — With Your Legal Rights at Every Step</h2>
+  <p class="section-intro">
+    Every event below is documented and verifiable. Click any event to reveal
+    <strong style="color:var(--gold);">your legal rights at that exact moment</strong> — so you know
+    exactly what to do if this ever happens to you.
+  </p>
 
-  <div class="teaser-section">
-    <div class="teaser-title">Case Timeline</div>
+  <div class="timeline">
 
-    <div class="paywall-blur">
-      <div class="timeline-preview">
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-05-31 · 09:00 EDT</span>
+        <span class="event-tag tag-banking">Banking</span>
+      </div>
+      <div class="event-title">Unauthorized $823.21 Debit — CIBC Savings Account</div>
+      <div class="event-desc">
+        Kudos Insurance initiated a debit of $823.21 from my CIBC savings account with no
+        authorization and no valid pre-authorized debit agreement on file for this account type.
+        Discovered on routine account check. Zero advance notice given.
+      </div>
+      <button class="toggle-btn">📋 What are my rights here? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Your Rights at This Moment</div>
+        <strong>Payments Canada Rule H1:</strong> You have the right to dispute any unauthorized
+        pre-authorized debit immediately. Your bank must acknowledge within 1 business day and complete
+        investigation within 5 business days. Request an <em>"Unauthorized PAD Declaration"</em> form
+        — this triggers a mandatory chargeback. You do NOT need to negotiate with the merchant first.
+        FCAC regulations require same-day dispute acknowledgment. Your bank is legally obligated to act.
+      </div>
+    </div>
 
-        <!-- FREE: Event 1 -->
-        <div class="tl-item">
-          <div class="tl-date">May 31<br>2026</div>
-          <div class="tl-dot red"></div>
-          <div class="tl-body">
-            <div class="tl-event">💳 Unauthorized debit — $823.21 taken from CIBC savings</div>
-            <div class="tl-detail">Kudos Communications debited Derek Francisco's savings account without authorization or advance notice. No email was sent. No consent was given. The charge was discovered independently.</div>
-          </div>
-        </div>
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-05-31 · 11:30 EDT</span>
+        <span class="event-tag tag-telecom">Telecom</span>
+      </div>
+      <div class="event-title">Kudos Rep Admits on Record: "This Charge Should Not Have Gone Through"</div>
+      <div class="event-desc">
+        Called Kudos customer service. Representative Tatiana acknowledged on a recorded call that
+        the debit was applied to the wrong account and should not have processed. Admission captured
+        under s.184(2)(a) Criminal Code participant recording doctrine.
+      </div>
+      <button class="toggle-btn">📋 What are my rights here? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Your Rights at This Moment</div>
+        <strong>s.184(2)(a) Criminal Code — Participant Recording:</strong> As a party to the call,
+        you have the absolute legal right to record it without notifying the other party. This recording
+        is admissible evidence. The rep's admission is a <em>vicarious admission</em> binding on the
+        corporation. Document: date, time, employee name, call reference number, exact words used.
+        Request written confirmation of the admission within 72 hours. This acknowledgment alone
+        is sufficient to support a chargeback demand.
+      </div>
+    </div>
 
-        <!-- FREE: Event 2 -->
-        <div class="tl-item">
-          <div class="tl-date">May 31<br>2026</div>
-          <div class="tl-dot gold"></div>
-          <div class="tl-body">
-            <div class="tl-event">🎙️ Tatiana (Kudos rep) admits charges were improper — on record</div>
-            <div class="tl-detail">During the first documented call, Kudos representative Tatiana admitted the charges were improper. This admission is certified under s.184(2)(a) Criminal Code and sealed with SHA-256 chain of custody. Partial refund of $490 offered. Net outstanding: $333.21.</div>
-          </div>
-        </div>
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-05-31 · 14:00 EDT</span>
+        <span class="event-tag tag-rights">Rights Concern</span>
+      </div>
+      <div class="event-title">Manager Contradicts Admission — Denies Valid Claim</div>
+      <div class="event-desc">
+        Escalated to manager. Manager directly contradicted Tatiana's admission, claimed the charge
+        was "correctly processed," and refused to initiate reversal. Stated CIBC dispute "takes 30 days"
+        — factually incorrect, and potentially designed to discourage the formal dispute process.
+      </div>
+      <button class="toggle-btn">📋 What are my rights here? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Your Rights at This Moment</div>
+        <strong>Consumer Protection Act (Ontario) s.14:</strong> A false or misleading representation
+        by a supplier is an unfair practice. Deliberately contradicting a prior agent admission to deny
+        a valid dispute may constitute bad faith dealing. Request the manager's employee ID, note that
+        this call is also recorded, and prepare to escalate to CCTS. Under <em>Whiten v. Pilot Insurance
+        (2002 SCC 18)</em>, bad-faith denial of a valid claim can attract punitive damages significantly
+        exceeding the original amount in dispute.
+      </div>
+    </div>
 
-        <!-- LOCKED events (blurred) -->
-        <div class="tl-item locked">
-          <div class="tl-date">Jun 1<br>2026</div>
-          <div class="tl-dot red"></div>
-          <div class="tl-body">
-            <div class="tl-event">🚫 Manager makes false statement — caught on recording</div>
-            <div class="tl-detail">Manager claimed a written notice email was sent prior to the charge. No such email exists in any inbox. This constitutes a material misrepresentation...</div>
-          </div>
-        </div>
-        <div class="tl-item locked">
-          <div class="tl-date">Jun 8<br>2026</div>
-          <div class="tl-dot red"></div>
-          <div class="tl-body">
-            <div class="tl-event">📞 5 hours on the phone in a single day — June 8 marathon call</div>
-            <div class="tl-detail">Derek spent 5 hours on the phone with Kudos/Telus on June 8 alone. The full transcript of what was said, what was promised, and what was denied...</div>
-          </div>
-        </div>
-        <div class="tl-item locked">
-          <div class="tl-date">Jun 9<br>2026</div>
-          <div class="tl-dot gold"></div>
-          <div class="tl-body">
-            <div class="tl-event">⚖️ CCTS complaint filed — and what Kudos must do now</div>
-            <div class="tl-detail">CCTS complaint submitted with full evidence package. Under CCTS Rules of Procedure, Kudos must respond within...</div>
-          </div>
-        </div>
-        <div class="tl-item locked">
-          <div class="tl-date">Jun 16<br>2026</div>
-          <div class="tl-dot green"></div>
-          <div class="tl-body">
-            <div class="tl-event">🏠 CPL filing — $1M property on the line</div>
-            <div class="tl-detail">Certificate of Pending Litigation filed against $1M property. 800-page filing. What this means for Kudos...</div>
-          </div>
-        </div>
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-06-08 · Full Day</span>
+        <span class="event-tag tag-telecom">Telecom</span>
+      </div>
+      <div class="event-title">4.5-Hour Transfer Loop — Zero Resolution</div>
+      <div class="event-desc">
+        Spent 4.5 hours across Kudos and Telus departments, transferred between agents multiple times,
+        each denying jurisdiction. This "transfer loop" is a documented CCTS complaint pattern where
+        companies create exhaustion barriers to discourage legitimate disputes from advancing.
+        Every minute was logged and recorded.
+      </div>
+      <button class="toggle-btn">📋 What are my rights here? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Your Rights at This Moment</div>
+        <strong>CCTS Complaint Eligibility:</strong> After a documented good-faith attempt to resolve
+        with the provider (you now have this), file with the Commission for Complaints for
+        Telecom-television Services at <em>ccts-cprst.ca</em>. Deliberate exhaustion tactics are
+        a documented aggravating factor in CCTS proceedings. Under <em>Mustapha v. Culligan
+        (2008 SCC 27)</em>, quantifiable psychological distress from corporate conduct is compensable.
+        Log every call: representative name, time, duration, what was said, what was refused.
+      </div>
+    </div>
 
-      </div><!-- /timeline -->
-    </div><!-- /paywall-blur -->
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-06-10</span>
+        <span class="event-tag tag-legal">Legal Action</span>
+      </div>
+      <div class="event-title">CCTS Complaint Filed — Case Open</div>
+      <div class="event-desc">
+        Formal complaint filed with the Commission for Complaints for Telecom-television Services.
+        CCTS has jurisdiction over Telus and Kudos billing disputes and can order reimbursement,
+        compensation for inconvenience, and systemic remedies. Respondents have 20 business days
+        to respond or CCTS investigation begins automatically.
+      </div>
+      <button class="toggle-btn">📋 How do I file a CCTS complaint? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">CCTS Filing Guide</div>
+        Visit <strong>ccts-cprst.ca</strong> — it's free and binding on member companies. You'll need:
+        provider name, account number, issue description, what resolution you sought, and why it failed.
+        Bring records of every contact. CCTS can award compensation for time, inconvenience, and
+        financial harm. File within 1 year of the incident. The company must respond within 20 business
+        days — non-response triggers automatic CCTS investigation.
+      </div>
+    </div>
+
+    <div class="timeline-event" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">2026-06-12</span>
+        <span class="event-tag tag-legal">Legal Action</span>
+      </div>
+      <div class="event-title">Civil Pre-Litigation Letter (CPL) Served — $321,332.84 Total Claim</div>
+      <div class="event-desc">
+        Formal pre-litigation demand letter served to all parties. Total claim of $321,332.84 comprising
+        actual damages, punitive damages for bad-faith denial, special damages for 29+ hours of
+        professional time lost, psychological distress, and disgorgement of systemic overcharges.
+        All claims supported by SCC authority.
+      </div>
+      <button class="toggle-btn">📋 How are damages calculated under Canadian law? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Damages Framework</div>
+        <strong>Actual:</strong> The $823.21 unauthorized debit.<br>
+        <strong>Punitive</strong> (<em>Whiten v. Pilot, 2002 SCC 18</em>): Bad-faith denial of a valid
+        claim can attract punitive damages of 10–30× the original amount where conduct is egregious
+        and deliberate.<br>
+        <strong>Special:</strong> Professional time lost documented at standard rate.<br>
+        <strong>Distress</strong> (<em>Mustapha v. Culligan, 2008 SCC 27</em>): Provable psychological
+        harm from prolonged corporate resistance.<br>
+        <strong>Disgorgement</strong> (<em>A.I. Enterprises v. AIM, 2014 SCC 12</em>): Profits from
+        unlawful conduct may be disgorged regardless of plaintiff's direct loss.<br>
+        Ontario Small Claims covers up to $35,000. Superior Court for larger amounts — no cap.
+      </div>
+    </div>
+
+    <div class="timeline-event resolved" onclick="toggleRights(this)">
+      <div class="event-meta">
+        <span class="event-date">Ongoing — Active as of June 2026</span>
+        <span class="event-tag tag-pending">Awaiting Response</span>
+      </div>
+      <div class="event-title">Awaiting Corporate Response — All Documentation Preserved</div>
+      <div class="event-desc">
+        CCTS file open. CPL served. All parties notified. Every call recorded, timestamped, and
+        preserved under SHA-256 chain of custody via ZPrimeDox Evidence Vault.
+        Live case updates go to CCLDR members first — join below to follow in real time.
+      </div>
+      <button class="toggle-btn">📋 What does "no response" mean legally? ▾</button>
+      <div class="rights-panel">
+        <div class="rights-label">Non-Response Consequences</div>
+        Failure to respond to a CPL within the stated deadline demonstrates bad faith — admissible
+        at trial. Non-response to CCTS within 20 business days triggers binding investigation.
+        Every day of non-response is documented evidence of ongoing harm, which can increase
+        distress and punitive components of the claim. CCTS non-engagement often results in a
+        default finding in favour of the complainant.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div style="padding: 0 40px 64px; max-width: 1040px; margin: 0 auto;">
+<div class="corporate-wrap" id="corporate-offer">
+  <div class="section-label">Direct Message</div>
+  <h2>To CIBC, Kudos Insurance &amp; Telus</h2>
+  <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:680px;margin-bottom:10px;">
+    I want to be direct with you: <strong style="color:var(--text);">I don't believe you're bad companies.</strong>
+    I believe you're all navigating the same challenge — legacy systems meeting AI infrastructure at a
+    pace that outstrips your compliance capacity. This isn't unique to you. It's a national problem.
+  </p>
+  <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:680px;margin-bottom:36px;">
+    I caught it in your systems. I documented it thoroughly. I built the tools to fix it.
+    You can spend the next 12 months in litigation — or call me this week and I'll show you
+    exactly where the gap is and how to close it at
+    <strong style="color:var(--gold);">half the cost of fighting me.</strong>
+  </p>
+
+  <div class="company-grid">
+    <div class="company-card card-cibc">
+      <div class="company-name">CIBC</div>
+      <div class="company-role">Banking Partner — PAD Compliance Gap</div>
+      <div class="company-issue">
+        Your pre-authorized debit system processed a merchant-initiated charge without a valid PAD
+        agreement on file for the correct account type. This is a Payments Canada Rule H1 compliance
+        gap likely affecting thousands of accounts. I can identify the scope and close it.
+      </div>
+      <div class="company-offer">
+        <span class="offer-hl">My offer to CIBC:</span> Full PAD compliance audit + VIGILAX banking
+        security integration — <span class="offer-hl">50% off standard rates</span> as part of case
+        resolution. Protects you from future FCAC regulatory exposure.
+      </div>
+    </div>
+    <div class="company-card card-kudos">
+      <div class="company-name">Kudos Insurance</div>
+      <div class="company-role">Telecom Insurance — Billing &amp; Training Gap</div>
+      <div class="company-issue">
+        Your system charged an unauthorized amount, your front-line rep admitted the error on record,
+        and your manager then contradicted the admission to deny the claim. This indicates a serious
+        disconnect between what your automated systems do and what your staff are authorized to
+        acknowledge. This is fixable — I can show you how.
+      </div>
+      <div class="company-offer">
+        <span class="offer-hl">My offer to Kudos:</span> Customer complaint handling audit + VIGILAX
+        AI-assisted escalation protocol — <span class="offer-hl">50% off standard rates</span>.
+        Prevent this from recurring for your next 10,000 customers.
+      </div>
+    </div>
+    <div class="company-card card-telus">
+      <div class="company-name">Telus</div>
+      <div class="company-role">Network Provider — Partner Ecosystem Accountability</div>
+      <div class="company-issue">
+        As the underlying network provider, Telus carries joint accountability for billing practices
+        in your partner ecosystem. The transfer loop documented in this case is a known CCTS complaint
+        pattern that erodes customer trust at scale. You have the leverage to change it — and
+        the incentive to move first.
+      </div>
+      <div class="company-offer">
+        <span class="offer-hl">My offer to Telus:</span> Partner billing compliance review + CCTS
+        complaint reduction strategy — <span class="offer-hl">50% off standard rates</span>.
+        Turn a liability into a customer satisfaction competitive advantage.
+      </div>
+    </div>
   </div>
 
-  <!-- ENTICE: What members get -->
-  <div class="entice-grid">
-    <div class="entice-card">
-      <div class="entice-lock">🔒</div>
-      <div class="entice-title">📼 Full Recording Transcripts</div>
-      <div class="entice-preview">Members get the complete certified transcripts from all <strong>4.5 hours</strong> of recordings — every admission, every lie, every evasion. <span class="blur">Tatiana says at 01:12:34 — "I agree that charge should not have been applied" and goes on to explain that the system flagged it as...</span></div>
+  <div class="corp-actions">
+    <p>This offer is genuine and time-limited. I'd rather help you fix it than fight it.</p>
+    <a href="mailto:derek@franciscoholdings.ca?subject=Case Resolution — Francisco v. Kudos/Telus/CIBC&body=Hello Derek, I represent [Company] and would like to discuss a resolution to the above matter."
+       class="btn-primary" style="margin-right:12px;">Contact Me Directly</a>
+    <a href="/vigilax.html" class="btn-secondary">See What I'm Offering — VIGILAX</a>
+  </div>
+</div>
+</div>
+
+<section>
+  <div class="section-label">Available Services</div>
+  <h2>How I Can Help — Consumers &amp; Companies</h2>
+  <p class="section-intro">
+    Whether you're a consumer who's been wronged and needs the playbook, or a company
+    trying to get ahead of the next CCTS complaint wave — here's what I bring to the table.
+  </p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <div class="service-name">VIGILAX Security &amp; Compliance Audit</div>
+      <div class="service-desc">
+        AI-powered audit of your billing systems, customer data handling, and regulatory exposure.
+        Includes constitutional rights compliance review for automated decision systems.
+      </div>
+      <div class="price-row">
+        <span class="price-was">$8,500</span>
+        <span class="price-now">$4,250</span>
+        <span class="price-badge">50% OFF</span>
+      </div>
     </div>
-    <div class="entice-card">
-      <div class="entice-lock">🔒</div>
-      <div class="entice-title">💰 Live Damages Calculator</div>
-      <div class="entice-preview">Watch the claim grow in real time. Current exposure: <strong>$321,332.84</strong> including Whiten punitive multiplier. <span class="blur">Breakdown: $333.21 net debit + $5,000 lost contract + $50,000 business disruption + $25,000 medical aggravation × Whiten ratio 3x...</span></div>
+    <div class="service-card">
+      <div class="service-icon">⚖️</div>
+      <div class="service-name">ZPrimeDox Litigation Risk Assessment</div>
+      <div class="service-desc">
+        AI-driven analysis of your regulatory exposure. Outcome prediction, document review, and
+        pre-litigation strategy using ZPrimeDox. Know your real risk before you're served.
+      </div>
+      <div class="price-row">
+        <span class="price-was">$3,500</span>
+        <span class="price-now">$1,750</span>
+        <span class="price-badge">50% OFF</span>
+      </div>
     </div>
-    <div class="entice-card">
-      <div class="entice-lock">🔒</div>
-      <div class="entice-title">⚖️ SCC Precedent Database</div>
-      <div class="entice-preview">10 interactive Supreme Court of Canada cases — with live analysis of how each applies. <span class="blur">Whiten v. Pilot Insurance (2002 SCC 18): punitive damages threshold met. Ratio: 3:1. Garland v. Consumers Gas: unjust enrichment claim...</span></div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Consumer Rights Compliance Training</div>
+      <div class="service-desc">
+        Train your customer-facing teams on CCTS requirements, Payments Canada PAD rules, PIPEDA
+        obligations, and proper escalation handling. Reduce complaint volume from the ground up.
+      </div>
+      <div class="price-row">
+        <span class="price-was">$5,000</span>
+        <span class="price-now">$2,500</span>
+        <span class="price-badge">50% OFF</span>
+      </div>
     </div>
-    <div class="entice-card">
-      <div class="entice-lock">🔒</div>
-      <div class="entice-title">📋 Copy-Ready Legal Templates</div>
-      <div class="entice-preview">Use Derek's exact filings for your own case. CCTS complaint, CRTC notice, demand letter, Ontario Small Claims, Consumer Protection Ontario — <span class="blur">all pre-filled with the exact regulatory language that Kudos counsel cannot dispute, based on CCTS precedent file #...</span></div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <div class="service-name">Full Case Resolution Package</div>
+      <div class="service-desc">
+        Dispute settlement, systemic fix roadmap, regulatory filing assistance, and ongoing compliance
+        monitoring via VIGILAX. One engagement — resolve this case and prevent the next one.
+        Pay less than litigation. Get more than a settlement.
+      </div>
+      <div class="price-row">
+        <span class="price-was">$12,000</span>
+        <span class="price-now">$6,000</span>
+        <span class="price-badge">50% OFF</span>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- PAYWALL GATE -->
-  <div class="paywall-gate">
-    <h2>This case is <em>changing Canadian telecom law.</em><br>Don't miss a single move.</h2>
-    <p>
-      <strong>29+ hours of documented abuse. 4.5 hours of certified recordings. A manager caught lying.</strong> A $321K claim. A CPL on a $1M property. And it's all happening right now, in real time — but only CCLDR members get the full story as it unfolds.
-    </p>
-    <div class="paywall-features">
-      <div class="pf-item"><strong>Full case timeline</strong> — every development, same day it happens</div>
-      <div class="pf-item"><strong>Complete recording transcripts</strong> — verbatim, certified, searchable</div>
-      <div class="pf-item"><strong>Live damages calculator</strong> — updated with every new filing</div>
-      <div class="pf-item"><strong>SCC authority database</strong> — 10 cases with live case analysis</div>
-      <div class="pf-item"><strong>Copy-ready legal templates</strong> — use Derek's filings for your own case</div>
-      <div class="pf-item"><strong>CCTS · CRTC · Ontario SC documents</strong> — before they're public</div>
-      <div class="pf-item"><strong>Cannabis &amp; constitutional cases</strong> — full CCC archive access</div>
-      <div class="pf-item"><strong>Direct alerts</strong> — the moment anything moves</div>
-    </div>
-    <a href="https://ccldr.net/join" class="paywall-cta">Join CCLDR — Follow This Case Live →</a>
-    <a href="https://ccldr.net/cases" class="paywall-sub-cta">Browse all cases first</a>
-    <div class="paywall-price">From <strong>$9.99/month</strong> &bull; Cancel any time &bull; Instant access</div>
+<div class="community-band">
+  <div class="section-label" style="color:var(--gold);">Canadian Consumer &amp; Legal Digital Rights</div>
+  <h2>Join CCLDR — Know Your Rights. Follow This Case Live.</h2>
+  <p>
+    CCLDR is Canada's hub for consumer rights education, real-time legal case tracking, and constitutional
+    advocacy. Free to read. Members get everything — live updates on this case as it unfolds, legal
+    templates you can use today, and direct access to ask me questions.
+  </p>
+  <div class="benefits-grid">
+    <div class="benefit-item"><span class="bcheck">✓</span> Live case updates before anyone else</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> CCTS complaint templates (ready to file)</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> PAD dispute letter templates</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> Your right to record calls — explained</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> SCC case law in plain language</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> Cannabis &amp; constitutional law section</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> Direct Q&amp;A with Derek Francisco</div>
+    <div class="benefit-item"><span class="bcheck">✓</span> Early access to new case studies</div>
   </div>
-
-  <!-- WHAT'S AT STAKE -->
-  <div class="stakes-band">
-    <h3>⚖️ What's actually at stake in this case</h3>
-    <div class="stakes-list">
-      <div class="stake-item"><strong>Unauthorized debit doctrine</strong> — Can a telecom take money from your account without notice?</div>
-      <div class="stake-item"><strong>Punitive damages</strong> — Does Kudos/Telus's conduct meet the Whiten bad-faith threshold?</div>
-      <div class="stake-item"><strong>False notice defence</strong> — Can a company claim it "sent an email" it never sent?</div>
-      <div class="stake-item"><strong>Medical vulnerability</strong> — Does disclosing a health condition create a higher duty of care?</div>
-      <div class="stake-item"><strong>45+ companies disrupted</strong> — Can one router outage ground an entire business network?</div>
-      <div class="stake-item"><strong>CPL on $1M property</strong> — When does telecom abuse become a land registry matter?</div>
-    </div>
+  <div class="join-row">
+    <a href="https://ccldr.net/join" class="btn-primary">Join CCLDR — From $9.99/month</a>
+    <a href="https://ccldr.net" class="btn-secondary">Learn More First</a>
   </div>
-
-  <!-- SOCIAL PROOF -->
-  <div class="proof-band">
-    <p>Derek Francisco has <strong>20+ years</strong> as Canada's leading constitutional advocate.<br>He fights cases the legal system doesn't expect him to win — and wins them.</p>
-    <div class="proof-numbers">
-      <div class="pn"><div class="num">20+</div><div class="lbl">Years advocating</div></div>
-      <div class="pn"><div class="num">45+</div><div class="lbl">Companies defended</div></div>
-      <div class="pn"><div class="num">$321K</div><div class="lbl">This claim alone</div></div>
-      <div class="pn"><div class="num">4.5h</div><div class="lbl">Certified recordings</div></div>
-    </div>
-  </div>
-
-  <!-- BOTTOM CTA -->
-  <div class="bottom-cta">
-    <div class="urgency">⏰ Case is moving NOW — next filing imminent</div>
-    <h2>Don't let Kudos win<br>by <span class="gold">keeping you in the dark.</span></h2>
-    <p>Every day you're not a CCLDR member is a day the telecom industry thinks nobody is watching. Derek is watching. Join him.</p>
-    <div class="cta-stack">
-      <a href="https://ccldr.net/join" class="cta-main">Join CCLDR &amp; Follow This Case →</a>
-      <div class="cta-alt">Already a member? <a href="https://ccldr.net/login">Sign in here</a> &bull; Questions? <a href="https://ccldr.net/about">What is CCLDR?</a></div>
-    </div>
-  </div>
-
-</div><!-- /container -->
+  <p class="join-note">Free to read this page. Members follow everything live. Cancel anytime.</p>
+</div>
 
 <footer>
-  <div class="container">
-    <p>This is a preview. Full case content is available exclusively on <a href="https://ccldr.net">ccldr.net</a> for registered members.</p>
-    <p style="margin-top:6px;"><a href="index.html">OmniaGuard</a> &bull; <a href="https://ccldr.net">CCLDR</a> &bull; <a href="https://ccldr.net/cases">All Cases</a></p>
-    <p style="margin-top:12px;font-size:11px;color:#3a3a4a;">This page contains factual information about an active legal proceeding. All recordings are certified under s.184(2)(a) Criminal Code. This is not legal advice.</p>
-  </div>
+  <p style="margin-bottom:10px;">
+    <a href="https://ccldr.net">CCLDR.net</a> &nbsp;·&nbsp;
+    <a href="/vigilax.html">VIGILAX</a> &nbsp;·&nbsp;
+    <a href="https://zprimedoxaihq.com">ZPrimeDox AI</a> &nbsp;·&nbsp;
+    <a href="mailto:derek@franciscoholdings.ca">derek@franciscoholdings.ca</a>
+  </p>
+  <p>Derek Francisco · Francisco Holdings · Canada<br>
+  All case facts documented and verifiable. Published for educational purposes.</p>
 </footer>
 
 <script>
-// Elapsed time since unauthorized debit
-function updateElapsed() {
-  const start = new Date('2026-05-31T09:00:00-04:00');
-  const now = new Date();
-  const diff = now - start;
-  if (diff < 0) { document.getElementById('elapsed').textContent = 'Case opening...'; return; }
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-  document.getElementById('elapsed').textContent =
-    days + 'd ' + String(hours).padStart(2,'0') + 'h ' +
-    String(mins).padStart(2,'0') + 'm ' + String(secs).padStart(2,'0') + 's';
-}
-updateElapsed();
-setInterval(updateElapsed, 1000);
+  function toggleRights(el) {
+    const panel = el.querySelector('.rights-panel');
+    const btn = el.querySelector('.toggle-btn');
+    if (!panel) return;
+    const open = panel.classList.toggle('open');
+    if (btn) btn.textContent = btn.textContent.replace(open ? '▾' : '▴', open ? '▴' : '▾');
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
 </script>
 </body>
 </html>
