@@ -1,0 +1,8 @@
+Number,Date,Time,Agent/Rep,Reference Number,Summary,Evidence
+1,[DATE],[TIME],[UNKNOWN - confirm from records],[REF #],Scheduled callback was missed entirely,Call/contact log
+2,[DATE],[TIME],[UNKNOWN - confirm from records],[REF #],"48-hour callback commitment made, never honoured",Call/contact log
+3,[DATE],[TIME],[UNKNOWN - confirm from records],[REF #],"48-hour callback commitment made, never honoured",Call/contact log
+4,[DATE],[TIME],[UNKNOWN - confirm from records],[REF #],"48-hour callback commitment made, never honoured",Call/contact log
+5,2026-06-19,~19:00,Hector,[REF #],"Representative stated ""I wish I could help"" and ended interaction without resolution",Recorded call (s.184(2)(a))
+6,2026-06-19,~19:10,[UNKNOWN - confirm from records],[REF #],Callback received and call terminated without resolution,Call log
+7,2026-06-19,evening,[UNKNOWN - confirm from records],[REF #],Placed in recurring callback loop with no resolution reached,Call log
