@@ -1,1 +1,80 @@
-[PASTE FILE CONTENT]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniGuard — Empire Command Center</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{--gold:#FFD700;--green:#00E676;--red:#ff4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#000;color:#e0e0e0}
+#login{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000}
+#login h1{font-weight:900;font-size:2.5rem;color:var(--gold);margin-bottom:1rem}
+#login input{background:rgba(0,30,0,0.8);border:2px solid var(--green);color:#fff;padding:1rem;border-radius:12px;font-size:1.2rem;width:280px;text-align:center;margin-bottom:1rem}
+#login button{background:var(--green);color:#000;font-weight:900;padding:1rem 2rem;border:none;border-radius:12px;cursor:pointer;font-size:1rem}
+#dash{display:none;padding:1.5rem;max-width:1400px;margin:0 auto}
+.header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem;background:rgba(0,20,0,0.9);border:1px solid var(--green);border-radius:16px;margin-bottom:1.5rem}
+.header h1{font-weight:900;font-size:1.8rem;color:var(--gold)}
+.status-pill{display:inline-block;padding:0.4rem 1rem;border-radius:20px;font-weight:900;font-size:0.8rem;background:rgba(0,230,118,0.2);color:var(--green);border:1px solid var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:1.5rem}
+.panel{background:rgba(0,20,0,0.9);border:1px solid rgba(0,230,118,0.2);border-radius:16px;padding:1.5rem}
+.panel h3{color:var(--green);font-weight:900;font-size:1.1rem;margin-bottom:1rem;text-transform:uppercase}
+.metric{display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem}
+.metric-value{font-weight:900;color:var(--gold)}
+.company-row{display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.company-name{font-weight:600;font-size:0.9rem}
+.company-status{font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:10px;font-weight:700}
+.online{background:rgba(0,230,118,0.15);color:var(--green)}
+.threat-item{padding:0.6rem;background:rgba(255,68,68,0.05);border-left:3px solid var(--red);margin-bottom:0.5rem;border-radius:0 8px 8px 0;font-size:0.85rem}
+.threat-item.resolved{border-left-color:var(--green);background:rgba(0,230,118,0.05)}
+.nav-tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.nav-tab{background:rgba(0,30,0,0.8);border:1px solid rgba(0,230,118,0.2);color:#aaa;padding:0.6rem 1.2rem;border-radius:10px;cursor:pointer;font-weight:700;font-size:0.85rem}
+.nav-tab.active{background:var(--green);color:#000;border-color:var(--green)}
+.alert-banner{background:linear-gradient(90deg,var(--red),#cc0000);color:#fff;text-align:center;padding:1rem;border-radius:12px;font-weight:900;margin-bottom:1.5rem;display:none}
+.alert-banner.active{display:block}
+@media(max-width:600px){.header{flex-direction:column;gap:1rem;text-align:center}.header h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<div id="login">
+<h1>🔒 OMNIGUARD</h1>
+<p style="color:#888;margin-bottom:1.5rem;font-size:0.9rem">Empire Command Center — Authorized Only</p>
+<input type="password" id="pass" placeholder="Access code" onkeypress="if(event.key==='Enter')doLogin()">
+<button onclick="doLogin()">ACCESS</button>
+<p style="color:#555;margin-top:1rem;font-size:0.8rem">Unauthorized access is logged</p>
+</div>
+<div id="dash">
+<div class="alert-banner" id="alertBox">⚠️ THREAT: Unauthorized access on Floor 7 — Neutralized</div>
+<div class="header">
+<div><h1>⚡ COMMAND CENTER</h1><p style="color:#888;font-size:0.9rem">OmniGuard | 45 Companies | Agent Swarm Active</p></div>
+<div style="text-align:right"><span class="status-pill">● ALL SYSTEMS OK</span><p style="color:#888;font-size:0.8rem;margin-top:0.3rem">Sync: <span id="syncTime">--:--</span></p></div>
+</div>
+<div class="nav-tabs">
+<button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+<button class="nav-tab" onclick="showTab('companies')">45 Companies</button>
+<button class="nav-tab" onclick="showTab('security')">Security</button>
+<button class="nav-tab" onclick="showTab('revenue')">Revenue</button>
+<button class="nav-tab" onclick="showTab('support')">Support</button>
+</div>
+<div id="tab-overview" class="tab-content">
+<div class="grid">
+<div class="panel"><h3>🤖 Agent Swarm</h3><div class="metric"><span>Active Agents</span><span class="metric-value">247</span></div><div class="metric"><span>Tasks (24h)</span><span class="metric-value">18,492</span></div><div class="metric"><span>Neural Nodes</span><span class="metric-value">12,847</span></div><div class="metric"><span>Latency</span><span class="metric-value">23ms</span></div><div class="metric"><span>Uptime</span><span class="metric-value">99.97%</span></div></div>
+<div class="panel"><h3>🛡️ Threat Intel</h3><div class="metric"><span>Blocked (24h)</span><span class="metric-value">3,847</span></div><div class="metric"><span>Broker Scans</span><span class="metric-value">1,240</span></div><div class="metric"><span>VPN Connections</span><span class="metric-value">892</span></div><div class="metric"><span>Injections Blocked</span><span class="metric-value">47</span></div><div class="metric"><span>Score</span><span class="metric-value" style="color:var(--green)">A+</span></div></div>
+<div class="panel"><h3>💰 Revenue Pulse</h3><div class="metric"><span>Today</span><span class="metric-value">,291</span></div><div class="metric"><span>Subscriptions</span><span class="metric-value">142</span></div><div class="metric"><span>Pending</span><span class="metric-value">8</span></div><div class="metric"><span>Conversion</span><span class="metric-value">3.2%</span></div><div class="metric"><span>Ad Spend</span><span class="metric-value">80</span></div></div>
+<div class="panel"><h3>📡 Empire Health</h3><div class="metric"><span>Websites</span><span class="metric-value">45/45</span></div><div class="metric"><span>Repos</span><span class="metric-value">45</span></div><div class="metric"><span>Domains</span><span class="metric-value">90</span></div><div class="metric"><span>SSL</span><span class="metric-value">45/45</span></div><div class="metric"><span>PayPal</span><span class="metric-value" style="color:var(--green)">✓</span></div></div>
+</div>
+</div>
+<div id="tab-companies" class="tab-content" style="display:none"><div class="panel"><h3>🏢 45-Floor Empire</h3><div id="companyList"></div></div></div>
+<div id="tab-security" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>🚨 Threat Feed</h3><div class="threat-item">[14:32] Brute force on zprimedoxaihq.com — IP blocked</div><div class="threat-item">[14:15] Data broker exposure #4821 — Opt-out initiated</div><div class="threat-item resolved">[13:58] Prompt injection — Filter neutralized</div><div class="threat-item resolved">[13:22] DDoS on vigilax.com — CDN mitigated</div></div><div class="panel"><h3>🔐 Access Logs</h3><div class="metric"><span>Failed (24h)</span><span class="metric-value">23</span></div><div class="metric"><span>Success</span><span class="metric-value">847</span></div><div class="metric"><span>Admin</span><span class="metric-value">3</span></div><div class="metric"><span>Keys Rotated</span><span class="metric-value">12</span></div></div></div></div>
+<div id="tab-revenue" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>📊 By Vertical</h3><div class="metric"><span>AI & Auto</span><span class="metric-value">,840</span></div><div class="metric"><span>Cyber</span><span class="metric-value">92</span></div><div class="metric"><span>Legal</span><span class="metric-value">10</span></div><div class="metric"><span>Luxury</span><span class="metric-value">49</span></div><div class="metric"><span>Real Estate</span><span class="metric-value">/data/data/com.termux/files/usr/bin/bash</span></div><div class="metric"><span>Corporate</span><span class="metric-value">00</span></div></div><div class="panel"><h3>🎯 Ad Performance</h3><div class="metric"><span>Google CTR</span><span class="metric-value">2.8%</span></div><div class="metric"><span>Meta CTR</span><span class="metric-value">1.9%</span></div><div class="metric"><span>LinkedIn CTR</span><span class="metric-value">3.1%</span></div><div class="metric"><span>Organic</span><span class="metric-value">1,240</span></div></div></div></div>
+<div id="tab-support" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>💬 Queue</h3><div class="metric"><span>Open</span><span class="metric-value">5</span></div><div class="metric"><span>Response</span><span class="metric-value">4 min</span></div><div class="metric"><span>Escalated</span><span class="metric-value">2</span></div><div class="metric"><span>Satisfaction</span><span class="metric-value">4.8/5</span></div></div><div class="panel"><h3>📞 Live Agent</h3><div class="metric"><span>Status</span><span class="metric-value" style="color:var(--green)">● ONLINE</span></div><div class="metric"><span>Calls Today</span><span class="metric-value">3</span></div><div class="metric"><span>Missed</span><span class="metric-value">0</span></div><button style="width:100%;background:var(--red);color:#fff;font-weight:900;padding:1rem;border:none;border-radius:12px;cursor:pointer;margin-top:1rem" onclick="alert('Status: OFFLINE')">GO OFFLINE</button></div></div></div>
+</div>
+<script>
+function doLogin(){var p=document.getElementById('pass').value;if(p==='phoenix2026'||p==='Francisco7'){document.getElementById('login').style.display='none';document.getElementById('dash').style.display='block';updateTime();setInterval(updateTime,60000);loadCompanies();}else{alert('Access denied. Logged.');}}
+function updateTime(){var d=new Date();document.getElementById('syncTime').textContent=d.toLocaleTimeString();}
+function showTab(t){document.querySelectorAll('.tab-content').forEach(x=>x.style.display='none');document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t).style.display='block';event.target.classList.add('active');}
+function loadCompanies(){var floors=['Francisco Holdings HQ','OmniGuard','PrimeDox AI','CCLDR','Vault Velocity','CCC','BENO-X','Weedlaw','CleanSwarm','Kiaros','OmniAguard','TechPetCage','TechPackCage','Vault Velocity Auto','SoulStack','Phoenix Dominion','OmniGuard .ca','FH .ca','PrimeDox .ca','CCLDR .ca','VV .ca','CCC .ca','BENO-X .ca','Weedlaw .ca','CleanSwarm .ca','Kiaros .ca','OmniAguard .ca','TechPetCage .ca','TechPackCage .ca','VV Auto .ca','SoulStack .ca','Phoenix .ca','FH UK','FH US','FH EU','Omni UK','Omni US','Omni EU','PrimeDox UK','PrimeDox US','PrimeDox EU','CCLDR UK','CCLDR US','CCLDR EU','VV UK','VV US'];var h='';floors.forEach((f,i)=>{h+='<div class="company-row"><span class="company-name">Floor '+(i+1)+': '+f+'</span><span class="company-status online">● ONLINE</span></div>';});document.getElementById('companyList').innerHTML=h;}
+</script>
+</body>
+</html>
