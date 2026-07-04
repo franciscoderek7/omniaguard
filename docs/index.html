@@ -3,78 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OmniGuard — Empire Command Center</title>
-<meta name="robots" content="noindex, nofollow">
+<title>Francisco Holdings Inc — 45-Floor Global Empire</title>
+<meta name="description" content="Francisco Holdings Inc operates 45 companies across AI, cybersecurity, legal education, luxury brokerage, real estate. Full business automations. Real services. Real revenue.">
+<meta name="keywords" content="business automation,AI empire,cybersecurity,luxury brokerage,real estate,legal education,corporate consulting,Francisco Holdings">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Francisco Holdings Inc — 45-Floor Global Empire">
+<meta property="og:description" content="Full business automations. AI-powered empire. Real services. Real revenue.">
 <style>
-:root{--gold:#FFD700;--green:#00E676;--red:#ff4444}
+:root{--gold:#FFD700;--green:#00E676;--dark:#000a00}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,sans-serif;background:#000;color:#e0e0e0}
-#login{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000}
-#login h1{font-weight:900;font-size:2.5rem;color:var(--gold);margin-bottom:1rem}
-#login input{background:rgba(0,30,0,0.8);border:2px solid var(--green);color:#fff;padding:1rem;border-radius:12px;font-size:1.2rem;width:280px;text-align:center;margin-bottom:1rem}
-#login button{background:var(--green);color:#000;font-weight:900;padding:1rem 2rem;border:none;border-radius:12px;cursor:pointer;font-size:1rem}
-#dash{display:none;padding:1.5rem;max-width:1400px;margin:0 auto}
-.header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem;background:rgba(0,20,0,0.9);border:1px solid var(--green);border-radius:16px;margin-bottom:1.5rem}
-.header h1{font-weight:900;font-size:1.8rem;color:var(--gold)}
-.status-pill{display:inline-block;padding:0.4rem 1rem;border-radius:20px;font-weight:900;font-size:0.8rem;background:rgba(0,230,118,0.2);color:var(--green);border:1px solid var(--green)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-bottom:1.5rem}
-.panel{background:rgba(0,20,0,0.9);border:1px solid rgba(0,230,118,0.2);border-radius:16px;padding:1.5rem}
-.panel h3{color:var(--green);font-weight:900;font-size:1.1rem;margin-bottom:1rem;text-transform:uppercase}
-.metric{display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem}
-.metric-value{font-weight:900;color:var(--gold)}
-.company-row{display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-.company-name{font-weight:600;font-size:0.9rem}
-.company-status{font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:10px;font-weight:700}
-.online{background:rgba(0,230,118,0.15);color:var(--green)}
-.threat-item{padding:0.6rem;background:rgba(255,68,68,0.05);border-left:3px solid var(--red);margin-bottom:0.5rem;border-radius:0 8px 8px 0;font-size:0.85rem}
-.threat-item.resolved{border-left-color:var(--green);background:rgba(0,230,118,0.05)}
-.nav-tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.nav-tab{background:rgba(0,30,0,0.8);border:1px solid rgba(0,230,118,0.2);color:#aaa;padding:0.6rem 1.2rem;border-radius:10px;cursor:pointer;font-weight:700;font-size:0.85rem}
-.nav-tab.active{background:var(--green);color:#000;border-color:var(--green)}
-.alert-banner{background:linear-gradient(90deg,var(--red),#cc0000);color:#fff;text-align:center;padding:1rem;border-radius:12px;font-weight:900;margin-bottom:1.5rem;display:none}
-.alert-banner.active{display:block}
-@media(max-width:600px){.header{flex-direction:column;gap:1rem;text-align:center}.header h1{font-size:1.4rem}}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem 1rem;background:radial-gradient(ellipse at center,rgba(0,30,0,0.3) 0%,transparent 70%)}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#FFA000);color:#000;font-weight:900;font-size:0.75rem;padding:0.4rem 1.2rem;border-radius:20px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-weight:900;font-size:3.5rem;color:var(--gold);text-shadow:0 0 40px rgba(255,215,0,0.3);margin-bottom:0.5rem}
+.hero h1 span{display:block;font-size:1.2rem;color:var(--green);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem}
+.hero p{font-size:1.3rem;color:#aaa;max-width:600px;margin:1rem auto 2rem}
+.btn-primary{background:linear-gradient(135deg,var(--gold),#FFA000);color:#000;font-weight:900;font-size:1.1rem;padding:1.2rem 2.5rem;border:none;border-radius:50px;text-decoration:none;display:inline-block;box-shadow:0 4px 20px rgba(255,215,0,0.3)}
+.btn-secondary{background:transparent;color:var(--green);font-weight:900;font-size:1.1rem;padding:1.2rem 2.5rem;border:2px solid var(--green);border-radius:50px;text-decoration:none;display:inline-block;margin-left:1rem}
+.stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:2rem;background:linear-gradient(90deg,transparent,rgba(0,230,118,0.05),transparent);border-top:1px solid rgba(0,230,118,0.1);border-bottom:1px solid rgba(0,230,118,0.1)}
+.stat{text-align:center}
+.stat-num{font-weight:900;font-size:2.5rem;color:var(--gold)}
+.stat-label{font-weight:600;font-size:0.85rem;color:#888;text-transform:uppercase}
+.section{padding:5rem 1.5rem}
+.section h2{text-align:center;font-weight:900;font-size:2.2rem;color:var(--gold);margin-bottom:0.5rem}
+.section > p{text-align:center;color:#888;margin-bottom:3rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:1300px;margin:0 auto}
+.card{background:rgba(0,20,0,0.85);border:1px solid rgba(0,230,118,0.2);border-radius:20px;padding:2rem;transition:all 0.3s ease}
+.card:hover{transform:translateY(-8px);border-color:var(--green);box-shadow:0 20px 50px rgba(0,230,118,0.15)}
+.card h3{color:var(--green);font-weight:900;font-size:1.2rem;margin-bottom:0.8rem}
+.card p{color:#aaa;font-size:0.95rem;line-height:1.6;margin-bottom:1rem}
+.card ul{list-style:none;margin-bottom:1.5rem}
+.card li{color:#ccc;font-size:0.9rem;padding:0.4rem 0;padding-left:1.2rem;position:relative}
+.card li::before{content:"▸";position:absolute;left:0;color:var(--gold);font-weight:900}
+.card a{background:linear-gradient(135deg,var(--gold),#FFA000);color:#000;font-weight:900;padding:0.8rem 1.5rem;border-radius:10px;text-decoration:none;font-size:0.9rem;display:inline-block}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto}
+.price-card{background:rgba(0,20,0,0.85);border:2px solid rgba(0,230,118,0.3);border-radius:20px;padding:2.5rem 2rem;text-align:center}
+.price-card:hover{transform:translateY(-6px);border-color:var(--green)}
+.price-card.popular{border-color:var(--gold);box-shadow:0 0 30px rgba(255,215,0,0.1)}
+.pop-badge{display:inline-block;background:var(--gold);color:#000;font-weight:900;font-size:0.7rem;padding:0.3rem 1rem;border-radius:20px;margin-bottom:1rem}
+.price-card h3{color:var(--green);font-weight:900;font-size:1.3rem}
+.price{font-weight:900;font-size:3rem;color:var(--gold);margin:1rem 0}
+.price span{font-size:1rem;color:#888}
+.price-card ul{list-style:none;text-align:left;margin:2rem 0}
+.price-card li{color:#ccc;font-size:0.9rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.price-card li::before{content:"✓";color:var(--green);font-weight:900;margin-right:0.5rem}
+.price-btn{width:100%;background:linear-gradient(135deg,var(--gold),#FFA000);color:#000;font-weight:900;padding:1rem;border:none;border-radius:12px;cursor:pointer;font-size:1rem}
+.trust{text-align:center;padding:3rem 1.5rem}
+.trust span{color:var(--green);font-weight:700;font-size:0.9rem;margin:0 1rem;opacity:0.7}
+.footer{text-align:center;padding:3rem;border-top:1px solid rgba(0,230,118,0.1)}
+.footer .tag{color:var(--gold);font-weight:900}
+#cs-widget{position:fixed;bottom:20px;right:20px;z-index:9999;font-family:system-ui,sans-serif}
+#cs-bubble{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#FFA000);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(255,215,0,0.4);font-size:1.8rem;border:3px solid #000}
+#cs-panel{position:absolute;bottom:75px;right:0;width:340px;background:linear-gradient(180deg,#001400,#000a00);border:2px solid var(--green);border-radius:20px;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.9)}
+#cs-panel.active{display:flex}
+#cs-header{background:linear-gradient(90deg,var(--gold),#FFA000);color:#000;padding:1rem 1.5rem;font-weight:900;display:flex;justify-content:space-between;align-items:center}
+#cs-close{background:none;border:none;color:#000;font-size:1.5rem;cursor:pointer;font-weight:900}
+#cs-body{padding:1rem;max-height:350px;overflow-y:auto}
+.cs-msg{margin-bottom:0.8rem;padding:0.8rem 1rem;border-radius:12px;font-size:0.9rem;max-width:85%}
+.cs-bot{background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.3);color:#e0e0e0}
+.cs-user{background:var(--gold);color:#000;margin-left:auto;font-weight:600}
+#cs-footer{padding:1rem;border-top:1px solid rgba(0,230,118,0.1);display:flex;gap:0.5rem}
+#cs-input{flex:1;background:rgba(0,0,0,0.5);border:1px solid var(--green);border-radius:10px;padding:0.8rem;color:#fff}
+#cs-send{background:var(--green);color:#000;border:none;border-radius:10px;padding:0 1rem;font-weight:900;cursor:pointer}
+.cs-esc{display:block;width:100%;background:linear-gradient(135deg,#ff4444,#cc0000);color:#fff;font-weight:900;padding:0.8rem;border:none;border-radius:10px;cursor:pointer;margin-top:0.5rem}
+#cs-typing{color:#888;font-size:0.8rem;padding:0 1rem;font-style:italic;display:none}
+@media(max-width:600px){.hero h1{font-size:2.2rem}.stats{gap:1.5rem}.stat-num{font-size:2rem}#cs-panel{width:calc(100vw - 40px);right:-10px}}
 </style>
 </head>
 <body>
-<div id="login">
-<h1>🔒 OMNIGUARD</h1>
-<p style="color:#888;margin-bottom:1.5rem;font-size:0.9rem">Empire Command Center — Authorized Only</p>
-<input type="password" id="pass" placeholder="Access code" onkeypress="if(event.key==='Enter')doLogin()">
-<button onclick="doLogin()">ACCESS</button>
-<p style="color:#555;margin-top:1rem;font-size:0.8rem">Unauthorized access is logged</p>
-</div>
-<div id="dash">
-<div class="alert-banner" id="alertBox">⚠️ THREAT: Unauthorized access on Floor 7 — Neutralized</div>
-<div class="header">
-<div><h1>⚡ COMMAND CENTER</h1><p style="color:#888;font-size:0.9rem">OmniGuard | 45 Companies | Agent Swarm Active</p></div>
-<div style="text-align:right"><span class="status-pill">● ALL SYSTEMS OK</span><p style="color:#888;font-size:0.8rem;margin-top:0.3rem">Sync: <span id="syncTime">--:--</span></p></div>
-</div>
-<div class="nav-tabs">
-<button class="nav-tab active" onclick="showTab('overview')">Overview</button>
-<button class="nav-tab" onclick="showTab('companies')">45 Companies</button>
-<button class="nav-tab" onclick="showTab('security')">Security</button>
-<button class="nav-tab" onclick="showTab('revenue')">Revenue</button>
-<button class="nav-tab" onclick="showTab('support')">Support</button>
-</div>
-<div id="tab-overview" class="tab-content">
-<div class="grid">
-<div class="panel"><h3>🤖 Agent Swarm</h3><div class="metric"><span>Active Agents</span><span class="metric-value">247</span></div><div class="metric"><span>Tasks (24h)</span><span class="metric-value">18,492</span></div><div class="metric"><span>Neural Nodes</span><span class="metric-value">12,847</span></div><div class="metric"><span>Latency</span><span class="metric-value">23ms</span></div><div class="metric"><span>Uptime</span><span class="metric-value">99.97%</span></div></div>
-<div class="panel"><h3>🛡️ Threat Intel</h3><div class="metric"><span>Blocked (24h)</span><span class="metric-value">3,847</span></div><div class="metric"><span>Broker Scans</span><span class="metric-value">1,240</span></div><div class="metric"><span>VPN Connections</span><span class="metric-value">892</span></div><div class="metric"><span>Injections Blocked</span><span class="metric-value">47</span></div><div class="metric"><span>Score</span><span class="metric-value" style="color:var(--green)">A+</span></div></div>
-<div class="panel"><h3>💰 Revenue Pulse</h3><div class="metric"><span>Today</span><span class="metric-value">,291</span></div><div class="metric"><span>Subscriptions</span><span class="metric-value">142</span></div><div class="metric"><span>Pending</span><span class="metric-value">8</span></div><div class="metric"><span>Conversion</span><span class="metric-value">3.2%</span></div><div class="metric"><span>Ad Spend</span><span class="metric-value">80</span></div></div>
-<div class="panel"><h3>📡 Empire Health</h3><div class="metric"><span>Websites</span><span class="metric-value">45/45</span></div><div class="metric"><span>Repos</span><span class="metric-value">45</span></div><div class="metric"><span>Domains</span><span class="metric-value">90</span></div><div class="metric"><span>SSL</span><span class="metric-value">45/45</span></div><div class="metric"><span>PayPal</span><span class="metric-value" style="color:var(--green)">✓</span></div></div>
-</div>
-</div>
-<div id="tab-companies" class="tab-content" style="display:none"><div class="panel"><h3>🏢 45-Floor Empire</h3><div id="companyList"></div></div></div>
-<div id="tab-security" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>🚨 Threat Feed</h3><div class="threat-item">[14:32] Brute force on zprimedoxaihq.com — IP blocked</div><div class="threat-item">[14:15] Data broker exposure #4821 — Opt-out initiated</div><div class="threat-item resolved">[13:58] Prompt injection — Filter neutralized</div><div class="threat-item resolved">[13:22] DDoS on vigilax.com — CDN mitigated</div></div><div class="panel"><h3>🔐 Access Logs</h3><div class="metric"><span>Failed (24h)</span><span class="metric-value">23</span></div><div class="metric"><span>Success</span><span class="metric-value">847</span></div><div class="metric"><span>Admin</span><span class="metric-value">3</span></div><div class="metric"><span>Keys Rotated</span><span class="metric-value">12</span></div></div></div></div>
-<div id="tab-revenue" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>📊 By Vertical</h3><div class="metric"><span>AI & Auto</span><span class="metric-value">,840</span></div><div class="metric"><span>Cyber</span><span class="metric-value">92</span></div><div class="metric"><span>Legal</span><span class="metric-value">10</span></div><div class="metric"><span>Luxury</span><span class="metric-value">49</span></div><div class="metric"><span>Real Estate</span><span class="metric-value">/data/data/com.termux/files/usr/bin/bash</span></div><div class="metric"><span>Corporate</span><span class="metric-value">00</span></div></div><div class="panel"><h3>🎯 Ad Performance</h3><div class="metric"><span>Google CTR</span><span class="metric-value">2.8%</span></div><div class="metric"><span>Meta CTR</span><span class="metric-value">1.9%</span></div><div class="metric"><span>LinkedIn CTR</span><span class="metric-value">3.1%</span></div><div class="metric"><span>Organic</span><span class="metric-value">1,240</span></div></div></div></div>
-<div id="tab-support" class="tab-content" style="display:none"><div class="grid"><div class="panel"><h3>💬 Queue</h3><div class="metric"><span>Open</span><span class="metric-value">5</span></div><div class="metric"><span>Response</span><span class="metric-value">4 min</span></div><div class="metric"><span>Escalated</span><span class="metric-value">2</span></div><div class="metric"><span>Satisfaction</span><span class="metric-value">4.8/5</span></div></div><div class="panel"><h3>📞 Live Agent</h3><div class="metric"><span>Status</span><span class="metric-value" style="color:var(--green)">● ONLINE</span></div><div class="metric"><span>Calls Today</span><span class="metric-value">3</span></div><div class="metric"><span>Missed</span><span class="metric-value">0</span></div><button style="width:100%;background:var(--red);color:#fff;font-weight:900;padding:1rem;border:none;border-radius:12px;cursor:pointer;margin-top:1rem" onclick="alert('Status: OFFLINE')">GO OFFLINE</button></div></div></div>
-</div>
+<section class="hero">
+<div class="badge">🛡️ SoulStack Verified</div>
+<h1>FRANCISCO HOLDINGS INC<span>45-Floor Global Empire</span></h1>
+<p>Full business automations across AI, cybersecurity, legal education, luxury brokerage, and real estate. Real services. Real infrastructure. Real revenue.</p>
+<div><a href="#services" class="btn-primary">Explore Services</a><a href="#pricing" class="btn-secondary">View Pricing</a></div>
+</section>
+<div class="stats"><div class="stat"><div class="stat-num">45</div><div class="stat-label">Companies</div></div><div class="stat"><div class="stat-num">6</div><div class="stat-label">Verticals</div></div><div class="stat"><div class="stat-num">24/7</div><div class="stat-label">AI Concierge</div></div><div class="stat"><div class="stat-num">Global</div><div class="stat-label">Reach</div></div></div>
+<section class="section" id="services"><h2>Empire Services</h2><p>Every company in the tower is operational, revenue-generating, and fully automated</p><div class="grid">
+<div class="card"><h3>🤖 AI & Automation</h3><p>PrimeDox AI Concierge, Agent Swarm Technology, Neural Graph Systems, custom AI specialist deployment.</p><ul><li>Multi-agent orchestration</li><li>Document generation AI</li><li>Neural decision networks</li><li>Custom specialist training</li></ul><a href="https://zprimedoxaihq.com">Access AI HQ →</a></div>
+<div class="card"><h3>🛡️ Cybersecurity</h3><p>OmniGuard Agentic AI Security — device protection, VPN, data broker defense, prompt injection shields.</p><ul><li>WireGuard VPN (5-10 devices)</li><li>Real-time threat scanning</li><li>Data broker monitoring</li><li>Prompt injection shield</li></ul><a href="https://vigilax.com">Secure Empire →</a></div>
+<div class="card"><h3>⚖️ Legal Education</h3><p>The most dangerous legal education platform. Cannabis law, constitutional advocacy, partnerships.</p><ul><li>Cannabis law history (2000–present)</li><li>Constitutional advocacy resources</li><li>Paralegal / lawyer partnerships</li><li>Self-representation guides</li></ul><a href="https://ccldr.net">Enter CCLDR →</a></div>
+<div class="card"><h3>🏎️ Luxury Brokerage</h3><p>Vault Velocity — white-glove concierge for supercars, jets, yachts, helicopters, armored vehicles.</p><ul><li>Supercar & armored vehicle sourcing</li><li>Aircraft & yacht brokerage</li><li>Global shipping & logistics</li><li>Luxury financing marketplace</li></ul><a href="https://vaultvelocityauto.com">Configure Dream →</a></div>
+<div class="card"><h3>🏢 Real Estate</h3><p>Full-service brokerage with vertical integration — sales, legal coordination, commercial & residential.</p><ul><li>Full-service property brokerage</li><li>Sales + legal coordination</li><li>Commercial & residential</li><li>Vertical integration services</li></ul><a href="#contact">List Property →</a></div>
+<div class="card"><h3>🌐 Corporate Consulting</h3><p>Empire architecture, global expansion strategy, revenue system integration, SoulStack badge systems.</p><ul><li>45+ company holding architecture</li><li>Global expansion roadmaps</li><li>Revenue system integration</li><li>SoulStack loyalty systems</li></ul><a href="#pricing">Consult Now →</a></div>
+</div></section>
+<section class="section" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(0,230,118,0.03))"><h2>Empire Access Tiers</h2><p>Real products. Real delivery. Real revenue share.</p><div class="pricing-grid">
+<div class="price-card"><h3>SOULSTACK</h3><div class="price">FREE</div><ul><li>Empire Dashboard Access</li><li>Weekly Intelligence Brief</li><li>Community Discord</li><li>Bronze SoulStack Badge</li></ul><button class="price-btn" onclick="alert('Welcome to the Empire!')">Join Free</button></div>
+<div class="price-card popular"><div class="pop-badge">MOST POPULAR</div><h3>STARTER</h3><div class="price">99<span> one-time</span></div><ul><li>Business Process Audit</li><li>3 Custom Automations</li><li>PrimeDox AI Setup</li><li>Email Sequence Build</li><li>30-Day Support</li><li>Silver SoulStack Badge</li></ul><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="franciscoderek7@gmail.com"><input type="hidden" name="item_name" value="FH Automation Starter"><input type="hidden" name="amount" value="999.00"><input type="hidden" name="currency_code" value="CAD"><button type="submit" class="price-btn">💳 Activate</button></form></div>
+<div class="price-card"><h3>BUILDER</h3><div class="price">,999<span> one-time</span></div><ul><li>Full Company Structure</li><li>AI Concierge Deployment</li><li>Domain + Hosting Config</li><li>Revenue System (PayPal/Stripe)</li><li>SEO + Sitemap Optimization</li><li>Agent Swarm Configuration</li><li>1-Year Priority Support</li><li>Gold SoulStack Badge</li></ul><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="franciscoderek7@gmail.com"><input type="hidden" name="item_name" value="FH Empire Builder"><input type="hidden" name="amount" value="4999.00"><input type="hidden" name="currency_code" value="CAD"><button type="submit" class="price-btn">💳 Build Empire</button></form></div>
+<div class="price-card"><h3>DOMINION</h3><div class="price">4,999<span> one-time</span></div><ul><li>45+ Company Architecture</li><li>Full Vertical Integration</li><li>Dedicated AI Engineering</li><li>Custom Neural Graph</li><li>White-Label Platform</li><li>Global Expansion Roadmap</li><li>Lifetime Support</li><li>Obsidian SoulStack Badge</li></ul><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"><input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="business" value="franciscoderek7@gmail.com"><input type="hidden" name="item_name" value="FH Phoenix Dominion"><input type="hidden" name="amount" value="24999.00"><input type="hidden" name="currency_code" value="CAD"><button type="submit" class="price-btn">💳 Claim Dominion</button></form></div>
+</div></section>
+<div class="trust"><h3 style="font-weight:900;color:var(--gold);font-size:1.2rem;margin-bottom:1rem">Trusted Across the Empire</h3><span>🔒 256-bit Encryption</span><span>⚡ Instant Activation</span><span>✓ 30-Day Guarantee</span><span>🌐 Global CDN</span><span>🤖 AI-Powered</span></div>
+<footer class="footer"><p class="tag">FRANCISCO HOLDINGS INC</p><p>45-Floor Global Empire | Phoenix Dominion</p><p style="margin-top:0.5rem;color:#555;font-size:0.8rem">© 2026 Francisco Holdings Inc. All rights reserved.</p></footer>
+<div id="cs-widget"><div id="cs-panel"><div id="cs-header"><span>🛡️ OmniGuard Support</span><button id="cs-close" onclick="toggleCS()">×</button></div><div id="cs-body"><div class="cs-msg cs-bot">Welcome to the Francisco Holdings Empire. I am your AI concierge. How can I assist you today?</div><div id="cs-typing">OmniGuard is typing...</div></div><div id="cs-footer"><input type="text" id="cs-input" placeholder="Type your question..." onkeypress="if(event.key==='Enter')sendCS()"><button id="cs-send" onclick="sendCS()">→</button></div><div style="padding:0 1rem 1rem"><button class="cs-esc" onclick="escalateCS()">📞 Call Live Agent</button></div></div><div id="cs-bubble" onclick="toggleCS()">💬</div></div>
 <script>
-function doLogin(){var p=document.getElementById('pass').value;if(p==='phoenix2026'||p==='Francisco7'){document.getElementById('login').style.display='none';document.getElementById('dash').style.display='block';updateTime();setInterval(updateTime,60000);loadCompanies();}else{alert('Access denied. Logged.');}}
-function updateTime(){var d=new Date();document.getElementById('syncTime').textContent=d.toLocaleTimeString();}
-function showTab(t){document.querySelectorAll('.tab-content').forEach(x=>x.style.display='none');document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+t).style.display='block';event.target.classList.add('active');}
-function loadCompanies(){var floors=['Francisco Holdings HQ','OmniGuard','PrimeDox AI','CCLDR','Vault Velocity','CCC','BENO-X','Weedlaw','CleanSwarm','Kiaros','OmniAguard','TechPetCage','TechPackCage','Vault Velocity Auto','SoulStack','Phoenix Dominion','OmniGuard .ca','FH .ca','PrimeDox .ca','CCLDR .ca','VV .ca','CCC .ca','BENO-X .ca','Weedlaw .ca','CleanSwarm .ca','Kiaros .ca','OmniAguard .ca','TechPetCage .ca','TechPackCage .ca','VV Auto .ca','SoulStack .ca','Phoenix .ca','FH UK','FH US','FH EU','Omni UK','Omni US','Omni EU','PrimeDox UK','PrimeDox US','PrimeDox EU','CCLDR UK','CCLDR US','CCLDR EU','VV UK','VV US'];var h='';floors.forEach((f,i)=>{h+='<div class="company-row"><span class="company-name">Floor '+(i+1)+': '+f+'</span><span class="company-status online">● ONLINE</span></div>';});document.getElementById('companyList').innerHTML=h;}
+function toggleCS(){document.getElementById('cs-panel').classList.toggle('active')}
+function escalateCS(){window.location.href='tel:YOUR_PHONE_NUMBER_HERE'}
 </script>
 </body>
 </html>
