@@ -1,65 +1,15 @@
 {
-  "name": "OmniaGuard AI Security",
-  "short_name": "OmniaGuard",
-  "description": "14-layer AI enterprise security. Encrypted vault, data broker protection, real-time threat intelligence. 0% breach rate.",
-  "start_url": "/",
-  "scope": "/",
+  "name": "OmniGuard — AI Security",
+  "short_name": "OmniGuard",
+  "description": "AI agent-swarm security: phishing detection, threat intelligence, and device protection.",
+  "start_url": "./omni-guard.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0a0a14",
-  "theme_color": "#00d4ff",
-  "orientation": "any",
-  "lang": "en",
-  "categories": ["security", "productivity", "utilities"],
-  "prefer_related_applications": false,
+  "background_color": "#05050f",
+  "theme_color": "#4A90E2",
+  "orientation": "portrait-primary",
   "icons": [
-    {"src": "omniaguard-logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-    {"src": "omniaguard-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-    {"src": "omniaguard-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
-  ],
-  "screenshots": [
-    {
-      "src": "omniaguard-neon.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "form_factor": "wide",
-      "label": "OmniaGuard Enterprise Security Dashboard"
-    },
-    {
-      "src": "omniaguard-logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "OmniaGuard Mobile Security"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Encrypted Vault",
-      "short_name": "Vault",
-      "description": "Access your AES-256 encrypted password and document vault",
-      "url": "/vault.html",
-      "icons": [{"src": "omniaguard-logo.png", "sizes": "192x192"}]
-    },
-    {
-      "name": "Threat Dashboard",
-      "short_name": "Threats",
-      "description": "View live threat intelligence and security status",
-      "url": "/threat-dashboard.html",
-      "icons": [{"src": "omniaguard-logo.png", "sizes": "192x192"}]
-    },
-    {
-      "name": "Data Broker Opt-Out",
-      "short_name": "Privacy",
-      "description": "Remove your data from 40+ data brokers",
-      "url": "/data-broker.html",
-      "icons": [{"src": "omniaguard-logo.png", "sizes": "192x192"}]
-    },
-    {
-      "name": "Install Guide",
-      "short_name": "Install",
-      "description": "Install OmniaGuard on all your devices",
-      "url": "/install-guide.html",
-      "icons": [{"src": "omniaguard-logo.png", "sizes": "192x192"}]
-    }
+    { "src": "icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" }
   ]
 }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to OmniGuard Pro</title>
+<meta name="description" content="Payment confirmed. Welcome to OmniGuard Pro — your AI security swarm is now active.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23090918'/><text y='.68em' font-size='62' text-anchor='middle' x='50'>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#4A90E2;--blue-dark:#2c5ea3;--blue-light:#7db4ed;
+  --pink:#E91E63;--pink-dark:#a8123f;--pink-light:#f17ba0;
+  --bg:#05050f;--bg2:#0a0a1a;--bg3:#0e0e22;
+  --white:#f0f2f8;--gray:#8a8fa8;--gray-dim:#5a5f78;
+  --border:rgba(74,144,226,0.18);--glass:rgba(16,16,34,0.6);
+}
+body{background:var(--bg);color:var(--white);font-family:'Inter',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.6}
+h1,h2,h3{font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.5px}
+a{color:inherit;text-decoration:none}
+
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:48px 40px;max-width:560px;width:100%;text-align:center}
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Orbitron',sans-serif;font-weight:900;font-size:18px;letter-spacing:1px;background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:28px}
+.logo-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--blue),var(--pink));display:flex;align-items:center;justify-content:center;font-size:14px;-webkit-text-fill-color:initial}
+
+.icon{font-size:56px;margin-bottom:18px}
+h1{font-size:26px;margin-bottom:10px}
+.lead{color:var(--gray);font-size:15px;max-width:420px;margin:0 auto 28px}
+
+.box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:24px;text-align:left}
+.box-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink-light);margin-bottom:10px}
+.ref-row{display:flex;gap:8px;align-items:center}
+.ref-input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--white);font-size:13px;padding:10px 12px;font-family:'Inter',monospace;overflow-x:auto;white-space:nowrap}
+.copy-btn{background:linear-gradient(90deg,var(--blue),var(--pink));color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.copy-btn:active{transform:translateY(1px)}
+.ref-note{color:var(--gray);font-size:12.5px;margin-top:10px}
+
+.upsell{background:linear-gradient(135deg,rgba(74,144,226,.12),rgba(233,30,99,.1));border:1px solid var(--blue);border-radius:14px;padding:24px;margin-bottom:28px;text-align:center}
+.upsell-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink-light);margin-bottom:8px}
+.upsell-price{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;color:#fff}
+.upsell-price .was{font-size:14px;color:var(--gray-dim);text-decoration:line-through;font-family:'Inter',sans-serif;font-weight:600;margin-right:6px}
+.upsell-sub{color:var(--gray);font-size:13px;margin:8px 0 16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:8px;font-size:13.5px;font-weight:700;letter-spacing:.4px;border:none;cursor:pointer}
+.btn-outline{border:1px solid rgba(240,242,248,.25);color:var(--white);background:rgba(255,255,255,.03)}
+.btn-outline:hover{border-color:var(--blue-light);color:var(--blue-light)}
+.btn-primary{background:linear-gradient(90deg,var(--blue),var(--pink));color:#fff}
+
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.support{font-size:12.5px;color:var(--gray-dim)}
+.support a{color:var(--blue-light)}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <a href="omni-guard.html" class="logo"><span class="logo-mark">🛡️</span>OmniGuard</a>
+  <div class="icon">✅</div>
+  <h1>Your Shield Is Active</h1>
+  <p class="lead">Payment confirmed. Welcome to <strong style="color:#fff">OmniGuard Pro</strong> — your AI security swarm and Timmy AI Oversight are now protecting your devices. A confirmation email with setup steps is on its way.</p>
+
+  <div class="box">
+    <div class="box-label">Share OmniGuard, Earn Rewards</div>
+    <div class="ref-row">
+      <span class="ref-input" id="ref-link">Generating your link…</span>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+    </div>
+    <p class="ref-note">Share this link with friends and family. Referrals unlock discount tiers and rewards on future OmniGuard purchases.</p>
+  </div>
+
+  <div class="upsell">
+    <div class="upsell-tag">Switch &amp; Save</div>
+    <div class="upsell-price"><span class="was">$118.88/yr</span>$99/yr</div>
+    <p class="upsell-sub">Move to annual billing and get OmniGuard Pro for the equivalent of ~2 months free versus paying monthly.</p>
+    <a href="https://paypal.me/techpetcage/99CAD" target="_blank" rel="noopener" class="btn btn-primary">Switch to Annual — $99/yr →</a>
+  </div>
+
+  <div class="actions">
+    <a href="omni-guard.html" class="btn btn-outline">← Back to OmniGuard</a>
+  </div>
+
+  <p class="support">Questions? Email <a href="mailto:omniaguard1@gmail.com?subject=OmniGuard%20Pro%20Onboarding">omniaguard1@gmail.com</a></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/franciscoderek7/primedoxai-deploy@main/agents/referral-engine.js"></script>
+<script>
+(function () {
+  function randomCode() {
+    return 'OG-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+  }
+
+  function renderShareLink() {
+    var el = document.getElementById('ref-link');
+    if (!el || !window.ReferralEngine) return;
+
+    var stored = null;
+    try {
+      var raw = localStorage.getItem('pd_referral');
+      stored = raw ? JSON.parse(raw) : null;
+    } catch (e) {}
+
+    var myCode = (stored && stored.myCode) || randomCode();
+    if (!stored || !stored.myCode) {
+      try {
+        var data = stored || { code: null, discount: 0, source: null, ts: null, commissions: [] };
+        data.myCode = myCode;
+        localStorage.setItem('pd_referral', JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    el.textContent = window.ReferralEngine.getShareLink(myCode);
+  }
+
+  function init() {
+    renderShareLink();
+    var btn = document.getElementById('copy-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var el = document.getElementById('ref-link');
+      var text = el ? el.textContent : '';
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+        });
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

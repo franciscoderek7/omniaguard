@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact OmniGuard — AI Security Operations Center</title>
+<meta name="description" content="Talk to OmniGuard about securing your organization. No spam, no sales pressure — just a fast response from the team.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23090918'/><text y='.68em' font-size='62' text-anchor='middle' x='50'>🛡️</text></svg>">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%;background:#000;font-family:'Inter',Arial,sans-serif;color:#fff}
+  body{display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{max-width:480px;width:100%;background:linear-gradient(160deg,rgba(10,14,24,0.95),rgba(20,10,20,0.95));
+        border:1px solid #4A90E2;border-radius:14px;padding:32px;box-shadow:0 0 30px rgba(74,144,226,0.2)}
+  .brand{font-weight:700;letter-spacing:1px;font-size:14px;margin-bottom:6px;text-transform:uppercase;
+        background:linear-gradient(90deg,#4A90E2,#E91E63);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1{font-size:22px;margin-bottom:8px}
+  p.lead{color:#c0c0c0;font-size:14px;margin-bottom:24px;line-height:1.5}
+  label{display:block;font-size:12px;letter-spacing:0.5px;color:#7db4ed;text-transform:uppercase;margin-bottom:6px}
+  .field{margin-bottom:16px}
+  input,textarea{width:100%;background:#111;border:1px solid #2a3550;color:#fff;border-radius:8px;
+        padding:10px 12px;font-size:14px;font-family:inherit}
+  input:focus,textarea:focus{outline:none;border-color:#4A90E2}
+  textarea{min-height:100px;resize:vertical}
+  button{width:100%;background:linear-gradient(135deg,#4A90E2,#E91E63);color:#fff;border:none;
+        font-size:14px;font-weight:600;padding:12px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
+  button:disabled{opacity:0.6;cursor:not-allowed}
+  #status{margin-top:14px;font-size:13px;min-height:18px}
+  #status.ok{color:#4ade80}
+  #status.err{color:#E91E63}
+  .fallback{margin-top:18px;font-size:12px;color:#888;text-align:center}
+  .fallback a{color:#7db4ed;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand">OmniGuard — AI Security Operations Center</div>
+  <h1>Talk to the team</h1>
+  <p class="lead">Tell us about your security setup and what you're worried about. We respond fast — no spam, no sales pressure.</p>
+
+  <form id="lead-form">
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+    </div>
+    <div class="field">
+      <label for="company">Company (optional)</label>
+      <input id="company" name="company" type="text" autocomplete="organization">
+    </div>
+    <div class="field">
+      <label for="message">What's your security concern?</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit" id="submit-btn">Send</button>
+    <div id="status" role="status"></div>
+  </form>
+
+  <div class="fallback">Prefer email? Reach us directly at <a href="mailto:omniaguard1@gmail.com">omniaguard1@gmail.com</a></div>
+</div>
+
+<script>
+  // Replace with the Production URL of the "OmniGuard Lead Webhook" node
+  // (automation/n8n/workflow-7-omniguard-lead-capture.json) once that workflow
+  // is imported and activated in n8n.
+  const WEBHOOK_URL = 'REPLACE-WITH-N8N-WEBHOOK-PRODUCTION-URL';
+
+  const form = document.getElementById('lead-form');
+  const statusEl = document.getElementById('status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.className = '';
+    statusEl.textContent = '';
+
+    if (WEBHOOK_URL.startsWith('REPLACE-')) {
+      statusEl.className = 'err';
+      statusEl.textContent = 'Form not wired up yet — contact omniaguard1@gmail.com directly.';
+      return;
+    }
+
+    const payload = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      company: form.company.value.trim(),
+      message: form.message.value.trim(),
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      statusEl.className = 'ok';
+      statusEl.textContent = "Thanks — we've got it. We'll be in touch shortly.";
+      form.reset();
+    } catch (err) {
+      statusEl.className = 'err';
+      statusEl.textContent = 'Something went wrong — email omniaguard1@gmail.com instead.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send';
+    }
+  });
+</script>
+
+</body>
+</html>
