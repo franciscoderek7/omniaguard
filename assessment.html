@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Security Assessment — OmniaGuard</title>
+<meta name="description" content="Get your free AI agent security assessment. Discover vulnerabilities in your AI infrastructure before attackers do. 15-minute assessment, instant results.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a0e27;--navy2:#0d1130;--card:#111a3a;--border:rgba(0,212,255,.12);--border2:rgba(0,212,255,.25);--cyan:#00d4ff;--text:#e8eeff;--muted:#8892a4;--red:#ef5350;--green:#43a047;--font:"Inter",system-ui,sans-serif}
+body{background:var(--navy);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6}
+nav{background:rgba(10,14,39,.95);border-bottom:1px solid var(--border);padding:0 40px;height:64px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-logo{font-size:18px;font-weight:900;color:#fff}.nav-logo span{color:var(--cyan)}
+.nav-spacer{flex:1}
+.back-link{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:6px;transition:color .15s}.back-link:hover{color:var(--text)}
+
+.page{max-width:1000px;margin:0 auto;padding:64px 40px}
+.page-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,83,80,.1);border:1px solid rgba(239,83,80,.3);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:.5px;margin-bottom:24px}
+h1{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+h1 span{color:var(--cyan)}
+.sub{font-size:18px;color:var(--muted);margin-bottom:48px;max-width:600px}
+
+.two-col{display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:start}
+
+/* THREAT STATS */
+.stats{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.stat{background:rgba(239,83,80,.06);border:1px solid rgba(239,83,80,.2);border-radius:10px;padding:16px 20px}
+.stat-num{font-size:28px;font-weight:900;color:var(--red)}
+.stat-desc{font-size:13px;color:var(--muted)}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:10px}
+.checklist li{display:flex;align-items:flex-start;gap:10px;font-size:14px}
+.checklist li::before{content:"⚠️";flex-shrink:0}
+
+/* FORM */
+.form-card{background:var(--card);border:2px solid var(--border2);border-radius:20px;padding:36px;position:sticky;top:84px}
+.form-card h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.form-tag{font-size:12px;color:#43a047;font-weight:700;margin-bottom:24px}
+.field{margin-bottom:16px}
+label{display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+input,select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:11px 14px;color:var(--text);font-size:14px;font-family:var(--font);outline:none;transition:border-color .2s}
+input:focus,select:focus{border-color:var(--cyan)}
+select option{background:var(--navy2)}
+.submit-btn{width:100%;background:var(--cyan);color:var(--navy);border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;transition:all .15s;margin-top:8px}
+.submit-btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.privacy{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+.urgency{background:rgba(239,83,80,.08);border:1px solid rgba(239,83,80,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);text-align:center;margin-bottom:16px}
+
+/* WHAT YOU GET */
+.deliverables{list-style:none;display:flex;flex-direction:column;gap:8px;margin:24px 0}
+.deliverables li{display:flex;align-items:center;gap:10px;font-size:14px}
+.deliverables li::before{content:"✓";color:var(--cyan);font-weight:700;flex-shrink:0}
+
+footer{background:var(--navy2);border-top:1px solid var(--border);padding:28px 40px;text-align:center;font-size:13px;color:#445}
+footer strong{color:var(--muted)}
+
+@media(max-width:768px){
+  .page{padding:40px 20px}
+  .two-col{grid-template-columns:1fr}
+  .form-card{position:static}
+  nav{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Omnia<span>Guard</span></div>
+  <div class="nav-spacer"></div>
+  <a href="index.html" class="back-link">← Back to Platform</a>
+</nav>
+
+<div class="page">
+  <div class="page-badge">🔴 LIMITED AVAILABILITY — 5 SLOTS THIS MONTH</div>
+  <h1>Is Your AI Infrastructure<br><span>Already Compromised?</span></h1>
+  <p class="sub">Most organizations don't discover AI agent vulnerabilities until after a breach. Get your free 15-minute assessment and find out where you stand — before attackers do.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">87%</div>
+          <div class="stat-desc">of organizations deploying AI agents have at least one critical unpatched prompt injection vector — OWASP AI Security 2025</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$4.2M</div>
+          <div class="stat-desc">average cost of an AI agent breach in regulated industries (IBM Cost of Data Breach Report 2025)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">14 min</div>
+          <div class="stat-desc">median time for attackers to exploit a newly discovered AI agent vulnerability once it's known</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">What We Check:</h3>
+      <ul class="checklist">
+        <li>Prompt injection exposure on all public-facing AI agents</li>
+        <li>Data exfiltration pathways via agent tool calls</li>
+        <li>Jailbreak resistance across your model configurations</li>
+        <li>Cross-agent trust boundary enforcement</li>
+        <li>Compliance gaps (PIPEDA, HIPAA, SOC 2, GDPR)</li>
+        <li>Memory and context persistence vulnerabilities</li>
+        <li>Autonomous action guardrails and kill-switch availability</li>
+      </ul>
+
+      <h3 style="font-size:16px;font-weight:700;margin:24px 0 12px;">What You Receive:</h3>
+      <ul class="deliverables">
+        <li>Executive-level AI Security Risk Score (0–100)</li>
+        <li>Prioritized vulnerability report (Critical / High / Medium)</li>
+        <li>Compliance gap matrix against NIST AI RMF</li>
+        <li>Remediation roadmap with estimated effort</li>
+        <li>30-minute debrief call with an OmniaGuard security engineer</li>
+        <li>No obligation. No sales pressure. Real findings only.</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="form-card">
+        <h2>Get Your Free Assessment</h2>
+        <div class="form-tag">✓ Free · No obligation · Results in 48 hours</div>
+        <div class="urgency">⚡ 5 enterprise assessment slots available this month</div>
+        <form onsubmit="submitAssessment(event)">
+          <div class="field">
+            <label>Your Name</label>
+            <input type="text" id="a-name" required placeholder="Jane Smith">
+          </div>
+          <div class="field">
+            <label>Work Email</label>
+            <input type="email" id="a-email" required placeholder="jane@enterprise.com">
+          </div>
+          <div class="field">
+            <label>Company</label>
+            <input type="text" id="a-company" required placeholder="Acme Corp">
+          </div>
+          <div class="field">
+            <label>Number of AI Agents in Production</label>
+            <select id="a-agents">
+              <option>1–5 agents</option>
+              <option>6–20 agents</option>
+              <option>21–100 agents</option>
+              <option>100+ agents</option>
+              <option>Planning deployment (not yet live)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Primary Industry</label>
+            <select id="a-industry">
+              <option>Financial Services</option>
+              <option>Healthcare</option>
+              <option>Legal Technology</option>
+              <option>Government</option>
+              <option>SaaS / Technology</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Biggest Security Concern</label>
+            <select id="a-concern">
+              <option>Prompt injection / jailbreaking</option>
+              <option>Data exfiltration</option>
+              <option>Regulatory compliance</option>
+              <option>Autonomous agent actions</option>
+              <option>Not sure — need general assessment</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn" id="assess-btn">Get My Free Assessment →</button>
+          <p class="privacy">🔒 Your information is never shared. Assessment is conducted under NDA on request.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><strong>© 2026 Francisco Holdings Inc.</strong> — OmniaGuard &nbsp;·&nbsp; <a href="mailto:omniaguard1@gmail.com" style="color:#445">omniaguard1@gmail.com</a></footer>
+
+<script>
+function submitAssessment(e) {
+  e.preventDefault();
+  const btn = document.getElementById('assess-btn');
+  btn.textContent = 'Sending request...';
+  btn.disabled = true;
+  const data = {
+    name: document.getElementById('a-name').value,
+    email: document.getElementById('a-email').value,
+    company: document.getElementById('a-company').value,
+    agents: document.getElementById('a-agents').value,
+    industry: document.getElementById('a-industry').value,
+    concern: document.getElementById('a-concern').value,
+  };
+  const subject = encodeURIComponent('Free AI Security Assessment Request — ' + data.company);
+  const body = encodeURIComponent(
+    'AI SECURITY ASSESSMENT REQUEST\n\n' +
+    'Name: ' + data.name + '\nEmail: ' + data.email + '\nCompany: ' + data.company +
+    '\nAI Agents: ' + data.agents + '\nIndustry: ' + data.industry + '\nConcern: ' + data.concern
+  );
+  window.location.href = 'mailto:omniaguard1@gmail.com?subject=' + subject + '&body=' + body;
+  setTimeout(() => {
+    btn.textContent = '✓ Request sent — we\'ll be in touch within 24 hours';
+    btn.style.background = '#43a047';
+    btn.style.color = '#fff';
+  }, 1000);
+}
+
+// Exit intent
+let exited = false;
+document.addEventListener('mouseleave', e => {
+  if (e.clientY < 0 && !exited && !sessionStorage.getItem('og_exit')) {
+    exited = true;
+    sessionStorage.setItem('og_exit', '1');
+    const div = document.createElement('div');
+    div.innerHTML = `<div style="position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;" onclick="this.remove()">
+      <div style="background:#111a3a;border:2px solid rgba(0,212,255,.3);border-radius:20px;padding:40px;max-width:480px;text-align:center;margin:20px;" onclick="event.stopPropagation()">
+        <div style="font-size:32px;margin-bottom:16px;">🛡️</div>
+        <h2 style="font-size:22px;font-weight:800;margin-bottom:8px;">Wait — Before You Go</h2>
+        <p style="color:#8892a4;margin-bottom:24px;line-height:1.6;">Download our free <strong style="color:#fff;">2026 AI Threat Report</strong> — the definitive guide to securing AI agent infrastructure. 47 pages, zero fluff.</p>
+        <form onsubmit="exitCapture(event)">
+          <input type="email" id="exit-email" placeholder="your@company.com" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(0,212,255,.3);border-radius:8px;padding:12px 14px;color:#e8eeff;font-size:14px;outline:none;margin-bottom:12px;">
+          <button type="submit" style="width:100%;background:#00d4ff;color:#0a0e27;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:800;cursor:pointer;">Download Free Report →</button>
+        </form>
+        <button onclick="this.closest('div[style]').remove()" style="background:none;border:none;color:#445;font-size:12px;cursor:pointer;margin-top:12px;">No thanks, I'll take my chances</button>
+      </div>
+    </div>`;
+    document.body.appendChild(div);
+  }
+});
+function exitCapture(e) {
+  e.preventDefault();
+  const email = document.getElementById('exit-email').value;
+  window.location.href = 'mailto:omniaguard1@gmail.com?subject=' + encodeURIComponent('AI Threat Report Request') + '&body=' + encodeURIComponent('Please send me the 2026 AI Threat Report.\n\nEmail: ' + email);
+  document.querySelector('div[style*="z-index:9999"]')?.remove();
+}
+</script>
+<script>window.REVEREND_SITE='omniaguard';</script>
+<script src="reverend-ai.js"></script>
+</body>
+</html>

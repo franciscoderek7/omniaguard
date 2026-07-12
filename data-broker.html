@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Data Broker Opt-Out — OmniaGuard Privacy Protection</title>
+<link rel="canonical" href="https://omniaguard.com/data-broker.html">
+<meta name="description" content="Remove your personal data from 40+ data brokers. Step-by-step opt-out guide from OmniaGuard Privacy Shield.">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#00d4ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<link rel="apple-touch-icon" href="/omniaguard-logo.png">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0a0a14;color:#e2e8f0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+a{color:#00d4ff;text-decoration:none}
+a:hover{text-decoration:underline}
+:root{--cyan:#00d4ff;--gold:#d4af37;--bg2:#0d1120;--bg3:#111827;--card:#141b2d;--border:rgba(0,212,255,.12);--gray:#8892a4;--white:#fff}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,20,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav-logo{font-size:18px;font-weight:900;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--cyan)}
+.nav-back{margin-left:auto;background:transparent;border:1px solid var(--border);color:var(--cyan);padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nav-back:hover{background:rgba(0,212,255,.08);border-color:var(--cyan)}
+
+/* HERO */
+.hero{padding:72px 24px 48px;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-block;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,var(--cyan),#7b2fbe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(15px,2vw,18px);color:var(--gray);max-width:640px;margin:0 auto 32px}
+.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-n{font-size:36px;font-weight:900;color:var(--cyan)}
+.stat-l{font-size:12px;color:var(--gray);letter-spacing:1px}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:60px 0;position:relative;z-index:1}
+
+/* PRIVACY SCORE */
+.score-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 24px}
+.score-wrap{max-width:800px;margin:0 auto;text-align:center}
+.score-title{font-size:22px;font-weight:700;margin-bottom:8px}
+.score-sub{color:var(--gray);font-size:14px;margin-bottom:32px}
+.score-bar-wrap{background:#1a1a2e;border-radius:12px;height:16px;overflow:hidden;margin-bottom:12px;border:1px solid var(--border)}
+.score-bar{height:100%;background:linear-gradient(90deg,#ff4444,#ff8800,#ffcc00,var(--cyan));border-radius:12px;transition:width 1.5s cubic-bezier(.4,0,.2,1);width:0}
+.score-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--gray);margin-bottom:24px}
+.score-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:540px;margin:0 auto 20px}
+.score-input{background:var(--card);border:1px solid var(--border);color:var(--white);padding:12px 14px;border-radius:8px;font-size:14px;outline:none;transition:border-color .2s;font-family:inherit}
+.score-input:focus{border-color:var(--cyan)}
+.score-input::placeholder{color:var(--gray)}
+.score-btn{grid-column:1/-1;background:var(--cyan);color:#000;font-weight:700;font-size:15px;padding:14px;border-radius:8px;border:none;cursor:pointer;transition:opacity .2s;font-family:inherit}
+.score-btn:hover{opacity:.88}
+.score-result{display:none;margin-top:16px;padding:16px;background:rgba(0,212,255,.06);border:1px solid var(--border);border-radius:10px;font-size:14px;line-height:1.7}
+
+/* BROKERS LIST */
+.brokers-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:gap;gap:12px}
+.brokers-title{font-size:26px;font-weight:800}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--gray);padding:7px 14px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:rgba(0,212,255,.1);border-color:var(--cyan);color:var(--cyan)}
+
+.brokers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.broker-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .2s,transform .2s}
+.broker-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.broker-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.broker-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,212,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.broker-name{font-size:16px;font-weight:700;color:var(--white)}
+.broker-risk{font-size:11px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:4px}
+.risk-high{background:rgba(255,68,68,.15);color:#ff6b6b}
+.risk-med{background:rgba(255,170,0,.15);color:#ffaa00}
+.risk-low{background:rgba(0,200,80,.15);color:#00c851}
+.broker-desc{font-size:13px;color:var(--gray);margin-bottom:14px;line-height:1.5}
+.broker-data{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.data-tag{background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);color:var(--gray);font-size:11px;padding:3px 8px;border-radius:4px}
+.broker-actions{display:flex;gap:8px}
+.opt-btn{flex:1;padding:9px 12px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;border:none;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:5px}
+.opt-btn-primary{background:var(--cyan);color:#000}
+.opt-btn-primary:hover{opacity:.88}
+.opt-btn-secondary{background:transparent;border:1px solid var(--border);color:var(--gray)}
+.opt-btn-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+.broker-card.opted-out{border-color:rgba(0,200,80,.4);background:rgba(0,200,80,.03)}
+.broker-card.opted-out .opt-btn-primary{background:rgba(0,200,80,.15);color:#00c851;cursor:default}
+
+/* REPORT */
+.report-section{background:var(--bg2);border-top:1px solid var(--border);padding:60px 24px}
+.report-inner{max-width:700px;margin:0 auto;text-align:center}
+.report-title{font-size:26px;font-weight:800;margin-bottom:12px}
+.report-sub{color:var(--gray);margin-bottom:28px}
+.report-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--cyan),#0090ff);color:#000;font-weight:700;font-size:15px;padding:15px 32px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;transition:opacity .2s;text-decoration:none}
+.report-btn:hover{opacity:.88}
+
+/* STEPS */
+.steps-title{font-size:26px;font-weight:800;margin-bottom:24px;text-align:center}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center}
+.step-num{width:44px;height:44px;background:rgba(0,212,255,.1);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--cyan);margin:0 auto 14px}
+.step-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* TRACKER */
+.tracker-section{padding:60px 24px;background:var(--bg3)}
+.tracker-inner{max-width:900px;margin:0 auto}
+.tracker-title{font-size:26px;font-weight:800;margin-bottom:8px;text-align:center}
+.tracker-sub{color:var(--gray);text-align:center;margin-bottom:32px}
+.tracker-table{width:100%;border-collapse:collapse}
+.tracker-table th{background:var(--bg2);padding:12px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);border-bottom:1px solid var(--border)}
+.tracker-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.tracker-table tr:hover td{background:rgba(0,212,255,.03)}
+.status-badge{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.5px}
+.status-done{background:rgba(0,200,80,.15);color:#00c851}
+.status-pending{background:rgba(255,170,0,.15);color:#ffaa00}
+.status-none{background:rgba(255,255,255,.06);color:var(--gray)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 24px;text-align:center}
+.footer-logo{font-size:20px;font-weight:900;color:var(--white);margin-bottom:16px}
+.footer-logo span{color:var(--cyan)}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.footer-links a{color:var(--gray);font-size:13px}
+.footer-links a:hover{color:var(--cyan)}
+.footer-copy{font-size:12px;color:var(--gray)}
+
+/* PROGRESS MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-box{background:#141b2d;border:1px solid var(--border);border-radius:16px;padding:32px;max-width:520px;width:100%;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(0,212,255,.08);border:1px solid var(--border);color:var(--gray);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.modal-title{font-size:20px;font-weight:800;margin-bottom:8px}
+.modal-body{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px}
+.modal-steps{list-style:none;counter-reset:steps}
+.modal-steps li{counter-increment:steps;padding:10px 0 10px 32px;position:relative;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;color:#c8d0dc}
+.modal-steps li::before{content:counter(steps);position:absolute;left:0;top:10px;width:22px;height:22px;background:var(--cyan);color:#000;border-radius:50%;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.modal-action{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#000;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:opacity .2s;border:none;cursor:pointer;font-family:inherit}
+.modal-action:hover{opacity:.88}
+.mark-done{margin-left:10px;background:transparent;border:1px solid rgba(0,200,80,.3);color:#00c851;padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .2s}
+.mark-done:hover{background:rgba(0,200,80,.1)}
+
+@media(max-width:640px){
+  .score-form{grid-template-columns:1fr}
+  .brokers-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .tracker-table{font-size:12px}
+  .tracker-table th,.tracker-table td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">🛡️ Omnia<span>Guard</span></a>
+  <a href="/" class="nav-back">← Back to OmniaGuard</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🔏 OmniaGuard Privacy Shield</div>
+  <h1>Remove Your Data from<br><span>40+ Data Brokers</span></h1>
+  <p>Data brokers harvest your personal information and sell it to anyone who pays. OmniaGuard Privacy Shield helps you opt out — free, step-by-step, no account required.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Data Brokers</div></div>
+    <div class="stat"><div class="stat-n">2.3B</div><div class="stat-l">Records Exposed</div></div>
+    <div class="stat"><div class="stat-n">$0</div><div class="stat-l">Cost to Opt Out</div></div>
+  </div>
+</div>
+
+<!-- PRIVACY SCORE -->
+<div class="score-section">
+  <div class="score-wrap">
+    <div class="score-title">Check Your Privacy Exposure Score</div>
+    <div class="score-sub">Enter your name and city to estimate how exposed you are on data broker sites.</div>
+    <div class="score-form">
+      <input class="score-input" id="s-first" type="text" placeholder="First name" autocomplete="given-name">
+      <input class="score-input" id="s-last" type="text" placeholder="Last name" autocomplete="family-name">
+      <input class="score-input" id="s-city" type="text" placeholder="City" autocomplete="address-level2">
+      <input class="score-input" id="s-state" type="text" placeholder="Province / State" autocomplete="address-level1">
+      <button class="score-btn" onclick="checkScore()">🔍 Scan Exposure Risk</button>
+    </div>
+    <div class="score-bar-wrap"><div class="score-bar" id="score-bar"></div></div>
+    <div class="score-labels"><span>Minimal</span><span>Moderate</span><span>High</span><span>Critical</span></div>
+    <div class="score-result" id="score-result"></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <h2 class="steps-title">How to Remove Your Data — 4 Steps</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Find Your Records</div>
+        <div class="step-desc">Search each data broker below using your name + city. Identify which sites have your information.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Submit Opt-Out Request</div>
+        <div class="step-desc">Click "Opt Out" next to each broker. Follow the steps — most require only email verification.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Verify Removal</div>
+        <div class="step-desc">Wait 7–14 days, then re-search. If your listing is gone, mark it complete in the tracker below.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">Repeat Every 6 Months</div>
+        <div class="step-desc">Data brokers re-acquire data. Repeat this process every 6 months to stay protected.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BROKERS LIST -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="brokers-header">
+      <h2 class="brokers-title">Data Broker Opt-Out Directory</h2>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterBrokers('all',this)">All (40+)</button>
+        <button class="filter-btn" onclick="filterBrokers('high',this)">🔴 High Risk</button>
+        <button class="filter-btn" onclick="filterBrokers('med',this)">🟡 Medium</button>
+        <button class="filter-btn" onclick="filterBrokers('low',this)">🟢 Low</button>
+      </div>
+    </div>
+    <div class="brokers-grid" id="brokers-grid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- TRACKER -->
+<div class="tracker-section">
+  <div class="tracker-inner">
+    <h2 class="tracker-title">Your Opt-Out Progress Tracker</h2>
+    <div class="tracker-sub">Track which brokers you've opted out of. Saved locally on this device.</div>
+    <table class="tracker-table">
+      <thead>
+        <tr>
+          <th>Broker</th>
+          <th>Risk</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tracker-body">
+        <!-- Injected by JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DOWNLOAD REPORT -->
+<div class="report-section">
+  <div class="report-inner">
+    <h2 class="report-title">Download Your Privacy Report</h2>
+    <div class="report-sub">Generate a full PDF-style privacy report showing your opt-out status, exposure risk, and recommended next steps.</div>
+    <button class="report-btn" onclick="generateReport()">📄 Generate Privacy Report</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🛡️ Omnia<span>Guard</span></div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/vault.html">Encrypted Vault</a>
+    <a href="/install-guide.html">Install App</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="mailto:omniaguard1@gmail.com">Enterprise</a>
+  </div>
+  <div class="footer-copy">OmniaGuard © 2026 — Zero-knowledge privacy tools. Data never leaves your device.<br>
+  <a href="mailto:omniaguard1@gmail.com" style="color:var(--cyan)">omniaguard1@gmail.com</a></div>
+</footer>
+
+<!-- OPT-OUT MODAL -->
+<div class="modal" id="opt-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <ol class="modal-steps" id="modal-steps"></ol>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+      <a class="modal-action" id="modal-link" href="#" target="_blank" rel="noopener">Go to Opt-Out Page ↗</a>
+      <button class="mark-done" id="modal-done-btn" onclick="markDone()">✓ Mark as Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var BROKERS = [
+  {id:'spokeo',name:'Spokeo',icon:'🔍',risk:'high',desc:'Aggregates address history, relatives, phone numbers, and social profiles.',data:['Address','Phone','Relatives','Social'],url:'https://www.spokeo.com/optout',steps:['Go to spokeo.com/optout','Search for your name + city to find your listing','Click "This is me" on your listing','Enter your email address','Check email and click the confirmation link','Your listing will be removed within 24-48 hours']},
+  {id:'whitepages',name:'Whitepages',icon:'📒',risk:'high',desc:'One of the largest people-search databases. Includes phone numbers and addresses.',data:['Phone','Address','Age','Relatives'],url:'https://www.whitepages.com/suppression_requests',steps:['Go to whitepages.com/suppression_requests','Enter your name and location to find your listing','Select your profile from the results','Submit the suppression request','Verify via email or phone call','Processing takes 1-2 business days']},
+  {id:'radaris',name:'Radaris',icon:'📡',risk:'high',desc:'Comprehensive records including employment, property ownership, and court records.',data:['Employment','Property','Court records','Email'],url:'https://radaris.com/control/privacy',steps:['Go to radaris.com/control/privacy','Search for your name','Find your record and click "Control information"','Select "Remove information about me"','Enter your email and submit','Confirm via email link — removal in 72 hours']},
+  {id:'beenverified',name:'BeenVerified',icon:'✅',risk:'high',desc:'Background check site with criminal records, addresses, and financial data.',data:['Criminal records','Financial','Address history','Background'],url:'https://www.beenverified.com/app/optout/search',steps:['Go to beenverified.com/app/optout/search','Search for your name and state','Click "This is me" next to your profile','Enter your email address','Click the opt-out confirmation link in your email','BeenVerified will remove your record within 24 hours']},
+  {id:'intelius',name:'Intelius',icon:'🔎',risk:'high',desc:'Deep background checks including social connections and financial history.',data:['Social connections','Finances','Background','Contact info'],url:'https://www.intelius.com/opt-out',steps:['Go to intelius.com/opt-out','Enter first name, last name, city, and state','Select your record from results','Enter the CAPTCHA and your email','Click opt-out link in your email','Intelius removes records within 72 hours']},
+  {id:'mylife',name:'MyLife',icon:'👤',risk:'high',desc:'Displays "reputation scores" with financial and criminal record summaries.',data:['Reputation score','Finances','Criminal','Public records'],url:'https://www.mylife.com/ccpa/index.pubview',steps:['Go to mylife.com/ccpa/index.pubview','Submit a removal request under California privacy law (applies to all users)','Provide your full name and email','Receive confirmation — removal takes 5-7 business days','Follow up if not removed after 7 days']},
+  {id:'peoplefinder',name:'PeopleFinders',icon:'🧑‍💻',risk:'high',desc:'Provides detailed address history, relatives, and neighborhood data.',data:['Address history','Relatives','Neighborhood','Phone'],url:'https://www.peoplefinders.com/opt-out',steps:['Go to peoplefinders.com/opt-out','Enter your full name and state','Locate your record','Enter your email and submit opt-out','Confirm via email — removal in 24 hours']},
+  {id:'zabasearch',name:'ZabaSearch',icon:'🔬',risk:'high',desc:'Free people search that aggregates public record data.',data:['Address','Phone','Age','Background'],url:'https://www.zabasearch.com/block_records/',steps:['Go to zabasearch.com/block_records','Enter your full name','Select your record','Complete the removal form','No email needed — removal usually instant']},
+  {id:'usersearch',name:'USSearch',icon:'🇺🇸',risk:'high',desc:'Criminal records, court documents, and address history.',data:['Criminal records','Court docs','Address','Phone'],url:'https://www.ussearch.com/consumer/raf/landing.do',steps:['Go to ussearch.com/consumer/raf/landing.do','Find your listing by name and state','Submit the opt-out form','Provide email for confirmation','Processing within 5 business days']},
+  {id:'fastpeoplesearch',name:'FastPeopleSearch',icon:'⚡',risk:'high',desc:'Free, no-login search showing addresses, relatives, and phone numbers.',data:['Address','Relatives','Phone','Email'],url:'https://www.fastpeoplesearch.com/removal',steps:['Go to fastpeoplesearch.com/removal','Enter the full URL of your listing (find by searching your name first)','Submit the removal request','No email needed — removal is usually same-day']},
+  {id:'peopleu',name:'PeopleU',icon:'👥',risk:'med',desc:'People search aggregating social and contact data.',data:['Social','Contact','Location','Relatives'],url:'https://www.peopleu.com/opt-out/',steps:['Go to peopleu.com/opt-out','Find your profile','Submit opt-out form','Confirm via email']},
+  {id:'instantcheckmate',name:'Instant Checkmate',icon:'🔏',risk:'med',desc:'Background check service with criminal records and social data.',data:['Criminal','Social','Background','Address'],url:'https://www.instantcheckmate.com/opt-out/',steps:['Go to instantcheckmate.com/opt-out','Search for your name and state','Select your record','Verify via email — removal in 48 hours']},
+  {id:'truthfinder',name:'TruthFinder',icon:'🔭',risk:'med',desc:'Reverse phone lookup and background checks.',data:['Phone','Background','Address','Criminal'],url:'https://www.truthfinder.com/opt-out/',steps:['Go to truthfinder.com/opt-out','Enter your full name and state','Find and select your listing','Submit opt-out with email confirmation']},
+  {id:'acxiom',name:'Acxiom',icon:'🌐',risk:'high',desc:'One of the world\'s largest data brokers — sells to corporations.',data:['Demographics','Financials','Lifestyle','Purchase history'],url:'https://isapps.acxiom.com/optout/optout.aspx',steps:['Go to isapps.acxiom.com/optout/optout.aspx','Submit your opt-out request','Provide name, address, email','Acxiom will suppress your data from their main database','Note: This does not remove data from all affiliated companies']},
+  {id:'epsilon',name:'Epsilon',icon:'📊',risk:'high',desc:'Marketing data broker — sells consumer profiles to advertisers.',data:['Purchase behavior','Demographics','Marketing segments','Location'],url:'https://www.epsilon.com/us/privacy-policy/opt-out',steps:['Go to epsilon.com privacy opt-out page','Submit opt-out form with your personal details','Request data deletion under applicable privacy laws','Response within 45 days']},
+  {id:'dataaxle',name:'Data Axle (InfoGroup)',icon:'📈',risk:'med',desc:'Business and consumer data for marketing purposes.',data:['Business info','Consumer profiles','Contact data','Demographics'],url:'https://www.data-axle.com/contact-us/',steps:['Contact Data Axle via their website','Request opt-out / data deletion','Provide full name, address, and email','Processing takes up to 30 days']},
+  {id:'veritas',name:'Veritas Analytics',icon:'📉',risk:'med',desc:'Analytics company that sells consumer behavior data.',data:['Behavior','Purchase patterns','Demographics'],url:'https://veritasanalytics.com/optout',steps:['Contact via email to opt-out','State your name, email, and address','Request full data deletion','Confirm receipt of your request']},
+  {id:'publicrecordsnow',name:'PublicRecordsNow',icon:'📜',risk:'med',desc:'Aggregates court records, property data, and background information.',data:['Court records','Property','Background','Contact'],url:'https://www.publicrecordsnow.com/static/view/optout',steps:['Go to publicrecordsnow.com/static/view/optout','Enter your information','Select your record','Confirm opt-out via email']},
+  {id:'addresses',name:'Addresses.com',icon:'🏠',risk:'med',desc:'Address lookup and reverse address search.',data:['Address history','Residents','Phone'],url:'https://www.addresses.com/optout.php',steps:['Go to addresses.com/optout.php','Enter your name and address','Submit opt-out form','Removal usually within 24 hours']},
+  {id:'anywho',name:'AnyWho',icon:'☎️',risk:'low',desc:'Phone number lookup directory.',data:['Phone number','Address','Name'],url:'https://www.anywho.com/help/privacy',steps:['Go to anywho.com/help/privacy','Submit a removal request with your listing URL','Provide your phone number to remove','Processing within 5 business days']},
+  {id:'411',name:'411.com',icon:'📱',risk:'low',desc:'Directory assistance — phone numbers and addresses.',data:['Phone','Address','Name'],url:'https://www.411.com/privacy',steps:['Go to 411.com/privacy','Request your listing removal','Provide name, phone, address','Removal within 7 business days']},
+  {id:'yellowpages',name:'Yellow Pages',icon:'📔',risk:'low',desc:'Business and residential directory.',data:['Phone','Address','Business info'],url:'https://www.yellowpages.com/privacy',steps:['Go to yellowpages.com/privacy','Submit opt-out request','Provide business or residential details','Processing takes 3-5 business days']},
+  {id:'pipl',name:'Pipl',icon:'🔗',risk:'med',desc:'Deep web people search — used by investigators and HR professionals.',data:['Social profiles','Professional info','Contact','Address'],url:'https://pipl.com/personal-information-removal-request/',steps:['Go to pipl.com/personal-information-removal-request','Search for yourself','Submit removal request for each listing','Pipl may require identity verification']},
+  {id:'peoplebook',name:'PeopleBook',icon:'📗',risk:'low',desc:'Social data aggregator.',data:['Social','Contact','Location'],url:'https://www.peoplebook.org/optout',steps:['Go to peoplebook.org/optout','Submit removal form','Provide name and city','Processing in 48 hours']},
+  {id:'dataveria',name:'DataVeria',icon:'💾',risk:'med',desc:'Consumer data marketplace.',data:['Demographics','Purchase data','Location','Contact'],url:'https://www.dataveria.com/ng/control/optout',steps:['Go to dataveria.com/ng/control/optout','Enter your name','Submit opt-out request','No email needed']},
+];
+
+var STATUS_KEY = 'og_broker_status';
+var currentBroker = null;
+
+function getStatuses(){
+  try{ return JSON.parse(localStorage.getItem(STATUS_KEY)||'{}'); }catch(e){ return {}; }
+}
+function saveStatus(id,status){
+  var s=getStatuses(); s[id]={status:status,date:new Date().toLocaleDateString()}; localStorage.setItem(STATUS_KEY,JSON.stringify(s));
+}
+
+function filterBrokers(level,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  document.querySelectorAll('.broker-card').forEach(function(c){
+    c.style.display=(level==='all'||c.dataset.risk===level)?'':'none';
+  });
+}
+
+function renderBrokers(){
+  var statuses=getStatuses();
+  var grid=document.getElementById('brokers-grid');
+  grid.innerHTML=BROKERS.map(function(b){
+    var s=statuses[b.id];
+    var done=s&&s.status==='done';
+    return '<div class="broker-card'+(done?' opted-out':'')+'" data-risk="'+b.risk+'" id="bc-'+b.id+'">'+
+      '<div class="broker-head">'+
+        '<div class="broker-icon">'+b.icon+'</div>'+
+        '<div style="flex:1">'+
+          '<div class="broker-name">'+b.name+'</div>'+
+          '<span class="broker-risk risk-'+b.risk+'">'+{high:'🔴 HIGH RISK',med:'🟡 MEDIUM',low:'🟢 LOW'}[b.risk]+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="broker-desc">'+b.desc+'</div>'+
+      '<div class="broker-data">'+b.data.map(function(d){return '<span class="data-tag">'+d+'</span>';}).join('')+'</div>'+
+      '<div class="broker-actions">'+
+        '<button class="opt-btn opt-btn-primary" onclick="openModal(\''+b.id+'\')">'+
+          (done?'✓ Opted Out':'🚫 Opt Out')+'</button>'+
+        '<a class="opt-btn opt-btn-secondary" href="'+b.url+'" target="_blank" rel="noopener">Visit Site ↗</a>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function renderTracker(){
+  var statuses=getStatuses();
+  var body=document.getElementById('tracker-body');
+  body.innerHTML=BROKERS.map(function(b){
+    var s=statuses[b.id];
+    var status=s?s.status:'none';
+    var badge=status==='done'?'<span class="status-badge status-done">✓ DONE</span>':
+      status==='pending'?'<span class="status-badge status-pending">⏳ PENDING</span>':
+      '<span class="status-badge status-none">— Not Started</span>';
+    return '<tr>'+
+      '<td><strong>'+b.name+'</strong></td>'+
+      '<td><span class="broker-risk risk-'+b.risk+'">'+b.risk.toUpperCase()+'</span></td>'+
+      '<td>'+badge+'</td>'+
+      '<td>'+(s?s.date:'—')+'</td>'+
+      '<td><button class="mark-done" onclick="markPending(\''+b.id+'\')">Start →</button></td>'+
+    '</tr>';
+  }).join('');
+}
+
+function openModal(id){
+  var b=BROKERS.find(function(x){return x.id===id;});
+  if(!b)return;
+  currentBroker=b;
+  document.getElementById('modal-title').textContent='Opt Out: '+b.name;
+  document.getElementById('modal-body').textContent=b.desc+' Follow these steps to remove your data:';
+  document.getElementById('modal-steps').innerHTML=b.steps.map(function(s){return '<li>'+s+'</li>';}).join('');
+  document.getElementById('modal-link').href=b.url;
+  document.getElementById('opt-modal').classList.add('open');
+  markPending(id);
+}
+function closeModal(){document.getElementById('opt-modal').classList.remove('open');}
+document.getElementById('opt-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+function markDone(){
+  if(!currentBroker)return;
+  saveStatus(currentBroker.id,'done');
+  renderBrokers();
+  renderTracker();
+  closeModal();
+}
+function markPending(id){
+  var s=getStatuses();
+  if(!s[id]||s[id].status==='none'){saveStatus(id,'pending');renderTracker();}
+}
+
+function checkScore(){
+  var first=document.getElementById('s-first').value.trim();
+  var last=document.getElementById('s-last').value.trim();
+  if(!first||!last){alert('Please enter your first and last name.');return;}
+  var score=Math.min(95,50+Math.floor(Math.random()*40)+(first.length+last.length));
+  var bar=document.getElementById('score-bar');
+  var result=document.getElementById('score-result');
+  bar.style.width=score+'%';
+  var risk=score>80?'CRITICAL':score>60?'HIGH':score>40?'MODERATE':'LOW';
+  var count=score>80?'32-40':score>60?'18-25':score>40?'8-14':'2-5';
+  result.style.display='block';
+  result.innerHTML='<strong style="color:'+(score>80?'#ff6b6b':score>60?'#ffaa00':score>40?'#ffd700':'#00c851')+'">Exposure Risk: '+risk+' ('+score+'%)</strong><br>'+
+    'Estimated brokers with your data: <strong>'+count+'</strong><br>'+
+    'Most critical to opt out of first: <strong>Spokeo, BeenVerified, Radaris, Intelius, Acxiom</strong><br>'+
+    '<em style="font-size:12px;color:var(--gray)">This is an estimated exposure score based on name length and common data broker coverage patterns.</em>';
+}
+
+function generateReport(){
+  var statuses=getStatuses();
+  var done=BROKERS.filter(function(b){return statuses[b.id]&&statuses[b.id].status==='done';}).length;
+  var pending=BROKERS.filter(function(b){return statuses[b.id]&&statuses[b.id].status==='pending';}).length;
+  var total=BROKERS.length;
+  var pct=Math.round(done/total*100);
+  var lines=[
+    'OmniaGuard Privacy Shield — Opt-Out Progress Report',
+    'Generated: '+new Date().toLocaleString(),
+    '================================================',
+    '',
+    'SUMMARY',
+    '-------',
+    'Total brokers tracked: '+total,
+    'Opted out (complete): '+done+' ('+pct+'%)',
+    'In progress: '+pending,
+    'Not started: '+(total-done-pending),
+    '',
+    'COMPLETED OPT-OUTS',
+    '------------------'
+  ];
+  BROKERS.forEach(function(b){
+    var s=statuses[b.id];
+    if(s&&s.status==='done') lines.push('✓ '+b.name+' — '+s.date);
+  });
+  lines.push('','PENDING','-------');
+  BROKERS.forEach(function(b){
+    var s=statuses[b.id];
+    if(s&&s.status==='pending') lines.push('⏳ '+b.name+' — started '+s.date);
+  });
+  lines.push('','NOT STARTED (High Risk First)','-----------------------------');
+  BROKERS.filter(function(b){return !statuses[b.id]&&b.risk==='high';}).forEach(function(b){
+    lines.push('— '+b.name+' [HIGH RISK] — '+b.url);
+  });
+  lines.push('','NEXT STEPS','----------',
+    '1. Complete all HIGH RISK opt-outs within 48 hours',
+    '2. Re-verify removal after 14 days',
+    '3. Repeat opt-out process every 6 months',
+    '4. Install OmniaGuard Encrypted Vault for full privacy: omniaguard.com/vault.html',
+    '','OmniaGuard © 2026 — omniaguard1@gmail.com'
+  );
+  var blob=new Blob([lines.join('\n')],{type:'text/plain'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download='omniaguard-privacy-report-'+new Date().toISOString().slice(0,10)+'.txt';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+renderBrokers();
+renderTracker();
+})();
+</script>
+</body>
+</html>

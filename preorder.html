@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmniaGuard PWA — Pre-Order | 50% Off Lifetime Access</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #050a14; color: #e0eaf5; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; }
+  a { color: #00d4ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav { background: #070f1e; border-bottom: 1px solid #0d2540; padding: 0 1rem; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 0; }
+  .nav-brand { font-size: 1.2rem; font-weight: 800; color: #00d4ff; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+  .nav-links a { color: #7a9bb5; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #e0eaf5; text-decoration: none; }
+  .nav-links a.active { color: #00d4ff; font-weight: 700; }
+
+  .hero { background: linear-gradient(160deg, #050a14 0%, #071527 60%, #050e1c 100%); padding: 4rem 1rem 3rem; text-align: center; border-bottom: 1px solid #0d2540; }
+  .hero-tag { display: inline-block; background: rgba(0,212,255,0.12); border: 1px solid #00d4ff; color: #00d4ff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1.25rem; }
+  .hero h1 { font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 800; color: #e0eaf5; line-height: 1.15; margin-bottom: 1rem; }
+  .hero h1 span { color: #00d4ff; }
+  .hero p { font-size: clamp(1rem, 2.5vw, 1.15rem); color: #7a9bb5; max-width: 600px; margin: 0 auto 2rem; }
+  .hero-note { font-size: 0.9rem; color: #7a9bb5; margin-top: 1rem; }
+  .hero-note strong { color: #ffd700; }
+
+  .countdown-wrap { margin: 2rem auto 0.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .cd-box { background: #071527; border: 1px solid #0d2540; border-radius: 6px; padding: 0.75rem 1.25rem; text-align: center; min-width: 72px; }
+  .cd-num { font-size: 2rem; font-weight: 800; color: #00d4ff; line-height: 1; }
+  .cd-label { font-size: 0.7rem; color: #7a9bb5; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; }
+
+  section { padding: 3.5rem 1rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-title { font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 800; color: #e0eaf5; margin-bottom: 0.4rem; }
+  .section-sub { color: #7a9bb5; font-size: 0.95rem; margin-bottom: 2.5rem; }
+  .cyan { color: #00d4ff; }
+
+  .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .tier { background: #071527; border: 1px solid #0d2540; border-radius: 8px; padding: 2rem; position: relative; }
+  .tier.featured { border-color: #ffd700; }
+  .tier-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #ffd700; color: #050a14; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.9rem; border-radius: 20px; white-space: nowrap; }
+  .tier-name { font-size: 1.1rem; font-weight: 700; color: #e0eaf5; margin-bottom: 0.35rem; }
+  .tier-price { margin-bottom: 0.25rem; }
+  .tier-price .now { font-size: 2rem; font-weight: 800; color: #00d4ff; }
+  .tier-price .unit { font-size: 0.9rem; color: #7a9bb5; }
+  .tier-price .was { font-size: 0.85rem; color: #7a9bb5; text-decoration: line-through; margin-left: 0.5rem; }
+  .tier-save { font-size: 0.8rem; color: #00c864; font-weight: 700; margin-bottom: 1rem; }
+  .tier-features { list-style: none; margin-bottom: 1.5rem; }
+  .tier-features li { font-size: 0.875rem; color: #7a9bb5; padding: 0.3rem 0; border-bottom: 1px solid #0d2540; display: flex; gap: 0.5rem; }
+  .tier-features li::before { content: '✓'; color: #00c864; font-weight: 700; flex-shrink: 0; }
+  .tier-features li:last-child { border-bottom: none; }
+  .btn-tier { display: block; width: 100%; text-align: center; padding: 0.85rem; border-radius: 4px; font-weight: 700; font-size: 0.95rem; font-family: inherit; cursor: pointer; transition: opacity 0.2s; border: none; }
+  .btn-cyan { background: #00d4ff; color: #050a14; }
+  .btn-gold { background: #ffd700; color: #050a14; }
+  .btn-tier:hover { opacity: 0.85; text-decoration: none; }
+  .btc-note { font-size: 0.75rem; color: #7a9bb5; margin-top: 0.6rem; text-align: center; }
+  .btc-note a { color: #ffd700; }
+
+  #waitlist { background: #071527; border-top: 1px solid #0d2540; border-bottom: 1px solid #0d2540; }
+  .waitlist-box { background: #050a14; border: 1px solid #00d4ff; border-radius: 8px; padding: 2rem; max-width: 520px; margin: 0 auto; text-align: center; }
+  .waitlist-box h2 { font-size: 1.4rem; font-weight: 800; color: #e0eaf5; margin-bottom: 0.4rem; }
+  .waitlist-box p { color: #7a9bb5; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .waitlist-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .waitlist-row input { flex: 1 1 200px; background: #071527; border: 1px solid #0d2540; color: #e0eaf5; padding: 0.75rem 1rem; border-radius: 4px; font-family: inherit; font-size: 0.95rem; }
+  .waitlist-row input:focus { outline: 2px solid #00d4ff; border-color: transparent; }
+  .waitlist-row input::placeholder { color: #3a5a75; }
+  #wl-btn { background: #00d4ff; color: #050a14; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; font-family: inherit; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; }
+  #wl-btn:hover { opacity: 0.85; }
+  #wl-confirm { display: none; color: #00c864; font-weight: 700; margin-top: 1rem; font-size: 0.9rem; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .feature-card { background: #071527; border: 1px solid #0d2540; border-radius: 6px; padding: 1.25rem; }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+  .feature-card h3 { font-size: 0.95rem; font-weight: 700; color: #e0eaf5; margin-bottom: 0.3rem; }
+  .feature-card p { font-size: 0.82rem; color: #7a9bb5; }
+
+  footer { background: #03070f; border-top: 1px solid #0d2540; padding: 2rem 1rem; text-align: center; }
+  .footer-inner { max-width: 800px; margin: 0 auto; }
+  .footer-brand { font-size: 1rem; font-weight: 700; color: #00d4ff; margin-bottom: 0.75rem; }
+  .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .footer-links a { color: #7a9bb5; font-size: 0.85rem; }
+  .footer-copy { color: #3a5a75; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">OmniaGuard</span>
+    <div class="nav-links">
+      <a href="index.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="free-scan.html">Free Scan</a>
+      <a href="preorder.html" class="active">Pre-Order</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Limited Pre-Order — 50% Off</div>
+  <h1>OmniaGuard PWA —<br><span>Launching Soon</span></h1>
+  <p>AI-Powered Personal Security for Every Device — Install Like an App, Protect Like a Fortress</p>
+
+  <div class="countdown-wrap" id="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-days">30</div><div class="cd-label">Days</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
+  </div>
+
+  <p class="hero-note"><strong>Pre-order now at 50% off</strong> — price goes up on launch day, July 15, 2026</p>
+</section>
+
+<section id="tiers">
+  <div class="container">
+    <div class="section-title">Choose Your <span class="cyan">Pre-Order Tier</span></div>
+    <div class="section-sub">Lock in your price forever. Pre-order pricing never increases — guaranteed.</div>
+    <div class="tiers">
+
+      <div class="tier">
+        <div class="tier-name">Pre-Order Pro</div>
+        <div class="tier-price">
+          <span class="now">$4.99</span><span class="unit">/mo</span>
+          <span class="was">$9.99/mo</span>
+        </div>
+        <div class="tier-save">Save 50% forever — price locked for life</div>
+        <ul class="tier-features">
+          <li>3 devices protected</li>
+          <li>Real-time AI threat scanning</li>
+          <li>VPN with Canadian servers</li>
+          <li>Encrypted vault for sensitive files</li>
+          <li>Price locked if you pre-order today</li>
+        </ul>
+        <a href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+Pre-Order+Pro" class="btn-tier btn-cyan">Pre-Order Pro — $4.99/mo</a>
+      </div>
+
+      <div class="tier featured">
+        <div class="tier-badge">Most Popular</div>
+        <div class="tier-name">Pre-Order Family</div>
+        <div class="tier-price">
+          <span class="now">$9.99</span><span class="unit">/mo</span>
+          <span class="was">$19.99/mo</span>
+        </div>
+        <div class="tier-save">Save 50% forever — price locked for life</div>
+        <ul class="tier-features">
+          <li>10 devices protected</li>
+          <li>All Pro features included</li>
+          <li>Parental controls &amp; family dashboard</li>
+          <li>Priority support</li>
+          <li>Price locked if you pre-order today</li>
+        </ul>
+        <a href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+Pre-Order+Family" class="btn-tier btn-gold">Pre-Order Family — $9.99/mo</a>
+      </div>
+
+      <div class="tier">
+        <div class="tier-name">Pre-Order Lifetime</div>
+        <div class="tier-price">
+          <span class="now">$199</span><span class="unit"> one-time</span>
+          <span class="was">$499</span>
+        </div>
+        <div class="tier-save">Best value — never pay again</div>
+        <ul class="tier-features">
+          <li>Up to 10 devices, forever</li>
+          <li>All Family features included</li>
+          <li>Lifetime updates, no subscription</li>
+          <li>Unlimited vault storage</li>
+          <li>Founding member status</li>
+        </ul>
+        <a href="https://paypal.me/techpetcage/199" target="_blank" rel="noopener" class="btn-tier btn-cyan">Pre-Order Lifetime — $199</a>
+        <div class="btc-note">
+          Pay with PayPal above — or <a href="mailto:omniaguard1@gmail.com?subject=OmniaGuard+Lifetime+Pre-Order">email us</a> if PayPal doesn't work.<br>
+          BTC accepted (personal use only): <code style="font-size:0.7rem;color:#7a9bb5;">bc1qqdjsf6senn899jmrav2x6hd32q94ma5ukh6z4x</code><br>
+          Email to confirm BTC payment.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="waitlist">
+  <div class="container">
+    <div class="waitlist-box">
+      <h2>Join the Waitlist</h2>
+      <p>Be first to know when OmniaGuard PWA launches. We'll email you on launch day.</p>
+      <div class="waitlist-row">
+        <input type="email" id="wl-email" placeholder="Your email address" autocomplete="email">
+        <button id="wl-btn" onclick="joinWaitlist()">Join Waitlist</button>
+      </div>
+      <div id="wl-confirm">You're on the list! We'll email you on launch day.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-title">What's <span class="cyan">Inside the PWA</span></div>
+    <div class="section-sub">Everything you need to protect your digital life — no App Store required.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#128269;</div>
+        <h3>Install Direct From Browser</h3>
+        <p>No App Store gatekeeping. Install OmniaGuard on any device in under 30 seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#129504;</div>
+        <h3>AI Threat Detection</h3>
+        <p>Real-time scanning powered by AI — catches phishing, malware, and suspicious behaviour before it reaches you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128274;</div>
+        <h3>VPN — Canadian Servers</h3>
+        <p>Encrypted tunnel with servers in Canada. Browse privately, protect your location, secure public Wi-Fi.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128193;</div>
+        <h3>Encrypted Vault</h3>
+        <p>Store sensitive files, passwords, and documents with zero-knowledge encryption. Only you hold the key.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128683;</div>
+        <h3>Data Broker Removal</h3>
+        <p>Automated removal requests sent to data brokers who are selling your personal information.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128737;</div>
+        <h3>Prompt Injection Shield</h3>
+        <p>Blocks AI prompt injection attacks — a new threat vector that most security tools don't even know about yet.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128276;</div>
+        <h3>Real-Time Threat Alerts</h3>
+        <p>Push notifications the moment a threat is detected. Know instantly — don't find out too late.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128187;</div>
+        <h3>Works Everywhere</h3>
+        <p>iPhone, Android, Mac, Windows, Linux. One subscription protects all your devices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">OmniaGuard — AI Cybersecurity Platform</div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:omniaguard1@gmail.com">Contact: omniaguard1@gmail.com</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 OmniaGuard. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Countdown to July 15, 2026
+  var launch = new Date('2026-07-15T00:00:00').getTime();
+  function updateCountdown() {
+    var now = Date.now();
+    var diff = launch - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<p style="color:#00c864;font-weight:700;font-size:1.2rem;">OmniaGuard is LIVE!</p>';
+      return;
+    }
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Waitlist
+  function joinWaitlist() {
+    var email = document.getElementById('wl-email').value.trim();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    var subject = encodeURIComponent('OmniaGuard Waitlist — ' + email);
+    var body = encodeURIComponent('Waitlist signup request from: ' + email);
+    window.location.href = 'mailto:omniaguard1@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('wl-email').value = '';
+    document.getElementById('wl-confirm').style.display = 'block';
+    localStorage.setItem('omniaguard_waitlist', email);
+  }
+</script>
+</body>
+</html>

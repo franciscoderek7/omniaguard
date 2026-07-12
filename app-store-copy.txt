@@ -1,0 +1,188 @@
+================================================================
+OMNIAGUARD — APP STORE LISTING COPY
+For iOS App Store & Google Play Submission
+================================================================
+Last updated: June 14, 2026
+
+================================================================
+APP NAME
+================================================================
+iOS App Store: OmniaGuard — AI Security Shield
+Google Play:   OmniaGuard — Enterprise AI Security
+
+================================================================
+SHORT DESCRIPTION (80 chars — Google Play)
+================================================================
+14-layer AI protection. VPN, antivirus, vault, real-time threats.
+
+================================================================
+SUBTITLE (30 chars — iOS only)
+================================================================
+AI Shield for Every Device
+
+================================================================
+FULL DESCRIPTION (4000 chars max)
+================================================================
+ZERO COMPROMISE. ZERO TRUST. ZERO FEAR.
+
+OmniaGuard is the world's most advanced personal AI security platform — built for Canadians who refuse to leave their digital life unprotected.
+
+14 LAYERS OF REAL-TIME PROTECTION:
+
+🛡 AI ANTIVIRUS ENGINE
+Our proprietary threat intelligence engine scans apps, files, and downloads in real time. Catches zero-day threats before antivirus databases have heard of them.
+
+🔒 MILITARY-GRADE VPN
+Zero-log VPN with servers in 40+ countries. One tap connects you with 256-bit AES encryption. Your ISP, hackers, and governments see nothing.
+
+🔑 ENCRYPTED VAULT
+AES-256-GCM encrypted password manager and document vault. Your passwords, IDs, and sensitive files — stored locally, unlocked with biometrics.
+
+🚨 REAL-TIME THREAT ALERTS
+24/7 monitoring. Instant push notifications when threats are detected on your network, your device, or your accounts.
+
+🕵️ DATA BROKER REMOVAL
+Automatically remove your personal data from 40+ data broker databases. Stop them from selling your information.
+
+📱 ANTI-THEFT PROTECTION
+Remote lock, wipe, and location tracking if your device is lost or stolen. Your data stays yours even if your phone doesn't.
+
+🔐 APP LOCK
+Lock sensitive apps behind biometrics or PIN. Nobody reads your messages or accesses your banking apps without you.
+
+🌐 SAFE BROWSING
+Real-time phishing and malicious site detection. Browse confidently — dangerous sites are blocked before they load.
+
+📊 SECURITY SCORE
+Your personal Security Score updates in real time as you add protection layers. Know exactly how safe you are.
+
+WHY OMNIAGUARD?
+
+✓ Built in Canada — Canadian data residency, Canadian privacy laws
+✓ No logs, no tracking, no data sold — ever
+✓ Human expert oversight — not just algorithms
+✓ Works offline — core protection active even without data connection
+✓ Family plan: protect up to 6 devices with one subscription
+✓ 7-day free trial — no credit card required
+
+PLANS:
+• Starter ($99/year): VPN + Password Manager + Encrypted Vault
+• Professional ($499/year): Full 14-layer protection + Security Audit
+• Enterprise ($2,499/year): Everything + Dedicated support + Quarterly audits
+
+Questions? Email: omniaguard1@gmail.com
+
+© 2026 OmniaGuard™ — Enterprise AI Security
+
+================================================================
+KEYWORDS (iOS — 100 chars max, comma-separated)
+================================================================
+VPN,antivirus,security,password manager,privacy,encrypted vault,threat detection,cybersecurity
+
+================================================================
+KEYWORDS (Google Play tags — select all that apply)
+================================================================
+- Security
+- Tools
+- Productivity
+- VPN
+- Password Manager
+- Antivirus
+
+================================================================
+WHAT'S NEW (Version notes — for updates)
+================================================================
+Version 1.0 — Initial Launch
+• 14-layer AI protection engine
+• Military-grade VPN (40+ countries)
+• AES-256-GCM encrypted vault
+• Real-time threat alerts
+• Data broker removal shield
+• Anti-theft protection
+• Safe browsing with phishing detection
+• Security Score dashboard
+• 7-day free trial
+
+================================================================
+SUPPORT URL
+================================================================
+https://omniaguard.com
+
+================================================================
+PRIVACY POLICY URL
+================================================================
+https://omniaguard.com/privacy-policy.html
+
+================================================================
+MARKETING URL
+================================================================
+https://omniaguard.com
+
+================================================================
+AGE RATING
+================================================================
+iOS:       4+ (no objectionable content)
+Android:   Everyone
+
+================================================================
+SCREENSHOTS NEEDED (Derek: get from AVAILY partner dashboard)
+================================================================
+iOS (6.7" screenshots — 6 required):
+1. Hero: Shield animation + "Zero Compromise" headline
+2. VPN: Connected state, server map
+3. Vault: Password manager unlocked view
+4. Threat Alert: Push notification + dashboard
+5. Data Broker: Broker list with removal status
+6. Security Score: Full score dashboard
+
+Android (phone screenshots — 8 required):
+Same 6 as iOS + 2 tablet screenshots
+
+================================================================
+APP CATEGORY
+================================================================
+iOS:     Utilities > Security
+Android: Tools
+
+================================================================
+PRICING (App Store)
+================================================================
+Download: Free (7-day trial, then subscription required)
+
+In-App Purchases:
+• OmniaGuard Starter — $99.99/year
+• OmniaGuard Professional — $499.99/year
+• OmniaGuard Enterprise — $2,499.99/year
+
+================================================================
+AVAILY WHITE-LABEL SETUP CHECKLIST (Derek)
+================================================================
+1. Go to https://availy.com → click "Start White Label"
+2. Email: franciscoderek7@gmail.com
+3. Brand name: OmniaGuard
+4. Primary color: #10B981 (emerald green)
+5. Secondary color: #D4AF37 (gold)
+6. Logo: Upload omniaguard-logo.png from omniaguard.com
+7. App name: OmniaGuard — AI Security Shield
+8. Select features: VPN + Antivirus + Password Manager + Anti-Theft + App Lock
+9. Platforms: iOS + Android
+10. Timeline: 2-4 weeks
+11. Get: App builds + App Store screenshots + promo video + admin dashboard
+
+AFTER AVAILY DELIVERS:
+- Submit iOS build to App Store Connect (appstoreconnect.apple.com)
+- Submit Android build to Google Play Console (play.google.com/console)
+- Use listing copy above
+- Set pricing tiers in App Store Connect / Play Console
+- Wire in PayPal links on omniaguard.com for web checkout
+
+================================================================
+COMODO WHITE-LABEL (WINDOWS/MAC — BACKUP)
+================================================================
+1. Go to https://comodo.com/partner → click "Reseller Program"
+2. Email: franciscoderek7@gmail.com / franciscoderek7@gmail.com
+3. Request: Endpoint protection white-label for Windows + Mac
+4. Brand as: "OmniaGuard Desktop" or "OmniaGuard Complete"
+5. Bundle with mobile app as "OmniaGuard Complete Suite" ($299/year)
+
+================================================================
