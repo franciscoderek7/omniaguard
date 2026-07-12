@@ -159,7 +159,7 @@
     '#rev-ai-input:focus{border-color:' + cfg.color + ';}',
     '#rev-ai-send{background:' + cfg.color + ';border:none;border-radius:8px;padding:9px 14px;color:#fff;font-weight:700;cursor:pointer;font-size:13px;}',
     '#rev-ai-send:hover{background:' + cfg.accent + ';}',
-    '@media(max-width:400px){#rev-ai-box{width:calc(100vw - 16px);right:8px;bottom:80px;}}'
+    '@media(max-width:600px){#rev-ai-box{width:calc(100vw - 24px);right:12px;bottom:84px;max-height:min(420px,58vh);}}'
   ].join('');
   document.head.appendChild(style);
 
