@@ -613,7 +613,7 @@ nav {
 }
 .audit-compare-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -1168,22 +1168,26 @@ footer a:hover { color: var(--text); }
           </button>
         </div>
 
-        <!-- UPSELL — $500 Full Audit -->
+        <!-- UPSELL — $99/yr + $500 Full Audit -->
         <div class="audit-upsell-card">
           <div class="audit-upsell-badge">UPGRADE AVAILABLE</div>
-          <div class="audit-upsell-title">Want the Full Picture?</div>
-          <p class="audit-upsell-sub">The free scan covers surface-level exposure. The <strong>$500 Deep Audit</strong> goes further — manual analysis, active threat testing, penetration summary, and a remediation roadmap your team can actually execute.</p>
+          <div class="audit-upsell-title">Keep Your Site Protected Year-Round</div>
+          <p class="audit-upsell-sub">The free scan is a one-time snapshot. The <strong>$99/yr Sentinel Shield</strong> keeps you covered with monthly re-scans, real-time threat alerts, and an annual review — so you're never caught off guard.</p>
           <ul class="audit-upsell-list">
-            <li>✓ Manual analyst review (not just automated)</li>
-            <li>✓ Active threat simulation (controlled, non-destructive)</li>
-            <li>✓ Social engineering exposure assessment</li>
-            <li>✓ Full remediation roadmap with prioritized fixes</li>
-            <li>✓ 45-min debrief call with findings walkthrough</li>
+            <li>✓ Monthly automated re-scan</li>
+            <li>✓ Real-time threat alerts</li>
+            <li>✓ Risk score tracking over time</li>
+            <li>✓ Remediation checklist (PDF)</li>
+            <li>✓ Priority email support</li>
           </ul>
-          <a href="https://paypal.me/techpetcage/500CAD" target="_blank" rel="noopener" class="audit-upsell-btn">
-            🔒 Book Full Audit — $500 →
+          <a href="https://paypal.me/techpetcage/99CAD" target="_blank" rel="noopener" class="audit-upsell-btn" style="margin-bottom:10px">
+            🛡️ Subscribe Sentinel Shield — $99/yr →
           </a>
-          <p class="audit-upsell-note">PayPal · One-time · Results within 5 business days · No subscription</p>
+          <p class="audit-upsell-note" style="margin-bottom:14px">PayPal · Annual · Cancel anytime</p>
+          <a href="https://paypal.me/techpetcage/500CAD" target="_blank" rel="noopener" class="audit-upsell-btn" style="background:transparent;border:1px solid var(--emerald);color:var(--emerald)">
+            🔒 Book Full Deep Audit — $500 →
+          </a>
+          <p class="audit-upsell-note">One-time · Results within 5 business days · No subscription</p>
         </div>
       </div>
     </div>
@@ -1324,8 +1328,8 @@ footer a:hover { color: var(--text); }
 <section class="full-audit-section">
   <div class="full-audit-inner">
     <div class="sec-eyebrow">Go Deeper</div>
-    <h2 class="sec-title">Full Security Audit — <span style="color:var(--emerald)">$500</span></h2>
-    <p class="full-audit-sub">When the free scan reveals issues, you need a human expert to confirm the severity, identify attack paths, and tell you exactly what to fix first. That's the $500 audit.</p>
+    <h2 class="sec-title">Subscription &amp; Audit Plans</h2>
+    <p class="full-audit-sub">Get ongoing protection with the $99/yr Sentinel Shield subscription, or go deeper with a one-time $500 Full Deep Audit when you need expert eyes on a specific threat.</p>
     <div class="audit-compare-grid">
       <div class="audit-col">
         <div class="audit-col-head free">Free Scan</div>
@@ -1335,9 +1339,9 @@ footer a:hover { color: var(--text); }
           <li>✓ HTTP header analysis</li>
           <li>✓ Threat DB cross-reference</li>
           <li>✓ Risk grade (A–F)</li>
-          <li class="dim">✗ Manual analyst review</li>
-          <li class="dim">✗ Active threat simulation</li>
-          <li class="dim">✗ Social engineering assessment</li>
+          <li class="dim">✗ Continuous monitoring</li>
+          <li class="dim">✗ Monthly re-scan</li>
+          <li class="dim">✗ Threat alerts</li>
           <li class="dim">✗ Remediation roadmap</li>
           <li class="dim">✗ Debrief call</li>
         </ul>
@@ -1345,7 +1349,27 @@ footer a:hover { color: var(--text); }
         <a href="#scan-form" class="audit-col-btn outline">Get Free Scan</a>
       </div>
       <div class="audit-col featured">
-        <div class="audit-featured-badge">RECOMMENDED</div>
+        <div class="audit-featured-badge">MOST POPULAR</div>
+        <div class="audit-col-head gold">Sentinel Shield</div>
+        <ul class="audit-col-list">
+          <li>✓ Everything in Free Scan</li>
+          <li>✓ Monthly automated re-scan</li>
+          <li>✓ Real-time threat alerts</li>
+          <li>✓ Risk score tracking over time</li>
+          <li>✓ Remediation checklist (PDF)</li>
+          <li>✓ Priority email support</li>
+          <li>✓ New vulnerability notifications</li>
+          <li>✓ Annual review report</li>
+          <li class="dim">✗ Manual analyst review</li>
+          <li class="dim">✗ Debrief call</li>
+        </ul>
+        <div class="audit-col-price gold">$99<span style="font-size:0.9rem;font-weight:500;">/yr</span></div>
+        <a href="https://paypal.me/techpetcage/99CAD" target="_blank" rel="noopener" class="audit-col-btn primary">
+          🛡️ Subscribe — $99/yr →
+        </a>
+        <p style="font-size:0.72rem;color:var(--muted2);margin-top:8px;text-align:center;">PayPal · Annual · Cancel anytime</p>
+      </div>
+      <div class="audit-col" style="background:linear-gradient(180deg,rgba(212,175,55,0.06) 0%,rgba(212,175,55,0.02) 100%)">
         <div class="audit-col-head gold">Full Deep Audit</div>
         <ul class="audit-col-list">
           <li>✓ Everything in Free Scan</li>
