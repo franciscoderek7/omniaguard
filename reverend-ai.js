@@ -48,13 +48,13 @@
       consultLabel: 'Get Warrior Tier — $149',
     },
     'omniaguard': {
-      name: 'OmniGuard AI',
+      name: 'OmniaGuard AI',
       avatar: '🛡️',
       color: '#6c63ff',
       accent: '#4b43cc',
-      greeting: "OmniGuard here. What's your threat surface? I can help you find the right protection tier.",
+      greeting: "OmniaGuard here. What's your threat surface? I can help you find the right protection tier.",
       consultLink: 'https://paypal.me/techpetcage/499CAD',
-      consultLabel: 'Start OmniGuard Sentinel — $499/mo',
+      consultLabel: 'Start OmniaGuard Sentinel — $499/mo',
     },
     'cleanswarm': {
       name: 'CleanSwarm AI',
@@ -82,7 +82,7 @@
   var KB = [
     // Founder — only answered if explicitly asked, then pivots back to security
     { kw: ['who built', 'who is the founder', 'who created', 'who founded', 'founder of omniaguard', 'who is behind', 'who owns omniaguard'],
-      answer: "OmniGuard was founded by Derek Francisco.<br><br>Now — what's your threat surface? Tell me your industry and team size and I'll point you to the right protection tier." },
+      answer: "OmniaGuard was founded by Derek Francisco.<br><br>Now — what's your threat surface? Tell me your industry and team size and I'll point you to the right protection tier." },
     // Off-topic legal routing (cannabis/legal — not a security question)
     { kw: ['cannabis charge', 'cannabis charges', 'marijuana charge', 'weed charge', 'cannabis', 'marijuana', 'possession charge', 'drug charge'],
       answer: "I specialize in cybersecurity, not legal matters. For cannabis defense, visit Floor 2 (BENO-X / Doc Weedlaw) or PrimeDox AI HQ at zprimedoxaihq.com." },
