@@ -25,6 +25,12 @@
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.empire-nav{position:relative;z-index:200;background:rgba(6,9,16,0.97);border-bottom:1px solid rgba(212,175,55,0.18);padding:0 5%;height:32px;display:flex;align-items:center;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.empire-nav::-webkit-scrollbar{display:none}
+.empire-nav-label{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:rgba(212,175,55,0.45);font-weight:700;flex-shrink:0}
+.empire-nav a{font-size:.7rem;color:#8892a4;text-decoration:none;white-space:nowrap;transition:color .2s;font-weight:500}
+.empire-nav a:hover{color:#d4af37}
+.empire-nav a.active{color:#00d084;font-weight:700}
 :root{
   --em:#00d084;
   --em2:#00b870;
@@ -53,7 +59,7 @@ canvas#particles{
 
 /* NAV */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:32px;left:0;right:0;z-index:100;
   background:rgba(10,14,23,0.92);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
@@ -84,7 +90,7 @@ nav{
 /* HERO */
 .hero{
   position:relative;z-index:1;
-  min-height:100vh;
+  min-height:calc(100vh - 32px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:100px 5% 60px;
 }
@@ -376,6 +382,18 @@ footer{
 
 <canvas id="particles"></canvas>
 
+<!-- EMPIRE NAV -->
+<div class="empire-nav">
+  <span class="empire-nav-label">Francisco Holdings</span>
+  <a href="https://franciscoholdingsinc.com">FH Inc.</a>
+  <a href="https://zprimedoxaihq.com">PrimeDox AI</a>
+  <a href="https://weedlaw.com">WeedLaw</a>
+  <a href="https://ccldr.net">CCLDR</a>
+  <a href="https://canadiancannabisconsulting.com">Consulting</a>
+  <a href="#" class="active">OmniaGuard</a>
+  <a href="https://vaultvelocityauto.com">Vault Velocity</a>
+</div>
+
 <!-- NAV -->
 <nav>
   <a class="nav-brand" href="#">OmniaGuard</a>
@@ -649,7 +667,7 @@ footer{
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Francisco Holdings Inc. All rights reserved. OmniaGuard is a trademark of Francisco Holdings Inc.</div>
+    <div class="footer-copy">© 2026 Francisco Holdings Inc. All rights reserved. OmniaGuard is a trademark of Francisco Holdings Inc. | <span style="color:rgba(212,175,55,0.5)">Part of the Francisco Holdings Inc. Empire</span></div>
     <div class="legal-disclaimer">OmniaGuard is a cybersecurity technology provider. Not law enforcement. Derek Francisco provides knowledge and education only. Not a lawyer.</div>
   </div>
 </footer>
