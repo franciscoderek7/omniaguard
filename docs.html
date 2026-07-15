@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documentation — OmniaGuard | AI Cybersecurity Platform</title>
-<meta name="description" content="OmniaGuard developer docs: integration guide, API reference, SDK, configuration, and agent management. Deploy in under 15 minutes.">
+<title>Documentation — OMNIAGUARD | AI Cybersecurity Platform</title>
+<meta name="description" content="OMNIAGUARD developer docs: integration guide, API reference, SDK, configuration, and agent management. Deploy in under 15 minutes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -97,7 +97,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,8,20,.92)
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand"><img src="omniaguard-logo.png" alt="OmniaGuard"><span class="nb-name">OmniaGuard</span></a>
+    <a href="index.html" class="nav-brand"><img src="omniaguard-logo.png" alt="OMNIAGUARD"><span class="nb-name">OMNIAGUARD</span></a>
     <ul class="nav-links">
       <li><a href="solutions.html">Solutions</a></li><li><a href="agents.html">Agents</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="docs.html" class="active">Docs</a></li><li><a href="contact.html">Contact</a></li>
     </ul>
@@ -140,12 +140,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,8,20,.92)
   </aside>
 
   <div class="docs-content">
-    <h1>OmniaGuard Docs</h1>
+    <h1>OMNIAGUARD Docs</h1>
     <p class="lead">Integrate the 14-agent swarm into your AI stack in under 15 minutes. All examples below use the inline gateway mode — no SDK required to get started.</p>
 
     <div class="docs-section" id="quickstart">
       <h2>Quickstart</h2>
-      <p>The fastest path to protection is the inline API gateway. Route your existing AI API calls through OmniaGuard's endpoint — your code changes by exactly one URL.</p>
+      <p>The fastest path to protection is the inline API gateway. Route your existing AI API calls through OMNIAGUARD's endpoint — your code changes by exactly one URL.</p>
       <h3>Step 1 — Get your API Key</h3>
       <p>After signing up, your API key is available on your dashboard. All keys follow the format <code style="background:var(--code-bg);padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)">og_live_xxxxxxxxxxxx</code>.</p>
       <h3>Step 2 — Route through the gateway</h3>
@@ -157,12 +157,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,8,20,.92)
 });</code></div>
       </div>
       <div class="code-block">
-        <div class="code-header"><span class="code-lang">After (OmniaGuard protected)</span><button class="code-copy" onclick="this.textContent='Copied!'">Copy</button></div>
+        <div class="code-header"><span class="code-lang">After (OMNIAGUARD protected)</span><button class="code-copy" onclick="this.textContent='Copied!'">Copy</button></div>
         <div class="code-body"><code><span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">"https://api.omniaguard.ai/v1/proxy"</span>, {
   method: <span class="str">"POST"</span>,
   headers: {
     <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span>,
-    <span class="str">"X-OmniaGuard-Key"</span>: <span class="str">"og_live_xxxxxxxxxxxx"</span>,
+    <span class="str">"X-OMNIAGUARD-Key"</span>: <span class="str">"og_live_xxxxxxxxxxxx"</span>,
     <span class="str">"X-Target-Model"</span>: <span class="str">"openai/gpt-4"</span>
   },
   body: JSON.stringify({
@@ -175,7 +175,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(6,8,20,.92)
 
     <div class="docs-section" id="authentication">
       <h2>Authentication</h2>
-      <p>OmniaGuard uses API key authentication. Include your key in the <code style="background:var(--code-bg);padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)">X-OmniaGuard-Key</code> header on every request.</p>
+      <p>OMNIAGUARD uses API key authentication. Include your key in the <code style="background:var(--code-bg);padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)">X-OMNIAGUARD-Key</code> header on every request.</p>
       <div class="code-block">
         <div class="code-header"><span class="code-lang">Environment Variable (recommended)</span></div>
         <div class="code-body"><code><span class="comment"># .env — never commit this file</span>
@@ -194,9 +194,9 @@ OMNIAGUARD_API_KEY=og_live_xxxxxxxxxxxx</code></div>
         </div>
         <div class="code-block">
           <div class="code-header"><span class="code-lang">TypeScript</span><button class="code-copy" onclick="this.textContent='Copied!'">Copy</button></div>
-          <div class="code-body"><code><span class="kw">import</span> { OmniaGuard } <span class="kw">from</span> <span class="str">'@omniaguard/sdk'</span>;
+          <div class="code-body"><code><span class="kw">import</span> { OMNIAGUARD } <span class="kw">from</span> <span class="str">'@omniaguard/sdk'</span>;
 
-<span class="kw">const</span> og = <span class="kw">new</span> <span class="fn">OmniaGuard</span>({
+<span class="kw">const</span> og = <span class="kw">new</span> <span class="fn">OMNIAGUARD</span>({
   apiKey: process.env.OMNIAGUARD_API_KEY,
   model: <span class="str">'openai/gpt-4'</span>,
   agents: <span class="str">'all'</span> <span class="comment">// or ['prime', 'vault', 'forge']</span>
@@ -221,9 +221,9 @@ OMNIAGUARD_API_KEY=og_live_xxxxxxxxxxxx</code></div>
         </div>
         <div class="code-block">
           <div class="code-header"><span class="code-lang">Python</span><button class="code-copy" onclick="this.textContent='Copied!'">Copy</button></div>
-          <div class="code-body"><code><span class="kw">from</span> omniaguard <span class="kw">import</span> OmniaGuard
+          <div class="code-body"><code><span class="kw">from</span> omniaguard <span class="kw">import</span> OMNIAGUARD
 
-og = <span class="fn">OmniaGuard</span>(api_key=os.environ[<span class="str">"OMNIAGUARD_API_KEY"</span>])
+og = <span class="fn">OMNIAGUARD</span>(api_key=os.environ[<span class="str">"OMNIAGUARD_API_KEY"</span>])
 
 result = og.<span class="fn">inspect</span>(
     messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: user_input}],
@@ -238,7 +238,7 @@ result = og.<span class="fn">inspect</span>(
 
     <div class="docs-section" id="api-overview">
       <h2>API Reference</h2>
-      <p>The OmniaGuard API is RESTful. All requests use HTTPS. Base URL: <code style="background:var(--code-bg);padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)">https://api.omniaguard.ai/v1</code></p>
+      <p>The OMNIAGUARD API is RESTful. All requests use HTTPS. Base URL: <code style="background:var(--code-bg);padding:2px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan)">https://api.omniaguard.ai/v1</code></p>
     </div>
 
     <div class="docs-section" id="endpoints">
@@ -291,7 +291,7 @@ result = og.<span class="fn">inspect</span>(
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><img src="omniaguard-logo.png" width="32" height="32" style="border-radius:6px" alt="OmniaGuard"><span style="font-size:18px;font-weight:700;color:var(--white)">OmniaGuard</span></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><img src="omniaguard-logo.png" width="32" height="32" style="border-radius:6px" alt="OMNIAGUARD"><span style="font-size:18px;font-weight:700;color:var(--white)">OMNIAGUARD</span></div>
       <p style="font-size:13px;color:var(--muted);line-height:1.7;max-width:280px">14 AI agents. Zero breaches. The world's most advanced AI security platform — operating in deep space.</p>
     </div>
     <div><div class="fh">Platform</div><a href="solutions.html" class="fa">Solutions</a><a href="agents.html" class="fa">Agents</a><a href="pricing.html" class="fa">Pricing</a></div>
@@ -299,7 +299,7 @@ result = og.<span class="fn">inspect</span>(
     <div><div class="fh">Legal</div><a href="#" class="fa">Terms of Service</a><a href="#" class="fa">Privacy Policy</a><a href="#" class="fa">Security Policy</a></div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 OmniaGuard · All rights reserved</span>
+    <span>© 2026 OMNIAGUARD · All rights reserved</span>
     <span style="color:rgba(0,212,255,.3)">A Francisco Holdings Inc. Venture</span>
   </div>
 </footer>

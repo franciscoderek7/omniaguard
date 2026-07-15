@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#00d4ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<meta name="apple-mobile-web-app-title" content="OMNIAGUARD">
 <meta name="description" content="Constitutional AI cybersecurity. Charter-compliant by design.">
-<title>OmniaGuard — Mobile Security Command</title>
+<title>OMNIAGUARD — Mobile Security Command</title>
 <link rel="manifest" href="manifest.json">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -293,7 +293,7 @@ select.form-input{cursor:pointer}
   <div class="install-banner" id="installBanner" style="display:none">
     <span style="font-size:24px">🛡️</span>
     <div class="install-text">
-      <strong>Add OmniaGuard to Home Screen</strong>
+      <strong>Add OMNIAGUARD to Home Screen</strong>
       Works offline · Instant alerts · No app store needed
     </div>
     <div class="install-close" id="installClose">✕</div>
@@ -331,7 +331,7 @@ select.form-input{cursor:pointer}
         </button>
         <p class="disclaimer" style="margin-top:20px">
           NOT LEGAL REPRESENTATION — EDUCATION ONLY<br>
-          OmniaGuard is educational AI security infrastructure.
+          OMNIAGUARD is educational AI security infrastructure.
         </p>
       </div>
     </div>
@@ -467,7 +467,7 @@ select.form-input{cursor:pointer}
       <div class="deploy-wrap">
         <div style="font-size:64px;margin-bottom:16px;animation:shieldPulse 1.5s ease infinite">🛡️</div>
         <div style="font-size:20px;font-weight:900;margin-bottom:8px" id="deployTitle">Activating Protection</div>
-        <div style="font-size:14px;color:var(--text2);margin-bottom:32px" id="deploySubtitle">Deploying OmniaGuard agents to your devices...</div>
+        <div style="font-size:14px;color:var(--text2);margin-bottom:32px" id="deploySubtitle">Deploying OMNIAGUARD agents to your devices...</div>
         <div class="deploy-progress" id="deploySteps">
           <div class="deploy-step waiting" id="dstep1">
             <div class="deploy-check">1</div>
@@ -496,7 +496,7 @@ select.form-input{cursor:pointer}
         <div id="deployComplete" style="display:none;text-align:center">
           <div style="font-size:48px;margin-bottom:12px">✅</div>
           <div style="font-size:22px;font-weight:900;color:var(--green);margin-bottom:8px">Shields Active</div>
-          <div style="font-size:14px;color:var(--text2);margin-bottom:24px">Your devices are protected by OmniaGuard AI agents.</div>
+          <div style="font-size:14px;color:var(--text2);margin-bottom:24px">Your devices are protected by OMNIAGUARD AI agents.</div>
           <button class="btn btn-cyan" onclick="goToScreen('screen-dashboard')">Open Dashboard →</button>
         </div>
       </div>
@@ -829,48 +829,48 @@ const TIERS = [
     monthly:499,annual:4990,agents:'1–5 devices',
     who:'Individuals, families, small shops',
     features:['5 AI Agents','Real-time scanning','Threat alerts','Mobile dashboard'],
-    stripeMonthly:'https://paypal.me/techpetcage/499CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/4990CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/499CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/4990CAD'
   },
   {
     id:'guardian',name:'GUARDIAN',emoji:'⚔️',colorClass:'t2',recommended:true,
     monthly:2499,annual:24990,agents:'5–20 agents',
     who:'Small businesses, startups',
     features:['20 AI Agents','Agent management','Priority alerts','Weekly reports','API access'],
-    stripeMonthly:'https://paypal.me/techpetcage/2499CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/24990CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/2499CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/24990CAD'
   },
   {
     id:'warden',name:'WARDEN',emoji:'🏰',colorClass:'t3',
     monthly:5000,annual:50000,agents:'20–50 agents',
     who:'Growing companies, mid-market',
     features:['50 AI Agents','Compliance logs','Audit-ready reporting','Custom alerts','SLA: 4hr response'],
-    stripeMonthly:'https://paypal.me/techpetcage/5000CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/50000CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/5000CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/50000CAD'
   },
   {
     id:'protector',name:'PROTECTOR',emoji:'🔰',colorClass:'t4',
     monthly:10000,annual:100000,agents:'50–100 agents',
     who:'Large enterprises, regional corps',
     features:['100 AI Agents','Charter s.8 logs','24/7 monitoring','War Room access','Dedicated support'],
-    stripeMonthly:'https://paypal.me/techpetcage/10000CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/100000CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/10000CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/100000CAD'
   },
   {
     id:'archon',name:'ARCHON',emoji:'⚡',colorClass:'t5',
     monthly:15000,annual:150000,agents:'100–250 agents',
     who:'National enterprises, critical infrastructure',
     features:['250 AI Agents','Intelligence feeds','Incident response','Executive dashboard','SLA: 1hr'],
-    stripeMonthly:'https://paypal.me/techpetcage/15000CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/150000CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/15000CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/150000CAD'
   },
   {
     id:'sovereign',name:'SOVEREIGN',emoji:'👑',colorClass:'t6',
     monthly:25000,annual:250000,agents:'250–500 agents',
     who:'Global Fortune 500, governments',
     features:['500 AI Agents','Full Charter stack','Intelligence briefings','White-glove deployment','SLA: 30min'],
-    stripeMonthly:'https://paypal.me/techpetcage/25000CAD',
-    stripeAnnual:'https://paypal.me/techpetcage/250000CAD'
+    stripeMonthly:'https://paypal.me/derekfranciaco1/25000CAD',
+    stripeAnnual:'https://paypal.me/derekfranciaco1/250000CAD'
   },
   {
     id:'custom',name:'CUSTOM',emoji:'🎯',colorClass:'t7',
@@ -1290,7 +1290,7 @@ function initReferral() {
 
   // Pre-fill share message
   const msg = document.getElementById('shareMessage');
-  if (msg) msg.innerHTML = `I'm protected by OmniaGuard AI security. Get <strong style="color:var(--gold)">25% off your first month</strong> with my code:<br><br><strong style="font-size:18px;color:var(--cyan)">${code}</strong><br><br>👉 omniaguard.com/ref/${code}`;
+  if (msg) msg.innerHTML = `I'm protected by OMNIAGUARD AI security. Get <strong style="color:var(--gold)">25% off your first month</strong> with my code:<br><br><strong style="font-size:18px;color:var(--cyan)">${code}</strong><br><br>👉 omniaguard.com/ref/${code}`;
 }
 
 function updateMilestones() {
@@ -1314,7 +1314,7 @@ function updateMilestones() {
 function copyRefCode() {
   const code = state.refCode;
   const link = `https://omniaguard.com/ref/${code}`;
-  const text = `Use my OmniaGuard referral code ${code} for 25% off: ${link}`;
+  const text = `Use my OMNIAGUARD referral code ${code} for 25% off: ${link}`;
   if (navigator.clipboard) navigator.clipboard.writeText(text);
   showToast('📋', 'Code + link copied to clipboard!');
 }
@@ -1322,7 +1322,7 @@ function copyRefCode() {
 function shareVia(method) {
   const code = state.refCode;
   const link = `https://omniaguard.com/ref/${code}`;
-  const msg = encodeURIComponent(`I'm protected by OmniaGuard AI security. Get 25% off with my code: ${code} → ${link}`);
+  const msg = encodeURIComponent(`I'm protected by OMNIAGUARD AI security. Get 25% off with my code: ${code} → ${link}`);
   const urls = {
     sms: `sms:?body=${msg}`,
     whatsapp: `https://wa.me/?text=${msg}`,
@@ -1332,7 +1332,7 @@ function shareVia(method) {
   };
   if (method === 'copy') {
     if (navigator.share) {
-      navigator.share({title:'OmniaGuard Protection',text:decodeURIComponent(msg),url:link}).catch(()=>{});
+      navigator.share({title:'OMNIAGUARD Protection',text:decodeURIComponent(msg),url:link}).catch(()=>{});
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(`${decodeURIComponent(msg)}`);
       showToast('📋','Message + link copied!');
@@ -1345,7 +1345,7 @@ function shareVia(method) {
 
 function showShareModal() {
   const msg = document.getElementById('shareMessage');
-  if (msg) msg.innerHTML = `I'm protected by OmniaGuard AI security. Get <strong style="color:var(--gold)">25% off your first month</strong> with my code:<br><br><strong style="font-size:18px;color:var(--cyan)">${state.refCode}</strong><br><br>👉 omniaguard.com/ref/${state.refCode}`;
+  if (msg) msg.innerHTML = `I'm protected by OMNIAGUARD AI security. Get <strong style="color:var(--gold)">25% off your first month</strong> with my code:<br><br><strong style="font-size:18px;color:var(--cyan)">${state.refCode}</strong><br><br>👉 omniaguard.com/ref/${state.refCode}`;
   document.getElementById('shareModal').classList.add('open');
 }
 
@@ -1393,7 +1393,7 @@ document.getElementById('installBanner').addEventListener('click', async () => {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
   const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === 'accepted') showToast('🛡️', 'OmniaGuard added to home screen!');
+  if (outcome === 'accepted') showToast('🛡️', 'OMNIAGUARD added to home screen!');
   deferredPrompt = null;
   document.getElementById('installBanner').style.display = 'none';
 });
@@ -1447,6 +1447,6 @@ function init() {
 
 init();
 </script>
-�<!-- ===== FLOATING SUPPORT WIDGET ===== -->�<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">�  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">�    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OmniaGuard Support</div>�    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon–Sat</div>�    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">�      <span style="font-size:20px;">✈️</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot — fastest</div></div>�    </a>�    <a href="mailto:omniaguard1@gmail.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">�      <span style="font-size:20px;">📧</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">omniaguard1@gmail.com</div></div>�    </a>�  </div>�  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">�    💬�  </button>�</div>�
+�<!-- ===== FLOATING SUPPORT WIDGET ===== -->�<div id="support-widget" style="position:fixed;bottom:28px;right:28px;z-index:9998;">�  <div id="support-popup" style="display:none;position:absolute;bottom:72px;right:0;width:280px;background:#0d1120;border:1px solid rgba(0,212,255,0.2);border-radius:16px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.6);">�    <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:4px;">OMNIAGUARD Support</div>�    <div style="color:#8892a4;font-size:12px;margin-bottom:16px;">We respond within 4 hours Mon–Sat</div>�    <a href="https://t.me/OmniguardSec_bot" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:12px;text-decoration:none;margin-bottom:10px;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)'" onmouseout="this.style.background='rgba(0,212,255,0.08)'">�      <span style="font-size:20px;">✈️</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">Telegram</div><div style="color:#8892a4;font-size:11px;">@OmniguardSec_bot — fastest</div></div>�    </a>�    <a href="mailto:omniaguard1@gmail.com" style="display:flex;align-items:center;gap:10px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(0,212,255,0.1)'" onmouseout="this.style.background='rgba(0,212,255,0.04)'">�      <span style="font-size:20px;">📧</span>�      <div><div style="color:#00d4ff;font-weight:600;font-size:13px;">ProtonMail</div><div style="color:#8892a4;font-size:11px;">omniaguard1@gmail.com</div></div>�    </a>�  </div>�  <button id="support-btn" onclick="var p=document.getElementById('support-popup');p.style.display=p.style.display==='none'?'block':'none';" style="width:56px;height:56px;border-radius:50%;background:#00d4ff;border:none;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">�    💬�  </button>�</div>�
 </body>
 </html>

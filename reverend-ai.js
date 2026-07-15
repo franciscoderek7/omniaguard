@@ -17,7 +17,7 @@
       color: '#27ae60',
       accent: '#1a7a40',
       greeting: "I'm Doc Weedlaw AI. Facing a cannabis charge? Ask me anything about your rights or BENO-X.",
-      consultLink: 'https://paypal.me/techpetcage/500CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/500CAD',
       consultLabel: 'Book Consultation ($500)',
     },
     'primedox': {
@@ -26,7 +26,7 @@
       color: '#00d4ff',
       accent: '#0099bb',
       greeting: "I'm PrimeDox AI. I can help you understand our document automation tiers. What are you looking for?",
-      consultLink: 'https://paypal.me/techpetcage/49CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/49CAD',
       consultLabel: 'Start Free Trial — $49',
     },
     'francisco-holdings': {
@@ -35,7 +35,7 @@
       color: '#c9a84c',
       accent: '#9a7a2e',
       greeting: "Welcome to Francisco Holdings. I help founders get clarity fast. What challenge are you facing?",
-      consultLink: 'https://paypal.me/techpetcage/500CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/500CAD',
       consultLabel: 'Book Strategy Session ($500)',
     },
     'weedlaw': {
@@ -44,17 +44,17 @@
       color: '#27ae60',
       accent: '#1a7a40',
       greeting: "Know Your Rights. I'm here to help. Are you facing a charge, or do you want to learn BENO-X?",
-      consultLink: 'https://paypal.me/techpetcage/149CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/149CAD',
       consultLabel: 'Get Warrior Tier — $149',
     },
     'omniaguard': {
-      name: 'OmniaGuard AI',
+      name: 'OMNIAGUARD AI',
       avatar: '🛡️',
       color: '#6c63ff',
       accent: '#4b43cc',
-      greeting: "OmniaGuard here. What's your threat surface? I can help you find the right protection tier.",
-      consultLink: 'https://paypal.me/techpetcage/499CAD',
-      consultLabel: 'Start OmniaGuard Sentinel — $499/mo',
+      greeting: "OMNIAGUARD here. What's your threat surface? I can help you find the right protection tier.",
+      consultLink: 'https://paypal.me/derekfranciaco1/499CAD',
+      consultLabel: 'Start OMNIAGUARD Sentinel — $499/mo',
     },
     'cleanswarm': {
       name: 'CleanSwarm AI',
@@ -62,7 +62,7 @@
       color: '#f59e0b',
       accent: '#b45309',
       greeting: "Hey! CleanSwarm here. Let's automate your workflow. What are you cleaning up?",
-      consultLink: 'https://paypal.me/techpetcage/399CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/399CAD',
       consultLabel: 'Start CleanSwarm Starter — $399/mo',
     },
     'default': {
@@ -71,18 +71,18 @@
       color: '#c9a84c',
       accent: '#9a7a2e',
       greeting: "Welcome to Francisco Holdings. I help founders get clarity fast. What challenge are you facing?",
-      consultLink: 'https://paypal.me/techpetcage/500CAD',
+      consultLink: 'https://paypal.me/derekfranciaco1/500CAD',
       consultLabel: 'Book Strategy Session — $500',
     }
   };
 
   var cfg = SITE_CONFIG[SITE] || SITE_CONFIG['default'];
 
-  // ── Knowledge Base (OmniaGuard ONLY — isolated, no cross-brand KB) ─────────
+  // ── Knowledge Base (OMNIAGUARD ONLY — isolated, no cross-brand KB) ─────────
   var KB = [
     // Founder — only answered if explicitly asked, then pivots back to security
     { kw: ['who built', 'who is the founder', 'who created', 'who founded', 'founder of omniaguard', 'who is behind', 'who owns omniaguard'],
-      answer: "OmniaGuard was founded by Derek Francisco.<br><br>Now — what's your threat surface? Tell me your industry and team size and I'll point you to the right protection tier." },
+      answer: "OMNIAGUARD was founded by Derek Francisco.<br><br>Now — what's your threat surface? Tell me your industry and team size and I'll point you to the right protection tier." },
     // Off-topic legal routing (cannabis/legal — not a security question)
     { kw: ['cannabis charge', 'cannabis charges', 'marijuana charge', 'weed charge', 'cannabis', 'marijuana', 'possession charge', 'drug charge'],
       answer: "I specialize in cybersecurity, not legal matters. For cannabis defense, visit Floor 2 (BENO-X / Doc Weedlaw) or PrimeDox AI HQ at zprimedoxaihq.com." },
@@ -91,7 +91,7 @@
       answer: "For healthcare or pharmacy AI handling patient data, the minimum recommended tier is <strong>Warden — $5,000/mo</strong>. It includes HIPAA-aligned controls with a signed Business Associate Agreement (BAA) for US healthcare clients, PIPEDA/Bill C-27 compliance, full 14-layer protection, and a dedicated integration engineer — live and protected within 48 hours, guaranteed." },
     // 14-layer stack
     { kw: ['14-layer', '14 layer', '14layer', 'fourteen layer', 'what layers', 'prompt injection', 'stack'],
-      answer: "OmniaGuard's 14-layer stack: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, (14) Real-time human oversight integration. Each layer runs in under 12ms — no perceptible latency." },
+      answer: "OMNIAGUARD's 14-layer stack: (1) Input sanitization, (2) Intent classification, (3) Prompt injection detection, (4) Role confusion prevention, (5) Context window monitoring, (6) Memory poisoning defense, (7) Token smuggling detection, (8) Output validation, (9) Data exfiltration prevention, (10) Agent cascade monitoring, (11) Cross-agent contamination detection, (12) Adversarial input filtering, (13) Policy enforcement, (14) Real-time human oversight integration. Each layer runs in under 12ms — no perceptible latency." },
     // Small business — Guardian
     { kw: ['small business', 'startup', '5-20 agents', '5 to 20 agents', 'few agents', 'growing team'],
       answer: "For a small business running 5-20 AI agents, <strong>Guardian — $2,499/mo</strong> is the right fit: 24/7 SOC monitoring, full compliance package, and active defense across your whole agent fleet." },
@@ -115,7 +115,7 @@
       answer: "We accept PayPal, Interac e-Transfer, Bitcoin, wire transfer, and corporate cheque. Click the button below to pay via PayPal — accounts are activated within 2 business hours of confirmed payment." },
     // General pricing fallback
     { kw: ['price', 'cost', 'tier', 'how much', 'pricing', 'plan', 'plans'],
-      answer: "OmniaGuard tiers:<br>🔹 Sentinel — $499/mo<br>🔸 Guardian — $2,499/mo<br>🛡️ Warden — $5,000/mo ★ Recommended<br>🔥 Archon — $15,000/mo<br>💎 Sovereign — $25,000/mo<br><br>Tell me your industry and team size and I'll recommend the right one." },
+      answer: "OMNIAGUARD tiers:<br>🔹 Sentinel — $499/mo<br>🔸 Guardian — $2,499/mo<br>🛡️ Warden — $5,000/mo ★ Recommended<br>🔥 Archon — $15,000/mo<br>💎 Sovereign — $25,000/mo<br><br>Tell me your industry and team size and I'll recommend the right one." },
     // Contact
     { kw: ['contact', 'email', 'reach', 'talk to', 'speak to someone', 'sales'],
       answer: "Book directly using the button below — that's the fastest way to reach our security team. We respond within 1 business hour." },

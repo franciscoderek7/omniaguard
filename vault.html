@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>OmniaGuard Encrypted Vault</title>
-<meta name="description" content="OmniaGuard zero-knowledge encrypted vault. AES-256-GCM. Your data never leaves your device.">
+<title>OMNIAGUARD Encrypted Vault</title>
+<meta name="description" content="OMNIAGUARD zero-knowledge encrypted vault. AES-256-GCM. Your data never leaves your device.">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#00d4ff">
 <meta name="mobile-web-app-capable" content="yes">
@@ -783,7 +783,7 @@ textarea {
 <div id="lock-screen" class="screen active">
   <div class="lock-inner">
     <div class="vault-logo">🛡️</div>
-    <h1 class="vault-title"><span>OmniaGuard</span> Vault</h1>
+    <h1 class="vault-title"><span>OMNIAGUARD</span> Vault</h1>
     <p class="vault-subtitle">Your encrypted vault — zero knowledge, zero compromise</p>
 
     <div class="badges">
@@ -830,7 +830,7 @@ textarea {
     <div class="vault-header-brand">
       <div class="vault-header-logo">🛡️</div>
       <div>
-        <div class="vault-header-name">OmniaGuard Vault</div>
+        <div class="vault-header-name">OMNIAGUARD Vault</div>
         <div class="vault-header-sub"><span class="status-dot"></span> Unlocked · <span id="session-timer">00:00</span></div>
       </div>
     </div>
@@ -1097,7 +1097,7 @@ textarea {
 <script>
 'use strict';
 // ══════════════════════════════════════════════════════════════
-//  OmniaGuard Encrypted Vault — vault.html
+//  OMNIAGUARD Encrypted Vault — vault.html
 //  AES-256-GCM | PBKDF2 | WebAuthn | IndexedDB
 // ══════════════════════════════════════════════════════════════
 
@@ -1403,7 +1403,7 @@ async function registerBiometric() {
     const cred = await navigator.credentials.create({
       publicKey: {
         challenge,
-        rp: { name: 'OmniaGuard Vault', id: location.hostname || 'localhost' },
+        rp: { name: 'OMNIAGUARD Vault', id: location.hostname || 'localhost' },
         user: { id: userId, name: 'vault-user', displayName: 'Vault User' },
         pubKeyCredParams: [
           { type: 'public-key', alg: -7 },

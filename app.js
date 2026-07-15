@@ -1,4 +1,4 @@
-/* OmniaGuard PWA — app.js */
+/* OMNIAGUARD PWA — app.js */
 (function () {
   'use strict';
 
@@ -15,13 +15,13 @@
     if (!('serviceWorker' in navigator)) return;
     navigator.serviceWorker.register('/service-worker.js')
       .then(reg => {
-        console.log('[OmniaGuard] Service worker registered. Scope:', reg.scope);
+        console.log('[OMNIAGUARD] Service worker registered. Scope:', reg.scope);
         // Request background sync if available
         if ('sync' in reg) {
           reg.sync.register('threat-alert-sync').catch(() => {});
         }
       })
-      .catch(err => console.warn('[OmniaGuard] SW registration failed:', err));
+      .catch(err => console.warn('[OMNIAGUARD] SW registration failed:', err));
   }
 
   /* ---- INSTALL PROMPT (suppressed — payment required before access) ---- */
@@ -39,7 +39,7 @@
     const t = document.createElement('div');
     t.id = 'og-offline-toast';
     t.style.cssText = 'position:fixed;top:80px;right:20px;z-index:99998;background:#1a1a2e;border:1px solid rgba(255,140,0,0.5);border-radius:10px;padding:12px 18px;color:#ff8c00;font-size:13px;font-weight:600;font-family:system-ui,-apple-system,sans-serif;box-shadow:0 4px 20px rgba(255,140,0,0.15);';
-    t.textContent = 'You are offline — OmniaGuard cached protection active';
+    t.textContent = 'You are offline — OMNIAGUARD cached protection active';
     document.body.appendChild(t);
   }
 
@@ -52,7 +52,7 @@
   function showOnlineToast() {
     const t = document.createElement('div');
     t.style.cssText = 'position:fixed;top:80px;right:20px;z-index:99998;background:#0d1a12;border:1px solid rgba(0,200,83,0.5);border-radius:10px;padding:12px 18px;color:#00c853;font-size:13px;font-weight:600;font-family:system-ui,-apple-system,sans-serif;box-shadow:0 4px 20px rgba(0,200,83,0.15);';
-    t.textContent = 'Back online — OmniaGuard fully operational';
+    t.textContent = 'Back online — OMNIAGUARD fully operational';
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 3000);
   }
@@ -116,8 +116,8 @@
     return Notification.requestPermission().then(permission => {
       localStorage.setItem('og_notify_permission', permission);
       if (permission === 'granted') {
-        new Notification('OmniaGuard Active', {
-          body: 'You will now receive threat alerts from OmniaGuard.',
+        new Notification('OMNIAGUARD Active', {
+          body: 'You will now receive threat alerts from OMNIAGUARD.',
           icon: '/omniaguard-logo.png'
         });
       }

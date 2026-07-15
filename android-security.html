@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="OmniaGuard Android Security — protect your Android device from AI-powered threats, prompt injection, and malicious agent behavior.">
+<meta name="description" content="OMNIAGUARD Android Security — protect your Android device from AI-powered threats, prompt injection, and malicious agent behavior.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Android Security — OmniaGuard</title>
+<title>Android Security — OMNIAGUARD</title>
 <link rel="canonical" href="https://omniaguard.com/android-security.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="OmniaGuard">
-<meta property="og:title" content="Android Security — OmniaGuard">
+<meta property="og:site_name" content="OMNIAGUARD">
+<meta property="og:title" content="Android Security — OMNIAGUARD">
 <meta property="og:description" content="">
 <meta property="og:url" content="https://omniaguard.com/android-security.html">
 <meta property="og:image" content="https://omniaguard.com/omniaguard-logo.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Android Security — OmniaGuard">
+<meta name="twitter:title" content="Android Security — OMNIAGUARD">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://omniaguard.com/omniaguard-logo.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="OmniaGuard">
+<meta name="apple-mobile-web-app-title" content="OMNIAGUARD">
 <link rel="apple-touch-icon" href="/omniaguard-logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/omniaguard-logo.png">
 <meta name="theme-color" content="#00d4ff">
@@ -132,8 +132,8 @@ main{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <img src="/omniaguard-logo.png" alt="OmniaGuard" width="32" height="32" loading="eager">
-      OmniaGuard
+      <img src="/omniaguard-logo.png" alt="OMNIAGUARD" width="32" height="32" loading="eager">
+      OMNIAGUARD
     </a>
     <a href="/threat-dashboard.html" class="nav-back">← Dashboard</a>
   </div>
@@ -143,14 +143,14 @@ main{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
   <div class="page-header">
     <div class="header-badge">🔐 ANDROID SECURITY LAYER</div>
     <h1>Biometric Auth &<br>Device Security</h1>
-    <p>Fingerprint/face lock for OmniaGuard. Device security audit. Real Android capabilities from your browser.</p>
+    <p>Fingerprint/face lock for OMNIAGUARD. Device security audit. Real Android capabilities from your browser.</p>
   </div>
 
   <!-- BIOMETRIC AUTH CARD -->
   <div class="auth-card locked" id="auth-card">
     <span class="auth-icon" id="auth-icon">🔐</span>
-    <div class="auth-title" id="auth-title">OmniaGuard Biometric Lock</div>
-    <div class="auth-desc" id="auth-desc">Register your fingerprint or face to lock sensitive OmniaGuard features. Uses your device's secure biometric chip — no data leaves the device.</div>
+    <div class="auth-title" id="auth-title">OMNIAGUARD Biometric Lock</div>
+    <div class="auth-desc" id="auth-desc">Register your fingerprint or face to lock sensitive OMNIAGUARD features. Uses your device's secure biometric chip — no data leaves the device.</div>
     <div class="auth-status locked" id="auth-status-badge">🔒 LOCKED</div>
     <div id="auth-controls" class="btn-row"></div>
     <div style="margin-top:16px;">
@@ -231,7 +231,7 @@ let authState = 'locked'; // locked | unlocked | unsupported | no-credential
 let storedCredentialId = null;
 
 const RP_ID = location.hostname;
-const RP_NAME = 'OmniaGuard';
+const RP_NAME = 'OMNIAGUARD';
 const USER_ID = new Uint8Array(16);
 crypto.getRandomValues(USER_ID);
 
@@ -285,10 +285,10 @@ function setUnsupported(msg) {
 function setLocked(hasCredential) {
   document.getElementById('auth-card').className = 'auth-card locked';
   document.getElementById('auth-icon').textContent = '🔐';
-  document.getElementById('auth-title').textContent = hasCredential ? 'OmniaGuard Locked' : 'Register Biometric';
+  document.getElementById('auth-title').textContent = hasCredential ? 'OMNIAGUARD Locked' : 'Register Biometric';
   document.getElementById('auth-desc').textContent = hasCredential
-    ? 'Tap "Authenticate" and use your fingerprint or face to unlock OmniaGuard.'
-    : 'Register your biometric to lock sensitive OmniaGuard features with fingerprint or face ID.';
+    ? 'Tap "Authenticate" and use your fingerprint or face to unlock OMNIAGUARD.'
+    : 'Register your biometric to lock sensitive OMNIAGUARD features with fingerprint or face ID.';
   document.getElementById('auth-status-badge').className = 'auth-status locked';
   document.getElementById('auth-status-badge').textContent = '🔒 LOCKED';
 
@@ -306,7 +306,7 @@ function setUnlocked() {
   document.getElementById('auth-card').className = 'auth-card unlocked';
   document.getElementById('auth-icon').textContent = '✅';
   document.getElementById('auth-title').textContent = 'Identity Verified';
-  document.getElementById('auth-desc').textContent = 'Biometric authentication successful. OmniaGuard is unlocked.';
+  document.getElementById('auth-desc').textContent = 'Biometric authentication successful. OMNIAGUARD is unlocked.';
   document.getElementById('auth-status-badge').className = 'auth-status unlocked';
   document.getElementById('auth-status-badge').textContent = '✅ UNLOCKED';
   document.getElementById('auth-controls').innerHTML = `
@@ -336,7 +336,7 @@ async function registerBiometric() {
         user: {
           id: USER_ID,
           name: 'primedox@omniaguard',
-          displayName: 'PrimeDox — OmniaGuard'
+          displayName: 'PrimeDox — OMNIAGUARD'
         },
         pubKeyCredParams: [
           { alg: -7, type: 'public-key' },   // ES256
@@ -437,7 +437,7 @@ function updatePasskeysList() {
       <div class="passkey-info">
         <span class="passkey-icon">🔑</span>
         <div>
-          <div style="font-size:14px;font-weight:600;">OmniaGuard Passkey</div>
+          <div style="font-size:14px;font-weight:600;">OMNIAGUARD Passkey</div>
           <div style="font-size:12px;color:var(--gray);">Registered: ${registered ? new Date(registered).toLocaleDateString() : 'Unknown'}</div>
           <div style="font-size:11px;font-family:monospace;color:var(--gray);">ID: ${credId.substring(0,20)}…</div>
         </div>
@@ -525,7 +525,7 @@ function runSecurityAudit() {
     status: hasCredential ? 'pass' : 'warn',
     icon: hasCredential ? '✅' : '⚠️',
     label: 'Biometric Credential Registered',
-    desc: hasCredential ? 'OmniaGuard biometric credential is registered on this device.' : 'No biometric credential registered. Register above to enable biometric lock.',
+    desc: hasCredential ? 'OMNIAGUARD biometric credential is registered on this device.' : 'No biometric credential registered. Register above to enable biometric lock.',
     badge: hasCredential ? 'REGISTERED' : 'NOT REGISTERED'
   });
 

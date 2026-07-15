@@ -1,4 +1,4 @@
-/* OmniaGuard Service Worker v2 */
+/* OMNIAGUARD Service Worker v2 */
 const CACHE_NAME = 'omniaguard-v2';
 const STATIC_ASSETS = [
   '/',
@@ -75,7 +75,7 @@ self.addEventListener('fetch', event => {
 
 /* ---- PUSH NOTIFICATIONS ---- */
 self.addEventListener('push', event => {
-  let data = { title: 'OmniaGuard Alert', body: 'Threat detected. Review your dashboard.', icon: '/omniaguard-logo.png' };
+  let data = { title: 'OMNIAGUARD Alert', body: 'Threat detected. Review your dashboard.', icon: '/omniaguard-logo.png' };
   if (event.data) {
     try { data = { ...data, ...event.data.json() }; } catch (e) { data.body = event.data.text(); }
   }
@@ -116,6 +116,6 @@ async function syncThreatAlerts() {
     if (!response.ok) throw new Error('Sync failed');
   } catch (e) {
     // Silently fail — will retry on next sync opportunity
-    console.log('[OmniaGuard SW] Background sync deferred:', e.message);
+    console.log('[OMNIAGUARD SW] Background sync deferred:', e.message);
   }
 }

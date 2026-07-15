@@ -7,8 +7,8 @@ Last updated: June 14, 2026
 ================================================================
 APP NAME
 ================================================================
-iOS App Store: OmniaGuard — AI Security Shield
-Google Play:   OmniaGuard — Enterprise AI Security
+iOS App Store: OMNIAGUARD — AI Security Shield
+Google Play:   OMNIAGUARD — Enterprise AI Security
 
 ================================================================
 SHORT DESCRIPTION (80 chars — Google Play)
@@ -25,7 +25,7 @@ FULL DESCRIPTION (4000 chars max)
 ================================================================
 ZERO COMPROMISE. ZERO TRUST. ZERO FEAR.
 
-OmniaGuard is the world's most advanced personal AI security platform — built for Canadians who refuse to leave their digital life unprotected.
+OMNIAGUARD is the world's most advanced personal AI security platform — built for Canadians who refuse to leave their digital life unprotected.
 
 14 LAYERS OF REAL-TIME PROTECTION:
 
@@ -72,7 +72,7 @@ PLANS:
 
 Questions? Email: omniaguard1@gmail.com
 
-© 2026 OmniaGuard™ — Enterprise AI Security
+© 2026 OMNIAGUARD™ — Enterprise AI Security
 
 ================================================================
 KEYWORDS (iOS — 100 chars max, comma-separated)
@@ -150,20 +150,20 @@ PRICING (App Store)
 Download: Free (7-day trial, then subscription required)
 
 In-App Purchases:
-• OmniaGuard Starter — $99.99/year
-• OmniaGuard Professional — $499.99/year
-• OmniaGuard Enterprise — $2,499.99/year
+• OMNIAGUARD Starter — $99.99/year
+• OMNIAGUARD Professional — $499.99/year
+• OMNIAGUARD Enterprise — $2,499.99/year
 
 ================================================================
 AVAILY WHITE-LABEL SETUP CHECKLIST (Derek)
 ================================================================
 1. Go to https://availy.com → click "Start White Label"
 2. Email: franciscoderek7@gmail.com
-3. Brand name: OmniaGuard
+3. Brand name: OMNIAGUARD
 4. Primary color: #10B981 (emerald green)
 5. Secondary color: #D4AF37 (gold)
 6. Logo: Upload omniaguard-logo.png from omniaguard.com
-7. App name: OmniaGuard — AI Security Shield
+7. App name: OMNIAGUARD — AI Security Shield
 8. Select features: VPN + Antivirus + Password Manager + Anti-Theft + App Lock
 9. Platforms: iOS + Android
 10. Timeline: 2-4 weeks
@@ -182,7 +182,7 @@ COMODO WHITE-LABEL (WINDOWS/MAC — BACKUP)
 1. Go to https://comodo.com/partner → click "Reseller Program"
 2. Email: franciscoderek7@gmail.com / franciscoderek7@gmail.com
 3. Request: Endpoint protection white-label for Windows + Mac
-4. Brand as: "OmniaGuard Desktop" or "OmniaGuard Complete"
-5. Bundle with mobile app as "OmniaGuard Complete Suite" ($299/year)
+4. Brand as: "OMNIAGUARD Desktop" or "OMNIAGUARD Complete"
+5. Bundle with mobile app as "OMNIAGUARD Complete Suite" ($299/year)
 
 ================================================================

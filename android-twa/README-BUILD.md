@@ -1,4 +1,4 @@
-# OmniaGuard Android APK — Build Guide
+# OMNIAGUARD Android APK — Build Guide
 # Trusted Web Activity (TWA) Wrapper
 # Turns omniaguard.com PWA into a real Android APK you can sideload
 
@@ -29,8 +29,8 @@ bubblewrap init --manifest https://omniaguard.com/manifest.json
 
 # When prompted:
 #   Package name: com.omniaguard.app
-#   App name: OmniaGuard
-#   App short name: OmniaGuard
+#   App name: OMNIAGUARD
+#   App short name: OMNIAGUARD
 #   Start URL: https://omniaguard.com/
 #   Display mode: standalone
 #   Status bar color: #00d4ff
@@ -183,9 +183,9 @@ webView.addJavascriptInterface(new Object() {
     public String getNetworkInfo() {
         // return JSON with connection type, IP, etc.
     }
-}, "OmniaGuardNative");
+}, "OMNIAGUARDNative");
 
-// In your web JS, call: OmniaGuardNative.getVPNStatus()
+// In your web JS, call: OMNIAGUARDNative.getVPNStatus()
 ```
 
 ---
@@ -201,7 +201,7 @@ This is the model used by products like:
 - Corporate MDM apps (Jamf, Intune)
 
 ```java
-public class OmniaGuardVPNService extends VpnService {
+public class OMNIAGUARDVPNService extends VpnService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Build VPN tunnel
@@ -209,7 +209,7 @@ public class OmniaGuardVPNService extends VpnService {
         builder.addAddress("10.99.0.2", 24);        // tunnel IP
         builder.addDnsServer("1.1.1.1");             // Cloudflare DNS
         builder.addRoute("0.0.0.0", 0);              // route all traffic
-        builder.setSession("OmniaGuard Security");
+        builder.setSession("OMNIAGUARD Security");
         ParcelFileDescriptor tun = builder.establish();
 
         // Now read all packets from tun descriptor
@@ -249,7 +249,7 @@ It CANNOT be silent — Android requires user approval each time.
 1. Open Chrome on your Galaxy S26 / Tab S11
 2. Go to https://omniaguard.com
 3. Tap the 3-dot menu (⋮) → "Add to Home Screen"
-4. Name it "OmniaGuard" → Add
+4. Name it "OMNIAGUARD" → Add
 5. Open app → tap "Enable Alerts" for push notifications
 6. Go to VPN Monitor → tap "Start Auto-Monitor"
 
@@ -262,4 +262,4 @@ It CANNOT be silent — Android requires user approval each time.
 
 ---
 
-*OmniaGuard Android Build Guide | Francisco Holdings Inc. | June 2026*
+*OMNIAGUARD Android Build Guide | Francisco Holdings Inc. | June 2026*
