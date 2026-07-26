@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FRANCISCO HOLDINGS INC. | The Trillion Dollar Skyscraper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --rr-black:#050505; --rr-void:#0a0a0a; --rr-silver:#C0C0C0; --rr-gold:#D4AF37; --rr-gold-bright:#F4D03F; --bugatti-blue:#0055FF; --bugatti-orange:#FF6600; --omni-red:#FF1A1A; --omni-steel:#888; --weed-blue:#00CCFF; --emerald:#00FF88; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--rr-black); color:#fff; font-family:'Rajdhani',sans-serif; overflow-x:hidden; min-height:100vh; }
+#loader { position:fixed; inset:0; z-index:99999; background:radial-gradient(ellipse at center,#0a0a0a 0%,#000 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1.5s ease,visibility 1.5s; }
+#loader.done { opacity:0; visibility:hidden; pointer-events:none; }
+.loader-crown { width:120px; height:120px; border:2px solid var(--rr-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; animation:pulseCrown 2s ease-in-out infinite; box-shadow:0 0 60px rgba(212,175,55,0.3), inset 0 0 40px rgba(212,175,55,0.1); }
+.loader-crown::before { content:"FH"; font-family:'Cinzel',serif; font-size:2.5rem; font-weight:900; color:var(--rr-gold); letter-spacing:4px; }
+@keyframes pulseCrown { 0%,100%{transform:scale(1);box-shadow:0 0 60px rgba(212,175,55,0.3);} 50%{transform:scale(1.05);box-shadow:0 0 100px rgba(212,175,55,0.6);} }
+.loader-text { margin-top:30px; font-family:'Cinzel',serif; font-size:1.2rem; color:var(--rr-silver); letter-spacing:8px; text-transform:uppercase; }
+.loader-bar { margin-top:20px; width:200px; height:2px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden; }
+.loader-bar::after { content:''; display:block; width:0%; height:100%; background:linear-gradient(90deg,var(--rr-gold),var(--rr-gold-bright)); animation:loadBar 2.5s ease forwards; }
+@keyframes loadBar { to{width:100%;} }
+#starfield { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.page-section { position:relative; z-index:1; min-height:100vh; display:none; }
+.page-section.active { display:block; }
+#lobby { background:radial-gradient(ellipse at 50% 100%,#0d0d1a 0%,#000 60%); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px; position:relative; overflow:hidden; }
+#lobby::before { content:''; position:absolute; inset:0; background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.3"/></svg>'); background-size:80px 80px; opacity:0.05; pointer-events:none; }
+.lobby-header { text-align:center; margin-top:40px; margin-bottom:30px; position:relative; z-index:2; }
+.lobby-header h1 { font-family:'Cinzel',serif; font-size:clamp(1.8rem,5vw,3.5rem); font-weight:900; background:linear-gradient(180deg,#fff 0%,var(--rr-silver) 50%,var(--rr-gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:6px; text-transform:uppercase; }
+.lobby-header .subtitle { font-family:'Orbitron',sans-serif; font-size:clamp(0.7rem,2vw,1rem); color:var(--rr-gold); letter-spacing:4px; margin-top:8px; text-transform:uppercase; }
+.lobby-header .stats { display:flex; gap:30px; justify-content:center; margin-top:20px; flex-wrap:wrap; }
+.stat-pill { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); padding:8px 20px; border-radius:30px; font-family:'Orbitron',sans-serif; font-size:0.75rem; color:var(--rr-silver); letter-spacing:2px; }
+.stat-pill span { color:var(--rr-gold); font-weight:700; }
+.tower-container { position:relative; width:100%; max-width:500px; height:70vh; perspective:1200px; z-index:2; margin:0 auto; }
+.tower { position:relative; width:100%; height:100%; transform-style:preserve-3d; animation:towerFloat 6s ease-in-out infinite; }
+@keyframes towerFloat { 0%,100%{transform:translateY(0) rotateY(0deg);} 50%{transform:translateY(-10px) rotateY(2deg);} }
+.tower-glow { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:300px; height:500px; background:radial-gradient(ellipse,rgba(212,175,55,0.15) 0%,transparent 70%); filter:blur(40px); pointer-events:none; }
+.tower-spire { position:absolute; left:50%; top:0; transform:translateX(-50%); width:4px; height:60px; background:linear-gradient(180deg,var(--rr-gold),transparent); filter:drop-shadow(0 0 10px var(--rr-gold)); }
+.tower-crown { position:absolute; left:50%; top:50px; transform:translateX(-50%); width:80px; height:40px; background:linear-gradient(180deg,rgba(212,175,55,0.4),rgba(212,175,55,0.1)); border:1px solid var(--rr-gold); border-radius:40px 40px 0 0; box-shadow:0 0 30px rgba(212,175,55,0.3); }
+.tower-crown::after { content:'392'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--rr-gold); }
+.floor { position:absolute; left:50%; transform:translateX(-50%) translateZ(0); height:50px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent); border-bottom:1px solid rgba(212,175,55,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.4s cubic-bezier(0.4,0,0.2,1); overflow:hidden; }
+.floor::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.05) 50%,transparent 100%); transform:translateX(-100%); transition:transform 0.6s; }
+.floor:hover::before { transform:translateX(100%); }
+.floor:hover { background:linear-gradient(90deg,rgba(212,175,55,0.1),rgba(212,175,55,0.2),rgba(212,175,55,0.1)); border-color:var(--rr-gold); box-shadow:0 0 20px rgba(212,175,55,0.2); transform:translateX(-50%) scale(1.05); }
+.floor-number { font-family:'Orbitron',sans-serif; font-size:0.65rem; color:rgba(255,255,255,0.4); position:absolute; left:10px; transition:color 0.3s; }
+.floor:hover .floor-number { color:var(--rr-gold); }
+.floor-name { font-family:'Rajdhani',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.6); letter-spacing:2px; text-transform:uppercase; transition:color 0.3s; }
+.floor:hover .floor-name { color:#fff; text-shadow:0 0 10px rgba(255,255,255,0.5); }
+.floor-icon { position:absolute; right:10px; font-size:1rem; opacity:0.3; transition:opacity 0.3s; }
+.floor:hover .floor-icon { opacity:1; }
+.f1 { top:90px; width:85%; } .f2 { top:145px; width:82%; } .f3 { top:200px; width:79%; } .f4 { top:255px; width:76%; } .f5 { top:310px; width:73%; } .f6 { top:365px; width:70%; } .f7 { top:420px; width:67%; } .f8 { top:475px; width:64%; } .f9 { top:530px; width:61%; } .f10 { top:585px; width:58%; } .f11 { top:640px; width:55%; } .f12 { top:695px; width:52%; }
+.floor-windows { position:absolute; inset:0; display:flex; justify-content:space-around; align-items:center; padding:0 20px; pointer-events:none; }
+.window { width:6px; height:10px; background:rgba(255,255,255,0.1); border-radius:1px; animation:windowFlicker 3s ease-in-out infinite; }
+@keyframes windowFlicker { 0%,100%{opacity:0.3;} 50%{opacity:0.8; background:rgba(212,175,55,0.4);} }
+.elevator-panel { position:fixed; right:20px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.8); border:1px solid rgba(212,175,55,0.2); border-radius:12px; padding:15px 10px; z-index:100; backdrop-filter:blur(10px); }
+.elevator-panel h4 { font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--rr-gold); text-align:center; margin-bottom:10px; letter-spacing:2px; }
+.elevator-btn { display:block; width:36px; height:36px; margin:6px auto; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:50%; color:rgba(255,255,255,0.5); font-family:'Orbitron',sans-serif; font-size:0.7rem; cursor:pointer; transition:all 0.3s; }
+.elevator-btn:hover,.elevator-btn.active { background:rgba(212,175,55,0.2); border-color:var(--rr-gold); color:var(--rr-gold); box-shadow:0 0 15px rgba(212,175,55,0.3); }
+.floor-page { position:fixed; inset:0; z-index:50; display:none; overflow-y:auto; background:var(--rr-void); }
+.floor-page.active { display:block; }
+.floor-page::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0; }
+#floor1::before { background:radial-gradient(ellipse at 20% 50%,rgba(212,175,55,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 50%,rgba(192,192,192,0.03) 0%,transparent 50%); }
+.rr-hero { text-align:center; padding:80px 20px 40px; position:relative; z-index:1; }
+.rr-hero h2 { font-family:'Cinzel',serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; background:linear-gradient(135deg,#fff 0%,var(--rr-silver) 40%,var(--rr-gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:8px; }
+.rr-hero .tagline { font-family:'Playfair Display',serif; font-style:italic; font-size:1.2rem; color:var(--rr-silver); margin-top:10px; letter-spacing:3px; }
+.rr-content { max-width:1200px; margin:0 auto; padding:0 20px 60px; position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
+.rr-card { background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01)); border:1px solid rgba(212,175,55,0.15); border-radius:16px; padding:30px; backdrop-filter:blur(10px); transition:all 0.4s; }
+.rr-card:hover { border-color:rgba(212,175,55,0.4); box-shadow:0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05); transform:translateY(-5px); }
+.rr-card h3 { font-family:'Cinzel',serif; color:var(--rr-gold); font-size:1.1rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase; }
+.rr-card p { color:rgba(255,255,255,0.6); line-height:1.7; font-size:0.95rem; }
+#floor2 { background:linear-gradient(180deg,#0a0a0a 0%,#1a0a0a 50%,#0a0a0a 100%); }
+#floor2::before { background:radial-gradient(ellipse at 50% 50%,rgba(255,26,26,0.08) 0%,transparent 60%); }
+.omni-hero { text-align:center; padding:80px 20px 40px; position:relative; z-index:1; }
+.omni-hero h2 { font-family:'Orbitron',sans-serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; color:#fff; text-shadow:0 0 40px rgba(255,26,26,0.5),0 0 80px rgba(255,26,26,0.2); letter-spacing:6px; }
+.omni-hero .sentinel-sub { font-family:'Rajdhani',sans-serif; color:var(--omni-red); font-size:1rem; letter-spacing:6px; text-transform:uppercase; margin-top:10px; }
+.sentinel-grid { max-width:1000px; margin:0 auto; padding:0 20px 60px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; position:relative; z-index:1; }
+.sentinel-card { background:linear-gradient(135deg,rgba(30,30,30,0.8),rgba(10,10,10,0.9)); border:1px solid rgba(255,26,26,0.2); border-radius:12px; padding:25px; position:relative; overflow:hidden; }
+.sentinel-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--omni-red),transparent); animation:scanLine 3s linear infinite; }
+@keyframes scanLine { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
+.sentinel-card h3 { font-family:'Orbitron',sans-serif; color:var(--omni-steel); font-size:0.9rem; letter-spacing:3px; margin-bottom:12px; }
+.sentinel-card .threat-level { display:inline-block; padding:4px 12px; background:rgba(255,26,26,0.15); border:1px solid rgba(255,26,26,0.3); color:var(--omni-red); font-family:'Orbitron',sans-serif; font-size:0.65rem; border-radius:4px; letter-spacing:2px; }
+#floor3 { background:linear-gradient(180deg,#000510 0%,#001020 50%,#000510 100%); }
+#floor3::before { background:radial-gradient(ellipse at 30% 50%,rgba(0,85,255,0.1) 0%,transparent 50%),radial-gradient(ellipse at 70% 50%,rgba(255,102,0,0.05) 0%,transparent 50%); }
+.bugatti-hero { text-align:center; padding:80px 20px 40px; position:relative; z-index:1; }
+.bugatti-hero h2 { font-family:'Orbitron',sans-serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; background:linear-gradient(135deg,var(--bugatti-blue) 0%,#fff 50%,var(--bugatti-orange) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:4px; }
+.bugatti-hero .speed-line { width:200px; height:2px; margin:15px auto; background:linear-gradient(90deg,transparent,var(--bugatti-blue),var(--bugatti-orange),transparent); }
+.bugatti-grid { max-width:1100px; margin:0 auto; padding:0 20px 60px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:25px; position:relative; z-index:1; }
+.bugatti-card { background:linear-gradient(135deg,rgba(0,85,255,0.05),rgba(0,0,0,0.5)); border:1px solid rgba(0,85,255,0.2); border-radius:12px; padding:30px; position:relative; overflow:hidden; }
+.bugatti-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--bugatti-blue),var(--bugatti-orange)); }
+.bugatti-card h3 { font-family:'Orbitron',sans-serif; color:var(--bugatti-blue); font-size:1rem; letter-spacing:3px; margin-bottom:12px; }
+#floor4 { background:linear-gradient(180deg,#0a0a0a 0%,#1a0a0a 100%); }
+.vault-hero h2 { font-family:'Orbitron',sans-serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; color:#fff; text-shadow:0 0 30px rgba(255,100,100,0.3); letter-spacing:4px; }
+#floor5 { background:linear-gradient(180deg,#000a1a 0%,#001530 100%); }
+.ccldr-hero h2 { font-family:'Cinzel',serif; font-size:clamp(2rem,6vw,4rem); color:var(--weed-blue); text-shadow:0 0 30px rgba(0,204,255,0.3); }
+#floor6 { background:linear-gradient(180deg,#001a0a 0%,#003010 100%); }
+.ccc-hero h2 { font-family:'Cinzel',serif; font-size:clamp(2rem,6vw,4rem); color:var(--emerald); text-shadow:0 0 30px rgba(0,255,136,0.3); }
+#floor7 { background:linear-gradient(180deg,#0a0a1a 0%,#1a1020 100%); }
+#floor8 { background:linear-gradient(180deg,#000a1a 0%,#001a30 100%); }
+#floor9 { background:linear-gradient(180deg,#1a0a00 0%,#301500 100%); }
+#floor10 { background:linear-gradient(180deg,#1a1500 0%,#302800 100%); }
+#floor11 { background:linear-gradient(180deg,#000a1a 0%,#001530 100%); }
+#floor12 { background:linear-gradient(180deg,#0a001a 0%,#1a0030 100%); }
+.floor-hero { text-align:center; padding:80px 20px 40px; position:relative; z-index:1; }
+.floor-hero h2 { font-family:'Cinzel',serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; letter-spacing:4px; }
+.floor-content { max-width:1100px; margin:0 auto; padding:0 20px 60px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; position:relative; z-index:1; }
+.floor-card { background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:25px; backdrop-filter:blur(10px); transition:all 0.3s; }
+.floor-card:hover { transform:translateY(-3px); border-color:rgba(255,255,255,0.2); }
+.floor-card h3 { font-family:'Orbitron',sans-serif; font-size:0.95rem; letter-spacing:2px; margin-bottom:12px; text-transform:uppercase; }
+.floor-card p { color:rgba(255,255,255,0.6); line-height:1.6; font-size:0.9rem; }
+.paypal-btn { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; background:linear-gradient(135deg,#0070BA,#005EA6); color:#fff; font-family:'Orbitron',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; border:none; border-radius:8px; cursor:pointer; text-decoration:none; margin-top:15px; transition:all 0.3s; box-shadow:0 4px 20px rgba(0,112,186,0.3); }
+.paypal-btn:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,112,186,0.5); }
+.price-tag { font-family:'Orbitron',sans-serif; font-size:1.5rem; font-weight:900; color:var(--rr-gold); margin:10px 0; }
+#chatbot-widget { position:fixed; bottom:20px; right:20px; z-index:1000; font-family:'Rajdhani',sans-serif; }
+.chatbot-toggle { width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,var(--bugatti-blue),var(--bugatti-orange)); border:2px solid rgba(255,255,255,0.2); color:#fff; font-size:1.5rem; cursor:pointer; box-shadow:0 5px 30px rgba(0,85,255,0.4); transition:all 0.3s; display:flex; align-items:center; justify-content:center; }
+.chatbot-toggle:hover { transform:scale(1.1); box-shadow:0 8px 40px rgba(0,85,255,0.6); }
+.chatbot-panel { position:absolute; bottom:75px; right:0; width:350px; max-width:calc(100vw - 40px); height:500px; background:linear-gradient(180deg,rgba(10,10,20,0.98),rgba(5,5,10,0.99)); border:1px solid rgba(0,85,255,0.3); border-radius:16px; display:none; flex-direction:column; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.8); }
+.chatbot-panel.open { display:flex; }
+.chatbot-header { padding:15px 20px; background:linear-gradient(90deg,rgba(0,85,255,0.2),rgba(255,102,0,0.1)); border-bottom:1px solid rgba(0,85,255,0.2); display:flex; align-items:center; gap:12px; }
+.chatbot-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,var(--bugatti-blue),var(--bugatti-orange)); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+.chatbot-title { font-family:'Orbitron',sans-serif; font-size:0.85rem; color:#fff; letter-spacing:1px; }
+.chatbot-status { font-size:0.7rem; color:var(--emerald); display:flex; align-items:center; gap:5px; }
+.chatbot-status::before { content:''; width:6px; height:6px; background:var(--emerald); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.chatbot-messages { flex:1; overflow-y:auto; padding:15px; display:flex; flex-direction:column; gap:10px; }
+.chat-msg { max-width:80%; padding:10px 14px; border-radius:12px; font-size:0.9rem; line-height:1.4; animation:msgIn 0.3s ease; }
+@keyframes msgIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+.chat-msg.bot { background:rgba(0,85,255,0.1); border:1px solid rgba(0,85,255,0.2); color:rgba(255,255,255,0.9); align-self:flex-start; border-bottom-left-radius:4px; }
+.chat-msg.user { background:rgba(255,102,0,0.1); border:1px solid rgba(255,102,0,0.2); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+.chatbot-input-area { padding:12px 15px; border-top:1px solid rgba(255,255,255,0.05); display:flex; gap:10px; }
+.chatbot-input { flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px 14px; color:#fff; font-family:'Rajdhani',sans-serif; font-size:0.9rem; outline:none; }
+.chatbot-input::placeholder { color:rgba(255,255,255,0.3); }
+.chatbot-send { background:linear-gradient(135deg,var(--bugatti-blue),var(--bugatti-orange)); border:none; border-radius:8px; color:#fff; padding:0 18px; cursor:pointer; font-size:1rem; transition:all 0.3s; }
+.chatbot-send:hover { transform:scale(1.05); }
+#command-center-gate { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.95); display:none; align-items:center; justify-content:center; backdrop-filter:blur(20px); }
+#command-center-gate.active { display:flex; }
+.gate-box { background:linear-gradient(135deg,rgba(10,10,20,0.95),rgba(5,5,10,0.98)); border:1px solid rgba(212,175,55,0.2); border-radius:20px; padding:50px; text-align:center; max-width:400px; width:90%; box-shadow:0 30px 80px rgba(0,0,0,0.8); }
+.gate-box h2 { font-family:'Cinzel',serif; font-size:1.5rem; color:var(--rr-gold); margin-bottom:10px; letter-spacing:4px; }
+.gate-box p { color:rgba(255,255,255,0.5); margin-bottom:25px; font-size:0.9rem; }
+.gate-input { width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:8px; padding:14px 18px; color:var(--rr-gold); font-family:'Orbitron',sans-serif; font-size:1rem; letter-spacing:3px; text-align:center; outline:none; margin-bottom:15px; }
+.gate-input:focus { border-color:var(--rr-gold); box-shadow:0 0 20px rgba(212,175,55,0.1); }
+.gate-btn { width:100%; padding:14px; background:linear-gradient(135deg,var(--rr-gold),var(--rr-gold-bright)); border:none; border-radius:8px; color:#000; font-family:'Orbitron',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:3px; cursor:pointer; transition:all 0.3s; }
+.gate-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(212,175,55,0.3); }
+.gate-error { color:var(--omni-red); font-size:0.8rem; margin-top:10px; display:none; }
+#command-center { position:fixed; inset:0; z-index:150; background:#050505; display:none; overflow-y:auto; }
+#command-center.active { display:block; }
+.cc-header { background:linear-gradient(90deg,rgba(0,50,0,0.3),rgba(0,30,0,0.1)); border-bottom:1px solid rgba(0,255,136,0.1); padding:20px 30px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; backdrop-filter:blur(10px); }
+.cc-header h2 { font-family:'Orbitron',sans-serif; color:var(--emerald); font-size:1.2rem; letter-spacing:3px; }
+.cc-close { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:2px; }
+.cc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; padding:30px; max-width:1400px; margin:0 auto; }
+.cc-panel { background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01)); border:1px solid rgba(0,255,136,0.1); border-radius:12px; padding:25px; }
+.cc-panel h3 { font-family:'Orbitron',sans-serif; color:var(--emerald); font-size:0.8rem; letter-spacing:3px; margin-bottom:15px; text-transform:uppercase; }
+.cc-metric { font-family:'Orbitron',sans-serif; font-size:2rem; color:#fff; margin:5px 0; }
+.cc-metric-label { font-size:0.75rem; color:rgba(255,255,255,0.4); letter-spacing:2px; }
+#gap-hunter { position:fixed; inset:0; z-index:160; background:#000; display:none; overflow-y:auto; }
+#gap-hunter.active { display:block; }
+.gh-header { text-align:center; padding:60px 20px 30px; }
+.gh-header h2 { font-family:'Orbitron',sans-serif; font-size:clamp(2rem,5vw,3.5rem); color:var(--rr-gold); text-shadow:0 0 40px rgba(212,175,55,0.3); letter-spacing:6px; }
+.scanner-ring { width:250px; height:250px; margin:30px auto; border:2px solid rgba(212,175,55,0.2); border-radius:50%; position:relative; display:flex; align-items:center; justify-content:center; }
+.scanner-ring::before { content:''; position:absolute; inset:-10px; border:1px solid rgba(212,175,55,0.1); border-radius:50%; animation:scannerPulse 2s ease-in-out infinite; }
+@keyframes scannerPulse { 0%,100%{transform:scale(1);opacity:0.5;} 50%{transform:scale(1.1);opacity:1;} }
+.scanner-core { width:100px; height:100px; background:radial-gradient(circle,rgba(212,175,55,0.3),transparent); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Orbitron',sans-serif; font-size:0.8rem; color:var(--rr-gold); }
+#court-cases { position:fixed; inset:0; z-index:170; background:linear-gradient(180deg,#0a0000 0%,#1a0505 100%); display:none; overflow-y:auto; }
+#court-cases.active { display:block; }
+.court-hero { text-align:center; padding:80px 20px 40px; }
+.court-hero h2 { font-family:'Cinzel',serif; font-size:clamp(2rem,5vw,3.5rem); color:var(--omni-red); text-shadow:0 0 40px rgba(255,26,26,0.3); letter-spacing:4px; }
+.court-grid { max-width:900px; margin:0 auto; padding:0 20px 60px; display:flex; flex-direction:column; gap:20px; }
+.court-case { background:linear-gradient(135deg,rgba(30,0,0,0.5),rgba(10,0,0,0.8)); border:1px solid rgba(255,26,26,0.15); border-radius:12px; padding:25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; }
+.court-case h3 { font-family:'Cinzel',serif; color:#fff; font-size:1rem; letter-spacing:2px; }
+.court-case .case-meta { color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:5px; }
+.top-nav { position:fixed; top:0; left:0; right:0; z-index:90; background:linear-gradient(180deg,rgba(0,0,0,0.9),transparent); padding:15px 30px; display:flex; justify-content:space-between; align-items:center; }
+.top-nav .logo { font-family:'Cinzel',serif; font-size:1rem; color:var(--rr-gold); letter-spacing:4px; text-decoration:none; }
+.top-nav .nav-links { display:flex; gap:25px; }
+.top-nav .nav-links a { color:rgba(255,255,255,0.6); text-decoration:none; font-family:'Orbitron',sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; transition:color 0.3s; }
+.top-nav .nav-links a:hover { color:var(--rr-gold); }
+.revenue-ticker { position:fixed; bottom:0; left:0; right:0; background:rgba(0,0,0,0.9); border-top:1px solid rgba(212,175,55,0.1); padding:10px 30px; z-index:80; display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:2px; }
+.revenue-ticker span { color:rgba(255,255,255,0.5); }
+.revenue-ticker .tick-val { color:var(--rr-gold); }
+.back-btn { position:fixed; top:80px; left:20px; z-index:60; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:10px 20px; border-radius:8px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:0.7rem; letter-spacing:2px; transition:all 0.3s; }
+.back-btn:hover { background:rgba(212,175,55,0.1); border-color:var(--rr-gold); color:var(--rr-gold); }
+.swarm-canvas { width:100%; height:300px; border-radius:12px; background:radial-gradient(ellipse at center,rgba(0,50,100,0.1),transparent); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:#000; }
+::-webkit-scrollbar-thumb { background:var(--rr-gold); border-radius:3px; }
+@media(max-width:768px){ .elevator-panel{display:none;} .top-nav .nav-links{display:none;} .tower-container{height:60vh;} .chatbot-panel{width:calc(100vw - 40px);} .revenue-ticker{gap:15px;font-size:0.6rem;} }
+.fade-in { animation:fadeIn 1s ease forwards; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+.enter-btn { display:inline-block; margin-top:30px; padding:16px 50px; background:linear-gradient(135deg,var(--rr-gold),var(--rr-gold-bright)); color:#000; font-family:'Orbitron',sans-serif; font-weight:900; font-size:0.9rem; letter-spacing:4px; text-transform:uppercase; border:none; border-radius:4px; cursor:pointer; transition:all 0.4s; text-decoration:none; }
+.enter-btn:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(212,175,55,0.4); }
+.f2-text{color:var(--omni-red)!important;} .f3-text{color:var(--bugatti-blue)!important;} .f4-text{color:#ff6464!important;} .f5-text{color:var(--weed-blue)!important;} .f6-text{color:var(--emerald)!important;} .f7-text{color:#aa88ff!important;} .f8-text{color:#00aaff!important;} .f9-text{color:#ffaa00!important;} .f10-text{color:var(--rr-gold)!important;} .f11-text{color:var(--weed-blue)!important;} .f12-text{color:#ff66ff!important;}
+</style>
+</head>
+<body>
+<div id="loader">
+  <div class="loader-crown"></div>
+  <div class="loader-text">Initializing Empire OS</div>
+  <div class="loader-bar"></div>
+</div>
+
+<canvas id="starfield"></canvas>
+
+<nav class="top-nav">
+  <a href="#" class="logo" onclick="showLobby()">FH INC.</a>
+  <div class="nav-links">
+    <a href="#" onclick="showCommandCenterGate()">Command Center</a>
+    <a href="#" onclick="showGapHunter()">Gap Hunter</a>
+    <a href="#" onclick="showCourtCases()">Court Cases</a>
+  </div>
+</nav>
+
+<section id="lobby" class="page-section active">
+  <div class="lobby-header">
+    <h1>Francisco Holdings Inc.</h1>
+    <div class="subtitle">The Trillion Dollar Skyscraper</div>
+    <div class="stats">
+      <div class="stat-pill"><span>392</span> Floors</div>
+      <div class="stat-pill"><span>45+</span> Companies</div>
+      <div class="stat-pill"><span>$1T+</span> Vision</div>
+      <div class="stat-pill"><span>∞</span> Agents</div>
+    </div>
+    <br>
+    <button class="enter-btn" onclick="showCommandCenterGate()">Enter Phoenix Tower</button>
+  </div>
+
+  <div class="tower-container">
+    <div class="tower-glow"></div>
+    <div class="tower">
+      <div class="tower-spire"></div>
+      <div class="tower-crown"></div>
+      
+      <div class="floor f1" onclick="showFloor(1)">
+        <span class="floor-number">01</span>
+        <span class="floor-name">Francisco Holdings HQ</span>
+        <span class="floor-icon">👑</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f2" onclick="showFloor(2)">
+        <span class="floor-number">02</span>
+        <span class="floor-name">OmniGuard</span>
+        <span class="floor-icon">🛡️</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f3" onclick="showFloor(3)">
+        <span class="floor-number">03</span>
+        <span class="floor-name">PrimeDox AI</span>
+        <span class="floor-icon">🤖</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f4" onclick="showFloor(4)">
+        <span class="floor-number">04</span>
+        <span class="floor-name">Vault Velocity Auto</span>
+        <span class="floor-icon">🏎️</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f5" onclick="showFloor(5)">
+        <span class="floor-number">05</span>
+        <span class="floor-name">CCLDR</span>
+        <span class="floor-icon">⚖️</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f6" onclick="showFloor(6)">
+        <span class="floor-number">06</span>
+        <span class="floor-name">CCC Cannabis</span>
+        <span class="floor-icon">🌿</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f7" onclick="showFloor(7)">
+        <span class="floor-number">07</span>
+        <span class="floor-name">TechPetCage</span>
+        <span class="floor-icon">📱</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f8" onclick="showFloor(8)">
+        <span class="floor-number">08</span>
+        <span class="floor-name">CleanSwarm</span>
+        <span class="floor-icon">🔷</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f9" onclick="showFloor(9)">
+        <span class="floor-number">09</span>
+        <span class="floor-name">Vigilax</span>
+        <span class="floor-icon">👁️</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f10" onclick="showFloor(10)">
+        <span class="floor-number">10</span>
+        <span class="floor-name">Kiaros</span>
+        <span class="floor-icon">⏳</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f11" onclick="showFloor(11)">
+        <span class="floor-number">11</span>
+        <span class="floor-name">Weedlaw</span>
+        <span class="floor-icon">📜</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+      <div class="floor f12" onclick="showFloor(12)">
+        <span class="floor-number">12</span>
+        <span class="floor-name">BENO-X</span>
+        <span class="floor-icon">💊</span>
+        <div class="floor-windows"><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="elevator-panel">
+    <h4>FLOORS</h4>
+    <button class="elevator-btn" onclick="showFloor(1)">1</button>
+    <button class="elevator-btn" onclick="showFloor(2)">2</button>
+    <button class="elevator-btn" onclick="showFloor(3)">3</button>
+    <button class="elevator-btn" onclick="showFloor(4)">4</button>
+    <button class="elevator-btn" onclick="showFloor(5)">5</button>
+    <button class="elevator-btn" onclick="showFloor(6)">6</button>
+    <button class="elevator-btn" onclick="showFloor(7)">7</button>
+    <button class="elevator-btn" onclick="showFloor(8)">8</button>
+    <button class="elevator-btn" onclick="showFloor(9)">9</button>
+    <button class="elevator-btn" onclick="showFloor(10)">10</button>
+    <button class="elevator-btn" onclick="showFloor(11)">11</button>
+    <button class="elevator-btn" onclick="showFloor(12)">12</button>
+  </div>
+</section>
+
+<div id="floor1" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="rr-hero fade-in">
+    <h2>Francisco Holdings HQ</h2>
+    <div class="tagline">Built Different. Built to Last. Built to Dominate.</div>
+  </div>
+  <div class="rr-content">
+    <div class="rr-card">
+      <h3>The Vision</h3>
+      <p>A 392-floor intelligent skyscraper housing 45+ powerful companies, protected by OmniGuard. The world's first fully autonomous agentic AI empire.</p>
+    </div>
+    <div class="rr-card">
+      <h3>Empire OS</h3>
+      <p>Self-building. Self-repairing. Self-scaling. An agentic AI ecosystem that builds, operates, protects and scales companies floor by floor.</p>
+    </div>
+    <div class="rr-card">
+      <h3>Hire Us</h3>
+      <p>Get an AI-powered empire built for your business. From $4,997 Starter to $99,997+ Custom white-glove everything.</p>
+      <div class="price-tag">$4,997 - $99,997+</div>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Pay Now via PayPal</a>
+    </div>
+    <div class="rr-card">
+      <h3>Agent Swarm</h3>
+      <p>312 active AI agents operating across 45 companies. 100% autonomous operations with Human In The Loop oversight.</p>
+    </div>
+  </div>
+</div>
+
+<div id="floor2" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="omni-hero fade-in">
+    <h2>OMNIGUARD</h2>
+    <div class="sentinel-sub">Sentinel Protocol Active</div>
+  </div>
+  <div class="sentinel-grid">
+    <div class="sentinel-card">
+      <h3>🛡️ PROMPT INJECTION DEFENSE</h3>
+      <p style="color:rgba(255,255,255,0.6);margin-top:8px;font-size:0.9rem;">Zero prompt injection attacks ever recorded. AI Input Sanitizer active.</p>
+      <span class="threat-level">THREAT LEVEL: NONE</span>
+    </div>
+    <div class="sentinel-card">
+      <h3>👁️ SENTINEL SURVEILLANCE</h3>
+      <p style="color:rgba(255,255,255,0.6);margin-top:8px;font-size:0.9rem;">The silver sentinels with red eyes patrol every floor. Autonomous threat detection across all 392 floors.</p>
+      <span class="threat-level">STATUS: ACTIVE</span>
+    </div>
+    <div class="sentinel-card">
+      <h3>🔐 QUANTUM ENCRYPTION</h3>
+      <p style="color:rgba(255,255,255,0.6);margin-top:8px;font-size:0.9rem;">Zero Trust Architecture. All systems encrypted. Behavioral AI Firewall monitoring 24/7.</p>
+      <span class="threat-level">SECURITY: MAXIMUM</span>
+    </div>
+    <div class="sentinel-card">
+      <h3>Protect Your Empire</h3>
+      <p style="color:rgba(255,255,255,0.6);margin-top:8px;font-size:0.9rem;">Enterprise cybersecurity for the AI age. Starting at $14,997.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Secure My Empire</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor3" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="bugatti-hero fade-in">
+    <h2>PRIMEDOX AI</h2>
+    <div class="speed-line"></div>
+    <p style="color:rgba(255,255,255,0.6);font-family:'Rajdhani',sans-serif;letter-spacing:3px;">THE CONCIERGE ROUTER</p>
+  </div>
+  <div class="bugatti-grid">
+    <div class="bugatti-card">
+      <h3>AI Document Intelligence</h3>
+      <p style="color:rgba(255,255,255,0.7);margin-top:10px;">Generate legal documents, contracts, motions, and corporate filings in seconds. Powered by PrimeDox AI.</p>
+    </div>
+    <div class="bugatti-card">
+      <h3>Agent Swarm Orchestrator</h3>
+      <p style="color:rgba(255,255,255,0.7);margin-top:10px;">Every floor has its own PrimeDox clone. Each AI specialist routes users to the right tool. Fully automated.</p>
+    </div>
+    <div class="bugatti-card">
+      <h3>Start Free Trial</h3>
+      <p style="color:rgba(255,255,255,0.7);margin-top:10px;">$49/month for full access to the PrimeDox AI suite. Document generation, legal templates, and agent routing.</p>
+      <div class="price-tag" style="color:var(--bugatti-blue);">$49/mo</div>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Subscribe Now</a>
+    </div>
+    <div class="bugatti-card">
+      <h3>HQ Portal</h3>
+      <p style="color:rgba(255,255,255,0.7);margin-top:10px;">zprimedoxaihq.com — The central hub where all AI specialists are listed and accessed.</p>
+    </div>
+  </div>
+</div>
+
+<div id="floor4" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f4-text">VAULT VELOCITY AUTO</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">LUXURY BROKERAGE FOR SUPERCARS, JETS, YACHTS & ARMORED VEHICLES</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f4-text">Supercar Sourcing</h3>
+      <p>White-glove concierge for the world's most exclusive vehicles. Bugatti, Rolls Royce, Lamborghinis.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f4-text">Jets & Yachts</h3>
+      <p>Private aviation and maritime brokerage. Global shipping. Blockchain authentication.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f4-text">Retainer Services</h3>
+      <p>Annual retainers from $99K to $999K/year. Your personal vehicle acquisition team on standby 24/7.</p>
+      <div class="price-tag" style="color:#ff6464;">$99K - $999K/yr</div>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Join Vault Velocity</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor5" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f5-text">CCLDR</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">CANNABIS LEGAL DEFENSE RESOURCE</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f5-text">Legal Education Platform</h3>
+      <p>The most dangerous legal education platform in the world. 20+ years of self-represented litigation experience.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f5-text">Document Generator</h3>
+      <p>AI-powered legal document generation at ccldr.net. Motions, affidavits, notices — all generated by PrimeDox AI.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f5-text">Partner Network</h3>
+      <p>Educating lawyers and paralegals on medical marijuana law since 2000. Partner with legal professionals nationwide.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Access CCLDR</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor6" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f6-text">CCC CANNABIS</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">THE A-TO-Z CANNABIS SUPERHIGHWAY</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f6-text">Cannabis Consulting</h3>
+      <p>20 years of expertise. From seed to sale. Compliance, licensing, and constitutional advocacy.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f6-text">Doc WeedLaw</h3>
+      <p>Prestigious Expertise. Maximum Authority. The #1 cannabis consulting expert.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f6-text">COMPACT Nonprofit</h3>
+      <p>Registered 2008 with patent license. Global expansion. Cannabis constitutional education.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Consult Now</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor7" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f7-text">TECHPETCAGE</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">DEVICE PROTECTION & TECH SOLUTIONS</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f7-text">Device Protection</h3>
+      <p>Premium device insurance and protection plans. Phones, tablets, laptops — covered against damage, theft, and malfunction.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f7-text">Tech Solutions</h3>
+      <p>Enterprise IT support, cloud migration, and cybersecurity for small businesses.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Get Protected</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor8" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f8-text">CLEANSWARM</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">AI-POWERED AUTOMATION & OPTIMIZATION</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f8-text">Automation Swarm</h3>
+      <p>Hexagonal AI agents that optimize your business processes. Cleaning, maintenance, workflow automation.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f8-text">Optimization Engine</h3>
+      <p>Machine learning algorithms that find inefficiencies and eliminate them. 24/7 continuous improvement.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Deploy Swarm</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor9" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f9-text">VIGILAX</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">THREAT DETECTION & PRIVATE INVESTIGATION</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f9-text">Threat Detection</h3>
+      <p>Advanced surveillance and threat monitoring. Vigilax Sentinel watches over your empire 24/7.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f9-text">Private Investigation</h3>
+      <p>ShadowTrace Solutions. Argus Eye Analytics. Cipher Intelligence. Global coverage.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Hire Vigilax</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor10" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f10-text">KIAROS</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">TIME & OPPORTUNITY INTELLIGENCE</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f10-text">Market Timing</h3>
+      <p>AI-powered market entry and exit signals. Know exactly when to act.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f10-text">Opportunity Radar</h3>
+      <p>Scans 100+ industries for emerging opportunities. Real-time alerts when markets shift.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Access Kiros</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor11" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f11-text">WEEDLAW</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">CANNABIS LAW EXPERTISE</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f11-text">Doc WeedLaw Platform</h3>
+      <p>Prestigious Expertise. Maximum Authority. The world's leading cannabis legal education platform.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f11-text">Legal Education</h3>
+      <p>Educating lawyers and paralegals on medical marijuana law, current cannabis law, and history dating back to 2000.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Learn More</a>
+    </div>
+  </div>
+</div>
+
+<div id="floor12" class="floor-page">
+  <button class="back-btn" onclick="showLobby()">← LOBBY</button>
+  <div class="floor-hero fade-in">
+    <h2 class="f12-text">BENO-X</h2>
+    <p style="color:rgba(255,255,255,0.5);font-family:'Rajdhani';letter-spacing:3px;margin-top:10px;">FUTURE TECHNOLOGIES & RESEARCH</p>
+  </div>
+  <div class="floor-content">
+    <div class="floor-card">
+      <h3 class="f12-text">NextGen Research</h3>
+      <p>Cutting-edge R&D across AI, biotech, and quantum computing. The future is built here first.</p>
+    </div>
+    <div class="floor-card">
+      <h3 class="f12-text">Innovation Lab</h3>
+      <p>Prototype development, patent filing, and technology transfer. From concept to market in record time.</p>
+      <a class="paypal-btn" href="https://paypal.me/techpetcage" target="_blank">Invest in BENO-X</a>
+    </div>
+  </div>
+</div>
+<div id="command-center-gate">
+  <div class="gate-box">
+    <h2>🔒 RESTRICTED ACCESS</h2>
+    <p>Emperor Level Clearance Required</p>
+    <input type="password" class="gate-input" id="gate-password" placeholder="ENTER ACCESS CODE">
+    <button class="gate-btn" onclick="checkPassword()">AUTHENTICATE</button>
+    <div class="gate-error" id="gate-error">ACCESS DENIED — INVALID CREDENTIALS</div>
+  </div>
+</div>
+
+<div id="command-center">
+  <div class="cc-header">
+    <h2>👑 EMPIRE OS v2.0 — COMMAND CENTER</h2>
+    <button class="cc-close" onclick="closeCommandCenter()">DISCONNECT</button>
+  </div>
+  <div class="cc-grid">
+    <div class="cc-panel">
+      <h3>Empire Valuation</h3>
+      <div class="cc-metric">$1,000,000,000,000+</div>
+      <div class="cc-metric-label">TOWARDS TRILLION</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Active Agents</h3>
+      <div class="cc-metric" id="agent-count">12,847</div>
+      <div class="cc-metric-label">AI SWARM ONLINE</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Monthly Revenue</h3>
+      <div class="cc-metric" id="revenue-metric">$28.7M</div>
+      <div class="cc-metric-label">+24.5% GROWTH</div>
+    </div>
+    <div class="cc-panel">
+      <h3>System Health</h3>
+      <div class="cc-metric" style="color:var(--emerald);">100%</div>
+      <div class="cc-metric-label">ALL SYSTEMS OPERATIONAL</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Agent Swarm Network</h3>
+      <canvas id="swarmCanvas" class="swarm-canvas"></canvas>
+    </div>
+    <div class="cc-panel">
+      <h3>Human In The Loop Queue</h3>
+      <div style="margin-top:15px;display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px;background:rgba(255,26,26,0.1);border:1px solid rgba(255,26,26,0.2);border-radius:8px;">
+          <div style="font-size:0.8rem;color:#fff;">Cannabis Compliance Review</div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);">HIGH PRIORITY — Floor 12</div>
+        </div>
+        <div style="padding:12px;background:rgba(255,170,0,0.1);border:1px solid rgba(255,170,0,0.2);border-radius:8px;">
+          <div style="font-size:0.8rem;color:#fff;">20% Discount Request</div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);">MEDIUM PRIORITY — Floor 23</div>
+        </div>
+      </div>
+    </div>
+    <div class="cc-panel">
+      <h3>Live Activity Feed</h3>
+      <div id="activity-feed" style="margin-top:15px;display:flex;flex-direction:column;gap:8
+<div id="command-center-gate">
+  <div class="gate-box">
+    <h2>🔒 RESTRICTED ACCESS</h2>
+    <p>Emperor Level Clearance Required</p>
+    <input type="password" class="gate-input" id="gate-password" placeholder="ENTER ACCESS CODE">
+    <button class="gate-btn" onclick="checkPassword()">AUTHENTICATE</button>
+    <div class="gate-error" id="gate-error">ACCESS DENIED — INVALID CREDENTIALS</div>
+  </div>
+</div>
+
+<div id="command-center">
+  <div class="cc-header">
+    <h2>👑 EMPIRE OS v2.0 — COMMAND CENTER</h2>
+    <button class="cc-close" onclick="closeCommandCenter()">DISCONNECT</button>
+  </div>
+  <div class="cc-grid">
+    <div class="cc-panel">
+      <h3>Empire Valuation</h3>
+      <div class="cc-metric">$1,000,000,000,000+</div>
+      <div class="cc-metric-label">TOWARDS TRILLION</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Active Agents</h3>
+      <div class="cc-metric" id="agent-count">12,847</div>
+      <div class="cc-metric-label">AI SWARM ONLINE</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Monthly Revenue</h3>
+      <div class="cc-metric" id="revenue-metric">$28.7M</div>
+      <div class="cc-metric-label">+24.5% GROWTH</div>
+    </div>
+    <div class="cc-panel">
+      <h3>System Health</h3>
+      <div class="cc-metric" style="color:var(--emerald);">100%</div>
+      <div class="cc-metric-label">ALL SYSTEMS OPERATIONAL</div>
+    </div>
+    <div class="cc-panel">
+      <h3>Agent Swarm Network</h3>
+      <canvas id="swarmCanvas" class="swarm-canvas"></canvas>
+    </div>
+    <div class="cc-panel">
+      <h3>Human In The Loop Queue</h3>
+      <div style="margin-top:15px;display:flex;flex-direction:column;gap:10px;">
+        <div style="padding:12px;background:rgba(255,26,26,0.1);border:1px solid rgba(255,26,26,0.2);border-radius:8px;">
+          <div style="font-size:0.8rem;color:#fff;">Cannabis Compliance Review</div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);">HIGH PRIORITY — Floor 12</div>
+        </div>
+        <div style="padding:12px;background:rgba(255,170,0,0.1);border:1px solid rgba(255,170,0,0.2);border-radius:8px;">
+          <div style="font-size:0.8rem;color:#fff;">20% Discount Request</div>
+          <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);">MEDIUM PRIORITY — Floor 23</div>
+        </div>
+      </div>
+    </div>
+    <div class="cc-panel">
+      <h3>Live Activity Feed</h3>
+      <div id="activity-feed" style="margin-top:15px;display:flex;flex-direction:column;gap:8
