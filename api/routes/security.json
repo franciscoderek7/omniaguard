@@ -1,0 +1,4 @@
+{
+ "endpoint":"security-events",
+ "purpose":"Send approved security information to Phoenix Core"
+}

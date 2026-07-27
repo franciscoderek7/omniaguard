@@ -1,4 +1,6 @@
 {
-"connection":"pending",
-"system":"Phoenix Core"
+  "system":"Phoenix Core",
+  "connection":"pending",
+  "authentication":"required",
+  "status":"development"
 }
