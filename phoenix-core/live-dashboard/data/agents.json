@@ -1,0 +1,14 @@
+{
+ "agents":[
+  {
+   "name":"PrimeDox AI",
+   "status":"online",
+   "tasks":0
+  },
+  {
+   "name":"OmniGuardian",
+   "status":"online",
+   "tasks":0
+  }
+ ]
+}
