@@ -1,0 +1,7 @@
+{
+  "platform":"OmniAGuard",
+  "monitoring":true,
+  "audit_logging":true,
+  "human_approval":true,
+  "phoenix_core_ready":true
+}

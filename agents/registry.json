@@ -1,0 +1,14 @@
+[
+  {
+    "name":"OmniGuardian",
+    "role":"Cybersecurity Monitoring Agent",
+    "status":"active",
+    "permission":"restricted"
+  },
+  {
+    "name":"Threat Intelligence Agent",
+    "role":"Security Analysis",
+    "status":"development",
+    "permission":"restricted"
+  }
+]
