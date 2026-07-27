@@ -1,0 +1,3 @@
+Public demonstration environment.
+
+Private AI architecture remains protected.
