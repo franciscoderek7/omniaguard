@@ -1,0 +1,33 @@
+body{
+margin:0;
+background:#050505;
+color:white;
+font-family:Arial, sans-serif;
+}
+
+header{
+text-align:center;
+padding:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+padding:30px;
+}
+
+.card{
+background:#111;
+border:1px solid #00ffff;
+border-radius:20px;
+padding:40px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,255,255,.25);
+}
+
+@media(max-width:800px){
+.grid{
+grid-template-columns:1fr;
+}
+}
