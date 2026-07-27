@@ -1,0 +1,19 @@
+{
+ "services":[
+  {
+   "name":"AI Security Assessment",
+   "price":499,
+   "currency":"CAD"
+  },
+  {
+   "name":"AI Automation Implementation",
+   "price":2500,
+   "currency":"CAD"
+  },
+  {
+   "name":"Managed AI Security",
+   "price":"subscription",
+   "currency":"CAD"
+  }
+ ]
+}
