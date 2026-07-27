@@ -11,9 +11,14 @@
    "type":"Cybersecurity"
   },
   {
-   "name":"Revenue Command",
+   "name":"Phoenix Core Revenue",
    "status":"online",
    "type":"Business Intelligence"
+  },
+  {
+   "name":"Company Floor Manager",
+   "status":"online",
+   "type":"Enterprise Control"
   }
  ]
 }

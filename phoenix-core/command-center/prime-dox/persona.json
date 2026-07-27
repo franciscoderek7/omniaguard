@@ -1,11 +1,11 @@
 {
  "name":"PrimeDox AI",
  "role":"AI Executive Assistant",
- "purpose":[
-  "Business intelligence",
-  "Document intelligence",
-  "Workflow assistance",
-  "Research support"
+ "capabilities":[
+  "Document Intelligence",
+  "Business Analysis",
+  "Workflow Assistance",
+  "Research Support"
  ],
  "humanApprovalRequired":true
 }
