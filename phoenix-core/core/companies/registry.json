@@ -1,0 +1,19 @@
+{
+ "companies":[
+  {
+   "name":"Francisco Holdings Inc.",
+   "status":"active",
+   "platform":"Phoenix Core"
+  },
+  {
+   "name":"OmniAGuard",
+   "status":"active",
+   "category":"Cybersecurity"
+  },
+  {
+   "name":"PrimeDox AI",
+   "status":"active",
+   "category":"Document Intelligence"
+  }
+ ]
+}

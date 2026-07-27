@@ -1,0 +1,12 @@
+{
+ "workflows":[
+  {
+   "name":"Lead To Customer",
+   "status":"planned"
+  },
+  {
+   "name":"Security Assessment",
+   "status":"planned"
+  }
+ ]
+}
