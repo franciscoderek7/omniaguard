@@ -1,6 +1,6 @@
-# OmniAGuard AI Layer
+Future AI Layer:
 
-Future:
-- Security analysis agents
-- Risk scoring
-- Monitoring assistants
+- Security analysis
+- Risk reports
+- Business recommendations
+- Human approval workflows
