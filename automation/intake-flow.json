@@ -1,0 +1,9 @@
+{
+"trigger":"new_lead",
+"steps":[
+"collect_information",
+"analyze_business",
+"generate_report",
+"schedule_call"
+]
+}
