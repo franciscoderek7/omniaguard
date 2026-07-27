@@ -1,0 +1,17 @@
+[
+ {
+  "name":"AI Security Assessment",
+  "price":"$499 CAD",
+  "type":"one-time"
+ },
+ {
+  "name":"Business AI Protection Package",
+  "price":"$2499 CAD",
+  "type":"implementation"
+ },
+ {
+  "name":"OmniAGuard Monitoring",
+  "price":"monthly subscription",
+  "type":"recurring"
+ }
+]
