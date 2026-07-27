@@ -1,0 +1,33 @@
+body{
+background:#02030a;
+color:#fff;
+font-family:Arial,sans-serif;
+overflow-x:hidden;
+}
+
+.holo-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:30px;
+}
+
+.holo-panel{
+background:rgba(0,255,255,.08);
+border:1px solid rgba(0,255,255,.5);
+border-radius:20px;
+padding:30px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(0,255,255,.25);
+transition:.3s;
+}
+
+.holo-panel:hover{
+transform:translateY(-5px);
+}
+
+.title{
+text-align:center;
+font-size:3rem;
+letter-spacing:5px;
+}
