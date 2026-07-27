@@ -1,0 +1,20 @@
+{
+  "name": "OmniaGuard — Constitutional AI Security",
+  "short_name": "OmniaGuard",
+  "description": "AI-powered cybersecurity protection. Charter-compliant by design.",
+  "start_url": "/omniaguard-site/app/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#00d4ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%230a0a14'/><path d='M96 20 L140 44 L140 96 Q140 140 96 168 Q52 140 52 96 L52 44 Z' fill='%2300d4ff' opacity='0.2' stroke='%2300d4ff' stroke-width='2'/><path d='M96 40 L128 58 L128 96 Q128 128 96 148 Q64 128 64 96 L64 58 Z' fill='%2300d4ff' opacity='0.4'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["security", "utilities", "business"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

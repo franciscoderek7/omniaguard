@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNIAGUARD — AI Cybersecurity Platform | Powered by Gemma 31B</title>
+<link rel="canonical" href="https://omniaguard.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="OMNIAGUARD protects your devices, data, and digital identity with AI-powered cybersecurity. 2.4B+ threats blocked. 99.97% uptime. Canadian-built.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OMNIAGUARD">
+<meta property="og:title" content="OMNIAGUARD — AI Cybersecurity Platform">
+<meta property="og:description" content="OMNIAGUARD protects your devices, data, and digital identity with AI-powered cybersecurity. 2.4B+ threats blocked. 99.97% uptime. Canadian-built.">
+<meta property="og:url" content="https://omniaguard.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OMNIAGUARD",
+  "url": "https://omniaguard.com",
+  "description": "AI-powered cybersecurity platform protecting devices, data, and digital identity",
+  "parentOrganization": { "@type": "Organization", "name": "Francisco Holdings Inc." }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.empire-nav{position:relative;z-index:200;background:rgba(6,9,16,0.97);border-bottom:1px solid rgba(212,175,55,0.18);padding:0 5%;height:32px;display:flex;align-items:center;gap:1.5rem;overflow-x:auto;scrollbar-width:none}
+.empire-nav::-webkit-scrollbar{display:none}
+.empire-nav-label{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:rgba(212,175,55,0.45);font-weight:700;flex-shrink:0}
+.empire-nav a{font-size:.7rem;color:#8892a4;text-decoration:none;white-space:nowrap;transition:color .2s;font-weight:500}
+.empire-nav a:hover{color:#d4af37}
+.empire-nav a.active{color:#00d084;font-weight:700}
+:root{
+  /* ═══ OMNIAGUARD — SPACE / COSMIC THEME ═══ */
+  --em:#00FFFF;
+  --em2:#00CCCC;
+  --gold:#00FFFF;
+  --gold2:#4B0082;
+  --bg:#000011;
+  --bg2:#05051A;
+  --bg3:#0A0A24;
+  --text:#E0E0FF;
+  --muted:#6060A0;
+  --border:rgba(0,255,255,0.15);
+  --card:rgba(5,5,26,0.92);
+  --primary:#00FFFF;
+  --accent:#4B0082;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Exo 2','Inter',system-ui,sans-serif;font-weight:300;letter-spacing:0.5px;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+canvas#particles{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:0.55;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:32px;left:0;right:0;z-index:100;
+  background:rgba(10,14,23,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:64px;
+}
+.nav-brand{
+  font-size:1.4rem;font-weight:800;letter-spacing:-0.5px;
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;text-decoration:none;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--em)}
+.nav-cta{
+  background:var(--em);color:#000;
+  padding:.5rem 1.25rem;border-radius:8px;
+  font-weight:700;font-size:.875rem;text-decoration:none;
+  transition:background .2s,transform .1s;
+}
+.nav-cta:hover{background:var(--em2);transform:translateY(-1px)}
+@media(max-width:768px){
+  .nav-links{display:none}
+  nav{padding:0 4%}
+}
+
+/* HERO */
+.hero{
+  position:relative;z-index:1;
+  min-height:calc(100vh - 32px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 5% 60px;
+}
+.gemma-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid var(--gold);border-radius:20px;
+  padding:.35rem .9rem;margin-bottom:1.5rem;
+  font-size:.78rem;font-weight:600;color:var(--gold);
+  background:rgba(212,175,55,0.08);
+}
+.gemma-badge .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--gold);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:900;line-height:1.1;
+  margin-bottom:1.25rem;
+  letter-spacing:-1px;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:var(--muted);max-width:620px;margin:0 auto 2.5rem;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--em),var(--em2));
+  color:#000;padding:.85rem 2.2rem;border-radius:10px;
+  font-weight:800;font-size:1rem;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,208,132,0.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,208,132,0.45)}
+.btn-secondary{
+  display:inline-block;
+  border:1px solid var(--border);
+  color:var(--text);padding:.85rem 2.2rem;border-radius:10px;
+  font-weight:600;font-size:1rem;text-decoration:none;
+  transition:border-color .2s,background .2s;
+}
+.btn-secondary:hover{border-color:var(--em);background:rgba(0,208,132,0.05)}
+
+/* STATS BAR */
+.stats-bar{
+  position:relative;z-index:1;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:0;
+  background:var(--bg2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:1.5rem 5%;
+}
+.stat{
+  text-align:center;padding:0 2.5rem;
+  border-right:1px solid var(--border);
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  display:block;font-size:1.8rem;font-weight:900;
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:600px){
+  .stat{padding:0.75rem 1.5rem;border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:80px 5%}
+.section-label{
+  font-size:.75rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--em);font-weight:700;margin-bottom:.75rem;
+}
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;
+  margin-bottom:1rem;letter-spacing:-.5px;
+}
+.section-sub{color:var(--muted);font-size:1rem;max-width:600px;margin-bottom:3rem}
+.center{text-align:center;display:flex;flex-direction:column;align-items:center}
+
+/* FEATURE GRID */
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.5rem;
+}
+.feature-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.75rem;
+  transition:border-color .25s,transform .25s;
+  backdrop-filter:blur(6px);
+}
+.feature-card:hover{border-color:var(--em);transform:translateY(-4px)}
+.feat-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(0,208,132,0.15),rgba(212,175,55,0.1));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1rem;
+  border:1px solid var(--border);
+}
+.feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
+.feature-card p{color:var(--muted);font-size:.875rem;line-height:1.6}
+
+/* AGENTIC AI */
+.ai-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ai-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:900px){.ai-inner{grid-template-columns:1fr;gap:2.5rem}}
+.ai-content .section-sub{margin-bottom:2rem}
+.agent-cards{display:flex;flex-direction:column;gap:1rem}
+.agent-card{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.25rem;
+}
+.agent-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--em),var(--em2));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.agent-card h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.agent-card p{color:var(--muted);font-size:.825rem}
+.orbit-viz{
+  position:relative;width:300px;height:300px;margin:0 auto;
+}
+.orbit-center{
+  position:absolute;top:50%;left:50%;
+  width:70px;height:70px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;font-weight:900;color:#000;
+  box-shadow:0 0 30px rgba(0,208,132,0.4);
+  z-index:2;
+}
+.orbit{
+  position:absolute;top:50%;left:50%;
+  border:1px solid;border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.orbit-1{width:130px;height:130px;border-color:rgba(0,208,132,0.35);animation:ring-spin 6s linear infinite}
+.orbit-2{width:200px;height:200px;border-color:rgba(212,175,55,0.25);animation:ring-spin 10s linear infinite reverse}
+.orbit-3{width:280px;height:280px;border-color:rgba(0,208,132,0.15);animation:ring-spin 16s linear infinite}
+@keyframes ring-spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.orbit-dot{
+  position:absolute;top:-5px;left:50%;margin-left:-5px;
+  width:10px;height:10px;border-radius:50%;
+}
+.orbit-1 .orbit-dot{background:var(--em);box-shadow:0 0 8px var(--em)}
+.orbit-2 .orbit-dot{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.orbit-3 .orbit-dot{background:#fff;box-shadow:0 0 6px rgba(255,255,255,0.6)}
+
+/* PRICING */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1.5rem;
+  max-width:1100px;margin:0 auto;
+}
+.price-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem 1.75rem;
+  display:flex;flex-direction:column;
+  transition:border-color .25s,transform .25s;
+  position:relative;overflow:hidden;
+}
+.price-card.featured{
+  border-color:var(--em);
+  background:linear-gradient(135deg,rgba(0,208,132,0.08),rgba(13,18,32,0.9));
+}
+.price-card.featured::before{
+  content:'MOST POPULAR';
+  position:absolute;top:16px;right:-28px;
+  background:var(--em);color:#000;
+  font-size:.65rem;font-weight:800;letter-spacing:1px;
+  padding:.3rem 2.5rem;transform:rotate(45deg);
+}
+.price-label{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--em);font-weight:700;margin-bottom:.75rem}
+.price-name{font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+.price-num{
+  font-size:2.8rem;font-weight:900;
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;margin-bottom:.25rem;
+}
+.price-period{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.price-features{list-style:none;margin-bottom:2rem;flex:1}
+.price-features li{
+  padding:.4rem 0;font-size:.875rem;color:var(--muted);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;align-items:center;gap:.5rem;
+}
+.price-features li::before{content:'✓';color:var(--em);font-weight:700;flex-shrink:0}
+.price-features li:last-child{border-bottom:none}
+.btn-price{
+  display:block;text-align:center;
+  background:var(--em);color:#000;
+  padding:.8rem;border-radius:10px;
+  font-weight:800;font-size:.9rem;text-decoration:none;
+  transition:background .2s,transform .1s;
+}
+.btn-price:hover{background:var(--em2);transform:translateY(-1px)}
+.btn-price.outline{
+  background:transparent;color:var(--em);
+  border:1px solid var(--em);
+}
+.btn-price.outline:hover{background:rgba(0,208,132,0.08)}
+
+/* HOW IT WORKS */
+.how-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;
+  max-width:900px;margin:0 auto;
+}
+@media(max-width:700px){.how-grid{grid-template-columns:1fr}}
+.how-step{text-align:center;padding:2rem 1.5rem}
+.how-num{
+  font-size:3rem;font-weight:900;
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:.75rem;
+}
+.how-step h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.how-step p{color:var(--muted);font-size:.875rem}
+
+/* TRUST BAR */
+.trust-bar{
+  position:relative;z-index:1;
+  background:var(--bg2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:2rem 5%;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:2.5rem;
+}
+.trust-item{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--muted)}
+.trust-item strong{color:var(--text)}
+.trust-icon{font-size:1.1rem}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  padding:60px 5% 30px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;
+  max-width:1100px;margin:0 auto 3rem;
+}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand{
+  font-size:1.4rem;font-weight:800;
+  background:linear-gradient(135deg,var(--em),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;display:inline-block;margin-bottom:.75rem;
+}
+.footer-desc{color:var(--muted);font-size:.85rem;line-height:1.7;margin-bottom:1rem}
+.footer-contact a{
+  display:block;color:var(--em);font-size:.85rem;text-decoration:none;margin-bottom:.3rem;
+}
+.footer-col h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem}
+.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-col ul li a:hover{color:var(--em)}
+.footer-bottom{
+  max-width:1100px;margin:0 auto;
+  border-top:1px solid var(--border);
+  padding-top:1.5rem;
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
+  gap:1rem;
+}
+.footer-copy{color:var(--muted);font-size:.78rem}
+.legal-disclaimer{
+  color:var(--muted);font-size:.72rem;
+  max-width:500px;line-height:1.5;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- EMPIRE NAV -->
+<div class="empire-nav">
+  <span class="empire-nav-label">Francisco Holdings</span>
+  <a href="https://franciscoholdingsinc.com">FH Inc.</a>
+  <a href="https://zprimedoxaihq.com">PrimeDox AI</a>
+  <a href="https://weedlaw.com">WeedLaw</a>
+  <a href="https://ccldr.net">CCLDR</a>
+  <a href="https://canadiancannabisconsulting.com">Consulting</a>
+  <a href="#" class="active">OMNIAGUARD</a>
+  <a href="https://vaultvelocityauto.com">Vault Velocity</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">OMNIAGUARD</a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#ai">AI Engine</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="mailto:support@omniaguard.com">Support</a></li>
+  </ul>
+  <a class="nav-cta" href="#pricing">Start Free Trial</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="gemma-badge"><span class="dot"></span> Powered by Gemma 31B</div>
+  <h1>Your Devices. Your Data.<br><span>Fully Protected.</span></h1>
+  <p>OMNIAGUARD deploys autonomous AI agents that monitor, detect, and neutralize threats in real-time — before you ever notice them.</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="#pricing">Get Protected Now</a>
+    <a class="btn-secondary" href="#features">See How It Works</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">2.4B+</span><span class="stat-label">Threats Blocked</span></div>
+  <div class="stat"><span class="stat-num">99.97%</span><span class="stat-label">Uptime</span></div>
+  <div class="stat"><span class="stat-num">47ms</span><span class="stat-label">Response Time</span></div>
+  <div class="stat"><span class="stat-num">0</span><span class="stat-label">Breaches</span></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="center">
+    <div class="section-label">Full-Spectrum Defense</div>
+    <h2 class="section-title">Everything you need to stay secure</h2>
+    <p class="section-sub">Eight layers of AI-powered protection covering every attack surface across all your devices.</p>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feat-icon">🛡️</div>
+      <h3>Device Shield</h3>
+      <p>Real-time malware detection, ransomware blocking, and kernel-level threat monitoring across all your devices.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🔒</div>
+      <h3>Encrypted VPN</h3>
+      <p>Military-grade AES-256 VPN with 10,000+ global nodes. Zero-log policy. Your traffic stays yours.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🗑️</div>
+      <h3>Data Broker Defense</h3>
+      <p>Automatically opt-out from 400+ data brokers and people-search sites that sell your personal information.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🌑</div>
+      <h3>Dark Web Monitor</h3>
+      <p>Continuous dark web scanning for your emails, SSN, credit cards, and passwords. Instant breach alerts.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">👨‍👩‍👧</div>
+      <h3>Family Protection</h3>
+      <p>Extend OMNIAGUARD to everyone you care about. Parental controls, safe browsing, and identity protection for all family members.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🏢</div>
+      <h3>Enterprise Armor</h3>
+      <p>Team threat management, endpoint protection, compliance reporting, and dedicated security operations support.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🤖</div>
+      <h3>Agentic AI Swarm</h3>
+      <p>Three autonomous AI agents — Perception, Response, and Learning — that coordinate 24/7 to harden your defenses.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">📡</div>
+      <h3>Threat Intelligence</h3>
+      <p>Live feeds from global honeypots and threat databases. Your protection updates before the attack even reaches you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTIC AI -->
+<section id="ai" class="ai-section">
+  <div class="ai-inner">
+    <div class="ai-content">
+      <div class="section-label">AI Engine</div>
+      <h2 class="section-title">Three agents.<br>One mission.</h2>
+      <p class="section-sub">OMNIAGUARD's Gemma 31B-powered swarm operates autonomously — perceiving, responding, and learning from every threat in real time.</p>
+      <div class="agent-cards">
+        <div class="agent-card">
+          <div class="agent-icon">👁️</div>
+          <div>
+            <h4>Perception Agent</h4>
+            <p>Continuously monitors network traffic, system behavior, and file integrity for anomalies the human eye would miss.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">⚡</div>
+          <div>
+            <h4>Response Agent</h4>
+            <p>Neutralizes threats in under 47ms — isolating processes, blocking connections, and rolling back unauthorized changes automatically.</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">🧠</div>
+          <div>
+            <h4>Learning Agent</h4>
+            <p>Updates threat models across the entire OMNIAGUARD network after every incident, so your protection gets stronger every day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="orbit-viz">
+        <div class="orbit-center">OG</div>
+        <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+        <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+        <div class="orbit orbit-3"><div class="orbit-dot"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="center">
+    <div class="section-label">Simple Pricing</div>
+    <h2 class="section-title">Choose your protection level</h2>
+    <p class="section-sub">No hidden fees. Cancel anytime. 30-day money-back guarantee.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-label">Personal</div>
+      <div class="price-name">Shield</div>
+      <div class="price-num">$9.99</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li>Device Shield (1 device)</li>
+        <li>Encrypted VPN</li>
+        <li>Dark Web Monitor</li>
+        <li>Gemma 31B AI Engine</li>
+        <li>Email breach alerts</li>
+        <li>24/7 support</li>
+      </ul>
+      <a class="btn-price outline" href="https://paypal.me/derekfranciaco1/9.99" target="_blank" rel="noopener">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-label">Family</div>
+      <div class="price-name">Guardian</div>
+      <div class="price-num">$19.99</div>
+      <div class="price-period">per month — up to 6 members</div>
+      <ul class="price-features">
+        <li>Everything in Personal</li>
+        <li>Up to 6 family members</li>
+        <li>Data Broker Defense</li>
+        <li>Family Protection suite</li>
+        <li>Parental controls</li>
+        <li>Priority support</li>
+      </ul>
+      <a class="btn-price" href="https://paypal.me/derekfranciaco1/19.99" target="_blank" rel="noopener">Get Protected</a>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Small Business</div>
+      <div class="price-name">Armor</div>
+      <div class="price-num">$49.99</div>
+      <div class="price-period">per month</div>
+      <ul class="price-features">
+        <li>Everything in Family</li>
+        <li>Up to 25 endpoints</li>
+        <li>Enterprise Armor</li>
+        <li>Compliance reporting</li>
+        <li>Agentic AI Swarm</li>
+        <li>Dedicated onboarding</li>
+      </ul>
+      <a class="btn-price outline" href="https://paypal.me/derekfranciaco1/49.99" target="_blank" rel="noopener">Get Armor</a>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Enterprise</div>
+      <div class="price-name">Command</div>
+      <div class="price-num">Custom</div>
+      <div class="price-period">volume pricing</div>
+      <ul class="price-features">
+        <li>Unlimited endpoints</li>
+        <li>Full SOC integration</li>
+        <li>Custom AI tuning</li>
+        <li>SLA guarantee</li>
+        <li>On-site deployment</li>
+        <li>Executive briefings</li>
+      </ul>
+      <a class="btn-price outline" href="mailto:security@omniaguard.com">Contact Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="center">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Protected in 3 steps</h2>
+    <p class="section-sub">Get full AI-powered cybersecurity coverage in minutes — no technical knowledge required.</p>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <h3>Choose Your Plan</h3>
+      <p>Select the protection level that fits your needs. Personal, Family, Business, or Enterprise — all include the Gemma 31B AI engine.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <h3>Deploy in Minutes</h3>
+      <p>Complete setup across all your devices in under 5 minutes. Our onboarding wizard handles the technical configuration automatically.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <h3>Stay Protected</h3>
+      <p>Our AI agents work silently in the background — monitoring, blocking, and learning. You stay safe without lifting a finger.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">🔐</span><strong>AES-256</strong> Encryption</div>
+  <div class="trust-item"><span class="trust-icon">🌐</span><strong>10,000+</strong> VPN Nodes</div>
+  <div class="trust-item"><span class="trust-icon">🤖</span><strong>Gemma 31B</strong> AI Engine</div>
+  <div class="trust-item"><span class="trust-icon">🚫</span><strong>Zero-Log</strong> Policy</div>
+  <div class="trust-item"><span class="trust-icon">💰</span><strong>30-Day</strong> Guarantee</div>
+  <div class="trust-item"><span class="trust-icon">🍁</span><strong>Canadian</strong> HQ</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">OMNIAGUARD</div>
+      <p class="footer-desc">AI-powered cybersecurity platform protecting devices, data, and digital identity. Built in Canada. Deployed globally.</p>
+      <div class="footer-contact">
+        <a href="mailto:security@omniaguard.com">security@omniaguard.com</a>
+        <a href="mailto:support@omniaguard.com">support@omniaguard.com</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#features">Device Shield</a></li>
+        <li><a href="#features">VPN</a></li>
+        <li><a href="#features">Data Broker Defense</a></li>
+        <li><a href="#features">Dark Web Monitor</a></li>
+        <li><a href="#ai">AI Engine</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Solutions</h4>
+      <ul>
+        <li><a href="#pricing">Personal</a></li>
+        <li><a href="#pricing">Family</a></li>
+        <li><a href="#pricing">Small Business</a></li>
+        <li><a href="#pricing">Enterprise</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="mailto:security@omniaguard.com">About</a></li>
+        <li><a href="mailto:support@omniaguard.com">Support</a></li>
+        <li><a href="mailto:security@omniaguard.com">Privacy Policy</a></li>
+        <li><a href="mailto:security@omniaguard.com">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Francisco Holdings Inc. All rights reserved. OMNIAGUARD is a trademark of Francisco Holdings Inc. | <span style="color:rgba(212,175,55,0.5)">Part of the Francisco Holdings Inc. Empire</span></div>
+    <div class="legal-disclaimer">OMNIAGUARD is a cybersecurity technology provider. Not law enforcement. Derek Francisco provides knowledge and education only. Not a lawyer.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var canvas=document.getElementById('particles');
+  var ctx=canvas.getContext('2d');
+  var W,H,particles=[];
+  var mouse={x:-9999,y:-9999};
+  var EM='rgba(0,208,132,', GOLD='rgba(212,175,55,';
+
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  window.addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY});
+  window.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999});
+
+  function Particle(){
+    this.x=Math.random()*W;
+    this.y=Math.random()*H;
+    this.vx=(Math.random()-.5)*0.4;
+    this.vy=(Math.random()-.5)*0.4;
+    this.r=Math.random()*2+1;
+    this.gold=Math.random()<0.2;
+  }
+  Particle.prototype.update=function(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(this.x<0||this.x>W)this.vx*=-1;
+    if(this.y<0||this.y>H)this.vy*=-1;
+  };
+  Particle.prototype.draw=function(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle=this.gold?GOLD+'0.7)':EM+'0.7)';
+    ctx.fill();
+  };
+
+  for(var i=0;i<80;i++)particles.push(new Particle());
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<particles.length;i++){
+      particles[i].update();
+      particles[i].draw();
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x;
+        var dy=particles[i].y-particles[j].y;
+        var d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=EM+(1-d/140)*0.18+')';
+          ctx.lineWidth=1;ctx.stroke();
+        }
+      }
+      var mx=particles[i].x-mouse.x;
+      var my=particles[i].y-mouse.y;
+      var md=Math.sqrt(mx*mx+my*my);
+      if(md<120){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(mouse.x,mouse.y);
+        ctx.strokeStyle=GOLD+(1-md/120)*0.35+')';
+        ctx.lineWidth=1;ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
