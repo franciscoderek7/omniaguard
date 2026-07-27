@@ -1,0 +1,14 @@
+{
+  "agents":[
+    {
+      "name":"PrimeDox AI",
+      "role":"AI Clone / Document Intelligence",
+      "status":"online"
+    },
+    {
+      "name":"OmniGuardian",
+      "role":"Cybersecurity Agent",
+      "status":"online"
+    }
+  ]
+}
