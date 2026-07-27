@@ -1,0 +1,20 @@
+{
+ "offers":[
+  {
+   "name":"Free AI Security Assessment",
+   "type":"Lead Generator"
+  },
+  {
+   "name":"OmniAGuard Security Review",
+   "price":"499 CAD"
+  },
+  {
+   "name":"AI Security Implementation",
+   "price":"2500+ CAD"
+  },
+  {
+   "name":"Managed AI Security",
+   "type":"Monthly Subscription"
+  }
+ ]
+}
