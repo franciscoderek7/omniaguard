@@ -1,0 +1,23 @@
+{
+ "roles":[
+  {
+   "name":"Owner",
+   "permissions":[
+    "all"
+   ]
+  },
+  {
+   "name":"Operator",
+   "permissions":[
+    "dashboard",
+    "reports"
+   ]
+  },
+  {
+   "name":"Client",
+   "permissions":[
+    "client_portal"
+   ]
+  }
+ ]
+}
