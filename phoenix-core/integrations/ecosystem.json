@@ -1,0 +1,26 @@
+{
+ "core":"Phoenix Core",
+ "humanOperator":"Derek",
+ "systems":[
+  {
+   "name":"OmniAGuard",
+   "role":"Cybersecurity Guardian",
+   "connection":"active"
+  },
+  {
+   "name":"PrimeDox AI",
+   "role":"AI Clone / Document Intelligence",
+   "connection":"active"
+  },
+  {
+   "name":"Z-PrimeDox AI HQ",
+   "role":"PrimeDox Platform Headquarters",
+   "connection":"active"
+  }
+ ],
+ "architecture":{
+  "controlLayer":"Phoenix Core",
+  "securityLayer":"OmniAGuard",
+  "intelligenceLayer":"PrimeDox AI"
+ }
+}
