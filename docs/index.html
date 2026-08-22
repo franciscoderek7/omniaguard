@@ -181,3 +181,48 @@ setTimeout(() => {
   document.getElementById('leadModal').style.display = 'flex';
 }, 10000);
 </script>
+<script>
+// PHOENIX DOMINION — TRIUMVIRATE ARCHITECTURE
+// LOCKED: FHI + OmniAGuard + PrimeDox AI
+// Monitoring all swarms, floors, and revenue streams
+
+const Triumvirate = {
+  entities: {
+    fhi: {
+      name: 'Francisco Holdings Inc.',
+      role: 'Empire Command Center',
+      monitors: ['All Swarms', 'All Floors', 'All Revenue']
+    },
+    omniaguard: {
+      name: 'OmniAGuard',
+      role: 'Security & Threat Monitoring',
+      monitors: ['Cybersecurity', 'Threats', 'Vulnerabilities']
+    },
+    primedox: {
+      name: 'PrimeDox AI (ZPrimeDoxAIHQ)',
+      role: 'Intelligence & Automation',
+      monitors: ['AI Agents', 'Legal', 'Documents', 'Operations']
+    }
+  },
+  
+  swarms: {
+    revenue: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
+    security: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' },
+    legal: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
+    automation: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
+    marketing: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
+    intelligence: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' }
+  },
+  
+  status() {
+    console.log('\n🧠 TRIUMVIRATE STATUS:');
+    console.log('   🏛️ FHI: Command Center');
+    console.log('   🛡️ OmniAGuard: Security');
+    console.log('   🧠 PrimeDox AI: Intelligence');
+    console.log('   📊 6 Swarms Active');
+  }
+};
+
+Triumvirate.status();
+console.log('✅ Triumvirate Architecture Locked');
+</script>
