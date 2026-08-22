@@ -3,31 +3,39 @@
 <head><meta charset="UTF-8"><title>OmniAGuard — AI Cybersecurity</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050510;color:#fff;font-family:'Segoe UI',sans-serif}
-.nav{display:flex;gap:2rem;padding:1.5rem 2rem;border-bottom:1px solid rgba(0,212,255,0.1);flex-wrap:wrap}
-.nav a{color:#8892b0;text-decoration:none;font-size:0.9rem;letter-spacing:2px;transition:color 0.3s}
-.nav a:hover{color:#00d4ff}
-.hero{text-align:center;padding:4rem 2rem;background:radial-gradient(ellipse at center,#0a0a1a 0%,#050510 100%)}
-.hero h1{font-size:4rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:#a0a0c0;font-size:1.2rem;margin:1rem 0 2rem}
-.btn{display:inline-block;padding:0.8rem 2rem;background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#fff;text-decoration:none;border-radius:100px;font-weight:700}
-.footer{text-align:center;padding:2rem;color:#404060;font-size:0.8rem;border-top:1px solid rgba(0,212,255,0.05)}
+body{background:#050510;color:#fff;font-family:'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden}
+canvas{position:fixed;top:0;left:0;z-index:0}
+.content{position:relative;z-index:1;max-width:800px}
+h1{font-size:4rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem}
+.sub{color:#a0a0c0;font-size:1.2rem;letter-spacing:4px;margin-bottom:2rem}
+.stats{display:flex;gap:3rem;justify-content:center;margin:2rem 0;flex-wrap:wrap}
+.stat-num{font-size:2.5rem;font-weight:700;color:#00d4ff}
+.stat-label{font-size:0.7rem;color:#606080;letter-spacing:2px;text-transform:uppercase}
+.btn{display:inline-block;padding:1rem 2.5rem;background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#fff;text-decoration:none;border-radius:100px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;transition:0.3s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,212,255,0.3)}
+.footer{position:fixed;bottom:1rem;font-size:0.7rem;color:#404060;letter-spacing:2px;z-index:1}
 </style>
 </head>
 <body>
-<div class="nav">
-<a href="/">🛡️ OmniAGuard</a>
-<a href="/products">Products</a>
-<a href="/services">Services</a>
-<a href="/about">About</a>
-<a href="/contact">Contact</a>
-<a href="/demo">🌀 Demo</a>
-</div>
-<div class="hero">
+<canvas id="bg"></canvas>
+<div class="content">
 <h1>OmniAGuard</h1>
-<p>Agentic AI Cybersecurity — Protect Your Empire</p>
-<a href="/products" class="btn">View Products</a>
+<p class="sub">Agentic AI Cybersecurity</p>
+<div class="stats">
+<div><div class="stat-num">∞</div><div class="stat-label">Threats Blocked</div></div>
+<div><div class="stat-num">0ms</div><div class="stat-label">Response Time</div></div>
+<div><div class="stat-num">AI</div><div class="stat-label">Agent Swarm</div></div>
 </div>
-<div class="footer">© 2026 Phoenix Dominion — Francisco Holdings Inc.</div>
+<button class="btn" onclick="window.open('https://www.paypal.com/paypalme/techpetcage','_blank')">Get Protected</button>
+</div>
+<div class="footer">OmniAGuard — AI Cybersecurity</div>
+<script>
+const c=document.getElementById('bg'),x=c.getContext('2d');let w,h,s=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<180;i++)s.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+0.5,d:Math.random()*Math.PI*2,s:Math.random()*0.5+0.1,c:Math.random()>0.5?'#00d4ff':'#ff6b9d'});
+function draw(){x.fillStyle='rgba(5,5,16,0.15)';x.fillRect(0,0,w,h);s.forEach(p=>{p.x+=Math.cos(p.d)*p.s;p.y+=Math.sin(p.d)*p.s;if(p.x<0||p.x>w)p.d=Math.PI-p.d;if(p.y<0||p.y>h)p.d=-p.d;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=p.c;x.globalAlpha=0.5;x.fill()});requestAnimationFrame(draw)}
+draw();
+</script>
 </body>
 </html>
