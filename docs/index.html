@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniAGuard — The Most Secure Empire on Earth</title>
+    <title>OmniAGuard — AI Cybersecurity</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{background:#050510;color:#e5e4e2;font-family:'Segoe UI',sans-serif;min-height:100vh}
+        body{background:#050510;color:#fff;font-family:'Segoe UI',sans-serif;min-height:100vh}
         .nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;border-bottom:1px solid rgba(0,212,255,0.1);flex-wrap:wrap;gap:1rem}
         .nav .logo{font-size:1.5rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .nav .links{display:flex;gap:2rem;flex-wrap:wrap}
@@ -14,21 +14,23 @@
         .nav .links a:hover{color:#00d4ff}
         .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;min-height:60vh;background:radial-gradient(ellipse at center,#0a0a1a 0%,#050510 100%)}
         .hero h1{font-size:3.5rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-        .hero .tagline{color:#8892b0;font-size:1.2rem;max-width:700px;margin-bottom:2rem;line-height:1.6}
-        .hero .badge{display:inline-block;border:1px solid rgba(0,212,255,0.2);padding:0.5rem 2rem;border-radius:100px;font-size:0.7rem;letter-spacing:4px;color:#00d4ff;background:rgba(0,212,255,0.05);margin-bottom:1.5rem}
-        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;padding:2rem;max-width:1200px;margin:0 auto}
+        .hero .tagline{color:#a0a0c0;font-size:1.2rem;max-width:600px;margin-bottom:2rem}
+        .btn{display:inline-block;padding:0.8rem 2.5rem;border-radius:100px;font-weight:700;letter-spacing:2px;text-decoration:none;transition:0.3s;border:none;cursor:pointer}
+        .btn-primary{background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#fff}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,212,255,0.3)}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;padding:2rem;max-width:1200px;margin:0 auto}
         .card{background:rgba(17,34,64,0.3);border:1px solid rgba(0,212,255,0.06);border-radius:16px;padding:1.5rem;text-align:center;transition:0.3s}
         .card:hover{border-color:#00d4ff;transform:translateY(-4px)}
-        .card .icon{font-size:2.5rem;margin-bottom:0.5rem}
         .card h3{color:#00d4ff;margin-bottom:0.5rem}
+        .card .price{color:#ff6b9d;font-weight:700;font-size:1.2rem;margin-top:0.5rem}
         .card p{color:#8892b0;font-size:0.9rem}
-        .card .status{color:#50C878;font-weight:700;margin-top:0.5rem}
+        .btn-buy{background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#fff;border:none;padding:0.5rem 1.5rem;border-radius:100px;font-weight:700;cursor:pointer;transition:0.3s;margin-top:0.5rem}
+        .btn-buy:hover{transform:scale(1.05)}
         .footer{text-align:center;padding:2rem;color:#404060;font-size:0.7rem;border-top:1px solid rgba(0,212,255,0.05)}
         .section-title{text-align:center;color:#00d4ff;font-size:2rem;letter-spacing:4px;margin:2rem 0;font-weight:300}
-        .secure-banner{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(255,107,157,0.1));border:2px solid #00d4ff;border-radius:16px;padding:2rem;text-align:center;max-width:800px;margin:2rem auto}
-        .secure-banner h2{color:#00d4ff;font-size:2rem}
-        .secure-banner p{color:#8892b0;font-size:1.1rem}
-        .secure-banner .lock{color:#ff6b9d;font-weight:700;font-size:2rem}
+        .secure-banner{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(255,107,157,0.1));border:1px solid #00d4ff;border-radius:16px;padding:1.5rem;text-align:center;max-width:800px;margin:1rem auto}
+        .secure-banner h2{color:#00d4ff;font-size:1.5rem}
+        .secure-banner p{color:#8892b0;font-size:1rem}
         @media(max-width:768px){.nav{flex-direction:column;align-items:flex-start}.hero h1{font-size:2.5rem}}
     </style>
 </head>
@@ -37,60 +39,32 @@
         <div class="logo">🛡️ OmniAGuard</div>
         <div class="links">
             <a href="/">Home</a>
-            <a href="#security">Security</a>
-            <a href="#products">Products</a>
             <a href="#services">Services</a>
+            <a href="#products">Products</a>
             <a href="https://franciscoholdingsinc.com/demo">Demo</a>
         </div>
     </div>
     <div class="hero">
-        <div class="badge">🔒 The Most Secure Empire on Earth</div>
+        <div class="secure-banner"><h2>🔒 SECURE</h2><p>0 threats · 0 jailbreaks · 0 prompt injections</p></div>
         <h1>OmniAGuard</h1>
-        <p class="tagline">AI cybersecurity that protects the Phoenix Dominion empire — no jailbreaks, no prompt injections, no sandbox escapes, no breaches.</p>
+        <p class="tagline">Agentic AI Cybersecurity — Protect Your Empire</p>
+        <a href="#services" class="btn btn-primary">View Services</a>
     </div>
 
-    <div class="secure-banner">
-        <h2>🔒 SECURITY STATUS</h2>
-        <p><span class="lock">🛡️</span> All systems secure · 0 threats · 14 agents active · 24/7 protection</p>
-        <p style="color:#50C878;font-weight:700;">✅ THE MOST SECURE EMPIRE ON EARTH</p>
-    </div>
-
-    <h2 class="section-title" id="security">🛡️ Security Layers</h2>
+    <h2 class="section-title" id="services">🛡️ Services</h2>
     <div class="grid">
-        <div class="card"><div class="icon">🧠</div><h3>AI Threat Detection</h3><p>Real-time threat detection across all systems</p><div class="status">✅ Active</div></div>
-        <div class="card"><div class="icon">🛡️</div><h3>Jailbreak Prevention</h3><p>Blocks all jailbreak attempts in real-time</p><div class="status">✅ Active</div></div>
-        <div class="card"><div class="icon">🔒</div><h3>Sandbox Protection</h3><p>All AI agents run in secure sandboxes</p><div class="status">✅ Active</div></div>
-        <div class="card"><div class="icon">🔄</div><h3>Prompt Injection Defense</h3><p>Detects and blocks prompt injection attacks</p><div class="status">✅ Active</div></div>
-        <div class="card"><div class="icon">📊</div><h3>24/7 Monitoring</h3><p>Vigilax monitors all systems 24/7</p><div class="status">✅ Active</div></div>
-        <div class="card"><div class="icon">🚨</div><h3>Incident Response</h3><p>Instant response to any security event</p><div class="status">✅ Active</div></div>
+        <div class="card"><h3>Threat Detection</h3><p>Real-time AI threat detection</p><div class="price">$99/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/99')">Buy</button></div>
+        <div class="card"><h3>Jailbreak Prevention</h3><p>Blocks all jailbreak attempts</p><div class="price">$199/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/199')">Buy</button></div>
+        <div class="card"><h3>Sandbox Protection</h3><p>Secure AI agent sandboxes</p><div class="price">$149/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/149')">Buy</button></div>
+        <div class="card"><h3>24/7 Monitoring</h3><p>Continuous system monitoring</p><div class="price">$99/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/99')">Buy</button></div>
     </div>
 
-    <h2 class="section-title" id="services">🛡️ 10 Services</h2>
+    <h2 class="section-title" id="products">📦 Products</h2>
     <div class="grid">
-        <div class="card"><h3>1. Threat Detection</h3><p>Real-time AI threat detection</p><div class="status">$99/mo</div></div>
-        <div class="card"><h3>2. Jailbreak Prevention</h3><p>Blocks all jailbreak attempts</p><div class="status">$199/mo</div></div>
-        <div class="card"><h3>3. Sandbox Protection</h3><p>Secure AI agent sandboxes</p><div class="status">$149/mo</div></div>
-        <div class="card"><h3>4. Prompt Injection Defense</h3><p>Blocks prompt injection attacks</p><div class="status">$199/mo</div></div>
-        <div class="card"><h3>5. 24/7 Monitoring</h3><p>Continuous system monitoring</p><div class="status">$99/mo</div></div>
-        <div class="card"><h3>6. Incident Response</h3><p>Instant security response</p><div class="status">$299/mo</div></div>
-        <div class="card"><h3>7. Vulnerability Scanning</h3><p>Regular vulnerability assessments</p><div class="status">$149/mo</div></div>
-        <div class="card"><h3>8. Data Encryption</h3><p>AES-256 encryption for all data</p><div class="status">$99/mo</div></div>
-        <div class="card"><h3>9. Security Audit</h3><p>Complete security audit</p><div class="status">$499</div></div>
-        <div class="card"><h3>10. Enterprise Security</h3><p>Full enterprise security suite</p><div class="status">$2,499/mo</div></div>
-    </div>
-
-    <h2 class="section-title" id="products">📦 10 Products</h2>
-    <div class="grid">
-        <div class="card"><h3>1. AI Firewall</h3><p>AI-powered firewall</p><div class="status">$299</div></div>
-        <div class="card"><h3>2. Security AI Agent</h3><p>Dedicated security AI agent</p><div class="status">$499</div></div>
-        <div class="card"><h3>3. Encryption Suite</h3><p>Full encryption toolkit</p><div class="status">$199</div></div>
-        <div class="card"><h3>4. Threat Intelligence</h3><p>Real-time threat intelligence</p><div class="status">$399</div></div>
-        <div class="card"><h3>5. Security Dashboard</h3><p>Real-time security dashboard</p><div class="status">$299</div></div>
-        <div class="card"><h3>6. Incident Response Kit</h3><p>Complete incident response toolkit</p><div class="status">$499</div></div>
-        <div class="card"><h3>7. Vulnerability Scanner</h3><p>Automated vulnerability scanner</p><div class="status">$199</div></div>
-        <div class="card"><h3>8. Security Audit Tool</h3><p>Automated security audit tool</p><div class="status">$399</div></div>
-        <div class="card"><h3>9. AI Security Training</h3><p>AI security training course</p><div class="status">$299</div></div>
-        <div class="card"><h3>10. Enterprise Security Suite</h3><p>Complete enterprise security</p><div class="status">$999</div></div>
+        <div class="card"><h3>AI Firewall</h3><p>AI-powered firewall</p><div class="price">$299</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
+        <div class="card"><h3>Security AI Agent</h3><p>Dedicated security AI agent</p><div class="price">$499</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/499')">Buy</button></div>
+        <div class="card"><h3>Encryption Suite</h3><p>Full encryption toolkit</p><div class="price">$199</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/199')">Buy</button></div>
+        <div class="card"><h3>Security Dashboard</h3><p>Real-time security dashboard</p><div class="price">$299</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
     </div>
 
     <div class="footer">© 2026 <span style="color:#00d4ff;">Phoenix Dominion</span> — Francisco Holdings Inc.</div>
