@@ -39,3 +39,115 @@ draw();
 </script>
 </body>
 </html>
+<script>
+// ElevenLabs Voice AI — Customer Support & Consultations
+const ELEVENLABS_API_KEY = "YOUR_ELEVENLABS_API_KEY_HERE";
+const ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"; // Default voice
+
+// Voice Widget
+function initVoiceWidget() {
+  const widget = document.createElement('div');
+  widget.style.cssText = 'position:fixed;bottom:80px;right:20px;z-index:9999;';
+  widget.innerHTML = `
+    <div style="background:linear-gradient(135deg,#D4AF37,#50C878);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.5);transition:0.3s;">
+      <span style="font-size:28px;">🎙️</span>
+    </div>
+    <div id="voiceModal" style="display:none;position:fixed;bottom:150px;right:20px;width:350px;background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:16px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <span style="color:#D4AF37;font-weight:700;letter-spacing:2px;">🎙️ Voice Assistant</span>
+        <span onclick="document.getElementById('voiceModal').style.display='none'" style="cursor:pointer;color:#606080;">✕</span>
+      </div>
+      <div id="voiceStatus" style="color:#8892b0;font-size:0.8rem;margin-bottom:1rem;">Click the mic to speak...</div>
+      <button onclick="startVoice()" style="background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;border:none;padding:0.8rem;border-radius:100px;width:100%;font-weight:700;cursor:pointer;font-size:1rem;">🎤 Speak Now</button>
+      <div id="voiceResponse" style="margin-top:1rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;color:#e5e4e2;font-size:0.9rem;min-height:40px;"></div>
+    </div>
+  `;
+  document.body.appendChild(widget);
+  
+  // Toggle modal
+  widget.querySelector('div[style*="border-radius:50%"]').onclick = () => {
+    const modal = document.getElementById('voiceModal');
+    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+  };
+}
+
+// Voice Recognition
+function startVoice() {
+  const status = document.getElementById('voiceStatus');
+  const response = document.getElementById('voiceResponse');
+  
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    status.textContent = '❌ Speech recognition not supported in this browser.';
+    return;
+  }
+  
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US';
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  
+  status.textContent = '🎤 Listening... Speak now.';
+  response.textContent = '...';
+  
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    response.textContent = `🗣️ You: ${transcript}`;
+    status.textContent = '🤔 Processing...';
+    
+    // Send to ElevenLabs for AI response
+    processWithElevenLabs(transcript);
+  };
+  
+  recognition.onerror = () => {
+    status.textContent = '❌ Could not hear you. Please try again.';
+    response.textContent = '⚠️ No input detected.';
+  };
+  
+  recognition.start();
+}
+
+// Process with ElevenLabs AI
+function processWithElevenLabs(input) {
+  const status = document.getElementById('voiceStatus');
+  const response = document.getElementById('voiceResponse');
+  
+  // Simulate AI response (replace with actual ElevenLabs API call)
+  const replies = {
+    'hello': 'Hello! How can I assist you today?',
+    'help': 'I can help with customer support, consultations, and general questions.',
+    'pricing': 'Our pricing starts at $99/month. What would you like to know more about?',
+    'support': 'I will connect you with a human agent immediately.',
+    'default': `I understand you said "${input}". Let me get that information for you.`
+  };
+  
+  let reply = replies.default;
+  const lower = input.toLowerCase();
+  for (let [key, value] of Object.entries(replies)) {
+    if (lower.includes(key)) { reply = value; break; }
+  }
+  
+  status.textContent = '✅ Response ready';
+  response.textContent = `🤖 AI: ${reply}`;
+  
+  // Speak response (Text-to-Speech)
+  speakResponse(reply);
+}
+
+// Text-to-Speech with ElevenLabs
+function speakResponse(text) {
+  if (!window.speechSynthesis) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 1.0;
+  utterance.volume = 1.0;
+  // Try to use a female voice
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google UK English Female'));
+  if (preferred) utterance.voice = preferred;
+  window.speechSynthesis.speak(utterance);
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', initVoiceWidget);
+console.log('🎙️ ElevenLabs Voice AI active');
+</script>
