@@ -156,3 +156,28 @@ console.log(`   🤖 PrimeDox AI: ${EmpireIdentity.avatars.primedox.role}`);
 console.log(`   🏛️ SoulStack: ${EmpireIdentity.avatars.soulstack.role}`);
 console.log(`   🛡️ Vigilax: ${EmpireIdentity.avatars.vigilax.role}`);
 </script>
+<!-- Lead Capture Modal -->
+<div id="leadModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(10px);">
+  <div style="background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:2rem;max-width:400px;width:90%;text-align:center;">
+    <h2 style="color:#D4AF37;margin-bottom:0.5rem;">🚀 Get Started Free</h2>
+    <p style="color:#8892b0;margin-bottom:1.5rem;font-size:0.9rem;">Enter your email to access free tools and resources.</p>
+    <input type="email" id="leadEmail" placeholder="your@email.com" style="width:100%;padding:0.8rem;background:rgba(0,0,0,0.3);border:1px solid rgba(212,175,55,0.1);border-radius:8px;color:#e5e4e2;margin-bottom:1rem;">
+    <button onclick="captureLead()" style="width:100%;padding:0.8rem;background:linear-gradient(135deg,#D4AF37,#50C878);border:none;border-radius:8px;color:#0a0a0f;font-weight:700;cursor:pointer;">Get Free Access</button>
+    <p style="color:#606080;font-size:0.7rem;margin-top:0.5rem;">No spam. Unsubscribe anytime.</p>
+    <span onclick="document.getElementById('leadModal').style.display='none'" style="position:absolute;top:1rem;right:1.5rem;font-size:1.5rem;cursor:pointer;color:#606080;">×</span>
+  </div>
+</div>
+<script>
+function captureLead() {
+  const email = document.getElementById('leadEmail').value;
+  if (!email) { alert('Please enter your email.'); return; }
+  alert('✅ Welcome! Check your email for free access.');
+  document.getElementById('leadModal').style.display = 'none';
+  // Log to lead database
+  console.log('📝 Lead captured:', email);
+}
+// Show lead modal after 10 seconds
+setTimeout(() => {
+  document.getElementById('leadModal').style.display = 'flex';
+}, 10000);
+</script>
