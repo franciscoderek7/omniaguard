@@ -26,3 +26,68 @@ h1{font-size:2.5rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-b
 </body>
 </html>
 <div style="text-align:center;padding:0.5rem;background:rgba(212,175,55,0.05);"><a href="https://franciscoholdingsinc.com/investors" style="color:#D4AF37;text-decoration:none;font-weight:700;">💎 Invest in the Tao Skyscraper</a></div>
+<script>
+// Phoenix Dominion — Industry Chatbot
+(function() {
+  const responses = {
+    greeting: 'Welcome! How can I help you today?',
+    services: 'Check our Services & Products page for full offerings.',
+    pricing: 'Pricing varies by service. Visit our Services & Products page.',
+    demo: 'Watch a demo at /demo.html',
+    default: 'I can help with services, pricing, or demos.'
+  };
+
+  const widget = document.createElement('div');
+  widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Segoe UI,sans-serif;';
+  widget.innerHTML = `
+    <div id="chatToggle" style="background:linear-gradient(135deg,#D4AF37,#50C878);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.5);font-size:28px;">💬</div>
+    <div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:320px;background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:16px;padding:1rem;box-shadow:0 20px 60px rgba(0,0,0,0.8);max-height:400px;flex-direction:column;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+        <span style="color:#D4AF37;font-weight:700;">💬 Assistant</span>
+        <span onclick="document.getElementById('chatWindow').style.display='none'" style="cursor:pointer;color:#606080;">✕</span>
+      </div>
+      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:250px;padding:0.3rem;background:rgba(0,0,0,0.2);border-radius:8px;font-size:0.8rem;color:#e5e4e2;">
+        <div style="padding:0.2rem 0;"><span style="color:#D4AF37;">🤖 Bot:</span> ${responses.greeting}</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
+        <input id="chatInput" type="text" placeholder="Ask..." style="flex:1;background:rgba(0,0,0,0.3);border:1px solid rgba(212,175,55,0.1);border-radius:8px;padding:0.5rem;color:#e5e4e2;font-size:0.8rem;" onkeydown="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()" style="background:linear-gradient(135deg,#D4AF37,#50C878);border:none;border-radius:8px;padding:0.5rem 1rem;color:#0a0a0f;font-weight:700;cursor:pointer;">➤</button>
+      </div>
+      <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap;">
+        <button onclick="quickReply('services')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Services</button>
+        <button onclick="quickReply('pricing')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Pricing</button>
+        <button onclick="quickReply('demo')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Demo</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(widget);
+
+  document.getElementById('chatToggle').onclick = () => {
+    const win = document.getElementById('chatWindow');
+    win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+  };
+
+  window.sendChat = function() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    const msgs = document.getElementById('chatMessages');
+    msgs.innerHTML += `<div style="padding:0.2rem 0;"><span style="color:#50C878;">👤 You:</span> ${msg}</div>`;
+    input.value = '';
+    setTimeout(() => {
+      const lower = msg.toLowerCase();
+      let reply = responses.default;
+      if (lower.includes('service')) reply = responses.services;
+      else if (lower.includes('price') || lower.includes('cost')) reply = responses.pricing;
+      else if (lower.includes('demo') || lower.includes('video')) reply = responses.demo;
+      msgs.innerHTML += `<div style="padding:0.2rem 0;"><span style="color:#D4AF37;">🤖 Bot:</span> ${reply}</div>`;
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 400);
+  };
+
+  window.quickReply = function(topic) {
+    document.getElementById('chatInput').value = topic;
+    sendChat();
+  };
+})();
+</script>
