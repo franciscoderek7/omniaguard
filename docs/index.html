@@ -1,154 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>OmniAGuard — AI Cybersecurity</title>
+<html><head><meta charset="UTF-8"><title>omniaguard.com</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050510;color:#fff;font-family:'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden}
-canvas{position:fixed;top:0;left:0;z-index:0}
-.content{position:relative;z-index:1;max-width:800px}
-h1{font-size:4rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem}
-.sub{color:#a0a0c0;font-size:1.2rem;letter-spacing:4px;margin-bottom:2rem}
-.stats{display:flex;gap:3rem;justify-content:center;margin:2rem 0;flex-wrap:wrap}
-.stat-num{font-size:2.5rem;font-weight:700;color:#00d4ff}
-.stat-label{font-size:0.7rem;color:#606080;letter-spacing:2px;text-transform:uppercase}
-.btn{display:inline-block;padding:1rem 2.5rem;background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#fff;text-decoration:none;border-radius:100px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;transition:0.3s}
-.btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,212,255,0.3)}
-.footer{position:fixed;bottom:1rem;font-size:0.7rem;color:#404060;letter-spacing:2px;z-index:1}
+body{background:#0a0a0f;color:#e5e4e2;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#8892b0;margin:1rem 0;letter-spacing:4px}
+.btn{display:inline-block;padding:0.8rem 2rem;background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;text-decoration:none;border-radius:100px;font-weight:700;border:none;cursor:pointer;transition:0.3s}
+.btn:hover{transform:translateY(-2px)}
+.footer{position:fixed;bottom:1rem;font-size:0.7rem;color:#404060;letter-spacing:2px}
 </style>
 </head>
 <body>
-<canvas id="bg"></canvas>
-<div class="content">
-<h1>OmniAGuard</h1>
-<p class="sub">Agentic AI Cybersecurity</p>
-<div class="stats">
-<div><div class="stat-num">∞</div><div class="stat-label">Threats Blocked</div></div>
-<div><div class="stat-num">0ms</div><div class="stat-label">Response Time</div></div>
-<div><div class="stat-num">AI</div><div class="stat-label">Agent Swarm</div></div>
-</div>
-<button class="btn" onclick="window.open('https://www.paypal.com/paypalme/techpetcage','_blank')">Get Protected</button>
-</div>
-<div class="footer">OmniAGuard — AI Cybersecurity</div>
-<script>
-const c=document.getElementById('bg'),x=c.getContext('2d');let w,h,s=[];
-function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
-window.addEventListener('resize',resize);resize();
-for(let i=0;i<180;i++)s.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+0.5,d:Math.random()*Math.PI*2,s:Math.random()*0.5+0.1,c:Math.random()>0.5?'#00d4ff':'#ff6b9d'});
-function draw(){x.fillStyle='rgba(5,5,16,0.15)';x.fillRect(0,0,w,h);s.forEach(p=>{p.x+=Math.cos(p.d)*p.s;p.y+=Math.sin(p.d)*p.s;if(p.x<0||p.x>w)p.d=Math.PI-p.d;if(p.y<0||p.y>h)p.d=-p.d;x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle=p.c;x.globalAlpha=0.5;x.fill()});requestAnimationFrame(draw)}
-draw();
-</script>
+<h1>omniaguard.com</h1>
+<p class="sub">A Francisco Holdings Inc. Company — Phoenix Dominion</p>
+<a href="https://www.paypal.com/paypalme/techpetcage" class="btn">💰 Subscribe</a>
+<div class="footer">© 2026 <span style="color:#D4AF37;">Phoenix Dominion</span></div>
 </body>
 </html>
-<script>
-// ElevenLabs Voice AI — Customer Support & Consultations
-const ELEVENLABS_API_KEY = "YOUR_ELEVENLABS_API_KEY_HERE";
-const ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"; // Default voice
-
-// Voice Widget
-function initVoiceWidget() {
-  const widget = document.createElement('div');
-  widget.style.cssText = 'position:fixed;bottom:80px;right:20px;z-index:9999;';
-  widget.innerHTML = `
-    <div style="background:linear-gradient(135deg,#D4AF37,#50C878);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.5);transition:0.3s;">
-      <span style="font-size:28px;">🎙️</span>
-    </div>
-    <div id="voiceModal" style="display:none;position:fixed;bottom:150px;right:20px;width:350px;background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:16px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.8);backdrop-filter:blur(20px);">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-        <span style="color:#D4AF37;font-weight:700;letter-spacing:2px;">🎙️ Voice Assistant</span>
-        <span onclick="document.getElementById('voiceModal').style.display='none'" style="cursor:pointer;color:#606080;">✕</span>
-      </div>
-      <div id="voiceStatus" style="color:#8892b0;font-size:0.8rem;margin-bottom:1rem;">Click the mic to speak...</div>
-      <button onclick="startVoice()" style="background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;border:none;padding:0.8rem;border-radius:100px;width:100%;font-weight:700;cursor:pointer;font-size:1rem;">🎤 Speak Now</button>
-      <div id="voiceResponse" style="margin-top:1rem;padding:0.8rem;background:rgba(0,0,0,0.2);border-radius:8px;color:#e5e4e2;font-size:0.9rem;min-height:40px;"></div>
-    </div>
-  `;
-  document.body.appendChild(widget);
-  
-  // Toggle modal
-  widget.querySelector('div[style*="border-radius:50%"]').onclick = () => {
-    const modal = document.getElementById('voiceModal');
-    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
-  };
-}
-
-// Voice Recognition
-function startVoice() {
-  const status = document.getElementById('voiceStatus');
-  const response = document.getElementById('voiceResponse');
-  
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    status.textContent = '❌ Speech recognition not supported in this browser.';
-    return;
-  }
-  
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = 'en-US';
-  recognition.continuous = false;
-  recognition.interimResults = true;
-  
-  status.textContent = '🎤 Listening... Speak now.';
-  response.textContent = '...';
-  
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    response.textContent = `🗣️ You: ${transcript}`;
-    status.textContent = '🤔 Processing...';
-    
-    // Send to ElevenLabs for AI response
-    processWithElevenLabs(transcript);
-  };
-  
-  recognition.onerror = () => {
-    status.textContent = '❌ Could not hear you. Please try again.';
-    response.textContent = '⚠️ No input detected.';
-  };
-  
-  recognition.start();
-}
-
-// Process with ElevenLabs AI
-function processWithElevenLabs(input) {
-  const status = document.getElementById('voiceStatus');
-  const response = document.getElementById('voiceResponse');
-  
-  // Simulate AI response (replace with actual ElevenLabs API call)
-  const replies = {
-    'hello': 'Hello! How can I assist you today?',
-    'help': 'I can help with customer support, consultations, and general questions.',
-    'pricing': 'Our pricing starts at $99/month. What would you like to know more about?',
-    'support': 'I will connect you with a human agent immediately.',
-    'default': `I understand you said "${input}". Let me get that information for you.`
-  };
-  
-  let reply = replies.default;
-  const lower = input.toLowerCase();
-  for (let [key, value] of Object.entries(replies)) {
-    if (lower.includes(key)) { reply = value; break; }
-  }
-  
-  status.textContent = '✅ Response ready';
-  response.textContent = `🤖 AI: ${reply}`;
-  
-  // Speak response (Text-to-Speech)
-  speakResponse(reply);
-}
-
-// Text-to-Speech with ElevenLabs
-function speakResponse(text) {
-  if (!window.speechSynthesis) return;
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.95;
-  utterance.pitch = 1.0;
-  utterance.volume = 1.0;
-  // Try to use a female voice
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Google UK English Female'));
-  if (preferred) utterance.voice = preferred;
-  window.speechSynthesis.speak(utterance);
-}
-
-// Init on load
-document.addEventListener('DOMContentLoaded', initVoiceWidget);
-console.log('🎙️ ElevenLabs Voice AI active');
-</script>
-<div style="position:fixed;bottom:0;left:0;width:100%;background:linear-gradient(135deg,#D4AF37,#50C878);padding:0.5rem;text-align:center;z-index:9999;"><a href="https://www.paypal.com/paypalme/techpetcage" style="color:#0a0a0f;font-weight:700;text-decoration:none;">💰 Start Free Trial — Subscribe Now</a></div>
