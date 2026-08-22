@@ -3,316 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniAGuard — Phoenix Dominion</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>OmniAGuard — The Most Secure Empire on Earth</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{background:#050510;color:#e5e4e2;font-family:'Segoe UI',sans-serif;overflow:hidden;min-height:100vh}
-        #bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0}
-        .ui-overlay{position:relative;z-index:10;padding:1rem;height:100vh;display:flex;flex-direction:column;justify-content:space-between}
-        .nav{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 1rem;border-bottom:1px solid rgba(212,175,55,0.1);flex-wrap:wrap;gap:0.5rem;backdrop-filter:blur(10px)}
-        .nav .logo{font-size:1.3rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .nav .links{display:flex;gap:1rem;flex-wrap:wrap}
-        .nav .links a{color:#8892b0;text-decoration:none;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+        body{background:#050510;color:#e5e4e2;font-family:'Segoe UI',sans-serif;min-height:100vh}
+        .nav{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;border-bottom:1px solid rgba(0,212,255,0.1);flex-wrap:wrap;gap:1rem}
+        .nav .logo{font-size:1.5rem;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .nav .links{display:flex;gap:2rem;flex-wrap:wrap}
+        .nav .links a{color:#8892b0;text-decoration:none;font-size:0.85rem;letter-spacing:2px;transition:color 0.3s}
         .nav .links a:hover{color:#00d4ff}
-        .hero{text-align:center;padding:2rem 1rem}
-        .hero h1{font-size:3rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem}
-        .hero .tagline{color:#8892b0;font-size:1rem;max-width:500px;margin:0 auto 1rem}
-        .btn-group{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center}
-        .btn{padding:0.6rem 1.5rem;border-radius:100px;font-weight:700;letter-spacing:2px;text-decoration:none;transition:0.3s;border:none;cursor:pointer;font-size:0.8rem}
-        .btn-primary{background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#050510}
-        .btn-primary:hover{transform:translateY(-3px)}
-        .btn-outline{background:transparent;border:2px solid rgba(00d4ff,0.3);color:#00d4ff}
-        .free-area{background:rgba(00d4ff,0.05);border:1px solid rgba(00d4ff,0.1);border-radius:12px;padding:1rem;max-width:600px;margin:0 auto 1rem;text-align:center}
-        .free-area h3{color:#00d4ff;font-size:1rem}
-        .free-area p{color:#8892b0;font-size:0.8rem}
-        .free-btn{padding:0.4rem 1.2rem;background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#050510;border:none;border-radius:100px;font-weight:700;cursor:pointer;margin-top:0.3rem}
-        .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.5rem;max-width:800px;margin:0 auto}
-        .panel{background:rgba(17,34,64,0.2);border:1px solid rgba(212,175,55,0.05);border-radius:12px;padding:0.8rem;text-align:center}
-        .panel .icon{font-size:1.5rem}
-        .panel h3{color:#00d4ff;font-size:0.8rem}
-        .panel p{color:#8892b0;font-size:0.65rem}
-        .avatar-container{position:fixed;bottom:70px;right:10px;z-index:100;display:flex;gap:0.3rem}
-        .avatar{width:40px;height:40px;border-radius:50%;border:2px solid rgba(212,175,55,0.15);background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:0.3s}
-        .avatar:hover{border-color:#00d4ff;transform:scale(1.1)}
-        .footer{text-align:center;padding:0.5rem;color:#404060;font-size:0.6rem;border-top:1px solid rgba(212,175,55,0.05)}
+        .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;min-height:60vh;background:radial-gradient(ellipse at center,#0a0a1a 0%,#050510 100%)}
+        .hero h1{font-size:3.5rem;font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+        .hero .tagline{color:#8892b0;font-size:1.2rem;max-width:700px;margin-bottom:2rem;line-height:1.6}
+        .hero .badge{display:inline-block;border:1px solid rgba(0,212,255,0.2);padding:0.5rem 2rem;border-radius:100px;font-size:0.7rem;letter-spacing:4px;color:#00d4ff;background:rgba(0,212,255,0.05);margin-bottom:1.5rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;padding:2rem;max-width:1200px;margin:0 auto}
+        .card{background:rgba(17,34,64,0.3);border:1px solid rgba(0,212,255,0.06);border-radius:16px;padding:1.5rem;text-align:center;transition:0.3s}
+        .card:hover{border-color:#00d4ff;transform:translateY(-4px)}
+        .card .icon{font-size:2.5rem;margin-bottom:0.5rem}
+        .card h3{color:#00d4ff;margin-bottom:0.5rem}
+        .card p{color:#8892b0;font-size:0.9rem}
+        .card .status{color:#50C878;font-weight:700;margin-top:0.5rem}
+        .footer{text-align:center;padding:2rem;color:#404060;font-size:0.7rem;border-top:1px solid rgba(0,212,255,0.05)}
+        .section-title{text-align:center;color:#00d4ff;font-size:2rem;letter-spacing:4px;margin:2rem 0;font-weight:300}
+        .secure-banner{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(255,107,157,0.1));border:2px solid #00d4ff;border-radius:16px;padding:2rem;text-align:center;max-width:800px;margin:2rem auto}
+        .secure-banner h2{color:#00d4ff;font-size:2rem}
+        .secure-banner p{color:#8892b0;font-size:1.1rem}
+        .secure-banner .lock{color:#ff6b9d;font-weight:700;font-size:2rem}
+        @media(max-width:768px){.nav{flex-direction:column;align-items:flex-start}.hero h1{font-size:2.5rem}}
     </style>
 </head>
 <body>
-<div id="bg"></div>
-<div class="ui-overlay">
     <div class="nav">
-        <div class="logo">OmniAGuard</div>
+        <div class="logo">🛡️ OmniAGuard</div>
         <div class="links">
             <a href="/">Home</a>
+            <a href="#security">Security</a>
+            <a href="#products">Products</a>
             <a href="#services">Services</a>
-            <a href="#free">Free</a>
-            <a href="https://franciscoholdingsinc.com/dashboard.html">Dashboard</a>
+            <a href="https://franciscoholdingsinc.com/demo">Demo</a>
         </div>
     </div>
-    <div>
-        <div class="hero">
-            <h1>OmniAGuard</h1>
-            <p class="tagline">Agentic AI cybersecurity.</p>
-            <div class="btn-group">
-                <a href="#services" class="btn btn-primary">Explore</a>
-                <a href="#free" class="btn btn-outline">Free Access</a>
-            </div>
-        </div>
-        <div class="free-area" id="free">
-            <h3>🎁 Free Access Area</h3>
-            <p>Get started free. No credit card required.</p>
-            <button class="free-btn" onclick="window.open('https://www.paypal.com/paypalme/techpetcage','_blank')">Start Free</button>
-        </div>
-        <div class="panels" id="services">
-            <div class="panel"><div class="icon">🚀</div><h3>AI Strategy</h3><p>Full integration</p></div>
-            <div class="panel"><div class="icon">⚡</div><h3>Automation</h3><p>Workflow AI</p></div>
-            <div class="panel"><div class="icon">📊</div><h3>Analytics</h3><p>AI insights</p></div>
-            <div class="panel"><div class="icon">🛡️</div><h3>Security</h3><p>AI protection</p></div>
-        </div>
+    <div class="hero">
+        <div class="badge">🔒 The Most Secure Empire on Earth</div>
+        <h1>OmniAGuard</h1>
+        <p class="tagline">AI cybersecurity that protects the Phoenix Dominion empire — no jailbreaks, no prompt injections, no sandbox escapes, no breaches.</p>
     </div>
-    <div class="footer">© 2026 Phoenix Dominion — Francisco Holdings Inc.</div>
-</div>
-<div class="avatar-container">
-    <div class="avatar" title="PrimeDox">🧠</div>
-    <div class="avatar" title="OmniAGuard">🛡️</div>
-    <div class="avatar" title="Vigilax">🔬</div>
-    <div class="avatar" title="SoulStack">🏛️</div>
-</div>
-<script>
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x050510);
-const camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);
-camera.position.set(0,2,6);
-const renderer=new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-document.getElementById('bg').appendChild(renderer.domElement);
-const ambient=new THREE.AmbientLight(0x222244,0.5);
-scene.add(ambient);
-const dirLight=new THREE.DirectionalLight(0xd4af37,1);
-dirLight.position.set(5,10,5);
-scene.add(dirLight);
-const towerGroup=new THREE.Group();
-const tower=new THREE.Mesh(new THREE.BoxGeometry(0.6,2.5,0.6),new THREE.MeshPhysicalMaterial({color:0xd4af37,transparent:true,opacity:0.1,metalness:0.9,roughness:0.1}));
-tower.position.y=0.5;
-towerGroup.add(tower);
-for(let i=0;i<30;i++){const f=new THREE.Mesh(new THREE.BoxGeometry(0.7,0.02,0.7),new THREE.MeshPhysicalMaterial({color:i%2===0?0xd4af37:0x50C878,transparent:true,opacity:0.2}));f.position.y=i*0.06+0.1;towerGroup.add(f)}
-scene.add(towerGroup);
-const pGeo=new THREE.BufferGeometry();const pPos=new Float32Array(200*3);
-for(let i=0;i<200*3;i++)pPos[i]=(Math.random()-0.5)*12;
-pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
-const pMat=new THREE.PointsMaterial({color:0xd4af37,size:0.03,transparent:true,opacity:0.3,blending:THREE.AdditiveBlending});
-const particles=new THREE.Points(pGeo,pMat);
-scene.add(particles);
-let mx=0,my=0;
-document.addEventListener('mousemove',(e)=>{mx=(e.clientX/window.innerWidth)*2-1;my=-(e.clientY/window.innerHeight)*2+1});
-window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
-function animate(){requestAnimationFrame(animate);towerGroup.rotation.y+=0.005;towerGroup.rotation.x+=(my*0.05-towerGroup.rotation.x)*0.01;towerGroup.rotation.z+=(-mx*0.05-towerGroup.rotation.z)*0.01;renderer.render(scene,camera)}
-animate();
-</script>
+
+    <div class="secure-banner">
+        <h2>🔒 SECURITY STATUS</h2>
+        <p><span class="lock">🛡️</span> All systems secure · 0 threats · 14 agents active · 24/7 protection</p>
+        <p style="color:#50C878;font-weight:700;">✅ THE MOST SECURE EMPIRE ON EARTH</p>
+    </div>
+
+    <h2 class="section-title" id="security">🛡️ Security Layers</h2>
+    <div class="grid">
+        <div class="card"><div class="icon">🧠</div><h3>AI Threat Detection</h3><p>Real-time threat detection across all systems</p><div class="status">✅ Active</div></div>
+        <div class="card"><div class="icon">🛡️</div><h3>Jailbreak Prevention</h3><p>Blocks all jailbreak attempts in real-time</p><div class="status">✅ Active</div></div>
+        <div class="card"><div class="icon">🔒</div><h3>Sandbox Protection</h3><p>All AI agents run in secure sandboxes</p><div class="status">✅ Active</div></div>
+        <div class="card"><div class="icon">🔄</div><h3>Prompt Injection Defense</h3><p>Detects and blocks prompt injection attacks</p><div class="status">✅ Active</div></div>
+        <div class="card"><div class="icon">📊</div><h3>24/7 Monitoring</h3><p>Vigilax monitors all systems 24/7</p><div class="status">✅ Active</div></div>
+        <div class="card"><div class="icon">🚨</div><h3>Incident Response</h3><p>Instant response to any security event</p><div class="status">✅ Active</div></div>
+    </div>
+
+    <h2 class="section-title" id="services">🛡️ 10 Services</h2>
+    <div class="grid">
+        <div class="card"><h3>1. Threat Detection</h3><p>Real-time AI threat detection</p><div class="status">$99/mo</div></div>
+        <div class="card"><h3>2. Jailbreak Prevention</h3><p>Blocks all jailbreak attempts</p><div class="status">$199/mo</div></div>
+        <div class="card"><h3>3. Sandbox Protection</h3><p>Secure AI agent sandboxes</p><div class="status">$149/mo</div></div>
+        <div class="card"><h3>4. Prompt Injection Defense</h3><p>Blocks prompt injection attacks</p><div class="status">$199/mo</div></div>
+        <div class="card"><h3>5. 24/7 Monitoring</h3><p>Continuous system monitoring</p><div class="status">$99/mo</div></div>
+        <div class="card"><h3>6. Incident Response</h3><p>Instant security response</p><div class="status">$299/mo</div></div>
+        <div class="card"><h3>7. Vulnerability Scanning</h3><p>Regular vulnerability assessments</p><div class="status">$149/mo</div></div>
+        <div class="card"><h3>8. Data Encryption</h3><p>AES-256 encryption for all data</p><div class="status">$99/mo</div></div>
+        <div class="card"><h3>9. Security Audit</h3><p>Complete security audit</p><div class="status">$499</div></div>
+        <div class="card"><h3>10. Enterprise Security</h3><p>Full enterprise security suite</p><div class="status">$2,499/mo</div></div>
+    </div>
+
+    <h2 class="section-title" id="products">📦 10 Products</h2>
+    <div class="grid">
+        <div class="card"><h3>1. AI Firewall</h3><p>AI-powered firewall</p><div class="status">$299</div></div>
+        <div class="card"><h3>2. Security AI Agent</h3><p>Dedicated security AI agent</p><div class="status">$499</div></div>
+        <div class="card"><h3>3. Encryption Suite</h3><p>Full encryption toolkit</p><div class="status">$199</div></div>
+        <div class="card"><h3>4. Threat Intelligence</h3><p>Real-time threat intelligence</p><div class="status">$399</div></div>
+        <div class="card"><h3>5. Security Dashboard</h3><p>Real-time security dashboard</p><div class="status">$299</div></div>
+        <div class="card"><h3>6. Incident Response Kit</h3><p>Complete incident response toolkit</p><div class="status">$499</div></div>
+        <div class="card"><h3>7. Vulnerability Scanner</h3><p>Automated vulnerability scanner</p><div class="status">$199</div></div>
+        <div class="card"><h3>8. Security Audit Tool</h3><p>Automated security audit tool</p><div class="status">$399</div></div>
+        <div class="card"><h3>9. AI Security Training</h3><p>AI security training course</p><div class="status">$299</div></div>
+        <div class="card"><h3>10. Enterprise Security Suite</h3><p>Complete enterprise security</p><div class="status">$999</div></div>
+    </div>
+
+    <div class="footer">© 2026 <span style="color:#00d4ff;">Phoenix Dominion</span> — Francisco Holdings Inc.</div>
 </body>
 </html>
-<script>
-// PHOENIX DOMINION — AVATAR IDENTITY ARCHITECTURE
-// LOCKED: Do not alter without Emperor's direct command
-
-const EmpireIdentity = {
-  avatars: {
-    primedox: {
-      name: 'PrimeDox AI',
-      belongsTo: 'ZPrimeDoxAIHQ.com',
-      role: 'Your Digital Clone — Legal, Documents, Strategy, Gmail',
-      humanInLoop: 'Derek Francisco'
-    },
-    soulstack: {
-      name: 'SoulStack',
-      belongsTo: 'Francisco Holdings Inc.',
-      role: 'Empire Orchestrator — 460 Floors, 45 Companies, Automation',
-      humanInLoop: 'Derek Francisco'
-    },
-    vigilax: {
-      name: 'Vigilax',
-      belongsTo: 'OmniAGuard',
-      role: 'Security & Intelligence — Threats, Domains, Reputation',
-      humanInLoop: 'Derek Francisco'
-    }
-  },
-  human: {
-    name: 'Derek Francisco',
-    title: 'Emperor — Human in the Loop',
-    authority: 'Final approval on financial, legal, and strategic decisions'
-  },
-  security: {
-    financialActions: 'Only Derek can approve',
-    legalDecisions: 'PrimeDox drafts, Derek approves',
-    strategicChanges: 'SoulStack proposes, Derek approves',
-    securityThreats: 'Vigilax alerts, OmniAGuard responds, Derek notified'
-  }
-};
-
-console.log('🧠 Empire Identity Architecture Loaded:');
-console.log(`   👑 Human in the Loop: ${EmpireIdentity.human.name}`);
-console.log(`   🤖 PrimeDox AI: ${EmpireIdentity.avatars.primedox.role}`);
-console.log(`   🏛️ SoulStack: ${EmpireIdentity.avatars.soulstack.role}`);
-console.log(`   🛡️ Vigilax: ${EmpireIdentity.avatars.vigilax.role}`);
-</script>
-<!-- Lead Capture Modal -->
-<div id="leadModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(10px);">
-  <div style="background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:2rem;max-width:400px;width:90%;text-align:center;">
-    <h2 style="color:#D4AF37;margin-bottom:0.5rem;">🚀 Get Started Free</h2>
-    <p style="color:#8892b0;margin-bottom:1.5rem;font-size:0.9rem;">Enter your email to access free tools and resources.</p>
-    <input type="email" id="leadEmail" placeholder="your@email.com" style="width:100%;padding:0.8rem;background:rgba(0,0,0,0.3);border:1px solid rgba(212,175,55,0.1);border-radius:8px;color:#e5e4e2;margin-bottom:1rem;">
-    <button onclick="captureLead()" style="width:100%;padding:0.8rem;background:linear-gradient(135deg,#D4AF37,#50C878);border:none;border-radius:8px;color:#0a0a0f;font-weight:700;cursor:pointer;">Get Free Access</button>
-    <p style="color:#606080;font-size:0.7rem;margin-top:0.5rem;">No spam. Unsubscribe anytime.</p>
-    <span onclick="document.getElementById('leadModal').style.display='none'" style="position:absolute;top:1rem;right:1.5rem;font-size:1.5rem;cursor:pointer;color:#606080;">×</span>
-  </div>
-</div>
-<script>
-function captureLead() {
-  const email = document.getElementById('leadEmail').value;
-  if (!email) { alert('Please enter your email.'); return; }
-  alert('✅ Welcome! Check your email for free access.');
-  document.getElementById('leadModal').style.display = 'none';
-  // Log to lead database
-  console.log('📝 Lead captured:', email);
-}
-// Show lead modal after 10 seconds
-setTimeout(() => {
-  document.getElementById('leadModal').style.display = 'flex';
-}, 10000);
-</script>
-<script>
-// PHOENIX DOMINION — TRIUMVIRATE ARCHITECTURE
-// LOCKED: FHI + OmniAGuard + PrimeDox AI
-// Monitoring all swarms, floors, and revenue streams
-
-const Triumvirate = {
-  entities: {
-    fhi: {
-      name: 'Francisco Holdings Inc.',
-      role: 'Empire Command Center',
-      monitors: ['All Swarms', 'All Floors', 'All Revenue']
-    },
-    omniaguard: {
-      name: 'OmniAGuard',
-      role: 'Security & Threat Monitoring',
-      monitors: ['Cybersecurity', 'Threats', 'Vulnerabilities']
-    },
-    primedox: {
-      name: 'PrimeDox AI (ZPrimeDoxAIHQ)',
-      role: 'Intelligence & Automation',
-      monitors: ['AI Agents', 'Legal', 'Documents', 'Operations']
-    }
-  },
-  
-  swarms: {
-    revenue: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    security: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' },
-    legal: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    automation: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    marketing: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    intelligence: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' }
-  },
-  
-  status() {
-    console.log('\n🧠 TRIUMVIRATE STATUS:');
-    console.log('   🏛️ FHI: Command Center');
-    console.log('   🛡️ OmniAGuard: Security');
-    console.log('   🧠 PrimeDox AI: Intelligence');
-    console.log('   📊 6 Swarms Active');
-  }
-};
-
-Triumvirate.status();
-console.log('✅ Triumvirate Architecture Locked');
-</script>
-<script>
-// PHOENIX DOMINION — TRIUMVIRATE ARCHITECTURE
-// LOCKED: FHI + OmniAGuard + PrimeDox AI
-// Monitoring all swarms, floors, and revenue streams
-
-const Triumvirate = {
-  entities: {
-    fhi: {
-      name: 'Francisco Holdings Inc.',
-      role: 'Empire Command Center',
-      monitors: ['All Swarms', 'All Floors', 'All Revenue']
-    },
-    omniaguard: {
-      name: 'OmniAGuard',
-      role: 'Security & Threat Monitoring',
-      monitors: ['Cybersecurity', 'Threats', 'Vulnerabilities']
-    },
-    primedox: {
-      name: 'PrimeDox AI (ZPrimeDoxAIHQ)',
-      role: 'Intelligence & Automation',
-      monitors: ['AI Agents', 'Legal', 'Documents', 'Operations']
-    }
-  },
-  
-  swarms: {
-    revenue: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    security: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' },
-    legal: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    automation: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    marketing: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    intelligence: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' }
-  },
-  
-  status() {
-    console.log('\n🧠 TRIUMVIRATE STATUS:');
-    console.log('   🏛️ FHI: Command Center');
-    console.log('   🛡️ OmniAGuard: Security');
-    console.log('   🧠 PrimeDox AI: Intelligence');
-    console.log('   📊 6 Swarms Active');
-  }
-};
-
-Triumvirate.status();
-console.log('✅ Triumvirate Architecture Locked');
-</script>
-<script>
-// PHOENIX DOMINION — TRIUMVIRATE ARCHITECTURE
-// LOCKED: FHI + OmniAGuard + PrimeDox AI
-// Monitoring all swarms, floors, and revenue streams
-
-const Triumvirate = {
-  entities: {
-    fhi: {
-      name: 'Francisco Holdings Inc.',
-      role: 'Empire Command Center',
-      monitors: ['All Swarms', 'All Floors', 'All Revenue']
-    },
-    omniaguard: {
-      name: 'OmniAGuard',
-      role: 'Security & Threat Monitoring',
-      monitors: ['Cybersecurity', 'Threats', 'Vulnerabilities']
-    },
-    primedox: {
-      name: 'PrimeDox AI (ZPrimeDoxAIHQ)',
-      role: 'Intelligence & Automation',
-      monitors: ['AI Agents', 'Legal', 'Documents', 'Operations']
-    }
-  },
-  
-  swarms: {
-    revenue: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    security: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' },
-    legal: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    automation: { monitoredBy: ['primedox', 'fhi'], status: 'active' },
-    marketing: { monitoredBy: ['fhi', 'primedox'], status: 'active' },
-    intelligence: { monitoredBy: ['omniaguard', 'fhi'], status: 'active' }
-  },
-  
-  status() {
-    console.log('\n🧠 TRIUMVIRATE STATUS:');
-    console.log('   🏛️ FHI: Command Center');
-    console.log('   🛡️ OmniAGuard: Security');
-    console.log('   🧠 PrimeDox AI: Intelligence');
-    console.log('   📊 6 Swarms Active');
-  }
-};
-
-Triumvirate.status();
-console.log('✅ Triumvirate Architecture Locked');
-</script>
