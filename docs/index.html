@@ -1,93 +1,105 @@
 <!DOCTYPE html>
-<html><head><meta name="industry" content="omniaguard"><meta charset="UTF-8"><title>omniaguard.com</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0f;color:#e5e4e2;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}
-h1{font-size:2.5rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:#8892b0;margin:1rem 0;letter-spacing:4px}
-.btn{display:inline-block;padding:0.8rem 2rem;background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;text-decoration:none;border-radius:100px;font-weight:700;border:none;cursor:pointer;transition:0.3s}
-.btn:hover{transform:translateY(-2px)}
-.footer{position:fixed;bottom:1rem;font-size:0.7rem;color:#404060;letter-spacing:2px}
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniAGuard — Cybersecurity</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
+        body{background:#050510;color:#e5e4e2;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+        
+        /* Holographic Background */
+        #bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at center,#0a0a1a 0%,#050510 100%)}
+        .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;background:repeating-linear-gradient(0deg,rgba(0,212,255,0.02) 0px,rgba(0,212,255,0.02) 1px,transparent 1px,transparent 4px),repeating-linear-gradient(90deg,rgba(0,212,255,0.02) 0px,rgba(0,212,255,0.02) 1px,transparent 1px,transparent 4px);pointer-events:none}
+        .glow{position:fixed;top:50%;left:50%;width:60vw;height:60vh;transform:translate(-50%,-50%);z-index:0;background:radial-gradient(ellipse at center,rgba(00d4ff,0.05) 0%,transparent 70%);animation:pulse 6s ease-in-out infinite;pointer-events:none}
+        @keyframes pulse{0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+        
+        .nav{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;border-bottom:1px solid rgba(00d4ff,0.1);flex-wrap:wrap;gap:1rem;backdrop-filter:blur(10px)}
+        .nav .logo{font-size:1.8rem;font-weight:900;letter-spacing:6px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Orbitron',sans-serif}
+        .nav .links{display:flex;gap:2rem;flex-wrap:wrap}
+        .nav .links a{color:#8892b0;text-decoration:none;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;transition:color 0.3s;font-weight:600}
+        .nav .links a:hover{color:#00d4ff}
+        .hero{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem;min-height:70vh}
+        .hero h1{font-size:4.5rem;font-weight:900;letter-spacing:12px;background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;font-family:'Orbitron',sans-serif;text-shadow:0 0 80px rgba(00d4ff,0.1)}
+        .hero .tagline{color:#8892b0;font-size:1.4rem;max-width:700px;margin-bottom:2rem;line-height:1.8;letter-spacing:1px}
+        .hero .badge{display:inline-block;border:1px solid rgba(00d4ff,0.2);padding:0.5rem 2rem;border-radius:100px;font-size:0.7rem;letter-spacing:4px;color:#00d4ff;background:rgba(00d4ff,0.05);margin-bottom:1.5rem;text-transform:uppercase}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+        .btn{display:inline-block;padding:1rem 3rem;border-radius:100px;font-weight:700;letter-spacing:3px;text-decoration:none;transition:0.3s;border:none;cursor:pointer;font-size:1rem;text-transform:uppercase}
+        .btn-primary{background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#050510}
+        .btn-primary:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(00d4ff,0.3)}
+        .btn-outline{background:transparent;border:2px solid rgba(00d4ff,0.3);color:#00d4ff}
+        .btn-outline:hover{background:rgba(00d4ff,0.1);transform:translateY(-4px)}
+        .section-title{position:relative;z-index:10;text-align:center;color:#00d4ff;font-size:2.5rem;letter-spacing:8px;margin:3rem 0 2rem;font-weight:300;font-family:'Orbitron',sans-serif}
+        .grid{position:relative;z-index:10;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;padding:0 2rem 3rem;max-width:1400px;margin:0 auto}
+        .card{background:rgba(17,34,64,0.2);border:1px solid rgba(00d4ff,0.06);border-radius:20px;padding:2rem;text-align:center;transition:0.4s;backdrop-filter:blur(10px)}
+        .card:hover{border-color:rgba(00d4ff,0.3);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+        .card .icon{font-size:2.5rem;margin-bottom:1rem}
+        .card h3{color:#00d4ff;margin-bottom:0.5rem;font-size:1.1rem;letter-spacing:2px}
+        .card p{color:#8892b0;font-size:0.9rem;line-height:1.6}
+        .card .price{color:#ff6b9d;font-weight:700;font-size:1.3rem;margin-top:0.8rem}
+        .btn-buy{background:linear-gradient(135deg,#00d4ff,#ff6b9d);color:#050510;border:none;padding:0.6rem 1.8rem;border-radius:100px;font-weight:700;cursor:pointer;transition:0.3s;margin-top:0.8rem;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase}
+        .btn-buy:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(00d4ff,0.2)}
+        .footer{position:relative;z-index:10;text-align:center;padding:2rem;color:#404060;font-size:0.7rem;border-top:1px solid rgba(00d4ff,0.05);letter-spacing:3px}
+        .footer .phoenix{background:linear-gradient(135deg,#00d4ff,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+        @media(max-width:768px){.nav{flex-direction:column;align-items:flex-start}.hero h1{font-size:2.5rem;letter-spacing:6px}.section-title{font-size:1.8rem}.grid{grid-template-columns:1fr;padding:0 1rem}}
+    </style>
 </head>
 <body>
-<h1>omniaguard.com</h1>
-<p class="sub">A Francisco Holdings Inc. Company — Phoenix Dominion</p>
-<a href="https://www.paypal.com/paypalme/techpetcage" class="btn">💰 Subscribe</a>
-<div class="footer">© 2026 <span style="color:#D4AF37;">Phoenix Dominion</span></div>
-<div style="text-align:center;padding:0.5rem;background:rgba(0,212,255,0.05);margin-top:0.5rem;">
-  <a href="https://buy.stripe.com/YOUR_ACTUAL_LINK_HERE" style="color:#00d4ff;text-decoration:none;font-weight:700;margin:0 1rem;">💳 Pay with Stripe</a>
-  <a href="https://www.paypal.com/paypalme/techpetcage" style="color:#D4AF37;text-decoration:none;font-weight:700;margin:0 1rem;">💰 PayPal</a>
-  <span style="color:#606080;font-size:0.7rem;">| Visa · Mastercard · Amex · Discover</span>
-</div>
-<div style="text-align:center;padding:0.5rem;background:rgba(212,175,55,0.03);">
-  <a href="/demo.html" style="color:#D4AF37;text-decoration:none;font-weight:700;">🎥 Watch Demo</a>
-</div>
+    <div id="bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="glow"></div>
+
+    <div class="nav">
+        <div class="logo">OmniAGuard</div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="#services">Services</a>
+            <a href="#products">Products</a>
+            <a href="/demo.html">Demo</a>
+            <a href="https://franciscoholdingsinc.com/dashboard.html">Dashboard</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="badge">⚡ Phoenix Dominion — Floor 10</div>
+        <h1>OmniAGuard</h1>
+        <p class="tagline">Agentic AI cybersecurity — protect your empire with 14 AI agents, real-time threat detection, and zero-trust security.</p>
+        <div class="btn-group">
+            <a href="#services" class="btn btn-primary">Explore Services</a>
+            <a href="#products" class="btn btn-outline">View Products</a>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="services">🛡️ 10 SERVICES</h2>
+    <div class="grid">
+        <div class="card"><div class="icon">🚀</div><h3>1. AI Strategy</h3><p>Full AI integration strategy</p><div class="price">$499/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/499')">Buy</button></div>
+        <div class="card"><div class="icon">⚡</div><h3>2. Automation</h3><p>AI-powered workflow automation</p><div class="price">$399/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/399')">Buy</button></div>
+        <div class="card"><div class="icon">📊</div><h3>3. Analytics</h3><p>AI-driven business intelligence</p><div class="price">$299/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
+        <div class="card"><div class="icon">🧠</div><h3>4. AI Models</h3><p>Custom AI model deployment</p><div class="price">$599/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/599')">Buy</button></div>
+        <div class="card"><div class="icon">💻</div><h3>5. Development</h3><p>Tailored software solutions</p><div class="price">$799/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/799')">Buy</button></div>
+        <div class="card"><div class="icon">🎓</div><h3>6. Training</h3><p>AI upskilling programs</p><div class="price">$249/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/249')">Buy</button></div>
+        <div class="card"><div class="icon">🔍</div><h3>7. AI Audit</h3><p>Complete AI system assessment</p><div class="price">$499</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/499')">Buy</button></div>
+        <div class="card"><div class="icon">🛡️</div><h3>8. AI Security</h3><p>AI-powered threat protection</p><div class="price">$299/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
+        <div class="card"><div class="icon">📈</div><h3>9. AI Growth</h3><p>Long-term AI roadmap</p><div class="price">$999/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/999')">Buy</button></div>
+        <div class="card"><div class="icon">🤖</div><h3>10. AI Support</h3><p>24/7 AI assistance</p><div class="price">$199/mo</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/199')">Buy</button></div>
+    </div>
+
+    <h2 class="section-title" id="products">📦 10 PRODUCTS</h2>
+    <div class="grid">
+        <div class="card"><div class="icon">📦</div><h3>1. AI Toolkit</h3><p>Complete AI development kit</p><div class="price">$299</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
+        <div class="card"><div class="icon">📄</div><h3>2. AI Templates</h3><p>50+ AI prompt templates</p><div class="price">$99</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/99')">Buy</button></div>
+        <div class="card"><div class="icon">📖</div><h3>3. AI Playbook</h3><p>Complete AI implementation guide</p><div class="price">$149</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/149')">Buy</button></div>
+        <div class="card"><div class="icon">📊</div><h3>4. AI Dashboard</h3><p>Real-time AI monitoring</p><div class="price">$399</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/399')">Buy</button></div>
+        <div class="card"><div class="icon">🛡️</div><h3>5. AI Security Kit</h3><p>AI-powered security tools</p><div class="price">$249</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/249')">Buy</button></div>
+        <div class="card"><div class="icon">🎓</div><h3>6. AI Course</h3><p>Master AI in 30 days</p><div class="price">$499</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/499')">Buy</button></div>
+        <div class="card"><div class="icon">🤖</div><h3>7. AI Assistant</h3><p>Personal AI assistant software</p><div class="price">$199</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/199')">Buy</button></div>
+        <div class="card"><div class="icon">📈</div><h3>8. AI Analytics</h3><p>AI-powered analytics platform</p><div class="price">$299</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/299')">Buy</button></div>
+        <div class="card"><div class="icon">✍️</div><h3>9. AI Content Kit</h3><p>AI content generation tools</p><div class="price">$149</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/149')">Buy</button></div>
+        <div class="card"><div class="icon">🏢</div><h3>10. AI Enterprise Suite</h3><p>Complete enterprise AI package</p><div class="price">$999</div><button class="btn-buy" onclick="window.open('https://www.paypal.com/paypalme/techpetcage/999')">Buy</button></div>
+    </div>
+
+    <div class="footer">© 2026 <span class="phoenix">Phoenix Dominion</span> — Francisco Holdings Inc.</div>
 </body>
 </html>
-<div style="text-align:center;padding:0.5rem;background:rgba(212,175,55,0.05);"><a href="https://franciscoholdingsinc.com/investors" style="color:#D4AF37;text-decoration:none;font-weight:700;">💎 Invest in the Tao Skyscraper</a></div>
-<script>
-// Phoenix Dominion — Industry Chatbot
-(function() {
-  const responses = {
-    greeting: 'Welcome! How can I help you today?',
-    services: 'Check our Services & Products page for full offerings.',
-    pricing: 'Pricing varies by service. Visit our Services & Products page.',
-    demo: 'Watch a demo at /demo.html',
-    default: 'I can help with services, pricing, or demos.'
-  };
-
-  const widget = document.createElement('div');
-  widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Segoe UI,sans-serif;';
-  widget.innerHTML = `
-    <div id="chatToggle" style="background:linear-gradient(135deg,#D4AF37,#50C878);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.5);font-size:28px;">💬</div>
-    <div id="chatWindow" style="display:none;position:absolute;bottom:70px;right:0;width:320px;background:#112240;border:1px solid rgba(212,175,55,0.2);border-radius:16px;padding:1rem;box-shadow:0 20px 60px rgba(0,0,0,0.8);max-height:400px;flex-direction:column;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-        <span style="color:#D4AF37;font-weight:700;">💬 Assistant</span>
-        <span onclick="document.getElementById('chatWindow').style.display='none'" style="cursor:pointer;color:#606080;">✕</span>
-      </div>
-      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:250px;padding:0.3rem;background:rgba(0,0,0,0.2);border-radius:8px;font-size:0.8rem;color:#e5e4e2;">
-        <div style="padding:0.2rem 0;"><span style="color:#D4AF37;">🤖 Bot:</span> ${responses.greeting}</div>
-      </div>
-      <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
-        <input id="chatInput" type="text" placeholder="Ask..." style="flex:1;background:rgba(0,0,0,0.3);border:1px solid rgba(212,175,55,0.1);border-radius:8px;padding:0.5rem;color:#e5e4e2;font-size:0.8rem;" onkeydown="if(event.key==='Enter')sendChat()">
-        <button onclick="sendChat()" style="background:linear-gradient(135deg,#D4AF37,#50C878);border:none;border-radius:8px;padding:0.5rem 1rem;color:#0a0a0f;font-weight:700;cursor:pointer;">➤</button>
-      </div>
-      <div style="margin-top:0.3rem;display:flex;gap:0.3rem;flex-wrap:wrap;">
-        <button onclick="quickReply('services')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Services</button>
-        <button onclick="quickReply('pricing')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Pricing</button>
-        <button onclick="quickReply('demo')" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:0.2rem 0.8rem;color:#D4AF37;font-size:0.6rem;cursor:pointer;">Demo</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(widget);
-
-  document.getElementById('chatToggle').onclick = () => {
-    const win = document.getElementById('chatWindow');
-    win.style.display = win.style.display === 'none' ? 'flex' : 'none';
-  };
-
-  window.sendChat = function() {
-    const input = document.getElementById('chatInput');
-    const msg = input.value.trim();
-    if (!msg) return;
-    const msgs = document.getElementById('chatMessages');
-    msgs.innerHTML += `<div style="padding:0.2rem 0;"><span style="color:#50C878;">👤 You:</span> ${msg}</div>`;
-    input.value = '';
-    setTimeout(() => {
-      const lower = msg.toLowerCase();
-      let reply = responses.default;
-      if (lower.includes('service')) reply = responses.services;
-      else if (lower.includes('price') || lower.includes('cost')) reply = responses.pricing;
-      else if (lower.includes('demo') || lower.includes('video')) reply = responses.demo;
-      msgs.innerHTML += `<div style="padding:0.2rem 0;"><span style="color:#D4AF37;">🤖 Bot:</span> ${reply}</div>`;
-      msgs.scrollTop = msgs.scrollHeight;
-    }, 400);
-  };
-
-  window.quickReply = function(topic) {
-    document.getElementById('chatInput').value = topic;
-    sendChat();
-  };
-})();
-</script>
