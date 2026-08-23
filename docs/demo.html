@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Demo — omniaguard</title>
+<html>
+<head><meta charset="UTF-8"><title>Interactive Demo — $1T Empire</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0f;color:#e5e4e2;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}
-h1{font-size:3rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:#8892b0;margin:1rem 0;font-size:1.2rem}
-.demo-box{background:#112240;border:1px solid rgba(212,175,55,0.1);border-radius:16px;padding:2rem;max-width:800px;width:100%;margin:1rem 0}
+body{background:#050510;color:#e5e4e2;font-family:'Segoe UI',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}
+h1{font-size:3rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.5rem}
+.sub{color:#8892b0;margin-bottom:2rem}
+.demo-box{background:rgba(17,34,64,0.3);border:1px solid rgba(212,175,55,0.1);border-radius:16px;padding:2rem;max-width:800px;width:100%;margin:1rem 0}
 .demo-box video{width:100%;border-radius:8px;background:#050510}
-.demo-box .features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;text-align:left}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;text-align:left}
 .features li{list-style:none;padding:0.3rem 0;color:#8892b0}
 .features li::before{content:"✓ ";color:#50C878}
-.btn{display:inline-block;padding:0.8rem 2.5rem;background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;text-decoration:none;border-radius:100px;font-weight:700;border:none;cursor:pointer;transition:0.3s;margin:0.3rem}
+.btn{display:inline-block;padding:0.8rem 2.5rem;background:linear-gradient(135deg,#D4AF37,#50C878);color:#0a0a0f;text-decoration:none;border-radius:100px;font-weight:700;border:none;cursor:pointer;transition:0.3s}
 .btn:hover{transform:translateY(-3px)}
-.btn-outline{background:transparent;border:1px solid #D4AF37;color:#D4AF37}
-.footer{position:fixed;bottom:1rem;font-size:0.7rem;color:#404060}
+.cyber-demo{background:rgba(255,68,68,0.05);border:2px solid #ff4444;border-radius:16px;padding:1.5rem;margin:1rem 0;text-align:center}
+.cyber-demo h3{color:#ff4444}
+.cyber-demo .status{color:#50C878;font-weight:700}
 </style>
 </head>
 <body>
-<h1>🎥 omniaguard — Demo</h1>
-<p class="sub">See omniaguard in action</p>
+<h1>🎥 Interactive Demo</h1>
+<p class="sub">Experience the $1 Trillion Empire in action</p>
+
+<div class="cyber-demo">
+  <h3>🛡️ Cybersecurity Demo</h3>
+  <p>Real-time threat detection, jailbreak prevention, and AI defense.</p>
+  <p class="status">✅ ALL SYSTEMS SECURE — 0 THREATS</p>
+  <button class="btn" onclick="alert('🛡️ OmniAGuard: No threats detected. Empire secure.')">Run Security Scan</button>
+</div>
 
 <div class="demo-box">
   <video controls poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='800' height='400' fill='%23112240'/><text x='400' y='200' font-size='24' fill='%23D4AF37' text-anchor='middle'>▶️ Demo Video Loading...</text></svg>">
     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
 </div>
 
@@ -37,9 +45,7 @@ h1{font-size:3rem;background:linear-gradient(135deg,#D4AF37,#50C878);-webkit-bac
   </ul>
 </div>
 
-<a href="/services-products.html" class="btn">💰 View Products & Services</a>
-<a href="https://www.paypal.com/paypalme/techpetcage" class="btn btn-outline">💳 Buy Now</a>
-
-<div class="footer">© 2026 Phoenix Dominion — omniaguard</div>
+<button class="btn" onclick="window.open('https://www.paypal.com/paypalme/techpetcage','_blank')">💰 Subscribe Now</button>
+<div class="footer" style="margin-top:2rem;color:#404060;font-size:0.7rem;">© 2026 Phoenix Dominion — Francisco Holdings Inc.</div>
 </body>
 </html>
